@@ -14,12 +14,14 @@ function cloneTower(tower) {
     return clone;
 }
 
+
 class Game{
     constructor(){
         this.canvas = document.getElementById('canvas1')
         this.ctx = this.canvas.getContext('2d')
-        this.canvas.width = 900;
-        this.canvas.height = 600;    
+        
+        this.canvas.width = 1360;
+        this.canvas.height = 768 ;    
   
         this.money = 10000;
 
@@ -34,11 +36,30 @@ class Game{
         this.towers = [];
     }
     start(){
+        window.addEventListener('load', ()=>{
+            this.resize()
+        }, false);
+        window.addEventListener('resize', ()=>{
+           this.resize()
+        }, false);
+        
         this.animation();
         this.grapControlBarTower();
         this.createGrid();
         this.catchMousePosition();
     }
+    resize(){
+        let width = window.innerWidth;     
+        let ratio = this.canvas.height/this.canvas.width ;
+        let height = width * ratio;
+        if(height > window.innerHeight){
+            height = window.innerHeight;     
+            ratio = this.canvas.width/this.canvas.height ;
+            width = height * ratio;        
+        }
+        this.canvas.style.width = width +'px'
+        this.canvas.style.height = height +'px';
+      }
     createGrid(){
         for (let y = this.cellSize; y < this.canvas.height; y += this.cellSize){
             for (let x = 0; x < this.canvas.width; x += this.cellSize){
