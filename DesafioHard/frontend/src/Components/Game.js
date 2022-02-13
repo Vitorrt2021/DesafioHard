@@ -126,9 +126,11 @@ class Game{
     catchMousePosition(){
         document.querySelector('body').addEventListener('mousemove',(e)=>{
             let rect = this.canvas.getBoundingClientRect();
+            const scaleY = this.canvas.height / rect.height;
+            const scaleX = this.canvas.width / rect.width ;
             this.mousePosition = {
-                x: e.clientX - rect.left,
-                y: e.clientY - rect.top,
+                x: (e.clientX - rect.left) * scaleX,
+                y: (e.clientY - rect.top) * scaleY,
             }
         })
     }
@@ -150,15 +152,16 @@ class Game{
         })
         const onMouseMove = (e)=>{
             //Desenha a celula que está por cima
-            console.log(this.mousePosition)
-            console.log(this.draggingElement)
             this.gameGrid.forEach((e)=>{
                 if(collision.pointRectCollisionDetection(this.mousePosition,e)){
                     this.cellOver = e;
                 }
             })
-            this.draggingElement.x = e.offsetX;
-            this.draggingElement.y = e.offsetY;
+            this.draggingElement.x = this.mousePosition.x;
+            this.draggingElement.y = this.mousePosition.y;
+            console.log(this.mousePosition)
+            console.log(this.draggingElement)
+            
         }
         const onMouseUp = (e)=>{
             this.addTowerInCell();
