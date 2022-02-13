@@ -27,15 +27,18 @@ class Game{
 
         this.cellOver = null;
         this.runAnimationControll = true;
-        this.cellSize = 100;
+        this.cellSize = 200;
         this.cellGap = 5;
         this.gameGrid = [];
         this.controlBar = new ControlBar(this.canvas.width,this.cellSize);
         this.draggingElement = null;
         this.mousePosition = {};
         this.towers = [];
+        this.backgroundImage =new Image()
+        this.backgroundImage.src = './assets/images/backgroundGame.png'
     }
     start(){
+        
         window.addEventListener('load', ()=>{
             this.resize()
         }, false);
@@ -101,6 +104,7 @@ class Game{
     animation(){
         if(this.runAnimationControll){
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);    
+            this.ctx.drawImage(this.backgroundImage,0,this.cellSize)
             this.controlBar.draw(this.ctx)
             this.drawTowers();
             if(this.draggingElement){
@@ -121,9 +125,10 @@ class Game{
     }
     catchMousePosition(){
         document.querySelector('body').addEventListener('mousemove',(e)=>{
+            let rect = this.canvas.getBoundingClientRect();
             this.mousePosition = {
-                x: e.offsetX,
-                y: e.offsetY,
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top,
             }
         })
     }
@@ -131,6 +136,8 @@ class Game{
         //Cria o grap e drop das torres para comprar
         document.querySelector('body').addEventListener('mousedown',(e)=>{
             this.controlBar.towers.forEach((tower)=>{
+                console.log(tower)
+                console.log(this.mousePosition)
                 if(Collision.pointRectCollisionDetection(this.mousePosition,tower)){
                     const newTower = cloneTower(tower);
                     this.towers.push(newTower);
@@ -143,6 +150,8 @@ class Game{
         })
         const onMouseMove = (e)=>{
             //Desenha a celula que está por cima
+            console.log(this.mousePosition)
+            console.log(this.draggingElement)
             this.gameGrid.forEach((e)=>{
                 if(collision.pointRectCollisionDetection(this.mousePosition,e)){
                     this.cellOver = e;
