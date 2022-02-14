@@ -4,6 +4,8 @@ import Collision from "./Collision.js";
 import Tower from "./Tower.js";
 import collision from "./Collision.js";
 import Player from "./Player.js";
+import Monster from "./Monster.js"
+import Enemy from "./Enemy.js"
 
 function cloneTower(tower) {
   const clone = new Tower();
@@ -34,6 +36,7 @@ class Game {
     this.draggingElement = null;
     this.mousePosition = {};
     this.towers = [];
+    this.enemys = []
     this.backgroundImage = new Image();
     this.backgroundImage.src = "../assets/images/backgroundGame.png";
   }
@@ -57,6 +60,7 @@ class Game {
     this.grapControlBarTower();
     this.createGrid();
     this.catchMousePosition();
+    this.spawnEnemy();
   }
   handleTowers() {
     this.towers.forEach(tower => {
@@ -117,6 +121,10 @@ class Game {
       this.ctx.drawImage(this.backgroundImage, 0, this.cellSize);
       this.controlBar.draw(this.ctx);
       this.handleTowers();
+      this.enemys.forEach((enemy) => {
+        enemy.update();
+        enemy.draw(this.ctx);
+      });
       if (this.draggingElement) {
         this.draggingElement.draw(this.ctx);
       }
@@ -176,6 +184,17 @@ class Game {
       document.querySelector("body").removeEventListener("mousemove", onMouseMove);
       document.querySelector("body").removeEventListener("mouseup", onMouseUp);
     };
+  }
+  spawnEnemy() {
+    let position = Math.floor(Math.random() * 3 + 1) * this.cellSize;
+    this.enemys.push(
+      new Enemy(
+        new Monster("robo"),
+        parseInt(this.canvas.width),
+        position,
+        this.cellSize
+      )
+    );
   }
 }
 
