@@ -25,6 +25,7 @@ class Game{
         this.canvas.height = 768 ;    
   
         this.player = new Player();
+        this.frames = 0;
 
         this.cellOver = null;
         this.runAnimationControll = true;
@@ -111,11 +112,13 @@ class Game{
             this.ctx.drawImage(this.backgroundImage,0,this.cellSize)
             this.controlBar.draw(this.ctx)
             this.handleTowers()
+            
             if(this.draggingElement){
                 this.draggingElement.draw(this.ctx)
             }if(this.cellOver){
                this.cellOver.draw(this.ctx) 
             }
+            this.frames++
             requestAnimationFrame(()=>{
                 this.animation()
             })    
