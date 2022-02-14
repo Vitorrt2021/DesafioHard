@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="gameplay_interface.css" />
+    <title>Tower Defense</title>
+  </head>
+  <body>
+    <header id="gameplay_interface">
+      <section id="tower_selection">
+        <div id="buttons_area">
+          <div class="tower_area">
+            <div class="tower_button cat_tower"></div>
+            <div class="tower_money_cost_visor">
+              <p id="cat_cost_value">100</p>
+            </div>
+          </div>
+
+          <div class="tower_area">
+            <div class="tower_button blue_rabbit_tower"></div>
+            <div class="tower_money_cost_visor">
+              <p id="blue_rabbit_cost_value">100</p>
+            </div>
+          </div>
+
+          <div class="tower_area">
+            <div class="tower_button red_rabbit_tower"></div>
+            <div class="tower_money_cost_visor">
+              <p id="red_rabbit_cost_value">100</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="score_display">
+        <p id="score_value">0</p>
+      </section>
+      <section id="money_display">
+        <p id="money_value">100</p>
+      </section>
+
+      <button class="blue_buttons save_ranking">Ranking</button>
+      <button class="blue_buttons restart_level">Reiniciar</button>
+    </header>
+    <main id="gameplay_canvas">CANVAS</main>
+  </body>
+</html>
