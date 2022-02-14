@@ -3,6 +3,7 @@ import Cell from './Cell.js'
 import Collision from './Collision.js'
 import Tower from './Tower.js'
 import collision from './Collision.js';
+import Player from './Player.js';
 
 function cloneTower(tower) {
     const clone = new Tower();
@@ -23,11 +24,11 @@ class Game{
         this.canvas.width = 1360;
         this.canvas.height = 768 ;    
   
-        this.money = 10000;
+        this.player = new Player();
 
         this.cellOver = null;
         this.runAnimationControll = true;
-        this.cellSize = 200;
+        this.cellSize = 194;
         this.cellGap = 5;
         this.gameGrid = [];
         this.controlBar = new ControlBar(this.canvas.width,this.cellSize);
@@ -36,9 +37,9 @@ class Game{
         this.towers = [];
         this.backgroundImage =new Image()
         this.backgroundImage.src = './assets/images/backgroundGame.png'
+  
     }
-    start(){
-        
+    start(){     
         window.addEventListener('load', ()=>{
             this.resize()
         }, false);
@@ -50,6 +51,13 @@ class Game{
         this.grapControlBarTower();
         this.createGrid();
         this.catchMousePosition();
+    }
+    handleTowers(){
+        this.towers.forEach((tower)=>{
+            tower.draw(this.ctx);
+            tower.update();
+            tower.handleProjectiles(this.ctx,this.canvas.width,this.cellSize)
+        })
     }
     resize(){
         let width = window.innerWidth;     
@@ -87,26 +95,22 @@ class Game{
         }
         let towerCost = 100;
         //Ve se tem dinheiro suficiente
-        if (this.money >= towerCost){
+        if (this.player.money >= towerCost){
             //pega a torre que acabou de colocar
             this.towers[this.towers.length-1].x = gridPositionX
             this.towers[this.towers.length-1].y = gridPositionY
-            this.money -= towerCost;
+            this.player.money -= towerCost;
         }else{
             this.towers.pop()
         }
     }
-    drawTowers(){
-        this.towers.forEach((tower)=>{
-            tower.draw(this.ctx);
-        })
-    }
+    
     animation(){
         if(this.runAnimationControll){
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);    
             this.ctx.drawImage(this.backgroundImage,0,this.cellSize)
             this.controlBar.draw(this.ctx)
-            this.drawTowers();
+            this.handleTowers()
             if(this.draggingElement){
                 this.draggingElement.draw(this.ctx)
             }if(this.cellOver){
@@ -138,8 +142,6 @@ class Game{
         //Cria o grap e drop das torres para comprar
         document.querySelector('body').addEventListener('mousedown',(e)=>{
             this.controlBar.towers.forEach((tower)=>{
-                console.log(tower)
-                console.log(this.mousePosition)
                 if(Collision.pointRectCollisionDetection(this.mousePosition,tower)){
                     const newTower = cloneTower(tower);
                     this.towers.push(newTower);
@@ -159,8 +161,6 @@ class Game{
             })
             this.draggingElement.x = this.mousePosition.x;
             this.draggingElement.y = this.mousePosition.y;
-            console.log(this.mousePosition)
-            console.log(this.draggingElement)
             
         }
         const onMouseUp = (e)=>{
