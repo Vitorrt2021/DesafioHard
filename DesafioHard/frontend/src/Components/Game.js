@@ -63,7 +63,7 @@ class Game {
     this.spawnEnemy();
   }
   handleTowers() {
-    this.towers.forEach((tower) => {
+    this.towers.forEach(tower => {
       tower.draw(this.ctx);
       tower.update();
       tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
@@ -131,11 +131,11 @@ class Game {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       // this.ctx.drawImage(this.backgroundImage, 0, 0);
       this.handleTowers();
-      this.gameGrid.forEach((e) => {
+      this.gameGrid.forEach(e => {
         console.log(e);
         e.draw(this.ctx);
       });
-      this.enemys.forEach((enemy) => {
+      this.enemys.forEach(enemy => {
         enemy.update();
         enemy.draw(this.ctx);
       });
@@ -158,15 +158,30 @@ class Game {
     this.runAnimationControll = false;
   }
   catchMousePosition() {
-    document.querySelector("body").addEventListener("mousemove", (e) => {
-      let rect = this.canvas.getBoundingClientRect();
-      const scaleY = this.canvas.height / rect.height;
-      const scaleX = this.canvas.width / rect.width;
-      this.mousePosition = {
-        x: (e.clientX - rect.left) * scaleX,
-        y: (e.clientY - rect.top) * scaleY,
-      };
+    document.querySelector("body").addEventListener("mousemove", e => {
+      this.updateMousePosition(e);
     });
+
+    document.getElementById("canvas1").addEventListener("drop", e => {
+      e.preventDefault();
+
+      let towerType = e.dataTransfer.getData("text");
+      this.updateMousePosition(e);
+      console.log(this.mousePosition);
+      this.towers.push(new Tower(this.mousePosition.x, this.mousePosition.y, 150, towerType));
+    });
+  }
+
+  updateMousePosition(e) {
+    let rect = this.canvas.getBoundingClientRect();
+
+    const scaleY = this.canvas.height / rect.height;
+    const scaleX = this.canvas.width / rect.width;
+
+    this.mousePosition = {
+      x: (e.clientX - rect.left) * scaleX,
+      y: (e.clientY - rect.top) * scaleY,
+    };
   }
   // grapControlBarTower() {
   //   //Cria o grap e drop das torres para comprar
@@ -206,14 +221,7 @@ class Game {
   // }
   spawnEnemy() {
     let position = Math.floor(Math.random() * 3) * this.cellSize;
-    this.enemys.push(
-      new Enemy(
-        new Monster("robo"),
-        parseInt(this.canvas.width),
-        position,
-        this.cellSize
-      )
-    );
+    this.enemys.push(new Enemy(new Monster("robo"), parseInt(this.canvas.width), position, this.cellSize));
   }
 }
 
