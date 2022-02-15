@@ -1,0 +1,26 @@
+html {
+    background: url("./images/clouds_background.png") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-weight: bolder;
+    font-family: "Architects Daughter", cursive;
+    text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+#window {
+    width: 100%;
+    height: 100%;
+    background: url('images/main_window.svg') no-repeat center center fixed;
+    background-size: 50% 80%;
+}
