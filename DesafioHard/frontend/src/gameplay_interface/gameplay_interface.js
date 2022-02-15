@@ -22,6 +22,55 @@ $(document).ready(function () {
   game.start();
 });
 
+// var adjustSize = function () {
+//   let iWidth = $("#gameplay_interface").width(); // Desconta duas vezes o tamanho da borda
+//   let iHeight = $("#gameplay_interface").height(); // Mantém o aspecto 4:3 para a largura (width) fixa
+//   console.log(iHeight);
+//   console.log(window.innerHeight);
+//   if (iHeight >= window.innerHeight) {
+//     console.log("ibgger");
+//     $("#gameplay_interface").width(iWidth + "px");
+//     $("#gameplay_interface").height(iHeight + "px");
+//   } else {
+//     $("#gameplay_interface").width("100%");
+//     $("#gameplay_interface").height("100%");
+//   }
+// };
+
+// window.onresize = adjustSize;
+// adjustSize();
+// startResize();
+// function startResize() {
+//   window.addEventListener(
+//     "load",
+//     () => {
+//       resize();
+//     },
+//     false
+//   );
+//   window.addEventListener(
+//     "resize",
+//     () => {
+//       resize();
+//     },
+//     false
+//   );
+// }
+// function resize() {
+//   let height = window.innerHeight;
+//   let ratio =
+//     $("#gameplay_interface").width() / $("#gameplay_interface").height();
+//   let width = height * ratio;
+
+//   if (height > window.innerHeight) {
+//     width = window.innerWidth;
+//     ratio =
+//       $("#gameplay_interface").width() / $("#gameplay_interface").height();
+//     height = width * ratio;
+//   }
+//   $("#gameplay_interface").width(width);
+//   $("#gameplay_interface").height(height);
+// }
 // document.addEventListener("drag", (event) => {
 // event.target.
 // })

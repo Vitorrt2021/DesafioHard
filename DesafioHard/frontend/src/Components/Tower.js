@@ -9,18 +9,17 @@ class Tower{
         this.health = 100;
         this.projectiles = [];
         this.projectileSrc = './assets/projectiles/carrot.svg'
-        this.timer = 2;
+        this.timer = 0;
     }
     draw(ctx){
         ctx.fillStyle = 'red'
         ctx.beginPath();
         ctx.rect(this.x,this.y,this.width,this.height);
         ctx.fill(); 
-
     }
     update(){
         this.timer++
-        if(this.timer % 120 === 0){
+        if(this.timer % 100 === 0){
             this.projectiles.push(new Projectile(this.x , this.y,this.projectileSrc))
         }
     }

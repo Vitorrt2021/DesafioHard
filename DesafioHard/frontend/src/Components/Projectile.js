@@ -14,7 +14,6 @@ class Projectile{
         this.x += this.speed;
     }
     draw(ctx){
-        //ctx.arc(this.x, this.y, this.width, 0, Math.PI *2);
         ctx.drawImage(this.image,this.x,this.y)
     }
 }
