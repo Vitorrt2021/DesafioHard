@@ -1,14 +1,17 @@
 const apiURL = 'http://edtech.dudeful.com:3004';
 
-$(document).ready(() => {
+const preventReload = () => {
 	window.addEventListener('beforeunload', function (e) {
 		e.preventDefault();
 		// In Mozilla Firefox prompt will always be shown
 		// Chrome requires returnValue to be set
 		e.returnValue = '';
 	});
+};
 
+$(document).ready(() => {
 	$('#save_score').click(saveScore);
+	$('#player_score').on('input', preventReload);
 
 	renderRanking();
 });
