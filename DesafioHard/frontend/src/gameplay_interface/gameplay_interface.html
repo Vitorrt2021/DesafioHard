@@ -4,49 +4,59 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="gameplay_interface.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="gameplay_interface.js" type="module"></script>
     <title>Tower Defense</title>
   </head>
   <body>
-    <header id="gameplay_interface">
-      <section id="tower_selection">
-        <div id="buttons_area">
-          <div class="tower_area">
-            <div class="tower_button cat_tower"></div>
-            <div class="tower_money_cost_visor">
-              <p id="cat_cost_value">100</p>
+    <div id="container_gameplay_interface">
+    <section id='gameplay_interface'>
+      <header id="gameplay_interface_header">
+        <section id="tower_selection">
+          <div id="buttons_area">
+            <div class="tower_area">
+              <!-- <div class="tower_button cat_tower"></div> -->
+              <img class="tower_button cat_tower" src="./images/cat_tower_level_1.png" draggable="true" />
+              <div class="tower_money_cost_visor">
+                <p id="cat_cost_value">100</p>
+              </div>
+            </div>
+
+            <div class="tower_area">
+              <div class="tower_button blue_rabbit_tower"></div>
+              <div class="tower_money_cost_visor">
+                <p id="blue_rabbit_cost_value">100</p>
+              </div>
+            </div>
+
+            <div class="tower_area">
+              <div class="tower_button red_rabbit_tower"></div>
+              <div class="tower_money_cost_visor">
+                <p id="red_rabbit_cost_value">100</p>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="tower_area">
-            <div class="tower_button blue_rabbit_tower"></div>
-            <div class="tower_money_cost_visor">
-              <p id="blue_rabbit_cost_value">100</p>
-            </div>
-          </div>
+        <section id="score_display">
+          <p id="score_value">0</p>
+        </section>
+        <section id="money_display">
+          <p id="money_value">100</p>
+        </section>
 
-          <div class="tower_area">
-            <div class="tower_button red_rabbit_tower"></div>
-            <div class="tower_money_cost_visor">
-              <p id="red_rabbit_cost_value">100</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="score_display">
-        <p id="score_value">0</p>
-      </section>
-      <section id="money_display">
-        <p id="money_value">100</p>
-      </section>
-
-      <button class="blue_buttons save_ranking">Ranking</button>
-      <button class="blue_buttons restart_level">Reiniciar</button>
+        <button class="blue_buttons save_ranking">Ranking</button>
+        <button class="blue_buttons restart_level">Reiniciar</button>
     </header>
-    <main id="gameplay_canvas">CANVAS</main>
-  </body>
+    <canvas id="canvas1"></canvas>
+  </section>  
+</div>
+</body>
 </html>

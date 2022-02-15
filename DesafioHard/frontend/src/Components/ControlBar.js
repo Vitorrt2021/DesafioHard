@@ -6,7 +6,7 @@ class ControlBar{
         this.height = cellSize;    
         this.towers = [];
         
-        const tower = new Tower(0,0,60)
+        const tower = new Tower(100,100,60)
         this.towers.push(tower) 
     }
     draw(ctx){
