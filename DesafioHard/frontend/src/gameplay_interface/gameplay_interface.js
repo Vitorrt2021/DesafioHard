@@ -3,20 +3,17 @@ import Game from "../Components/Game.js";
 $(document).ready(function () {
   $(".cat_tower").on("dragstart", function (event) {
     event.originalEvent.dataTransfer.setData("text", "cat_tower_level1");
-    console.log("ondragstart");
   });
 
   $("#canvas1").on("dragover", function (event) {
     event.originalEvent.preventDefault();
-    console.log("ondragover");
   });
 
-  $("#canvas1").on("drop", function (event) {
-    console.log("ondrop");
-    event.originalEvent.preventDefault();
-    let data = event.originalEvent.dataTransfer.getData("text");
-    console.log(data + " eae?");
-  });
+  // $("#canvas1").on("drop", function (event) {
+  //   event.originalEvent.preventDefault();
+  //   let data = event.originalEvent.dataTransfer.getData("text");
+  //   console.log(data + " eae?");
+  // });
 
   const game = new Game();
   game.start();
