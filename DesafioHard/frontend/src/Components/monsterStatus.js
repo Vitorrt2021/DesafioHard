@@ -21,7 +21,7 @@ export default {
       "../assets/monsters/slimeGreen/image5.svg",
     ],
   },
-  sapo: {
+  toad: {
     speed: 3,
     health: 200,
     image: [
@@ -32,7 +32,7 @@ export default {
       "../assets/monsters/sapo/sapo5.svg",
     ],
   },
-  robo: {
+  robot: {
     speed: 4,
     health: 300,
     image: [
