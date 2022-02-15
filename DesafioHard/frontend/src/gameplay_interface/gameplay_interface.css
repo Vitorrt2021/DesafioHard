@@ -14,25 +14,45 @@ html {
   text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
 }
 
-html,
-body {
-  height: 100%;
+html body {
+  overflow-y: hidden;
+}
+#container_gameplay_interface {
+  width: 100%;
+  padding-top: 56.25%;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 #gameplay_interface {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 #gameplay_interface_header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   height: 25%;
+  max-height: 25vh;
 }
 
+#canvas1 {
+  width: 100%;
+  height: 75%;
+  max-height: 75vh;
+
+  overflow-y: hidden;
+
+  background-image: url("../assets/images/backgroundGame.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 #tower_selection {
   width: 33.33%;
   height: 100%;
-  margin-top: 5px;
   position: relative;
   background: url("./images/towers_buttons_display.svg");
   background-size: 100% 100%;
@@ -126,15 +146,3 @@ body {
 /* #gameplay_canvas {
 
 } */
-
-#canvas1 {
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
-  background-color: white;
-
-  width: 100%;
-  height: 100%;
-  /* background-color: red; */
-}
