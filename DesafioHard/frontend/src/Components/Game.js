@@ -26,6 +26,7 @@ class Game {
     this.mousePosition = {};
     this.towers = [];
     this.enemys = [];
+    this.monster = ["slimePink", "slimeGreen", "toad", "robot"];
   }
   start() {
     this.animation();
@@ -120,7 +121,7 @@ class Game {
     let position = this.canvas.height / postions[Math.floor(Math.random() * 3)];
     this.enemys.push(
       new Enemy(
-        new Monster("robo"),
+        new Monster(this.monster[Math.floor(Math.random() * 4)]),
         parseInt(this.canvas.width),
         position,
         this.cellSize
