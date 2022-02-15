@@ -10,7 +10,7 @@ const preventReload = () => {
 };
 
 $(document).ready(function () {
-	$('#score_value').on('input', preventReload);
+	$('#score_value').one('change', preventReload);
 
 	$('.cat_tower').on('dragstart', function (event) {
 		event.originalEvent.dataTransfer.setData(
