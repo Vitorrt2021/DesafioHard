@@ -1,7 +1,7 @@
 import Projectile from "./Projectile.js";
 
 class Tower {
-  constructor(x = 0, y = 0, cellSize = 0) {
+  constructor(x = 0, y = 0, cellSize = 0, towerType = "cat_tower_level_1") {
     this.x = x - cellSize / 2;
     this.y = y - cellSize / 2;
     this.width = cellSize;
@@ -9,8 +9,9 @@ class Tower {
     this.health = 100;
     this.projectiles = [];
     this.projectileSrc = "../assets/projectiles/carrot.svg";
+
     this.image = new Image();
-    this.image.src = "../assets/towers/cat_tower_level_1.png";
+    this.image.src = `../assets/towers/${towerType}.png`;
     this.timer = 0;
   }
   draw(ctx) {

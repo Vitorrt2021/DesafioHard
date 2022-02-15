@@ -2,18 +2,20 @@ import Game from "../Components/Game.js";
 
 $(document).ready(function () {
   $(".cat_tower").on("dragstart", function (event) {
-    event.originalEvent.dataTransfer.setData("text", "cat_tower_level1");
+    event.originalEvent.dataTransfer.setData("text", "cat_tower_level_1");
+  });
+
+  $(".blue_rabbit_tower").on("dragstart", function (event) {
+    event.originalEvent.dataTransfer.setData("text", "blue_rabbit_tower_level_1");
+  });
+
+  $(".red_rabbit_tower").on("dragstart", function (event) {
+    event.originalEvent.dataTransfer.setData("text", "red_rabbit_tower_level_1");
   });
 
   $("#canvas1").on("dragover", function (event) {
     event.originalEvent.preventDefault();
   });
-
-  // $("#canvas1").on("drop", function (event) {
-  //   event.originalEvent.preventDefault();
-  //   let data = event.originalEvent.dataTransfer.getData("text");
-  //   console.log(data + " eae?");
-  // });
 
   const game = new Game();
   game.start();

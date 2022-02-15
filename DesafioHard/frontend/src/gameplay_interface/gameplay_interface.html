@@ -17,46 +17,45 @@
   </head>
   <body>
     <div id="container_gameplay_interface">
-    <section id='gameplay_interface'>
-      <header id="gameplay_interface_header">
-        <section id="tower_selection">
-          <div id="buttons_area">
-            <div class="tower_area">
-              <!-- <div class="tower_button cat_tower"></div> -->
-              <img class="tower_button cat_tower" src="./images/cat_tower_level_1.png" draggable="true" />
-              <div class="tower_money_cost_visor">
-                <p id="cat_cost_value">100</p>
+      <section id="gameplay_interface">
+        <header id="gameplay_interface_header">
+          <section id="tower_selection">
+            <div id="buttons_area">
+              <div class="tower_area">
+                <img class="tower_button cat_tower" src="./images/cat_tower_level_1.png" draggable="true" />
+                <div class="tower_money_cost_visor">
+                  <p id="cat_cost_value">100</p>
+                </div>
+              </div>
+
+              <div class="tower_area">
+                <img class="tower_button blue_rabbit_tower" src="./images/blue_rabbit_tower_level_1.png" draggable="true" />
+                <div class="tower_money_cost_visor">
+                  <p id="blue_rabbit_cost_value">100</p>
+                </div>
+              </div>
+
+              <div class="tower_area">
+                <img class="tower_button red_rabbit_tower" src="./images/red_rabbit_tower_level_1.png" draggable="true" />
+                <div class="tower_money_cost_visor">
+                  <p id="red_rabbit_cost_value">100</p>
+                </div>
               </div>
             </div>
+          </section>
 
-            <div class="tower_area">
-              <div class="tower_button blue_rabbit_tower"></div>
-              <div class="tower_money_cost_visor">
-                <p id="blue_rabbit_cost_value">100</p>
-              </div>
-            </div>
+          <section id="score_display">
+            <p id="score_value">0</p>
+          </section>
+          <section id="money_display">
+            <p id="money_value">100</p>
+          </section>
 
-            <div class="tower_area">
-              <div class="tower_button red_rabbit_tower"></div>
-              <div class="tower_money_cost_visor">
-                <p id="red_rabbit_cost_value">100</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="score_display">
-          <p id="score_value">0</p>
-        </section>
-        <section id="money_display">
-          <p id="money_value">100</p>
-        </section>
-
-        <button class="blue_buttons save_ranking">Ranking</button>
-        <button class="blue_buttons restart_level">Reiniciar</button>
-    </header>
-    <canvas id="canvas1"></canvas>
-  </section>  
-</div>
-</body>
+          <button class="blue_buttons save_ranking">Ranking</button>
+          <button class="blue_buttons restart_level">Reiniciar</button>
+        </header>
+        <canvas id="canvas1"></canvas>
+      </section>
+    </div>
+  </body>
 </html>

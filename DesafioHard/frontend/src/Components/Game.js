@@ -165,10 +165,10 @@ class Game {
     document.getElementById("canvas1").addEventListener("drop", e => {
       e.preventDefault();
 
-      let data = e.dataTransfer.getData("text");
+      let towerType = e.dataTransfer.getData("text");
       this.updateMousePosition(e);
       console.log(this.mousePosition);
-      this.towers.push(new Tower(this.mousePosition.x, this.mousePosition.y, 150));
+      this.towers.push(new Tower(this.mousePosition.x, this.mousePosition.y, 150, towerType));
     });
   }
 
