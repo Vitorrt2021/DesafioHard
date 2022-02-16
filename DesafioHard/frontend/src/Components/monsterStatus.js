@@ -9,9 +9,11 @@ export default {
       "../assets/monsters/slimePink/image4.svg",
       "../assets/monsters/slimePink/image5.svg",
     ],
+    imageHeight: [47, 42, 39, 35, 39],
+    imageMaxHeight: 47,
   },
   slimeGreen: {
-    speed: 2,
+    speed: 1.5,
     health: 150,
     image: [
       "../assets/monsters/slimeGreen/image1.svg",
@@ -20,9 +22,11 @@ export default {
       "../assets/monsters/slimeGreen/image4.svg",
       "../assets/monsters/slimeGreen/image5.svg",
     ],
+    imageHeight: [47, 42, 39, 35, 39],
+    imageMaxHeight: 47,
   },
   toad: {
-    speed: 3,
+    speed: 2,
     health: 200,
     image: [
       "../assets/monsters/sapo/sapo1.svg",
@@ -31,9 +35,11 @@ export default {
       "../assets/monsters/sapo/sapo4.svg",
       "../assets/monsters/sapo/sapo5.svg",
     ],
+    imageHeight: [87, 87, 87, 87, 87],
+    imageMaxHeight: 87,
   },
   robot: {
-    speed: 4,
+    speed: 2.5,
     health: 300,
     image: [
       "../assets/monsters/robo/image1.svg",
@@ -42,5 +48,7 @@ export default {
       "../assets/monsters/robo/image4.svg",
       "../assets/monsters/robo/image5.svg",
     ],
+    imageHeight: [72, 72, 72, 72, 72],
+    imageMaxHeight: 87,
   },
 };
