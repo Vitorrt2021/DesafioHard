@@ -1,5 +1,5 @@
 class Enemy {
-  constructor(monster, x, y, cellSize) {
+  constructor(monster, x, y, cellSize, line) {
     this.x = x;
     this.y = y;
     this.width = cellSize;
@@ -9,6 +9,7 @@ class Enemy {
     this.maxHealth = this.health;
     this.attack = monster.attack;
     this.monster = monster;
+    this.line = line;
   }
   update() {
     this.x -= this.speed;

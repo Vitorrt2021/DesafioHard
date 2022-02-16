@@ -13,7 +13,7 @@ class Tower {
     this.projectiles = [];
     this.projectileSrc = towerStatus[towerType].projectile;
     this.price = towerStatus[towerType].price;
-
+    this.isShooting = false;
     this.image = new Image();
     this.image.src = towerStatus[towerType].image;
     this.timer = 0;
@@ -22,19 +22,21 @@ class Tower {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     ctx.font = "30px arial";
     ctx.strokeStyle = "black";
-    ctx.fillText(this.health, this.x + this.x * 0.5, this.y);
+    ctx.fillText(this.health, this.x, this.y);
   }
   update() {
-    this.timer++;
-    if (this.timer % this.attackSpeed === 0) {
-      this.projectiles.push(
-        new Projectile(
-          this.x + this.width,
-          this.y + 30,
-          this.projectileSrc,
-          this.damage
-        )
-      );
+    if (this.isShooting) {
+      this.timer++;
+      if (this.timer % this.attackSpeed === 0) {
+        this.projectiles.push(
+          new Projectile(
+            this.x + this.width,
+            this.y + 30,
+            this.projectileSrc,
+            this.damage
+          )
+        );
+      }
     }
   }
   handleProjectiles(ctx, canvasWidth, cellSize) {

@@ -37,10 +37,37 @@ class Game {
     this.createGrid();
     this.catchMousePosition();
   }
+  haveEnemyInLine() {
+    const position = [false, false, false];
+    const towerPosition = [
+      Math.floor(76.4),
+      Math.floor(326.4),
+      Math.floor(576.4),
+    ];
+    this.enemys.forEach((enemy) => {
+      position[enemy.line] = true;
+    });
+    this.towers.forEach((tower) => {
+      console.log(tower.y);
+      console.log(towerPosition.indexOf(Math.floor(tower.y)));
+      if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
+        console.log("Outro");
+        if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
+          tower.isShooting = true;
+          console.log("Verda");
+        } else {
+          tower.isShooting = false;
+        }
+      }
+    });
+  }
   handleTowers() {
     this.towers.forEach(tower => {
       tower.draw(this.ctx);
-      tower.update();
+
+      if (tower.isShooting) {
+        tower.update();
+      }
       tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
     });
   }
@@ -85,18 +112,15 @@ class Game {
       this.enemys.forEach((enemy, enemyIndex) => {
         if (collision.rectRectCollisionDetection(tower, enemy)) {
           let towerHealth = tower.health;
-          if (towerHealth >= enemy.health) {
-            tower.health -= enemy.health;
-            enemy.health -= enemy.health;
-            this.enemyIsDead(enemy, enemyIndex);
-          } else {
-            tower.health -= enemy.health;
-            enemy.health -= towerHealth;
-          }
+          tower.health -= enemy.health;
+          enemy.health -= towerHealth;
+          this.enemyIsDead(enemy, enemyIndex);
+          this.towerWasDestroyed(tower, towerIndex);
         }
       });
     });
   }
+
   checkProjectileCollision() {
     this.towers.forEach(tower => {
       tower.projectiles.forEach((projectile, index) => {
@@ -118,12 +142,18 @@ class Game {
       }
     }
   }
-
+  drawGrid() {
+    this.gameGrid.forEach((cell, index) => {
+      //não desenha a ultima coluna
+      if (index == 6 || index == 13 || index == 20) return;
+      cell.draw(this.ctx);
+    });
+  }
   animation() {
     if (this.runAnimationControll) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.handleTowers();
-      this.enemys.forEach(enemy => {
+      this.drawGrid();
+      this.enemys.forEach((enemy) => {
         enemy.update();
         enemy.draw(this.ctx);
       });
@@ -133,10 +163,13 @@ class Game {
       if (this.frames % this.spawnVelocid === 0) {
         this.spawnEnemy();
       }
+      this.haveEnemyInLine();
+      this.handleTowers();
       this.checkProjectileCollision();
       this.checkTowerCollision();
       this.checkEnemyAttackedBase();
       this.frames++;
+
       requestAnimationFrame(() => {
         this.animation();
       });
@@ -159,15 +192,44 @@ class Game {
 
       let towerType = e.dataTransfer.getData("text");
       this.updateMousePosition(e);
-      const newTower = new Tower(this.mousePosition.x, this.mousePosition.y, 150, towerType);
-
-      if (newTower.price > this.player.money) return;
-      this.player.money -= parseInt(newTower.price);
-      this.updateMoney();
-      this.towers.push(newTower);
+      const newTower = new Tower(
+        this.mousePosition.x,
+        this.mousePosition.y,
+        150,
+        towerType
+      );
+      if (newTower.price > this.player.money) {
+        return;
+      }
+      this.addTowerInCell(newTower);
     });
   }
-
+  addTowerInCell(tower) {
+    const gridPositionX =
+      this.mousePosition.x -
+      (this.mousePosition.x % this.cellSize) +
+      this.cellGap;
+    const gridPositionY =
+      this.mousePosition.y -
+      (this.mousePosition.y % this.cellSize) +
+      this.cellGap;
+    //Impedir de colocar a torre na ultima coluna
+    if (gridPositionX - 5 === this.gameGrid[6].x) return;
+    //Ver já tem torre nessa celula
+    for (let i = 0; i < this.towers.length; i++) {
+      if (
+        this.towers[i].x === gridPositionX &&
+        this.towers[i].y === gridPositionY + this.cellSize / 3.5
+      ) {
+        return false;
+      }
+    }
+    tower.x = gridPositionX;
+    tower.y = gridPositionY + this.cellSize / 3.5;
+    this.player.money -= parseInt(tower.price);
+    this.updateMoney();
+    this.towers.push(tower);
+  }
   updateMousePosition(e) {
     let rect = this.canvas.getBoundingClientRect();
 
@@ -180,10 +242,11 @@ class Game {
     };
   }
   spawnEnemy() {
-    const positions = [2.5, 10, 1.4];
-    let position = this.canvas.height / positions[Math.floor(Math.random() * 3)];
+    const positions = [10, 2.5, 1.4];
+    const sorted = Math.floor(Math.random() * 3);
+    let position = this.canvas.height / positions[sorted];
     this.enemys.push(
-      new Enemy(new Monster(this.monster[Math.floor(Math.random() * 4)], this.monsterStatus), parseInt(this.canvas.width), position, this.cellSize)
+      new Enemy(new Monster(this.monster[Math.floor(Math.random() * 4)], this.monsterStatus), parseInt(this.canvas.width), position, this.cellSize, sorted)
     );
   }
 }
