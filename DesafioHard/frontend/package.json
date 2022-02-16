@@ -4,5 +4,6 @@
   },
   "script": {
     "start": "node server.js"
-  }
+  },
+  "type": "commonjs"
 }

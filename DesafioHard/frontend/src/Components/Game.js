@@ -4,6 +4,7 @@ import collision from "./Collision.js";
 import Player from "./Player.js";
 import Monster from "./Monster.js";
 import Enemy from "./Enemy.js";
+import MonsterStatus from "./monsterStatus.js";
 
 class Game {
   constructor() {
@@ -26,6 +27,7 @@ class Game {
     this.towers = [];
     this.enemys = [];
     this.monster = ["slimePink", "slimeGreen", "toad", "robot"];
+    this.monsterStatus = new MonsterStatus();
   }
   start() {
     this.updateScore();
@@ -56,7 +58,7 @@ class Game {
     });
   }
   handleTowers() {
-    this.towers.forEach((tower) => {
+    this.towers.forEach(tower => {
       tower.draw(this.ctx);
 
       if (tower.isShooting) {
@@ -116,7 +118,7 @@ class Game {
   }
 
   checkProjectileCollision() {
-    this.towers.forEach((tower) => {
+    this.towers.forEach(tower => {
       tower.projectiles.forEach((projectile, index) => {
         this.enemys.forEach((enemy, enemyIndex) => {
           if (collision.rectRectCollisionDetection(projectile, enemy)) {
@@ -177,11 +179,11 @@ class Game {
   }
 
   catchMousePosition() {
-    document.querySelector("body").addEventListener("mousemove", (e) => {
+    document.querySelector("body").addEventListener("mousemove", e => {
       this.updateMousePosition(e);
     });
 
-    document.getElementById("canvas1").addEventListener("drop", (e) => {
+    document.getElementById("canvas1").addEventListener("drop", e => {
       e.preventDefault();
 
       let towerType = e.dataTransfer.getData("text");
@@ -236,17 +238,11 @@ class Game {
     };
   }
   spawnEnemy() {
-    const postions = [10, 2.5, 1.4];
+    const positions = [10, 2.5, 1.4];
     const sorted = Math.floor(Math.random() * 3);
-    let position = this.canvas.height / postions[sorted];
+    let position = this.canvas.height / positions[sorted];
     this.enemys.push(
-      new Enemy(
-        new Monster(this.monster[Math.floor(Math.random() * 4)]),
-        parseInt(this.canvas.width),
-        position,
-        this.cellSize,
-        sorted
-      )
+      new Enemy(new Monster(this.monster[Math.floor(Math.random() * 4)], this.monsterStatus), parseInt(this.canvas.width), position, this.cellSize, sorted)
     );
   }
 }
