@@ -5,8 +5,7 @@
 }
 
 html {
-  background: url("./images/clouds_background.png") no-repeat center center
-    fixed;
+  background: url("./images/clouds_background.png") no-repeat center center fixed;
   background-size: cover;
   color: white;
   font-weight: bolder;
@@ -89,12 +88,6 @@ html body {
   align-items: center;
 }
 
-/* .cat_tower {
-  background: url("./images/cat_tower_level_1.png");
-  background-size: 100% 100%;
-  filter: brightness(75%);
-} */
-
 .blue_rabbit_tower {
   background: url("./images/blue_rabbit_tower_level_1.png");
   background-size: 100% 100%;
@@ -142,7 +135,3 @@ html body {
   text-shadow: inherit;
   font-size: 40px;
 }
-
-/* #gameplay_canvas {
-
-} */
