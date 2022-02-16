@@ -39,18 +39,7 @@ class Game {
       tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
     });
   }
-  resize() {
-    let width = window.innerWidth;
-    let ratio = this.canvas.height / this.canvas.width;
-    let height = width * ratio;
-    if (height > window.innerHeight) {
-      height = window.innerHeight;
-      ratio = this.canvas.width / this.canvas.height;
-      width = height * ratio;
-    }
-    this.canvas.style.width = width + "px";
-    this.canvas.style.height = height + "px";
-  }
+  checkCollition() {}
   createGrid() {
     for (let y = 0; y < this.canvas.height; y += this.cellSize) {
       for (let x = 0; x < this.canvas.width; x += this.cellSize) {
@@ -87,6 +76,7 @@ class Game {
   stopAnimation() {
     this.runAnimationControll = false;
   }
+
   catchMousePosition() {
     document.querySelector("body").addEventListener("mousemove", (e) => {
       this.updateMousePosition(e);
