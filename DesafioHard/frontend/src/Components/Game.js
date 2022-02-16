@@ -46,13 +46,9 @@ class Game {
       position[enemy.line] = true;
     });
     this.towers.forEach((tower) => {
-      console.log(tower.y);
-      console.log(towerPosition.indexOf(Math.floor(tower.y)));
       if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
-        console.log("Outro");
         if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
           tower.isShooting = true;
-          console.log("Verda");
         } else {
           tower.isShooting = false;
         }
