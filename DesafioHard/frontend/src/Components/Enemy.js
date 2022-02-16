@@ -14,17 +14,14 @@ class Enemy {
     this.x -= this.speed;
   }
   draw(ctx) {
-    const imageSapo = new Image();
-    imageSapo.src = this.monster.selectImage();
-    ctx.drawImage(
-      imageSapo,
-      this.x,
-      this.y + 30 + this.monster.diferenceHeight()
-    );
+    const imageLoaded = this.monster.selectImage();
+    if (!imageLoaded) {
+      return;
+    }
+    ctx.drawImage(imageLoaded, this.x, this.y + 30 + this.monster.diferenceHeight());
     ctx.font = "30px arial";
     ctx.strokeStyle = "black";
     ctx.fillText(this.health, this.x, this.y);
   }
 }
-
 export default Enemy;

@@ -4,6 +4,7 @@ import collision from "./Collision.js";
 import Player from "./Player.js";
 import Monster from "./Monster.js";
 import Enemy from "./Enemy.js";
+import MonsterStatus from "./monsterStatus.js";
 
 class Game {
   constructor() {
@@ -26,6 +27,7 @@ class Game {
     this.towers = [];
     this.enemys = [];
     this.monster = ["slimePink", "slimeGreen", "toad", "robot"];
+    this.monsterStatus = new MonsterStatus();
   }
   start() {
     this.updateScore();
@@ -36,7 +38,7 @@ class Game {
     this.catchMousePosition();
   }
   handleTowers() {
-    this.towers.forEach((tower) => {
+    this.towers.forEach(tower => {
       tower.draw(this.ctx);
       tower.update();
       tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
@@ -96,7 +98,7 @@ class Game {
     });
   }
   checkProjectileCollision() {
-    this.towers.forEach((tower) => {
+    this.towers.forEach(tower => {
       tower.projectiles.forEach((projectile, index) => {
         this.enemys.forEach((enemy, enemyIndex) => {
           if (collision.rectRectCollisionDetection(projectile, enemy)) {
@@ -121,7 +123,7 @@ class Game {
     if (this.runAnimationControll) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.handleTowers();
-      this.enemys.forEach((enemy) => {
+      this.enemys.forEach(enemy => {
         enemy.update();
         enemy.draw(this.ctx);
       });
@@ -148,21 +150,16 @@ class Game {
   }
 
   catchMousePosition() {
-    document.querySelector("body").addEventListener("mousemove", (e) => {
+    document.querySelector("body").addEventListener("mousemove", e => {
       this.updateMousePosition(e);
     });
 
-    document.getElementById("canvas1").addEventListener("drop", (e) => {
+    document.getElementById("canvas1").addEventListener("drop", e => {
       e.preventDefault();
 
       let towerType = e.dataTransfer.getData("text");
       this.updateMousePosition(e);
-      const newTower = new Tower(
-        this.mousePosition.x,
-        this.mousePosition.y,
-        150,
-        towerType
-      );
+      const newTower = new Tower(this.mousePosition.x, this.mousePosition.y, 150, towerType);
 
       if (newTower.price > this.player.money) return;
       this.player.money -= parseInt(newTower.price);
@@ -183,15 +180,10 @@ class Game {
     };
   }
   spawnEnemy() {
-    const postions = [2.5, 10, 1.4];
-    let position = this.canvas.height / postions[Math.floor(Math.random() * 3)];
+    const positions = [2.5, 10, 1.4];
+    let position = this.canvas.height / positions[Math.floor(Math.random() * 3)];
     this.enemys.push(
-      new Enemy(
-        new Monster(this.monster[Math.floor(Math.random() * 4)]),
-        parseInt(this.canvas.width),
-        position,
-        this.cellSize
-      )
+      new Enemy(new Monster(this.monster[Math.floor(Math.random() * 4)], this.monsterStatus), parseInt(this.canvas.width), position, this.cellSize)
     );
   }
 }
