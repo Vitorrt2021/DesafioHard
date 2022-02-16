@@ -3,14 +3,14 @@ export default {
     health: 500,
     damage: 50,
     attackSpeed: 100,
-    price: 100,
+    price: 150,
     image: "../assets/towers/blue_rabbit_tower_level_1.png",
     projectile: "../assets/projectiles/carrot.svg",
   },
   blue_rabbit_tower_level_2: {
     health: 750,
     damage: 100,
-    price: 100,
+    price: 150,
     attackSpeed: 50,
     image: "../assets/towers/blue_rabbit_tower_level_2.png",
     projectile: "../assets/projectiles/carrot.svg",
@@ -18,7 +18,7 @@ export default {
   blue_rabbit_tower_level_3: {
     health: 1000,
     damage: 200,
-    price: 100,
+    price: 150,
     attackSpeed: 30,
     image: "../assets/towers/blue_rabbit_tower_level_3.png",
     projectile: "../assets/projectiles/lightning.svg",
@@ -26,7 +26,7 @@ export default {
   red_rabbit_tower_level_1: {
     health: 500,
     damage: 50,
-    price: 150,
+    price: 200,
     attackSpeed: 150,
     image: "../assets/towers/red_rabbit_tower_level_1.png",
     projectile: "../assets/projectiles/carrot.svg",
@@ -34,7 +34,7 @@ export default {
   red_rabbit_tower_level_2: {
     health: 750,
     damage: 100,
-    price: 150,
+    price: 200,
     attackSpeed: 100,
     image: "../assets/towers/red_rabbit_tower_level_2.png",
     projectile: "../assets/projectiles/carrot.svg",
@@ -42,7 +42,7 @@ export default {
   red_rabbit_tower_level_3: {
     health: 1000,
     damage: 200,
-    price: 150,
+    price: 200,
     attackSpeed: 50,
     image: "../assets/towers/red_rabbit_tower_level_3.png",
     projectile: "../assets/projectiles/lightning.svg",
@@ -50,7 +50,7 @@ export default {
   cat_tower_level_1: {
     health: 500,
     damage: 50,
-    price: 200,
+    price: 100,
     attackSpeed: 200,
     image: "../assets/towers/cat_tower_level_1.png",
     projectile: "../assets/projectiles/wool_ball.svg",
@@ -58,7 +58,7 @@ export default {
   cat_tower_level_2: {
     health: 750,
     damage: 100,
-    price: 200,
+    price: 100,
     attackSpeed: 150,
     image: "../assets/towers/cat_tower_level_2.png",
     projectile: "../assets/projectiles/wool_ball.svg",
@@ -66,7 +66,7 @@ export default {
   cat_tower_level_3: {
     health: 1000,
     damage: 200,
-    price: 200,
+    price: 100,
     attackSpeed: 100,
     image: "../assets/towers/cat_tower_level_3.png",
     projectile: "../assets/projectiles/lightning.svg",

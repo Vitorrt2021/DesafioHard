@@ -116,11 +116,17 @@ class Game {
       }
     }
   }
-
+  drawGrid() {
+    this.gameGrid.forEach((cell, index) => {
+      //não desenha a ultima coluna
+      if (index == 6 || index == 13 || index == 20) return;
+      cell.draw(this.ctx);
+    });
+  }
   animation() {
     if (this.runAnimationControll) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      this.handleTowers();
+      this.drawGrid();
       this.enemys.forEach((enemy) => {
         enemy.update();
         enemy.draw(this.ctx);
@@ -131,10 +137,12 @@ class Game {
       if (this.frames % this.spawnVelocid === 0) {
         this.spawnEnemy();
       }
+      this.handleTowers();
       this.checkProjectileCollision();
       this.checkTowerCollision();
       this.checkEnemyAttackedBase();
       this.frames++;
+
       requestAnimationFrame(() => {
         this.animation();
       });
@@ -163,14 +171,40 @@ class Game {
         150,
         towerType
       );
-
-      if (newTower.price > this.player.money) return;
-      this.player.money -= parseInt(newTower.price);
-      this.updateMoney();
-      this.towers.push(newTower);
+      if (newTower.price > this.player.money) {
+        console.log("Sem dinheiro");
+        return;
+      }
+      this.addTowerInCell(newTower);
     });
   }
-
+  addTowerInCell(tower) {
+    const gridPositionX =
+      this.mousePosition.x -
+      (this.mousePosition.x % this.cellSize) +
+      this.cellGap;
+    const gridPositionY =
+      this.mousePosition.y -
+      (this.mousePosition.y % this.cellSize) +
+      this.cellGap;
+    //Impedir de colocar a torre na ultima coluna
+    if (gridPositionX - 5 === this.gameGrid[6].x) return;
+    //Ver já tem torre nessa celula
+    for (let i = 0; i < this.towers.length; i++) {
+      if (
+        this.towers[i].x === gridPositionX &&
+        this.towers[i].y === gridPositionY + this.cellSize / 3.5
+      ) {
+        console.log("tem torre nessa celula");
+        return false;
+      }
+    }
+    tower.x = gridPositionX;
+    tower.y = gridPositionY + this.cellSize / 3.5;
+    this.player.money -= parseInt(tower.price);
+    this.updateMoney();
+    this.towers.push(tower);
+  }
   updateMousePosition(e) {
     let rect = this.canvas.getBoundingClientRect();
 
