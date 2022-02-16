@@ -3,14 +3,14 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.width = cellSize;
-    this.height = cellSize;
+    this.height = cellSize / 2;
     this.speed = monster.speed;
     this.health = monster.health;
     this.maxHealth = this.health;
     this.attack = monster.attack;
     this.monster = monster;
   }
-  update(ctx) {
+  update() {
     this.x -= this.speed;
   }
   draw(ctx) {
@@ -21,6 +21,9 @@ class Enemy {
       this.x,
       this.y + 30 + this.monster.diferenceHeight()
     );
+    ctx.font = "30px arial";
+    ctx.strokeStyle = "black";
+    ctx.fillText(this.health, this.x, this.y);
   }
 }
 
