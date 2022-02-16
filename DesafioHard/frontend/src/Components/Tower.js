@@ -12,6 +12,7 @@ class Tower {
     this.attackSpeed = towerStatus[towerType].attackSpeed;
     this.projectiles = [];
     this.projectileSrc = towerStatus[towerType].projectile;
+    this.price = towerStatus[towerType].price;
 
     this.image = new Image();
     this.image.src = towerStatus[towerType].image;
@@ -19,12 +20,20 @@ class Tower {
   }
   draw(ctx) {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    ctx.font = "30px arial";
+    ctx.strokeStyle = "black";
+    ctx.fillText(this.health, this.x + this.x * 0.5, this.y);
   }
   update() {
     this.timer++;
     if (this.timer % this.attackSpeed === 0) {
       this.projectiles.push(
-        new Projectile(this.x + this.width, this.y + 30, this.projectileSrc)
+        new Projectile(
+          this.x + this.width,
+          this.y + 30,
+          this.projectileSrc,
+          this.damage
+        )
       );
     }
   }

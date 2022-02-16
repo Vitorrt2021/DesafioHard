@@ -1,5 +1,4 @@
 import Cell from "./Cell.js";
-import Collision from "./Collision.js";
 import Tower from "./Tower.js";
 import collision from "./Collision.js";
 import Player from "./Player.js";
@@ -16,7 +15,7 @@ class Game {
 
     this.player = new Player();
     this.frames = 0;
-    this.spawnVelocid = 200;
+    this.spawnVelocid = 1000;
     this.cellOver = null;
     this.runAnimationControll = true;
     this.cellSize = 250;
@@ -29,6 +28,9 @@ class Game {
     this.monster = ["slimePink", "slimeGreen", "toad", "robot"];
   }
   start() {
+    this.updateScore();
+    this.updateMoney();
+
     this.animation();
     this.createGrid();
     this.catchMousePosition();
@@ -40,17 +42,71 @@ class Game {
       tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
     });
   }
-  resize() {
-    let width = window.innerWidth;
-    let ratio = this.canvas.height / this.canvas.width;
-    let height = width * ratio;
-    if (height > window.innerHeight) {
-      height = window.innerHeight;
-      ratio = this.canvas.width / this.canvas.height;
-      width = height * ratio;
+  gameIsOver() {
+    if (this.player.live <= 0) {
+      alert("Você perdeu");
+      this.stopAnimation();
     }
-    this.canvas.style.width = width + "px";
-    this.canvas.style.height = height + "px";
+  }
+  updateScore() {
+    $("#score_value").html(this.player.score);
+  }
+  updateMoney() {
+    $("#money_value").html(this.player.money);
+  }
+  checkEnemyAttackedBase() {
+    this.enemys.forEach((enemy, enemyIndex) => {
+      if (enemy.x + this.cellSize / 3 < 0) {
+        this.player.live -= enemy.health;
+        this.enemys.splice(enemyIndex, 1);
+        this.gameIsOver();
+      }
+    });
+  }
+
+  enemyIsDead(enemy, enemyIndex) {
+    if (enemy.health <= 0) {
+      this.enemys.splice(enemyIndex, 1);
+      this.player.score += 20;
+      this.player.money += 20;
+      this.updateScore();
+      this.updateMoney();
+    }
+  }
+  towerWasDestroyed(tower, towerIndex) {
+    if (tower.health <= 0) {
+      this.towers.splice(towerIndex, 1);
+    }
+  }
+  checkTowerCollision() {
+    this.towers.forEach((tower, towerIndex) => {
+      this.enemys.forEach((enemy, enemyIndex) => {
+        if (collision.rectRectCollisionDetection(tower, enemy)) {
+          let towerHealth = tower.health;
+          if (towerHealth >= enemy.health) {
+            tower.health -= enemy.health;
+            enemy.health -= enemy.health;
+            this.enemyIsDead(enemy, enemyIndex);
+          } else {
+            tower.health -= enemy.health;
+            enemy.health -= towerHealth;
+          }
+        }
+      });
+    });
+  }
+  checkProjectileCollision() {
+    this.towers.forEach((tower) => {
+      tower.projectiles.forEach((projectile, index) => {
+        this.enemys.forEach((enemy, enemyIndex) => {
+          if (collision.rectRectCollisionDetection(projectile, enemy)) {
+            tower.projectiles.splice(index, 1);
+            enemy.health -= projectile.power;
+            this.enemyIsDead(enemy, enemyIndex);
+          }
+        });
+      });
+    });
   }
   createGrid() {
     for (let y = 0; y < this.canvas.height; y += this.cellSize) {
@@ -65,7 +121,6 @@ class Game {
     if (this.runAnimationControll) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.handleTowers();
-
       this.enemys.forEach((enemy) => {
         enemy.update();
         enemy.draw(this.ctx);
@@ -76,6 +131,9 @@ class Game {
       if (this.frames % this.spawnVelocid === 0) {
         this.spawnEnemy();
       }
+      this.checkProjectileCollision();
+      this.checkTowerCollision();
+      this.checkEnemyAttackedBase();
       this.frames++;
       requestAnimationFrame(() => {
         this.animation();
@@ -88,6 +146,7 @@ class Game {
   stopAnimation() {
     this.runAnimationControll = false;
   }
+
   catchMousePosition() {
     document.querySelector("body").addEventListener("mousemove", (e) => {
       this.updateMousePosition(e);
@@ -98,9 +157,17 @@ class Game {
 
       let towerType = e.dataTransfer.getData("text");
       this.updateMousePosition(e);
-      this.towers.push(
-        new Tower(this.mousePosition.x, this.mousePosition.y, 150, towerType)
+      const newTower = new Tower(
+        this.mousePosition.x,
+        this.mousePosition.y,
+        150,
+        towerType
       );
+
+      if (newTower.price > this.player.money) return;
+      this.player.money -= parseInt(newTower.price);
+      this.updateMoney();
+      this.towers.push(newTower);
     });
   }
 
@@ -116,7 +183,6 @@ class Game {
     };
   }
   spawnEnemy() {
-    // let position = Math.floor(Math.random() * 3) * this.cellSize;
     const postions = [2.5, 10, 1.4];
     let position = this.canvas.height / postions[Math.floor(Math.random() * 3)];
     this.enemys.push(
