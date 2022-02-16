@@ -17,11 +17,17 @@ $(document).ready(function () {
   });
 
   $(".blue_rabbit_tower").on("dragstart", function (event) {
-    event.originalEvent.dataTransfer.setData("text", "blue_rabbit_tower_level_1");
+    event.originalEvent.dataTransfer.setData(
+      "text",
+      "blue_rabbit_tower_level_1"
+    );
   });
 
   $(".red_rabbit_tower").on("dragstart", function (event) {
-    event.originalEvent.dataTransfer.setData("text", "red_rabbit_tower_level_1");
+    event.originalEvent.dataTransfer.setData(
+      "text",
+      "red_rabbit_tower_level_1"
+    );
   });
 
   $("#canvas1").on("dragover", function (event) {
