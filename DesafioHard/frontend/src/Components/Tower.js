@@ -22,7 +22,7 @@ class Tower {
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     ctx.font = "30px arial";
     ctx.strokeStyle = "black";
-    ctx.fillText(this.health, this.x + this.x * 0.5, this.y);
+    ctx.fillText(this.health, this.x, this.y);
   }
   update() {
     this.timer++;
