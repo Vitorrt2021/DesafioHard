@@ -35,10 +35,37 @@ class Game {
     this.createGrid();
     this.catchMousePosition();
   }
+  haveEnemyInLine() {
+    const position = [false, false, false];
+    const towerPosition = [
+      Math.floor(76.4),
+      Math.floor(326.4),
+      Math.floor(576.4),
+    ];
+    this.enemys.forEach((enemy) => {
+      position[enemy.line] = true;
+    });
+    this.towers.forEach((tower) => {
+      console.log(tower.y);
+      console.log(towerPosition.indexOf(Math.floor(tower.y)));
+      if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
+        console.log("Outro");
+        if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
+          tower.isShooting = true;
+          console.log("Verda");
+        } else {
+          tower.isShooting = false;
+        }
+      }
+    });
+  }
   handleTowers() {
     this.towers.forEach((tower) => {
       tower.draw(this.ctx);
-      tower.update();
+
+      if (tower.isShooting) {
+        tower.update();
+      }
       tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
     });
   }
@@ -83,18 +110,15 @@ class Game {
       this.enemys.forEach((enemy, enemyIndex) => {
         if (collision.rectRectCollisionDetection(tower, enemy)) {
           let towerHealth = tower.health;
-          if (towerHealth >= enemy.health) {
-            tower.health -= enemy.health;
-            enemy.health -= enemy.health;
-            this.enemyIsDead(enemy, enemyIndex);
-          } else {
-            tower.health -= enemy.health;
-            enemy.health -= towerHealth;
-          }
+          tower.health -= enemy.health;
+          enemy.health -= towerHealth;
+          this.enemyIsDead(enemy, enemyIndex);
+          this.towerWasDestroyed(tower, towerIndex);
         }
       });
     });
   }
+
   checkProjectileCollision() {
     this.towers.forEach((tower) => {
       tower.projectiles.forEach((projectile, index) => {
@@ -137,6 +161,7 @@ class Game {
       if (this.frames % this.spawnVelocid === 0) {
         this.spawnEnemy();
       }
+      this.haveEnemyInLine();
       this.handleTowers();
       this.checkProjectileCollision();
       this.checkTowerCollision();
@@ -172,7 +197,6 @@ class Game {
         towerType
       );
       if (newTower.price > this.player.money) {
-        console.log("Sem dinheiro");
         return;
       }
       this.addTowerInCell(newTower);
@@ -195,7 +219,6 @@ class Game {
         this.towers[i].x === gridPositionX &&
         this.towers[i].y === gridPositionY + this.cellSize / 3.5
       ) {
-        console.log("tem torre nessa celula");
         return false;
       }
     }
@@ -217,14 +240,16 @@ class Game {
     };
   }
   spawnEnemy() {
-    const postions = [2.5, 10, 1.4];
-    let position = this.canvas.height / postions[Math.floor(Math.random() * 3)];
+    const postions = [10, 2.5, 1.4];
+    const sorted = Math.floor(Math.random() * 3);
+    let position = this.canvas.height / postions[sorted];
     this.enemys.push(
       new Enemy(
         new Monster(this.monster[Math.floor(Math.random() * 4)]),
         parseInt(this.canvas.width),
         position,
-        this.cellSize
+        this.cellSize,
+        sorted
       )
     );
   }
