@@ -1,10 +1,8 @@
-const express = require('express')
-const app =  express()
+const express = require('express');
+const app = express();
+const port = 80;
 
-app.use(express.static(__dirname + '/src'))
+app.use(express.static(__dirname + '/src'));
+app.use(express.static(__dirname + '/src/gameplay_interface'));
 
-app.get('/',(req,res)=>{
-    res.send('Funciona')
-})
-const port = 3005
-app.listen(port,()=>console.log(`Ouvindo na porta ${port} ...`))
+app.listen(port, () => console.log(`Ouvindo na porta ${port} ...`));
