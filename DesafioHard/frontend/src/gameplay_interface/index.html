@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="gameplay_interface.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="gameplay_interface.js" type="module"></script>
     <title>Tower Defense</title>
   </head>
   <body>
@@ -43,7 +39,9 @@
               </div>
             </div>
           </section>
-
+          <section id="live_display">
+            <p id="live_value">0</p>
+          </section>
           <section id="score_display">
             <p id="score_value">0</p>
           </section>
@@ -57,5 +55,10 @@
         <canvas id="canvas1"></canvas>
       </section>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="gameplay_interface.js" type="module"></script>
   </body>
 </html>
