@@ -17,6 +17,7 @@ class Tower {
     this.isDamaged = false;
     this.explosionFrame = 0;
     this.alphaRedRectangle = 0;
+    this.maxAlphaRectangle = 0.5;
     this.redRectDimensionModifier = 0;
 
     this.explosionImages = Array(8)
@@ -34,22 +35,12 @@ class Tower {
     this.nextLevel = towerStatus[towerType].nextLevel;
   }
   draw(ctx) {
-    // CHECK THE TOWER IMAGE RANGE
-    // ctx.rect(this.x, this.y, this.height, this.width);
-    // ctx.stroke();
-
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
     if (this.canEnvolve) {
       const image = new Image();
       image.src = "../assets/images/evolve_tower.png";
-      ctx.drawImage(
-        image,
-        this.x + this.width * 0.8,
-        this.y,
-        this.width / 5,
-        this.height / 5
-      );
+      ctx.drawImage(image, this.x + this.width * 0.8, this.y, this.width / 5, this.height / 5);
     }
 
     ctx.font = "30px arial";
@@ -57,26 +48,24 @@ class Tower {
     ctx.fillText(this.health, this.x, this.y);
 
     if (this.isDamaged) {
-      if (Number.isInteger(this.explosionFrame)) {
-        if (this.explosionFrame <= this.explosionImages.length / 2) {
-          this.alphaRedRectangle += 0.0625; //O alpha deve chegar no máximo até 0.25 no meio da animação da explosão
-        } else {
-          this.alphaRedRectangle -= 0.0625;
-        }
-        // console.log(this.alphaRedRectangle, this.explosionFrame);
-      }
-      console.log(this.alphaRedRectangle, this.explosionFrame);
-      ctx.fillStyle = `rgba(255, 0, 0, ${this.alphaRedRectangle})`;
-      // ctx.fillRect(this.x, this.y, this.width * this.redRectDimensionModifier, this.height * this.redRectDimensionModifier);
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      if (this.explosionFrame.toFixed(1).match(/[0-9]\.0/) !== null) {
+        const halfLengthExplosions = this.explosionImages.length / 2;
 
-      ctx.drawImage(
-        this.explosionImages[parseInt(this.explosionFrame)],
-        this.x,
-        this.y,
-        this.width,
-        this.height
-      );
+        if (this.explosionFrame <= halfLengthExplosions) {
+          this.alphaRedRectangle += this.maxAlphaRectangle / halfLengthExplosions;
+        } else {
+          this.alphaRedRectangle -= this.maxAlphaRectangle / halfLengthExplosions;
+        }
+      }
+
+      console.log(this.alphaRedRectangle, this.explosionFrame.toFixed(1));
+      ctx.fillStyle = `rgba(255, 0, 0, ${this.alphaRedRectangle})`;
+      ctx.beginPath();
+      ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2, 0, 2 * Math.PI);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.drawImage(this.explosionImages[parseInt(this.explosionFrame)], this.x, this.y, this.width, this.height);
 
       this.explosionFrame += 0.2;
     }
@@ -91,14 +80,7 @@ class Tower {
   update() {
     if (this.isShooting) {
       if (this.timer % this.attackSpeed === 0) {
-        this.projectiles.push(
-          new Projectile(
-            this.x + this.width,
-            this.y + 30,
-            this.projectileSrc,
-            this.damage
-          )
-        );
+        this.projectiles.push(new Projectile(this.x + this.width, this.y + 30, this.projectileSrc, this.damage));
       }
       this.timer++;
     }
