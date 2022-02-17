@@ -16,7 +16,7 @@ class Game {
 
 		this.player = new Player();
 		this.frames = 0;
-		this.spawnVelocid = 1000;
+		this.spawnVelocid = 500;
 		this.cellOver = null;
 		this.runAnimationControll = true;
 		this.cellSize = 250;

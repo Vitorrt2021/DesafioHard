@@ -19,9 +19,13 @@ class Enemy {
     if (!imageLoaded) {
       return;
     }
-    ctx.drawImage(imageLoaded, this.x, this.y + 30 + this.monster.diferenceHeight());
+    ctx.drawImage(
+      imageLoaded,
+      this.x,
+      this.y + 30 + this.monster.diferenceHeight()
+    );
+
     ctx.font = "30px arial";
-    ctx.strokeStyle = "black";
     ctx.fillText(this.health, this.x, this.y);
   }
 }

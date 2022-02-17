@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="gameplay_interface.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="gameplay_interface.js" type="module"></script>
     <title>Tower Defense</title>
   </head>
   <body>
@@ -24,26 +20,28 @@
               <div class="tower_area">
                 <img class="tower_button cat_tower" src="./images/cat_tower_level_1.png" draggable="true" />
                 <div class="tower_money_cost_visor">
-                  <p id="cat_cost_value">100</p>
+                  <p class="price" id="cat_cost_value">100</p>
                 </div>
               </div>
 
               <div class="tower_area">
                 <img class="tower_button blue_rabbit_tower" src="./images/blue_rabbit_tower_level_1.png" draggable="true" />
                 <div class="tower_money_cost_visor">
-                  <p id="blue_rabbit_cost_value">150</p>
+                  <p class="price" id="blue_rabbit_cost_value">150</p>
                 </div>
               </div>
 
               <div class="tower_area">
                 <img class="tower_button red_rabbit_tower" src="./images/red_rabbit_tower_level_1.png" draggable="true" />
                 <div class="tower_money_cost_visor">
-                  <p id="red_rabbit_cost_value">200</p>
+                  <p class="price" id="red_rabbit_cost_value">200</p>
                 </div>
               </div>
             </div>
           </section>
-
+          <section id="live_display">
+            <p id="live_value">0</p>
+          </section>
           <section id="score_display">
             <p id="score_value">0</p>
           </section>
@@ -57,5 +55,10 @@
         <canvas id="canvas1"></canvas>
       </section>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="gameplay_interface.js" type="module"></script>
   </body>
 </html>
