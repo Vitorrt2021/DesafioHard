@@ -7,8 +7,7 @@
 
 html {
   font-size: 1.44vw;
-  background: url("./images/clouds_background.png") no-repeat center center
-    fixed;
+  background: url("./images/clouds_background.png") no-repeat center center fixed;
   background-size: cover;
   color: white;
   font-weight: bolder;
@@ -68,10 +67,10 @@ html body {
 
 #buttons_area {
   position: relative;
-  margin-top: 5%;
+  margin-top: 1%;
   width: 90%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .tower_area {
@@ -82,38 +81,22 @@ html body {
 }
 
 .tower_button {
-  width: 60%;
-  height: 60%;
+  width: 55%;
+  height: 55%;
 }
 
 .tower_money_cost_visor {
-  width: 70%;
-  background: url("./images/tower_cost_display.svg");
-  background-size: 100% 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 75%;
+  background: url("./images/tower_cost_display.svg") no-repeat center;
+  background-size: 75% 100%;
 }
 
-/* .cat_tower {
-  background: url("./images/cat_tower_level_1.png");
-  background-size: 100% 100%;
-  filter: brightness(75%);
-} */
-.cat_tower {
-  cursor: pointer;
-}
-.blue_rabbit_tower {
-  background: url("./images/blue_rabbit_tower_level_1.png");
-  background-size: 100% 100%;
-  cursor: pointer;
-}
-
+.cat_tower,
+.blue_rabbit_tower,
 .red_rabbit_tower {
-  background: url("./images/red_rabbit_tower_level_1.png");
-  background-size: 100% 100%;
   cursor: pointer;
 }
+
 #live_display {
   width: 15%;
   height: 75%;
@@ -151,6 +134,7 @@ html body {
 }
 .price {
   font-size: 1rem;
+  margin-left: 35%;
 }
 #live_value,
 #score_value,
