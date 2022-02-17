@@ -1,3 +1,14 @@
+const explosionsArray = [
+  "../assets/explosions/Explosion_A.png",
+  "../assets/explosions/Explosion_B.png",
+  "../assets/explosions/Explosion_C.png",
+  "../assets/explosions/Explosion_D.png",
+  "../assets/explosions/Explosion_E.png",
+  "../assets/explosions/Explosion_F.png",
+  "../assets/explosions/Explosion_G.png",
+  "../assets/explosions/Explosion_H.png",
+];
+
 export default {
   cat_tower_base: {
     price: 50,
@@ -12,6 +23,7 @@ export default {
     attackSpeed: 200,
     image: "../assets/towers/cat_tower_level_1.png",
     projectile: "../assets/projectiles/wool_ball.png",
+    explosions: explosionsArray,
   },
   cat_tower_level_2: {
     level: 2,
@@ -22,6 +34,7 @@ export default {
     attackSpeed: 170,
     image: "../assets/towers/cat_tower_level_2.png",
     projectile: "../assets/projectiles/wool_ball.png",
+    explosions: explosionsArray,
   },
   cat_tower_level_3: {
     level: 3,
@@ -31,6 +44,7 @@ export default {
     attackSpeed: 120,
     image: "../assets/towers/cat_tower_level_3.png",
     projectile: "../assets/projectiles/lightning.svg",
+    explosions: explosionsArray,
   },
   blue_rabbit_tower_base: {
     price: 50,
@@ -45,6 +59,7 @@ export default {
     price: 150,
     image: "../assets/towers/blue_rabbit_tower_level_1.png",
     projectile: "../assets/projectiles/carrot.png",
+    explosions: explosionsArray,
   },
   blue_rabbit_tower_level_2: {
     level: 2,
@@ -55,6 +70,7 @@ export default {
     attackSpeed: 120,
     image: "../assets/towers/blue_rabbit_tower_level_2.png",
     projectile: "../assets/projectiles/carrot.png",
+    explosions: explosionsArray,
   },
   blue_rabbit_tower_level_3: {
     level: 3,
@@ -64,6 +80,7 @@ export default {
     attackSpeed: 80,
     image: "../assets/towers/blue_rabbit_tower_level_3.png",
     projectile: "../assets/projectiles/lightning.svg",
+    explosions: explosionsArray,
   },
   red_rabbit_tower_base: {
     price: 50,
@@ -78,6 +95,7 @@ export default {
     attackSpeed: 120,
     image: "../assets/towers/red_rabbit_tower_level_1.png",
     projectile: "../assets/projectiles/carrot.png",
+    explosions: explosionsArray,
   },
   red_rabbit_tower_level_2: {
     level: 2,
@@ -88,6 +106,7 @@ export default {
     attackSpeed: 90,
     image: "../assets/towers/red_rabbit_tower_level_2.png",
     projectile: "../assets/projectiles/carrot.png",
+    explosions: explosionsArray,
   },
   red_rabbit_tower_level_3: {
     level: 3,
@@ -97,5 +116,6 @@ export default {
     attackSpeed: 60,
     image: "../assets/towers/red_rabbit_tower_level_3.png",
     projectile: "../assets/projectiles/lightning.svg",
+    explosions: explosionsArray,
   },
 };

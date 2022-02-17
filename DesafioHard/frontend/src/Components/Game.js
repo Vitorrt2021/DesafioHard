@@ -161,6 +161,7 @@ class Game {
           let towerHealth = tower.health;
           tower.health -= enemy.health;
           enemy.health -= towerHealth;
+          tower.isDamaged = true;
           this.enemyIsDead(enemy, enemyIndex);
           this.towerWasDestroyed(tower, towerIndex);
         }
@@ -198,6 +199,7 @@ class Game {
   }
   animation() {
     if (this.runAnimationControll) {
+      this.ctx.fillStyle = "black";
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.canEnvolveTowers();
       this.drawGrid();

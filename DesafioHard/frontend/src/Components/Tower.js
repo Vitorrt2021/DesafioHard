@@ -14,6 +14,19 @@ class Tower {
     this.projectileSrc = towerStatus[towerType].projectile;
     this.price = towerStatus[towerType].price;
     this.isShooting = true;
+    this.isDamaged = false;
+    this.explosionFrame = 0;
+    this.alphaRedRectangle = 0;
+    this.redRectDimensionModifier = 0;
+
+    this.explosionImages = Array(8)
+      .fill()
+      .map((_, i) => {
+        const explosionImage = new Image();
+        explosionImage.src = towerStatus[towerType].explosions[i];
+        return explosionImage;
+      });
+
     this.image = new Image();
     this.image.src = towerStatus[towerType].image;
     this.timer = this.attackSpeed;
@@ -26,9 +39,54 @@ class Tower {
     // ctx.stroke();
 
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+    if (this.canEnvolve) {
+      const image = new Image();
+      image.src = "../assets/images/evolve_tower.png";
+      ctx.drawImage(
+        image,
+        this.x + this.width * 0.8,
+        this.y,
+        this.width / 5,
+        this.height / 5
+      );
+    }
+
     ctx.font = "30px arial";
     ctx.strokeStyle = "black";
     ctx.fillText(this.health, this.x, this.y);
+
+    if (this.isDamaged) {
+      if (Number.isInteger(this.explosionFrame)) {
+        if (this.explosionFrame <= this.explosionImages.length / 2) {
+          this.alphaRedRectangle += 0.0625; //O alpha deve chegar no máximo até 0.25 no meio da animação da explosão
+        } else {
+          this.alphaRedRectangle -= 0.0625;
+        }
+        // console.log(this.alphaRedRectangle, this.explosionFrame);
+      }
+      console.log(this.alphaRedRectangle, this.explosionFrame);
+      ctx.fillStyle = `rgba(255, 0, 0, ${this.alphaRedRectangle})`;
+      // ctx.fillRect(this.x, this.y, this.width * this.redRectDimensionModifier, this.height * this.redRectDimensionModifier);
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+
+      ctx.drawImage(
+        this.explosionImages[parseInt(this.explosionFrame)],
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+
+      this.explosionFrame += 0.2;
+    }
+
+    if (this.explosionFrame >= this.explosionImages.length) {
+      this.explosionFrame = 0;
+      this.alphaRedRectangle = 0;
+      this.redRectDimensionModifier = 0;
+      this.isDamaged = false;
+    }
   }
   update() {
     if (this.isShooting) {
