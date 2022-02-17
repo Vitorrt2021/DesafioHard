@@ -5,6 +5,7 @@ import Player from "./Player.js";
 import Monster from "./Monster.js";
 import Enemy from "./Enemy.js";
 import MonsterStatus from "./monsterStatus.js";
+import towerStatus from "./towerStatus.js";
 
 class Game {
   constructor() {
@@ -16,7 +17,7 @@ class Game {
 
     this.player = new Player();
     this.frames = 0;
-    this.spawnVelocid = 500;
+    this.spawnVelocid = 1000;
     this.cellOver = null;
     this.runAnimationControll = true;
     this.cellSize = 250;
@@ -30,6 +31,7 @@ class Game {
     this.monsterStatus = new MonsterStatus();
   }
   start() {
+    this.updateLive();
     this.updateScore();
     this.updateMoney();
 
@@ -57,6 +59,36 @@ class Game {
       }
     });
   }
+  canBuyTowers() {
+    $(".red_rabbit_tower").css("filter", "brightness(100%)");
+    $(".blue_rabbit_tower").css("filter", "brightness(100%)");
+    $(".cat_tower").css("filter", "brightness(100%)");
+    if (this.player.money < parseInt(towerStatus.red_rabbit_tower_level_1.price)) {
+      $(".red_rabbit_tower").css("filter", "brightness(55%)");
+    }
+    if (this.player.money < parseInt(towerStatus.blue_rabbit_tower_level_1.price)) {
+      $(".blue_rabbit_tower").css("filter", "brightness(55%)");
+    }
+    if (this.player.money < parseInt(towerStatus.cat_tower_level_1.price)) {
+      $(".cat_tower").css("filter", "brightness(55%)");
+    }
+  }
+  canEnvolveTowers() {
+    this.towers.forEach(tower => {
+      const nextLevel = tower.nextLevel;
+      if (!tower.hasOwnProperty("nextLevel") || !tower.hasOwnProperty("price") || !towerStatus[nextLevel]) {
+        tower.canEnvolve = false;
+      } else if (towerStatus[nextLevel].hasOwnProperty("price")) {
+        if (parseInt(towerStatus[nextLevel].price) <= this.player.money) {
+          tower.canEnvolve = true;
+        } else {
+          tower.canEnvolve = false;
+        }
+      } else {
+        tower.canEnvolve = false;
+      }
+    });
+  }
   handleTowers() {
     this.towers.forEach(tower => {
       tower.draw(this.ctx);
@@ -77,13 +109,18 @@ class Game {
     $("#score_value").html(this.player.score);
   }
   updateMoney() {
+    this.canBuyTowers();
     $("#money_value").html(this.player.money);
+  }
+  updateLive() {
+    $("#live_value").html(this.player.live);
   }
   checkEnemyAttackedBase() {
     this.enemys.forEach((enemy, enemyIndex) => {
       if (enemy.x + this.cellSize / 3 < 0) {
         this.player.live -= enemy.health;
         this.enemys.splice(enemyIndex, 1);
+        this.updateLive();
         this.gameIsOver();
       }
     });
@@ -150,6 +187,7 @@ class Game {
     if (this.runAnimationControll) {
       this.ctx.fillStyle = "black";
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.canEnvolveTowers();
       this.drawGrid();
       this.enemys.forEach(enemy => {
         enemy.update();
@@ -210,6 +248,8 @@ class Game {
     }
     tower.x = gridPositionX;
     tower.y = gridPositionY + this.cellSize / 3.5;
+    console.log("--------TowerPrice");
+    console.log(tower.price);
     this.player.money -= parseInt(tower.price);
     this.updateMoney();
     this.towers.push(tower);

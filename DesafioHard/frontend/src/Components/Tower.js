@@ -32,6 +32,7 @@ class Tower {
     this.timer = 0;
     this.level = towerStatus[towerType].level;
     this.nextLevel = towerStatus[towerType].nextLevel;
+    this.canEnvolve = false;
   }
   draw(ctx) {
     // CHECK THE TOWER IMAGE RANGE
@@ -39,6 +40,13 @@ class Tower {
     // ctx.stroke();
 
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+
+    if (this.canEnvolve) {
+      const image = new Image();
+      image.src = "../assets/images/evolve_tower.png";
+      ctx.drawImage(image, this.x + this.width * 0.8, this.y, this.width / 5, this.height / 5);
+    }
+
     ctx.font = "30px arial";
     ctx.strokeStyle = "black";
     ctx.fillText(this.health, this.x, this.y);

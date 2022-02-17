@@ -22,7 +22,7 @@ export default {
     price: 100,
     attackSpeed: 200,
     image: "../assets/towers/cat_tower_level_1.png",
-    projectile: "../assets/projectiles/wool_ball.svg",
+    projectile: "../assets/projectiles/wool_ball.png",
     explosions: explosionsArray,
   },
   cat_tower_level_2: {
@@ -33,7 +33,7 @@ export default {
     price: 200,
     attackSpeed: 150,
     image: "../assets/towers/cat_tower_level_2.png",
-    projectile: "../assets/projectiles/wool_ball.svg",
+    projectile: "../assets/projectiles/wool_ball.png",
     explosions: explosionsArray,
   },
   cat_tower_level_3: {
@@ -58,7 +58,7 @@ export default {
     attackSpeed: 100,
     price: 150,
     image: "../assets/towers/blue_rabbit_tower_level_1.png",
-    projectile: "../assets/projectiles/carrot.svg",
+    projectile: "../assets/projectiles/carrot.png",
     explosions: explosionsArray,
   },
   blue_rabbit_tower_level_2: {
@@ -69,7 +69,7 @@ export default {
     price: 250,
     attackSpeed: 50,
     image: "../assets/towers/blue_rabbit_tower_level_2.png",
-    projectile: "../assets/projectiles/carrot.svg",
+    projectile: "../assets/projectiles/carrot.png",
     explosions: explosionsArray,
   },
   blue_rabbit_tower_level_3: {
@@ -94,7 +94,7 @@ export default {
     price: 200,
     attackSpeed: 150,
     image: "../assets/towers/red_rabbit_tower_level_1.png",
-    projectile: "../assets/projectiles/carrot.svg",
+    projectile: "../assets/projectiles/carrot.png",
     explosions: explosionsArray,
   },
   red_rabbit_tower_level_2: {
@@ -105,7 +105,7 @@ export default {
     price: 300,
     attackSpeed: 100,
     image: "../assets/towers/red_rabbit_tower_level_2.png",
-    projectile: "../assets/projectiles/carrot.svg",
+    projectile: "../assets/projectiles/carrot.png",
     explosions: explosionsArray,
   },
   red_rabbit_tower_level_3: {
