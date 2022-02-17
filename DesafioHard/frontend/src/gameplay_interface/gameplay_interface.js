@@ -1,13 +1,13 @@
 import Game from '../Components/Game.js';
 
 $(document).ready(function () {
-	// Prevent user from reloading page by accident
-	window.addEventListener('beforeunload', function (e) {
-		e.preventDefault();
-		// In Mozilla Firefox prompt will always be shown
-		// Chrome requires returnValue to be set
-		e.returnValue = '';
-	});
+	// // Prevent user from reloading page by accident
+	// window.addEventListener('beforeunload', function (e) {
+	// 	e.preventDefault();
+	// 	// In Mozilla Firefox prompt will always be shown
+	// 	// Chrome requires returnValue to be set
+	// 	e.returnValue = '';
+	// });
 
 	$('.cat_tower').on('dragstart', function (event) {
 		event.originalEvent.dataTransfer.setData(
@@ -36,4 +36,8 @@ $(document).ready(function () {
 
 	const game = new Game();
 	game.start();
+
+	$('canvas').click(() => {
+		game.evolveTower();
+	});
 });
