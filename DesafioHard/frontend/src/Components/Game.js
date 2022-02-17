@@ -16,7 +16,7 @@ class Game {
 
     this.player = new Player();
     this.frames = 0;
-    this.spawnVelocid = 1000;
+    this.spawnVelocid = 500;
     this.cellOver = null;
     this.runAnimationControll = true;
     this.cellSize = 250;
@@ -48,13 +48,9 @@ class Game {
       position[enemy.line] = true;
     });
     this.towers.forEach((tower) => {
-      console.log(tower.y);
-      console.log(towerPosition.indexOf(Math.floor(tower.y)));
       if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
-        console.log("Outro");
         if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
           tower.isShooting = true;
-          console.log("Verda");
         } else {
           tower.isShooting = false;
         }
@@ -62,7 +58,7 @@ class Game {
     });
   }
   handleTowers() {
-    this.towers.forEach(tower => {
+    this.towers.forEach((tower) => {
       tower.draw(this.ctx);
 
       if (tower.isShooting) {
@@ -122,7 +118,7 @@ class Game {
   }
 
   checkProjectileCollision() {
-    this.towers.forEach(tower => {
+    this.towers.forEach((tower) => {
       tower.projectiles.forEach((projectile, index) => {
         this.enemys.forEach((enemy, enemyIndex) => {
           if (collision.rectRectCollisionDetection(projectile, enemy)) {
@@ -183,11 +179,11 @@ class Game {
   }
 
   catchMousePosition() {
-    document.querySelector("body").addEventListener("mousemove", e => {
+    document.querySelector("body").addEventListener("mousemove", (e) => {
       this.updateMousePosition(e);
     });
 
-    document.getElementById("canvas1").addEventListener("drop", e => {
+    document.getElementById("canvas1").addEventListener("drop", (e) => {
       e.preventDefault();
 
       let towerType = e.dataTransfer.getData("text");
@@ -246,7 +242,16 @@ class Game {
     const sorted = Math.floor(Math.random() * 3);
     let position = this.canvas.height / positions[sorted];
     this.enemys.push(
-      new Enemy(new Monster(this.monster[Math.floor(Math.random() * 4)], this.monsterStatus), parseInt(this.canvas.width), position, this.cellSize, sorted)
+      new Enemy(
+        new Monster(
+          this.monster[Math.floor(Math.random() * 4)],
+          this.monsterStatus
+        ),
+        parseInt(this.canvas.width),
+        position,
+        this.cellSize,
+        sorted
+      )
     );
   }
 }
