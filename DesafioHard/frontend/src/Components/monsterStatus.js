@@ -74,7 +74,7 @@ const monsterStatus = {
     imageMaxHeight: 47,
   },
   toad: {
-    speed: 2,
+    speed: 1.9,
     health: 200,
     image: [
       "../assets/monsters/sapo/sapo1.svg",
@@ -88,8 +88,8 @@ const monsterStatus = {
     imageMaxHeight: 87,
   },
   robot: {
-    speed: 2.5,
-    health: 300,
+    speed: 1,
+    health: 400,
     image: [
       "../assets/monsters/robo/image1.svg",
       "../assets/monsters/robo/image2.svg",

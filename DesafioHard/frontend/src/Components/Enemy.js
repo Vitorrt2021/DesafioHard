@@ -1,13 +1,13 @@
 class Enemy {
-  constructor(monster, x, y, cellSize, line) {
+  constructor(monster, x, y, cellSize, line, level) {
     this.x = x;
     this.y = y;
     this.width = cellSize;
     this.height = cellSize / 2;
     this.speed = monster.speed;
-    this.health = monster.health;
+    this.health = monster.health + monster.health * level * 0.5;
     this.maxHealth = this.health;
-    this.attack = monster.attack;
+    this.attack = this.health;
     this.monster = monster;
     this.line = line;
   }
@@ -24,8 +24,8 @@ class Enemy {
       this.x,
       this.y + 30 + this.monster.diferenceHeight()
     );
-
     ctx.font = "30px arial";
+    ctx.strokeStyle = "black";
     ctx.fillText(this.health, this.x, this.y);
   }
 }
