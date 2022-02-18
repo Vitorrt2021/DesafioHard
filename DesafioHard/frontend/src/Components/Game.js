@@ -116,6 +116,7 @@ class Game {
 	gameIsOver() {
 		if (this.player.live <= 0) {
 			alert('Você perdeu');
+			$('#live_value').html('0');
 			this.stopAnimation();
 		}
 	}
@@ -355,7 +356,6 @@ class Game {
 				this.level
 			)
 		);
-		console.log(this.enemys[this.enemys.length - 1]);
 	}
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
@@ -372,7 +372,6 @@ class Game {
 	updateLevel() {
 		if (this.player.score >= 200 * (this.level + 1)) {
 			this.level++;
-			console.log(this.level);
 		}
 	}
 }
