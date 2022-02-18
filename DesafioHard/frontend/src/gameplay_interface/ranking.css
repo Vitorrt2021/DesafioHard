@@ -1,0 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.app__container{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('images/clouds_background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ranking__container{
+    width: 70%;
+    height: 70%;
+    background-image: url('images/ranking_window.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ranking__cell__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 40%;
+    height: 50%;
+}
+
+.ranking__cell{
+    background-image: url('images/ranking_window_cell.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-size: 100% 100%;
+    
+    width: 45%;
+    height: 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    margin-right: 5%;
+
+}
+
+.ranking__cell__name {
+    width: 100%;
+    text-align: left;
+    padding: 5% 0 0 10%;
+    font-size: 1.5vw;
+
+}
+
+.ranking__cell__score{
+    width: 100%;
+    text-align: right;
+    padding: 0 5% 10% 0;
+    font-size: 2.0vw;
+
+}
