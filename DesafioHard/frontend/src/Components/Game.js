@@ -115,7 +115,11 @@ class Game {
 	}
 	gameIsOver() {
 		if (this.player.live <= 0) {
-			alert('Você perdeu');
+			const audio = new Audio('../assets/audios/titanic_flute.mp3');
+			audio.play();
+			setTimeout(() => {
+				alert('Você perdeu');
+			}, 500);
 			this.stopAnimation();
 		}
 	}
