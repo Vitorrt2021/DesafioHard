@@ -6,6 +6,7 @@ import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import MonsterStatus from './monsterStatus.js';
 import towerStatus from './towerStatus.js';
+import AssetManager from './AssetManager';
 
 class Game {
 	constructor() {
@@ -33,6 +34,11 @@ class Game {
 		this.spawnVelocid = 500 - 10 * this.level;
 	}
 	start() {
+		//remove
+		const assets = new AssetManager();
+
+		return;
+		//remove
 		this.updateLive();
 		this.updateScore();
 		this.updateMoney();
