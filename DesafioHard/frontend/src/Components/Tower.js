@@ -109,6 +109,7 @@ class Tower {
 					)
 				);
 				const audio = new Audio('../assets/audios/shooting.mp3');
+				audio.volume = 0.5;
 				audio.play();
 			}
 			this.timer++;

@@ -8,7 +8,6 @@ $(document).ready(function () {
 	// 	// Chrome requires returnValue to be set
 	// 	e.returnValue = '';
 	// });
-
 	$('.cat_tower').on('dragstart', function (event) {
 		event.originalEvent.dataTransfer.setData('text', 'cat_tower_level_1');
 	});
