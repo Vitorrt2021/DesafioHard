@@ -11,8 +11,13 @@
 			href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-		<link rel="stylesheet" href="gameplay_interface.css" />
+		<link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="../styles/save-score.css">
+		<link rel="stylesheet" href="../styles/ranking.css" />
+		<link rel="stylesheet" href="../styles/gameplay_interface.css" />
 		<title>Tower Defense</title>
 	</head>
 	<body>
@@ -24,7 +29,7 @@
 							<div class="tower_area">
 								<img
 									class="tower_button cat_tower"
-									src="./images/cat_tower_level_1.png"
+									src="../assets/images/cat_tower_level_1.png"
 									draggable="true"
 								/>
 								<div class="tower_money_cost_visor">
@@ -35,7 +40,7 @@
 							<div class="tower_area">
 								<img
 									class="tower_button blue_rabbit_tower"
-									src="./images/blue_rabbit_tower_level_1.png"
+									src="../assets/images/blue_rabbit_tower_level_1.png"
 									draggable="true"
 								/>
 								<div class="tower_money_cost_visor">
@@ -46,7 +51,7 @@
 							<div class="tower_area">
 								<img
 									class="tower_button red_rabbit_tower"
-									src="./images/red_rabbit_tower_level_1.png"
+									src="../assets/images/red_rabbit_tower_level_1.png"
 									draggable="true"
 								/>
 								<div class="tower_money_cost_visor">
@@ -62,22 +67,18 @@
 						<p id="score_value">0</p>
 					</section>
 					<section id="money_display">
-						<p id="money_value">100</p>
+						<p id="money_value">0</p>
 					</section>
 
-					<button class="blue_buttons save_ranking">Ranking</button>
+					<button class="blue_buttons save_ranking">Salvar</button>
 					<button class="blue_buttons restart_level">Reiniciar</button>
 				</header>
 				<canvas id="canvas1"></canvas>
 			</section>
 		</div>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<link
-			rel="stylesheet"
-			href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
-		/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-		<script src="gameplay_interface.js" type="module"></script>
+		<div class="modal"></div>
 	</body>
+
+	<script src="gameplay_interface.js" type="module"></script>
 </html>
