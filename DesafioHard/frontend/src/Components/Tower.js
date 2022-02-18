@@ -108,6 +108,8 @@ class Tower {
 						this.damage
 					)
 				);
+				const audio = new Audio('../assets/audios/shooting.mp3');
+				audio.play();
 			}
 			this.timer++;
 		}
