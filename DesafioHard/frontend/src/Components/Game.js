@@ -17,7 +17,7 @@ class Game {
 
     this.player = new Player();
     this.frames = 0;
-    this.spawnVelocid = 1000;
+    this.spawnVelocid = 100;
     this.cellOver = null;
     this.runAnimationControll = true;
     this.cellSize = 250;
@@ -41,11 +41,15 @@ class Game {
   }
   haveEnemyInLine() {
     const position = [false, false, false];
-    const towerPosition = [Math.floor(76.4), Math.floor(326.4), Math.floor(576.4)];
-    this.enemys.forEach(enemy => {
+    const towerPosition = [
+      Math.floor(76.4),
+      Math.floor(326.4),
+      Math.floor(576.4),
+    ];
+    this.enemys.forEach((enemy) => {
       position[enemy.line] = true;
     });
-    this.towers.forEach(tower => {
+    this.towers.forEach((tower) => {
       // console.log(tower.y);
       // console.log(towerPosition.indexOf(Math.floor(tower.y)));
       if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
@@ -63,10 +67,14 @@ class Game {
     $(".red_rabbit_tower").css("filter", "brightness(100%)");
     $(".blue_rabbit_tower").css("filter", "brightness(100%)");
     $(".cat_tower").css("filter", "brightness(100%)");
-    if (this.player.money < parseInt(towerStatus.red_rabbit_tower_level_1.price)) {
+    if (
+      this.player.money < parseInt(towerStatus.red_rabbit_tower_level_1.price)
+    ) {
       $(".red_rabbit_tower").css("filter", "brightness(55%)");
     }
-    if (this.player.money < parseInt(towerStatus.blue_rabbit_tower_level_1.price)) {
+    if (
+      this.player.money < parseInt(towerStatus.blue_rabbit_tower_level_1.price)
+    ) {
       $(".blue_rabbit_tower").css("filter", "brightness(55%)");
     }
     if (this.player.money < parseInt(towerStatus.cat_tower_level_1.price)) {
@@ -74,9 +82,13 @@ class Game {
     }
   }
   canEnvolveTowers() {
-    this.towers.forEach(tower => {
+    this.towers.forEach((tower) => {
       const nextLevel = tower.nextLevel;
-      if (!tower.hasOwnProperty("nextLevel") || !tower.hasOwnProperty("price") || !towerStatus[nextLevel]) {
+      if (
+        !tower.hasOwnProperty("nextLevel") ||
+        !tower.hasOwnProperty("price") ||
+        !towerStatus[nextLevel]
+      ) {
         tower.canEnvolve = false;
       } else if (towerStatus[nextLevel].hasOwnProperty("price")) {
         if (parseInt(towerStatus[nextLevel].price) <= this.player.money) {
@@ -90,7 +102,7 @@ class Game {
     });
   }
   handleTowers() {
-    this.towers.forEach(tower => {
+    this.towers.forEach((tower) => {
       tower.draw(this.ctx);
 
       if (tower.isShooting) {
@@ -156,7 +168,7 @@ class Game {
   }
 
   checkProjectileCollision() {
-    this.towers.forEach(tower => {
+    this.towers.forEach((tower) => {
       tower.projectiles.forEach((projectile, index) => {
         this.enemys.forEach((enemy, enemyIndex) => {
           if (collision.rectRectCollisionDetection(projectile, enemy)) {
@@ -189,7 +201,7 @@ class Game {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.canEnvolveTowers();
       this.drawGrid();
-      this.enemys.forEach(enemy => {
+      this.enemys.forEach((enemy) => {
         enemy.update();
         enemy.draw(this.ctx);
       });
@@ -219,16 +231,21 @@ class Game {
   }
 
   catchMousePosition() {
-    document.querySelector("body").addEventListener("mousemove", e => {
+    document.querySelector("body").addEventListener("mousemove", (e) => {
       this.updateMousePosition(e);
     });
 
-    document.getElementById("canvas1").addEventListener("drop", e => {
+    document.getElementById("canvas1").addEventListener("drop", (e) => {
       e.preventDefault();
 
       let towerType = e.dataTransfer.getData("text");
       this.updateMousePosition(e);
-      const newTower = new Tower(this.mousePosition.x, this.mousePosition.y, 150, towerType);
+      const newTower = new Tower(
+        this.mousePosition.x,
+        this.mousePosition.y,
+        150,
+        towerType
+      );
       if (newTower.price > this.player.money) {
         return;
       }
@@ -236,13 +253,22 @@ class Game {
     });
   }
   addTowerInCell(tower) {
-    const gridPositionX = this.mousePosition.x - (this.mousePosition.x % this.cellSize) + this.cellGap;
-    const gridPositionY = this.mousePosition.y - (this.mousePosition.y % this.cellSize) + this.cellGap;
+    const gridPositionX =
+      this.mousePosition.x -
+      (this.mousePosition.x % this.cellSize) +
+      this.cellGap;
+    const gridPositionY =
+      this.mousePosition.y -
+      (this.mousePosition.y % this.cellSize) +
+      this.cellGap;
     //Impedir de colocar a torre na ultima coluna
     if (gridPositionX - 5 === this.gameGrid[6].x) return;
     //Ver já tem torre nessa celula
     for (let i = 0; i < this.towers.length; i++) {
-      if (this.towers[i].x === gridPositionX && this.towers[i].y === gridPositionY + this.cellSize / 3.5) {
+      if (
+        this.towers[i].x === gridPositionX &&
+        this.towers[i].y === gridPositionY + this.cellSize / 3.5
+      ) {
         return false;
       }
     }
@@ -258,7 +284,7 @@ class Game {
   evolveTower() {
     const offset = 20;
 
-    const finder = tower =>
+    const finder = (tower) =>
       this.mousePosition.x - offset > tower.x &&
       this.mousePosition.x + offset < tower.x + tower.width &&
       this.mousePosition.y - offset > tower.y &&
@@ -268,7 +294,12 @@ class Game {
 
     if (!towerClicked || towerClicked.level == 3) return;
 
-    const evolvedTower = new Tower(towerClicked.x + towerClicked.width / 2, towerClicked.y + towerClicked.height / 2, 150, towerClicked.nextLevel);
+    const evolvedTower = new Tower(
+      towerClicked.x + towerClicked.width / 2,
+      towerClicked.y + towerClicked.height / 2,
+      150,
+      towerClicked.nextLevel
+    );
 
     if (evolvedTower.price > this.player.money) return;
 
@@ -295,7 +326,16 @@ class Game {
     const sorted = Math.floor(Math.random() * 3);
     let position = this.canvas.height / positions[sorted];
     this.enemys.push(
-      new Enemy(new Monster(this.monster[Math.floor(Math.random() * 4)], this.monsterStatus), parseInt(this.canvas.width), position, this.cellSize, sorted)
+      new Enemy(
+        new Monster(
+          this.monster[Math.floor(Math.random() * 4)],
+          this.monsterStatus
+        ),
+        parseInt(this.canvas.width),
+        position,
+        this.cellSize,
+        sorted
+      )
     );
   }
 }
