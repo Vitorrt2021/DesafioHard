@@ -1,157 +1,158 @@
-@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 html {
-  font-size: 1.44vw;
-  background: url("./images/clouds_background.png") no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  font-weight: bolder;
-  text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
+	font-size: 1.44vw;
+	background: url('./images/clouds_background.png') no-repeat center center
+		fixed;
+	background-size: cover;
+	color: white;
+	font-weight: bolder;
+	text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
 }
 p {
-  font-family: "Roboto", sans-serif;
-  font-size: 1rem;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1rem;
 }
 html body {
-  overflow-y: hidden;
+	overflow-y: hidden;
 }
 
 #container_gameplay_interface {
-  width: 100%;
-  padding-top: 56.25%;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden;
+	width: 100%;
+	padding-top: 56.25%;
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: hidden;
 }
 #gameplay_interface {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 }
 #gameplay_interface_header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 25%;
-  max-height: 25vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 25%;
+	max-height: 25vh;
 }
 
 #canvas1 {
-  width: 100%;
-  height: 75%;
-  max-height: 75vh;
+	width: 100%;
+	height: 75%;
+	max-height: 75vh;
 
-  overflow-y: hidden;
+	overflow-y: hidden;
 
-  background-image: url("../assets/images/backgroundGame.png");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+	background-image: url('../assets/images/backgroundGame.png');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
 }
 #tower_selection {
-  width: 35%;
-  height: 100%;
-  position: relative;
-  background: url("./images/towers_buttons_display.svg");
-  background-size: 100% 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+	width: 35%;
+	height: 100%;
+	position: relative;
+	background: url('./images/towers_buttons_display.svg');
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 }
 
 #buttons_area {
-  position: relative;
-  margin-top: 1%;
-  width: 90%;
-  display: flex;
-  justify-content: flex-end;
+	position: relative;
+	margin-top: 1%;
+	width: 90%;
+	display: flex;
+	justify-content: flex-end;
 }
 
 .tower_area {
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .tower_button {
-  width: 55%;
-  height: 55%;
+	width: 55%;
+	height: 55%;
 }
 
 .tower_money_cost_visor {
-  width: 75%;
-  background: url("./images/tower_cost_display.svg") no-repeat center;
-  background-size: 75% 100%;
+	width: 75%;
+	background: url('./images/tower_cost_display.svg') no-repeat center;
+	background-size: 75% 100%;
 }
 
 .cat_tower,
 .blue_rabbit_tower,
 .red_rabbit_tower {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 #live_display {
-  width: 15%;
-  height: 75%;
-  padding-left: 2%;
-  padding-bottom: 1%;
-  margin-top: 0.5%;
-  background: url("./images/live_display.svg");
-  background-size: 100% 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 15%;
+	height: 75%;
+	padding-left: 2%;
+	padding-bottom: 1%;
+	margin-top: 0.5%;
+	background: url('./images/live_display.svg');
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #score_display {
-  width: 15%;
-  height: 75%;
+	width: 15%;
+	height: 75%;
 
-  padding-left: 2%;
-  background: url("./images/score_display.svg");
-  background-size: 100% 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	padding-left: 2%;
+	background: url('./images/score_display.svg');
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #money_display {
-  width: 15%;
-  height: 75%;
-  padding-left: 2%;
-  background: url("./images/money_display.svg");
-  background-size: 100% 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+	width: 15%;
+	height: 75%;
+	padding-left: 2%;
+	background: url('./images/money_display.svg');
+	background-size: 100% 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 .price {
-  font-size: 1rem;
-  margin-left: 35%;
+	font-size: 1rem;
+	margin-left: 35%;
 }
 #live_value,
 #score_value,
 #money_value {
-  font-size: 2rem;
+	font-size: 2rem;
 }
 
 .blue_buttons {
-  width: 15%;
-  height: 50%;
-  border: none;
-  background: url("./images/blue_button.svg");
-  background-size: 100% 100%;
-  color: inherit;
-  font-weight: inherit;
-  text-shadow: inherit;
-  font-family: "Architects Daughter", cursive;
-  font-size: 1.5rem;
-  cursor: pointer;
+	width: 15%;
+	height: 50%;
+	border: none;
+	background: url('./images/blue_button.svg');
+	background-size: 100% 100%;
+	color: inherit;
+	font-weight: inherit;
+	text-shadow: inherit;
+	font-family: 'Architects Daughter', cursive;
+	font-size: 1.5rem;
+	cursor: pointer;
 }
