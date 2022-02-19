@@ -4,7 +4,7 @@ import collision from './Collision.js';
 import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
-import AssetManager from './AssetManager';
+import AssetManager from './AssetManager.js';
 import towerStatus from './towerStatus.js';
 import MonsterStatus from './monsterStatus.js';
 
