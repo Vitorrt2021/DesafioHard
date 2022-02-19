@@ -2,7 +2,7 @@ import renderRanking from './requests/ranking.js';
 
 $(document).ready(() => {
 	$('#play_game').click(() => {
-		window.location = '/gameplay';
+		window.location = '/DesafioHard/frontend/src/gameplay/index.html';
 	});
 
 	// When the user clicks on the button, render the ranking modal

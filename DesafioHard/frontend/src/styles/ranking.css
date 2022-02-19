@@ -131,6 +131,7 @@
 	text-align: left;
 	padding: 5% 0 0 10%;
 	font-size: 1.5rem;
+	overflow: hidden;
 }
 
 .ranking__cell__score {

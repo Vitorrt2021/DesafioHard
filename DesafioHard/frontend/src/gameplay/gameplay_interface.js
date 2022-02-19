@@ -28,12 +28,12 @@ $(document).ready(() => {
 
 	$('.save_ranking').click(() => {
 		const score = $('#score_value').html();
-		// if (score >= 100) {
-		game.stopAnimation();
-		saveScore.renderNodes();
-		// } else {
-		// 	alert('Pontuação mínima para registrar ranking: 100 pontos');
-		// }
+		if (score >= 100) {
+			game.stopAnimation();
+			saveScore.renderNodes();
+		} else {
+			alert('Pontuação mínima para registrar ranking: 100 pontos');
+		}
 	});
 
 	$('.restart_level').click(() => {

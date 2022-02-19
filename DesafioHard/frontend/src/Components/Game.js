@@ -4,9 +4,10 @@ import collision from './Collision.js';
 import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
-import AssetManager from './AssetManager';
+//import AssetManager from './AssetManager.js';
 import towerStatus from './towerStatus.js';
 import MonsterStatus from './monsterStatus.js';
+import * as saveScore from '../requests/save-score.js';
 
 class Game {
 	constructor() {
@@ -35,7 +36,7 @@ class Game {
 	}
 	start() {
 		//remove
-		const assets = new AssetManager();
+		//const assets = new AssetManager();
 
 		//return;
 		//remove
@@ -124,7 +125,8 @@ class Game {
 			const audio = new Audio('../assets/audios/titanic_flute.mp3');
 			audio.play();
 			setTimeout(() => {
-				alert('Você perdeu');
+				// alert('Você perdeu');
+				saveScore.renderNodes();
 			}, 500);
 			$('#live_value').html('0');
 			this.stopAnimation();
@@ -310,7 +312,7 @@ class Game {
 
 		const towerClicked = this.towers.find(finder);
 
-		if (!towerClicked || towerClicked.level == 3) return;
+		if (!towerClicked || towerClicked.level == 4) return;
 
 		const evolvedTower = new Tower(
 			towerClicked.x + towerClicked.width / 2,

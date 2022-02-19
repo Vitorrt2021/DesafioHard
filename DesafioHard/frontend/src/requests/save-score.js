@@ -1,5 +1,3 @@
-import renderRanking from './ranking.js';
-
 const apiURL = 'http://edtech.dudeful.com:3004';
 
 const saveScore = () => {
@@ -15,7 +13,7 @@ const saveScore = () => {
 			//SERÁ REINICIADO DURANTE O SALVAMENTO DO NOVO SCORE NO ARQUIVO JSON
 			//E PORTANTO, AO TENTAR CHAMAR A FUNÇÃO ABAIXO HAVERÁ UM ERRO, POIS
 			//A REQUISIÇÃO ACONTECERÁ NO MOMENTO EM QUE O SERVIDOR ESTÁ SENDO REINICIADO!
-			renderRanking();
+			window.location = '/DesafioHard/frontend/src/index.html';
 		})
 		.fail((error) => {
 			console.error(error);
