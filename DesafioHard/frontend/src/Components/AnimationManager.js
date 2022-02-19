@@ -2,9 +2,10 @@ import assetManager from './AssetManager.js';
 
 class AnimationManager {
 	#imagesForAnimation = [];
+	#animations;
 
 	constructor() {
-		this.animations = {};
+		this.#animations = {};
 
 		//Explosion animation
 		for (let index = 0; index < 8; index++) {
@@ -13,7 +14,19 @@ class AnimationManager {
 			);
 		}
 
-		this.animations['Explosion'] = new Animation(0.2, this.#imagesForAnimation);
+		this.#animations['Explosion'] = {
+			counterIncrement: 0.2,
+			images: this.#imagesForAnimation,
+		};
+
+		//Another animation...
+		//reset imagesForAnimation
+		// this.#imagesForAnimation = [];
+	}
+
+	getNewAnimationInstance(animationName) {
+		const anim = this.#animations[animationName];
+		return new Animation(anim.counterIncrement, anim.images);
 	}
 }
 

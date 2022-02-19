@@ -18,7 +18,8 @@ class Tower {
 		this.price = towerStatus[towerType].price;
 		this.isShooting = true;
 		this.isDamaged = false;
-		this.explosionFrame = 0;
+		this.explosionAnimation =
+			animationManager.getNewAnimationInstance('Explosion');
 		this.alphaRedRectangle = 0;
 		this.maxAlphaRectangle = 1.0;
 		this.redRectDimensionModifier = 0;
@@ -42,10 +43,10 @@ class Tower {
 		}
 
 		ctx.font = '30px arial';
-		ctx.strokeStyle = 'black';
+		ctx.fillStyle = 'black';
 		ctx.fillText(this.health, this.x, this.y);
 
-		if (animationManager.animations['Explosion'].isAnimationFinished()) {
+		if (this.explosionAnimation.isAnimationFinished()) {
 			this.alphaRedRectangle = 0;
 			this.redRectDimensionModifier = 0;
 			this.isDamaged = false;
@@ -53,13 +54,13 @@ class Tower {
 
 		if (this.isDamaged) {
 			this.#drawRedCircle(
-				animationManager.animations['Explosion'].frame,
-				animationManager.animations['Explosion'].getAnimationLength(),
+				this.explosionAnimation.frame,
+				this.explosionAnimation.getAnimationLength(),
 				ctx
 			);
 
 			ctx.drawImage(
-				animationManager.animations['Explosion'].selectImage(),
+				this.explosionAnimation.selectImage(),
 				this.x,
 				this.y,
 				this.width,
