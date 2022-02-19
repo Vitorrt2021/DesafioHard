@@ -24,9 +24,18 @@ class Enemy {
 			this.x,
 			this.y + 30 + this.monster.diferenceHeight()
 		);
-		ctx.font = '30px arial';
-		ctx.strokeStyle = 'black';
-		ctx.fillText(this.health, this.x, this.y);
+		this.drawLiveBar(ctx);
+	}
+	drawLiveBar(ctx) {
+		ctx.fillStyle = '#000';
+		ctx.fillRect(this.x, this.y, 100, this.width / 10);
+		ctx.fillStyle = '#FF0000';
+		ctx.fillRect(
+			this.x + 5,
+			this.y + 5,
+			90 * (this.health / this.maxHealth),
+			this.width / 10 - 10
+		);
 	}
 }
 export default Enemy;

@@ -161,17 +161,24 @@ html body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
+	flex-direction: column;
 	color: white;
-	font-size: 1.9rem;
 	font-family: 'Roboto', sans-serif;
-
+	height: 10vw;
+	width: 7.5vw;
 	border-radius: 5px;
-	width: 28vw;
 	padding: 0px !important;
 	border: solid 2px #efb469;
 	background-color: #f3db95 !important;
 }
 .tooltip1 img {
-	width: 15%;
+	width: 30%;
+}
+.tooltip1 div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.tooltip1 div label {
+	font-size: 1rem;
 }

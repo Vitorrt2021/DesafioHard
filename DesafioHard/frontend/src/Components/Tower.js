@@ -8,6 +8,7 @@ class Tower {
 		this.width = cellSize;
 		this.height = cellSize;
 		this.health = towerStatus[towerType].health;
+		this.maxHealth = this.health;
 		this.damage = towerStatus[towerType].damage;
 		this.attackSpeed = towerStatus[towerType].attackSpeed;
 		this.projectiles = [];
@@ -48,10 +49,7 @@ class Tower {
 				this.height / 5
 			);
 		}
-
-		ctx.font = '30px arial';
-		ctx.strokeStyle = 'black';
-		ctx.fillText(this.health, this.x, this.y);
+		this.drawLiveBar(ctx);
 
 		if (this.isDamaged) {
 			if (this.explosionFrame.toFixed(1).match(/[0-9]\.0/) !== null) {
@@ -114,6 +112,17 @@ class Tower {
 			}
 			this.timer++;
 		}
+	}
+	drawLiveBar(ctx) {
+		ctx.fillStyle = '#000';
+		ctx.fillRect(this.x * 1.05, this.y - 10, 100, this.width / 7);
+		ctx.fillStyle = '#FF0000';
+		ctx.fillRect(
+			this.x * 1.05 + 5,
+			this.y - 10 + 5,
+			90 * (this.health / this.maxHealth),
+			this.width / 7 - 10
+		);
 	}
 	handleProjectiles(ctx, canvasWidth, cellSize) {
 		this.projectiles.forEach((projectile, index) => {
