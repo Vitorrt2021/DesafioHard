@@ -38,6 +38,7 @@ export default {
 	},
 	cat_tower_level_3: {
 		level: 3,
+		nextLevel: 'fernando_torres',
 		health: 1000,
 		damage: 200,
 		price: 300,
@@ -116,6 +117,16 @@ export default {
 		attackSpeed: 60,
 		image: '../assets/towers/red_rabbit_tower_level_3.png',
 		projectile: '../assets/projectiles/lightning.svg',
+		explosions: explosionsArray,
+	},
+	fernando_torres: {
+		level: 4,
+		health: 2000,
+		damage: 450,
+		price: 300,
+		attackSpeed: 60,
+		image: '../assets/towers/fernando_torres.png',
+		projectile: '../assets/projectiles/football_ball.png',
 		explosions: explosionsArray,
 	},
 };
