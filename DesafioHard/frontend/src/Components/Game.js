@@ -4,9 +4,9 @@ import collision from './Collision.js';
 import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
-import AssetManager from './AssetManager.js';
 import towerStatus from './towerStatus.js';
 import MonsterStatus from './monsterStatus.js';
+import animationManager from './AnimationManager.js'; //not remove
 import * as saveScore from '../requests/save-score.js';
 
 class Game {
@@ -35,11 +35,6 @@ class Game {
 		this.spawnVelocid = 500 - 10 * this.level;
 	}
 	start() {
-		//remove
-		//const assets = new AssetManager();
-
-		//return;
-		//remove
 		this.updateLive();
 		this.updateScore();
 		this.updateMoney();
@@ -90,7 +85,7 @@ class Game {
 			$('.cat_tower').css('filter', 'brightness(55%)');
 		}
 	}
-	canEnvolveTowers() {
+	canEvolveTowers() {
 		this.towers.forEach((tower) => {
 			const nextLevel = tower.nextLevel;
 			if (
@@ -98,15 +93,15 @@ class Game {
 				!tower.hasOwnProperty('price') ||
 				!towerStatus[nextLevel]
 			) {
-				tower.canEnvolve = false;
+				tower.canEvolve = false;
 			} else if (towerStatus[nextLevel].hasOwnProperty('price')) {
 				if (parseInt(towerStatus[nextLevel].price) <= this.player.money) {
-					tower.canEnvolve = true;
+					tower.canEvolve = true;
 				} else {
-					tower.canEnvolve = false;
+					tower.canEvolve = false;
 				}
 			} else {
-				tower.canEnvolve = false;
+				tower.canEvolve = false;
 			}
 		});
 	}
@@ -218,7 +213,7 @@ class Game {
 		if (this.runAnimationControll) {
 			this.ctx.fillStyle = 'black';
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-			this.canEnvolveTowers();
+			this.canEvolveTowers();
 			this.drawGrid();
 			this.enemys.forEach((enemy) => {
 				enemy.update();
@@ -259,6 +254,7 @@ class Game {
 			e.preventDefault();
 
 			let towerType = e.dataTransfer.getData('text');
+			console.log(towerType);
 			this.updateMousePosition(e);
 			const newTower = new Tower(
 				this.mousePosition.x,

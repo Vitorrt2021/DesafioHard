@@ -1,8 +1,9 @@
 import Game from '../Components/Game.js';
+import assetManager from '../Components/AssetManager.js';
 import * as saveScore from '../requests/save-score.js';
 import renderRanking from '../requests/ranking.js';
 
-$(document).ready(() => {
+$(document).ready(async () => {
 	// Prevent user from reloading page by accident
 	window.addEventListener('beforeunload', function (e) {
 		const score = $('#score_value').html();
@@ -61,6 +62,11 @@ $(document).ready(() => {
 	$('#canvas1').on('dragover', function (event) {
 		event.originalEvent.preventDefault();
 	});
+
+	//Esperando carregar as imagens e sons antes de continuar...
+	while (!assetManager.isImagesLoadCompleted()) {
+		await new Promise((r) => setTimeout(r, 200));
+	}
 
 	const game = new Game();
 	game.start();

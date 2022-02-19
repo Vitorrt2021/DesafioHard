@@ -12,7 +12,6 @@ const explosionsArray = [
 export default {
 	cat_tower_base: {
 		price: 50,
-		image: '../assets/towers/cat_tower_base.png',
 	},
 	cat_tower_level_1: {
 		level: 1,
@@ -21,8 +20,7 @@ export default {
 		damage: 50,
 		price: 100,
 		attackSpeed: 200,
-		image: '../assets/towers/cat_tower_level_1.png',
-		projectile: '../assets/projectiles/wool_ball.png',
+		projectile: 'wool_ball',
 		explosions: explosionsArray,
 	},
 	cat_tower_level_2: {
@@ -32,8 +30,7 @@ export default {
 		damage: 100,
 		price: 200,
 		attackSpeed: 170,
-		image: '../assets/towers/cat_tower_level_2.png',
-		projectile: '../assets/projectiles/wool_ball.png',
+		projectile: 'wool_ball',
 		explosions: explosionsArray,
 	},
 	cat_tower_level_3: {
@@ -43,13 +40,11 @@ export default {
 		damage: 200,
 		price: 300,
 		attackSpeed: 120,
-		image: '../assets/towers/cat_tower_level_3.png',
-		projectile: '../assets/projectiles/lightning.svg',
+		projectile: 'lightning',
 		explosions: explosionsArray,
 	},
 	blue_rabbit_tower_base: {
 		price: 50,
-		image: '../assets/towers/blue_rabbit_tower_base.png',
 	},
 	blue_rabbit_tower_level_1: {
 		level: 1,
@@ -58,8 +53,7 @@ export default {
 		damage: 75,
 		attackSpeed: 170,
 		price: 200,
-		image: '../assets/towers/blue_rabbit_tower_level_1.png',
-		projectile: '../assets/projectiles/carrot.png',
+		projectile: 'carrot',
 		explosions: explosionsArray,
 	},
 	blue_rabbit_tower_level_2: {
@@ -69,8 +63,7 @@ export default {
 		damage: 150,
 		price: 400,
 		attackSpeed: 120,
-		image: '../assets/towers/blue_rabbit_tower_level_2.png',
-		projectile: '../assets/projectiles/carrot.png',
+		projectile: 'carrot',
 		explosions: explosionsArray,
 	},
 	blue_rabbit_tower_level_3: {
@@ -79,13 +72,11 @@ export default {
 		damage: 300,
 		price: 800,
 		attackSpeed: 80,
-		image: '../assets/towers/blue_rabbit_tower_level_3.png',
-		projectile: '../assets/projectiles/lightning.svg',
+		projectile: 'lightning',
 		explosions: explosionsArray,
 	},
 	red_rabbit_tower_base: {
 		price: 50,
-		image: '../assets/towers/red_rabbit_tower_base.png',
 	},
 	red_rabbit_tower_level_1: {
 		level: 1,
@@ -94,8 +85,7 @@ export default {
 		damage: 150,
 		price: 500,
 		attackSpeed: 120,
-		image: '../assets/towers/red_rabbit_tower_level_1.png',
-		projectile: '../assets/projectiles/carrot.png',
+		projectile: 'carrot',
 		explosions: explosionsArray,
 	},
 	red_rabbit_tower_level_2: {
@@ -105,8 +95,7 @@ export default {
 		damage: 300,
 		price: 1000,
 		attackSpeed: 90,
-		image: '../assets/towers/red_rabbit_tower_level_2.png',
-		projectile: '../assets/projectiles/carrot.png',
+		projectile: 'carrot',
 		explosions: explosionsArray,
 	},
 	red_rabbit_tower_level_3: {
@@ -115,8 +104,7 @@ export default {
 		damage: 450,
 		price: 1500,
 		attackSpeed: 60,
-		image: '../assets/towers/red_rabbit_tower_level_3.png',
-		projectile: '../assets/projectiles/lightning.svg',
+		projectile: 'lightning',
 		explosions: explosionsArray,
 	},
 	fernando_torres: {
@@ -125,8 +113,7 @@ export default {
 		damage: 450,
 		price: 300,
 		attackSpeed: 60,
-		image: '../assets/towers/fernando_torres.png',
-		projectile: '../assets/projectiles/football_ball.png',
+		projectile: 'football_ball',
 		explosions: explosionsArray,
 	},
 };
