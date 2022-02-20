@@ -74,4 +74,31 @@ $(document).ready(async () => {
 	$('canvas').click(() => {
 		game.evolveTower();
 	});
+	createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
+	createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
+	createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
 });
+
+function createTooltip(element, live, strenght, speed) {
+	$(element).tooltip({
+		classes: {
+			'ui-tooltip': 'tooltip1',
+			'ui-tooltip-content': 'tooltip1',
+		},
+		content: `
+			<div class="tooltip1">
+				<div>
+					<img src="../assets/images/live_icon_tooltip.png" alt="Live">
+					<label id="live_value_">${live}</label>
+				</div>
+				<div>
+					<img src="../assets/images/strenght_icon_tooltip.png" alt="Força">
+					<label id='strength_value_'>${strenght}</label>
+				</div>
+				<div>
+					<img src="../assets/images/speed_icon_tooltip.png" alt="spped">
+					<label id="live_value_">${speed}</label>
+				</div>
+			</div>`,
+	});
+}

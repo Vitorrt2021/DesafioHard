@@ -21,7 +21,15 @@ p {
 html body {
 	overflow-y: hidden;
 }
-
+#level_value {
+	font-family: 'Roboto', sans-serif;
+	color: rgb(241, 241, 241);
+	position: absolute;
+	top: 2vw;
+	left: 2.3vw;
+	font-size: 3em;
+	z-index: 4;
+}
 #container_gameplay_interface {
 	width: 100%;
 	padding-top: 56.25%;
