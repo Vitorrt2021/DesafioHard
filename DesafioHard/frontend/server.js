@@ -1,39 +1,39 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 2500;
+const port = 80;
 const fs = require('fs');
 
-app.use('/', express.static(path.join(__dirname, '/src/styles')));
-app.use('/', express.static(path.join(__dirname, '/src/gameplay')));
-app.use('/', express.static(path.join(__dirname, '/src')));
+// app.use('/', express.static(path.join(__dirname, '/src/styles')));
+// app.use('/', express.static(path.join(__dirname, '/src/gameplay')));
+app.use(express.static(path.join(__dirname, '/src')));
 
-app.get('/get-assets', (req, res) => {
-	const data = getFilesInsideDirectory('./src/assets');
-	// const data = getFilesInsideDirectory('../frontend/src/assets');
-	res.send(data);
-});
+// app.get('/get-assets', (req, res) => {
+// 	const data = getFilesInsideDirectory('./src/assets');
+// 	const data = getFilesInsideDirectory('../frontend/src/assets');
+// 	res.send(data);
+// });
 
-function getFilesInsideDirectory(directory) {
-	const filesArray = [];
-	console.log(__dirname);
-	function readPath(directory) {
-		const dirRead = fs.readdirSync(directory);
+// function getFilesInsideDirectory(directory) {
+// 	const filesArray = [];
 
-		for (const file of dirRead) {
-			const absolutePath = path.join(directory, file);
+// 	function readPath(directory) {
+// 		const dirRead = fs.readdirSync(directory);
 
-			if (fs.statSync(absolutePath).isDirectory()) {
-				readPath(absolutePath);
-			} else {
-				filesArray.push(absolutePath);
-			}
-		}
-	}
+// 		for (const file of dirRead) {
+// 			const absolutePath = path.join(directory, file);
 
-	readPath(directory);
+// 			if (fs.statSync(absolutePath).isDirectory()) {
+// 				readPath(absolutePath);
+// 			} else {
+// 				filesArray.push(absolutePath);
+// 			}
+// 		}
+// 	}
 
-	return filesArray;
-}
+// 	readPath(directory);
+
+// 	return filesArray;
+// }
 
 app.listen(port, () => console.log(`Ouvindo na porta ${port} ...`));

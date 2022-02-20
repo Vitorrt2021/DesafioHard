@@ -1,3 +1,5 @@
+const apiURL = 'http://edtech.dudeful.com:3004';
+
 const mainArray = [
 	'..\\assets\\audios\\dropTower.mp3',
 	'..\\assets\\audios\\envolve.mp3',
@@ -77,7 +79,7 @@ class AssetManager {
 		// this.files = getFilesInsideDirectory('../assets');
 		// this.#files = mainArray; //temporario, mandar funcao de ler diretorios para o servidor.
 
-		$.get('/get-assets', (res) => {
+		$.get(apiURL + '/get-assets', (res) => {
 			this.#buildAssets(res);
 		});
 	}
@@ -85,19 +87,20 @@ class AssetManager {
 	#buildImageObject(filePath) {
 		const image = new Image();
 		image.src = filePath;
-		console.log('buildImage: ' + filePath);
+		// console.log('buildImage: ' + filePath);
 		return image;
 	}
 
 	#buildAssets(files) {
+		// console.log(files);
 		for (const filePath of files) {
 			let changedFilePath = filePath.split('\\');
-			changedFilePath[0] = '..';
-
 			const fileName = changedFilePath[changedFilePath.length - 1];
 			const fileExtension = fileName.slice(-3);
 
 			changedFilePath = changedFilePath.join('\\');
+			changedFilePath = changedFilePath.slice(15);
+			// console.log(changedFilePath);
 			// console.log(
 			// 	filePath,
 			// 	fileName,
@@ -110,11 +113,13 @@ class AssetManager {
 				// sounds[fileName.slice(0, -4)] = {}; //TODO, verificar depois os sons.
 			} else {
 				const im = this.#buildImageObject(changedFilePath);
-				const name = fileName.slice(0, -4);
-				console.log(im + ' -> ' + name);
-				console.log(typeof im, typeof name);
-				console.log(this.images);
-				console.log(typeof this.images);
+				const name = fileName.split('/').at(-1).slice(0, -4);
+				console.log(name);
+				this.images[name] = im;
+				// console.log(im + ' -> ' + name);
+				// console.log(typeof im, typeof name);
+				// console.log(this.images);
+				// console.log(typeof this.images);
 			}
 		}
 	}
