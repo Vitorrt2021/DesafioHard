@@ -1,15 +1,19 @@
+import monsterStatus from './monsterStatus.js';
+import animationManager from './AnimationManager.js';
+
 class Monster {
-	constructor(type, monsterStatus) {
-		this.cont = 0;
+	constructor(type) {
+		// this.cont = 0;
 		// this.speed = monsterStatus[type].speed;
-		this.speed = monsterStatus.getMonsterInitialSpeed(type);
-		this.health = monsterStatus.getMonsterInitialHealth(type);
-		this.attack;
+		this.type = type;
+		this.speed = monsterStatus[type].speed;
+		this.health = monsterStatus[type].health;
+		// this.attack;
 		// this.image = monsterStatus[type].image;
-		this.image = monsterStatus.getMonsterImages(type);
-		this.imageHeight = monsterStatus.getMonsterImageHeight(type);
-		this.imageMaxHeight = monsterStatus.getMonsterImageMaxHeight(type);
-		this.index = null;
+		this.animation = animationManager.getNewAnimationInstance(type);
+		this.imageHeight = monsterStatus[type].imageHeight;
+		this.imageMaxHeight = monsterStatus[type].imageMaxHeight;
+		// this.index = null;
 	}
 
 	// getMonsterImageHeight(type) {
@@ -39,20 +43,23 @@ class Monster {
 	attack() {
 		return this.health;
 	}
-	selectImage() {
-		const imageResult = this.image[parseInt(this.cont)];
-		this.index = this.image.indexOf(imageResult);
 
-		if (this.cont >= 4.5) {
-			this.cont = 0;
-		} else {
-			this.cont += 0.1;
-		}
-
-		return imageResult;
+	changeAnimation(animationName) {
+		this.animation = animationManager.getNewAnimationInstance(animationName);
 	}
-	diferenceHeight() {
-		return this.imageMaxHeight - this.imageHeight[this.index];
+
+	selectImage() {
+		// const imageResult = this.animation[parseInt(this.cont)];
+		// this.index = this.animation.indexOf(imageResult);
+
+		// if (this.cont >= 4.5) {
+		// 	this.cont = 0;
+		// } else {
+		// 	this.cont += 0.1;
+		// }
+
+		// return imageResult;
+		return this.animation.selectImage();
 	}
 }
 
