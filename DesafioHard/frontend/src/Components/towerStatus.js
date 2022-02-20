@@ -52,6 +52,7 @@ export default {
 	},
 	blue_rabbit_tower_level_3: {
 		level: 3,
+		nextLevel: 'fernando_torres',
 		health: 1500,
 		damage: 300,
 		price: 800,
@@ -81,6 +82,7 @@ export default {
 	},
 	red_rabbit_tower_level_3: {
 		level: 3,
+		nextLevel: 'fernando_torres',
 		health: 2000,
 		damage: 450,
 		price: 1500,
@@ -89,10 +91,10 @@ export default {
 	},
 	fernando_torres: {
 		level: 4,
-		health: 2000,
-		damage: 450,
-		price: 300,
-		attackSpeed: 60,
+		health: 100000,
+		damage: 100000,
+		price: 3000,
+		attackSpeed: 50,
 		projectile: 'football_ball',
 	},
 };
