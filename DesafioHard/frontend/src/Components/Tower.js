@@ -112,14 +112,14 @@ class Tower {
 	drawLiveBar(ctx) {
 		ctx.fillStyle = '#000';
 		ctx.fillRect(
-			this.x * 1.05 + 10,
+			this.x + this.width * 0.1 + 10,
 			this.y - 10 + this.width,
 			100,
 			this.width / 7
 		);
 		ctx.fillStyle = '#FF0000';
 		ctx.fillRect(
-			this.x * 1.05 + 15,
+			this.x + this.width * 0.1 + 15,
 			this.y - 10 + 5 + this.width,
 			90 * (this.health / this.maxHealth),
 			this.width / 7 - 10

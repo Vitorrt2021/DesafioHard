@@ -49,6 +49,7 @@
 	<body>
 		<div id="container_gameplay_interface">
 			<section id="gameplay_interface">
+				<h4 id="level_value" title="level">0</h4>
 				<header id="gameplay_interface_header">
 					<section id="tower_selection">
 						<div id="buttons_area">
@@ -99,12 +100,21 @@
 						<p id="money_value">0</p>
 					</section>
 
-					<button class="blue_buttons save_ranking">Salvar</button>
+					<button title="a" class="blue_buttons save_ranking">Salvar</button>
 					<button class="blue_buttons restart_level">Reiniciar</button>
 				</header>
 				<canvas id="canvas1"></canvas>
 			</section>
 		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+		/>
+		
+		<script src="gameplay_interface.js" type="module"></script>
 
 		<div class="modal"></div>
 	</body>
