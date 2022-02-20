@@ -42,14 +42,7 @@ class Tower {
 				this.height / 5
 			);
 		}
-<<<<<<< HEAD
 		this.drawLiveBar(ctx);
-=======
-
-		ctx.font = '30px arial';
-		ctx.fillStyle = 'black';
-		ctx.fillText(this.health, this.x, this.y);
->>>>>>> 869d8808bd68198da8d44b2e93c462830207dff7
 
 		if (this.explosionAnimation.isAnimationFinished()) {
 			this.alphaRedRectangle = 0;
