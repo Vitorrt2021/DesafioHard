@@ -35,6 +35,11 @@ class Enemy {
 		if (!this.isDying) {
 			this.drawLiveBar(ctx);
 		}
+		// if (!this.isDying) {
+		// ctx.font = '30px arial';
+		// ctx.strokeStyle = 'black';
+		// ctx.fillText(this.health, this.x, this.y + delta_y);
+		// }
 
 		if (!this.isDead) {
 			ctx.drawImage(monsterImage, this.x, this.y + delta_y);

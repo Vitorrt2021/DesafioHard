@@ -88,15 +88,15 @@ function createTooltip(element, live, strenght, speed) {
 		content: `
 			<div class="tooltip1">
 				<div>
-					<img src="./images/live_icon.png" alt="Live">
+					<img src="../assets/images/live_icon_tooltip.png" alt="Live">
 					<label id="live_value_">${live}</label>
 				</div>
 				<div>
-					<img src="./images/strenght_icon.png" alt="Força">
+					<img src="../assets/images/strenght_icon_tooltip.png" alt="Força">
 					<label id='strength_value_'>${strenght}</label>
 				</div>
 				<div>
-					<img src="./images/speed_icon.png" alt="spped">
+					<img src="../assets/images/speed_icon_tooltip.png" alt="spped">
 					<label id="live_value_">${speed}</label>
 				</div>
 			</div>`,

@@ -67,6 +67,7 @@ const mainArray = [
 	'..\\assets\\towers\\red_rabbit_tower_level_2.png',
 	'..\\assets\\towers\\red_rabbit_tower_level_3.png',
 	'..\\assets\\towers\\fernando_torres.png',
+	'..\\assets\\images\\opengraph.png',
 ];
 
 function getFilesInsideDirectory(directory) {
