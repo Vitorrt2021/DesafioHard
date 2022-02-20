@@ -1,5 +1,7 @@
 import Projectile from './Projectile.js';
 import towerStatus from './towerStatus.js';
+import assetManager from './AssetManager.js';
+import animationManager from './AnimationManager.js';
 
 class Tower {
 	constructor(x = 0, y = 0, cellSize = 0, towerType = 'cat_tower_level_1') {
@@ -12,37 +14,28 @@ class Tower {
 		this.damage = towerStatus[towerType].damage;
 		this.attackSpeed = towerStatus[towerType].attackSpeed;
 		this.projectiles = [];
-		this.projectileSrc = towerStatus[towerType].projectile;
+		this.projectileImage =
+			assetManager.images[towerStatus[towerType].projectile];
 		this.price = towerStatus[towerType].price;
 		this.isShooting = true;
 		this.isDamaged = false;
-		this.explosionFrame = 0;
+		this.explosionAnimation =
+			animationManager.getNewAnimationInstance('Explosion');
 		this.alphaRedRectangle = 0;
-		this.maxAlphaRectangle = 0.5;
+		this.maxAlphaRectangle = 1.0;
 		this.redRectDimensionModifier = 0;
-
-		this.explosionImages = Array(8)
-			.fill()
-			.map((_, i) => {
-				const explosionImage = new Image();
-				explosionImage.src = towerStatus[towerType].explosions[i];
-				return explosionImage;
-			});
-
-		this.image = new Image();
-		this.image.src = towerStatus[towerType].image;
+		this.image = assetManager.images[towerType];
 		this.timer = this.attackSpeed;
 		this.level = towerStatus[towerType].level;
 		this.nextLevel = towerStatus[towerType].nextLevel;
 	}
+
 	draw(ctx) {
 		ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
-		if (this.canEnvolve) {
-			const image = new Image();
-			image.src = '../assets/images/evolve_tower.png';
+		if (this.canEvolve) {
 			ctx.drawImage(
-				image,
+				assetManager.images['evolve_tower'],
 				this.x + this.width * 0.8,
 				this.y,
 				this.width / 5,
@@ -51,50 +44,53 @@ class Tower {
 		}
 		this.drawLiveBar(ctx);
 
+		if (this.explosionAnimation.isAnimationFinished()) {
+			this.alphaRedRectangle = 0;
+			this.redRectDimensionModifier = 0;
+			this.isDamaged = false;
+		}
+
 		if (this.isDamaged) {
-			if (this.explosionFrame.toFixed(1).match(/[0-9]\.0/) !== null) {
-				const halfLengthExplosions = this.explosionImages.length / 2;
-
-				if (this.explosionFrame <= halfLengthExplosions) {
-					this.alphaRedRectangle +=
-						this.maxAlphaRectangle / halfLengthExplosions;
-				} else {
-					this.alphaRedRectangle -=
-						this.maxAlphaRectangle / halfLengthExplosions;
-				}
-			}
-
-			console.log(this.alphaRedRectangle, this.explosionFrame.toFixed(1));
-			ctx.fillStyle = `rgba(255, 0, 0, ${this.alphaRedRectangle})`;
-			ctx.beginPath();
-			ctx.arc(
-				this.x + this.width / 2,
-				this.y + this.height / 2,
-				this.width / 2,
-				0,
-				2 * Math.PI
+			this.#drawRedCircle(
+				this.explosionAnimation.getCurrentFrame(false),
+				this.explosionAnimation.getAnimationLength(),
+				ctx
 			);
-			ctx.closePath();
-			ctx.fill();
 
 			ctx.drawImage(
-				this.explosionImages[parseInt(this.explosionFrame)],
+				this.explosionAnimation.selectImage(),
 				this.x,
 				this.y,
 				this.width,
 				this.height
 			);
-
-			this.explosionFrame += 0.2;
-		}
-
-		if (this.explosionFrame >= this.explosionImages.length) {
-			this.explosionFrame = 0;
-			this.alphaRedRectangle = 0;
-			this.redRectDimensionModifier = 0;
-			this.isDamaged = false;
 		}
 	}
+
+	#drawRedCircle(frame, animationLength, ctx) {
+		if (frame.toFixed(1).match(/[0-9]\.0/) !== null) {
+			const halfLengthExplosions = animationLength / 2;
+
+			if (frame <= halfLengthExplosions) {
+				this.alphaRedRectangle += this.maxAlphaRectangle / halfLengthExplosions;
+			} else {
+				this.alphaRedRectangle -= this.maxAlphaRectangle / halfLengthExplosions;
+			}
+		}
+
+		ctx.fillStyle = `rgba(255, 0, 0, ${this.alphaRedRectangle})`;
+		ctx.beginPath();
+		ctx.arc(
+			this.x + this.width / 2,
+			this.y + this.height / 2,
+			this.width / 2,
+			0,
+			2 * Math.PI
+		);
+		ctx.closePath();
+		ctx.fill();
+	}
+
 	update() {
 		if (this.isShooting) {
 			if (this.timer % this.attackSpeed === 0) {
@@ -102,7 +98,7 @@ class Tower {
 					new Projectile(
 						this.x + this.width,
 						this.y + 30,
-						this.projectileSrc,
+						this.projectileImage,
 						this.damage
 					)
 				);
@@ -116,14 +112,14 @@ class Tower {
 	drawLiveBar(ctx) {
 		ctx.fillStyle = '#000';
 		ctx.fillRect(
-			this.x * 1.05 + 10,
+			this.x + this.width * 0.1 + 10,
 			this.y - 10 + this.width,
 			100,
 			this.width / 7
 		);
 		ctx.fillStyle = '#FF0000';
 		ctx.fillRect(
-			this.x * 1.05 + 15,
+			this.x + this.width * 0.1 + 15,
 			this.y - 10 + 5 + this.width,
 			90 * (this.health / this.maxHealth),
 			this.width / 7 - 10

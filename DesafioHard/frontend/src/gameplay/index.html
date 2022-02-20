@@ -4,6 +4,20 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+    <!-- --------------------OPENGRAPH START-------------------- -->
+    <meta property="og:title" content="Alpha Defense" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://edtech.dudeful.com" />
+    <meta property="og:image" content="https://raw.githubusercontent.com/Vitorrt2021/DesafioHard/main/DesafioHard/frontend/src/assets/images/opengraph.png" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="300" />
+    <meta property="og:image:height" content="300" />
+    <meta property="og:image:alt" content="Torre Coelho Vermelho - Level 3" />
+    <meta property="og:description" 
+        content="Jogue agora o que há de mais sofisticado no gênero Tower Defense!" 
+    />
+    <!-- --------------------OPENGRAPH END-------------------- -->
 
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,7 +25,21 @@
 			href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
 			rel="stylesheet"
 		/>
-		<link rel="stylesheet" href="gameplay_interface.css" />
+		<link
+			rel="shortcut icon"
+			href="../assets/images/favicon.png"
+			type="image/x-icon"
+		/>
+		<link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+		/>
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+		<script src="gameplay_interface.js" type="module"></script>
+		<link rel="stylesheet" href="../styles/save-score.css" />
+		<link rel="stylesheet" href="../styles/ranking.css" />
+		<link rel="stylesheet" href="../styles/gameplay_interface.css" />
 		<title>Tower Defense</title>
 	</head>
 	<body>
@@ -24,7 +52,7 @@
 								<img 
 									title='Tower'
 									class="tower_button cat_tower"
-									src="./images/cat_tower_level_1.png"
+									src="../assets/images/cat_tower_level_1.png"
 									draggable="true"
 								/>
 								<div class="tower_money_cost_visor">
@@ -36,11 +64,11 @@
 								<img
 									title='Tower'
 									class="tower_button blue_rabbit_tower"
-									src="./images/blue_rabbit_tower_level_1.png"
+									src="../assets/images/blue_rabbit_tower_level_1.png"
 									draggable="true"
 								/>
 								<div class="tower_money_cost_visor">
-									<p class="price" id="blue_rabbit_cost_value">150</p>
+									<p class="price" id="blue_rabbit_cost_value">200</p>
 								</div>
 							</div>
 
@@ -48,11 +76,11 @@
 								<img
 									title='Tower'
 									class="tower_button red_rabbit_tower"
-									src="./images/red_rabbit_tower_level_1.png"
+									src="../assets/images/red_rabbit_tower_level_1.png"
 									draggable="true"
 								/>
 								<div class="tower_money_cost_visor">
-									<p class="price" id="red_rabbit_cost_value">200</p>
+									<p class="price" id="red_rabbit_cost_value">500</p>
 								</div>
 							</div>
 						</div>
@@ -64,10 +92,10 @@
 						<p id="score_value">0</p>
 					</section>
 					<section id="money_display">
-						<p id="money_value">100</p>
+						<p id="money_value">0</p>
 					</section>
 
-					<button class="blue_buttons save_ranking">Ranking</button>
+					<button class="blue_buttons save_ranking">Salvar</button>
 					<button class="blue_buttons restart_level">Reiniciar</button>
 				</header>
 				<canvas id="canvas1"></canvas>
@@ -82,5 +110,6 @@
 		/>
 		
 		<script src="gameplay_interface.js" type="module"></script>
+		<div class="modal"></div>
 	</body>
 </html>

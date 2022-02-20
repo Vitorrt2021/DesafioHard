@@ -1,3 +1,5 @@
+import assetManager from './AssetManager.js';
+
 class Cell {
 	constructor(x, y, cellSize) {
 		this.x = x;
@@ -6,10 +8,8 @@ class Cell {
 		this.height = cellSize;
 	}
 	draw(ctx) {
-		const image = new Image();
-		image.src = '../assets/images/star_path.svg';
 		ctx.drawImage(
-			image,
+			assetManager.images['tower_symbol'],
 			this.x + this.width / 3,
 			this.y + this.height / 2,
 			this.width / 5,
