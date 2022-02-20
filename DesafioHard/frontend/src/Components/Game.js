@@ -5,7 +5,7 @@ import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
-import animationManager from './AnimationManager.js'; //not remove
+import animationManager from './AnimationManager.js'; //do not remove
 import * as saveScore from '../requests/save-score.js';
 
 class Game {

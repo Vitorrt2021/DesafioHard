@@ -69,51 +69,51 @@ const mainArray = [
 	'..\\assets\\towers\\fernando_torres.png',
 ];
 
-function getFilesInsideDirectory(directory) {
-	const filesArray = [];
-
-	function readPath(directory) {
-		const dirRead = fs.readdirSync(directory);
-
-		for (const file of dirRead) {
-			const absolutePath = path.join(directory, file);
-
-			if (fs.statSync(absolutePath).isDirectory()) {
-				readPath(absolutePath);
-			} else {
-				filesArray.push(absolutePath);
-			}
-		}
-	}
-
-	readPath(directory);
-
-	console.log(filesArray);
-}
-
-function buildImageObject(imagePath) {
-	const image = new Image();
-	image.src = imagePath;
-
-	return image;
-}
-
 class AssetManager {
 	constructor() {
 		this.images = {};
 		this.sounds = {};
 		// this.files = getFilesInsideDirectory('../assets');
-		this.files = mainArray; //temporario, mandar funcao de ler diretorios para o servidor.
+		// this.#files = mainArray; //temporario, mandar funcao de ler diretorios para o servidor.
 
-		for (const filePath of this.files) {
-			const split = filePath.split('\\');
-			const fileName = split[split.length - 1];
+		$.get('/get-assets', (res) => {
+			this.#buildAssets(res);
+		});
+	}
+
+	#buildImageObject(filePath) {
+		const image = new Image();
+		image.src = filePath;
+		console.log('buildImage: ' + filePath);
+		return image;
+	}
+
+	#buildAssets(files) {
+		for (const filePath of files) {
+			let changedFilePath = filePath.split('\\');
+			changedFilePath[0] = '..';
+
+			const fileName = changedFilePath[changedFilePath.length - 1];
 			const fileExtension = fileName.slice(-3);
 
+			changedFilePath = changedFilePath.join('\\');
+			// console.log(
+			// 	filePath,
+			// 	fileName,
+			// 	fileName.slice(0, -4),
+			// 	fileExtension,
+			// 	changedFilePath,
+			// 	typeof changedFilePath
+			// );
 			if (fileExtension === 'mp3') {
-				this.sounds[fileName.slice(0, -4)] = {}; //TODO, verificar depois os sons.
+				// sounds[fileName.slice(0, -4)] = {}; //TODO, verificar depois os sons.
 			} else {
-				this.images[fileName.slice(0, -4)] = buildImageObject(filePath);
+				const im = this.#buildImageObject(changedFilePath);
+				const name = fileName.slice(0, -4);
+				console.log(im + ' -> ' + name);
+				console.log(typeof im, typeof name);
+				console.log(this.images);
+				console.log(typeof this.images);
 			}
 		}
 	}
