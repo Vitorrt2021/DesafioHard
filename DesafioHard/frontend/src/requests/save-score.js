@@ -13,7 +13,7 @@ const saveScore = () => {
 			//SERÁ REINICIADO DURANTE O SALVAMENTO DO NOVO SCORE NO ARQUIVO JSON
 			//E PORTANTO, AO TENTAR CHAMAR A FUNÇÃO ABAIXO HAVERÁ UM ERRO, POIS
 			//A REQUISIÇÃO ACONTECERÁ NO MOMENTO EM QUE O SERVIDOR ESTÁ SENDO REINICIADO!
-			window.location = '/DesafioHard/frontend/src/index.html';
+			window.location = '/';
 		})
 		.fail((error) => {
 			console.error(error);

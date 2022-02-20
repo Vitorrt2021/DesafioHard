@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const port = 2500;
+const port = 80;
 const fs = require('fs');
 
 // app.use('/', express.static(path.join(__dirname, '/src/styles')));
 // app.use('/', express.static(path.join(__dirname, '/src/gameplay')));
-// app.use('/', express.static(path.join(__dirname, '/src')));
+app.use(express.static(path.join(__dirname, '/src')));
 
 // app.get('/get-assets', (req, res) => {
 // 	const data = getFilesInsideDirectory('./src/assets');
