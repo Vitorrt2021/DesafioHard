@@ -21,13 +21,22 @@ p {
 html body {
 	overflow-y: hidden;
 }
-
+#level_value {
+	font-family: 'Roboto', sans-serif;
+	color: rgb(241, 241, 241);
+	position: absolute;
+	top: 2vw;
+	left: 2.3vw;
+	font-size: 3em;
+	z-index: 4;
+}
 #container_gameplay_interface {
 	width: 100%;
 	padding-top: 56.25%;
 	position: relative;
 	overflow-x: hidden;
 	overflow-y: hidden;
+	border: outset 1vh #efb469;
 }
 #gameplay_interface {
 	position: absolute;
@@ -82,8 +91,7 @@ html body {
 }
 
 .tower_button {
-	width: 55%;
-	height: 55%;
+	width: 45%;
 }
 
 .tower_money_cost_visor {
@@ -155,4 +163,30 @@ html body {
 	font-family: 'Architects Daughter', cursive;
 	font-size: 1.5rem;
 	cursor: pointer;
+}
+
+.tooltip1 {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	height: 10vw;
+	width: 7.5vw;
+	border-radius: 5px;
+	padding: 0px !important;
+	border: solid 2px #efb469;
+	background-color: #f3db95 !important;
+}
+.tooltip1 img {
+	width: 30%;
+}
+.tooltip1 div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.tooltip1 div label {
+	font-size: 1rem;
 }
