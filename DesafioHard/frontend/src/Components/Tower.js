@@ -10,6 +10,7 @@ class Tower {
 		this.width = cellSize;
 		this.height = cellSize;
 		this.health = towerStatus[towerType].health;
+		this.maxHealth = this.health;
 		this.damage = towerStatus[towerType].damage;
 		this.attackSpeed = towerStatus[towerType].attackSpeed;
 		this.projectiles = [];
@@ -41,10 +42,14 @@ class Tower {
 				this.height / 5
 			);
 		}
+<<<<<<< HEAD
+		this.drawLiveBar(ctx);
+=======
 
 		ctx.font = '30px arial';
 		ctx.fillStyle = 'black';
 		ctx.fillText(this.health, this.x, this.y);
+>>>>>>> 869d8808bd68198da8d44b2e93c462830207dff7
 
 		if (this.explosionAnimation.isAnimationFinished()) {
 			this.alphaRedRectangle = 0;
@@ -105,10 +110,27 @@ class Tower {
 					)
 				);
 				const audio = new Audio('../assets/audios/shooting.mp3');
+				audio.volume = 0.5;
 				audio.play();
 			}
 			this.timer++;
 		}
+	}
+	drawLiveBar(ctx) {
+		ctx.fillStyle = '#000';
+		ctx.fillRect(
+			this.x * 1.05 + 10,
+			this.y - 10 + this.width,
+			100,
+			this.width / 7
+		);
+		ctx.fillStyle = '#FF0000';
+		ctx.fillRect(
+			this.x * 1.05 + 15,
+			this.y - 10 + 5 + this.width,
+			90 * (this.health / this.maxHealth),
+			this.width / 7 - 10
+		);
 	}
 	handleProjectiles(ctx, canvasWidth, cellSize) {
 		this.projectiles.forEach((projectile, index) => {
