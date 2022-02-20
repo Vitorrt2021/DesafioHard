@@ -5,7 +5,7 @@ class Enemy {
 		this.width = width;
 		this.height = height;
 		this.speed = monster.speed;
-		this.health = monster.health + monster.health * level * 0.2;
+		this.health = monster.health + monster.health * level * 0.5;
 		this.maxHealth = this.health;
 		this.attack = this.health;
 		this.monster = monster;
