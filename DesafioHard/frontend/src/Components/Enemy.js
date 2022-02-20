@@ -44,6 +44,7 @@ class Enemy {
 		if (!this.isDying) {
 			this.drawLiveBar(ctx);
 		}
+		this.drawLiveBar(ctx);
 	}
 	drawLiveBar(ctx) {
 		ctx.fillStyle = '#000';
