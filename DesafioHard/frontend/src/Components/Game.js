@@ -5,7 +5,7 @@ import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
-import animationManager from './AnimationManager.js'; //not remove
+import animationManager from './AnimationManager.js'; //do not remove
 import * as saveScore from '../requests/save-score.js';
 
 class Game {
@@ -174,7 +174,7 @@ class Game {
 					enemy.health -= towerHealth;
 					tower.isDamaged = true;
 					const audio = new Audio('../assets/audios/explosion.mp3');
-					audio.volume = 0.5;
+					audio.volume = 0.3;
 					audio.play();
 					this.enemyIsDead(enemy, enemyIndex);
 					this.towerWasDestroyed(tower, towerIndex);
@@ -299,7 +299,7 @@ class Game {
 		tower.x = gridPositionX;
 		tower.y = gridPositionY + this.cellSize / 3.5;
 		const audio = new Audio('../assets/audios/dropTower.mp3');
-		audio.volume = 0.5;
+		audio.volume = 0.3;
 		audio.play();
 		this.player.money -= parseInt(tower.price);
 		this.updateMoney();
@@ -351,7 +351,7 @@ class Game {
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
 		const audio = new Audio('../assets/audios/envolve.mp3');
-		audio.volume = 0.5;
+		audio.volume = 0.3;
 		audio.play();
 
 		this.towers[towerIndex] = evolvedTower;
@@ -369,7 +369,7 @@ class Game {
 		};
 	}
 	spawnEnemy() {
-		// const positions = [10, 2.5, 1.4];
+		//const positions = [10, 2.5, 1.4];
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
 		const sorted = Math.floor(Math.random() * 3);
@@ -403,21 +403,26 @@ class Game {
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
 			const audio = new Audio('../assets/audios/robot_.mp3');
-			audio.volume = 0.5;
+			audio.volume = 0.3;
 			audio.play();
 		} else if (monster === 'slimePink' || monster === 'slimeGreen') {
 			const audio = new Audio('../assets/audios/slimeWalk.mp3');
-			audio.volume = 0.5;
+			audio.volume = 0.3;
 			audio.play();
 		} else if (monster === 'toad') {
 			const audio = new Audio('../assets/audios/monsterGreen.mp3');
-			audio.volume = 0.5;
+			audio.volume = 0.3;
 			audio.play();
 		}
 	}
+
 	updateLevel() {
 		if (this.player.score >= 200 * (this.level + 1)) {
 			this.level++;
+			const audio = new Audio('../assets/audios/level_up.mp3');
+			audio.volume = 0.3;
+			audio.play();
+			$('#level_value').html(this.level);
 		}
 	}
 }
