@@ -5,7 +5,6 @@ import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
-import MonsterStatus from './monsterStatus.js';
 import animationManager from './AnimationManager.js'; //not remove
 import * as saveScore from '../requests/save-score.js';
 
@@ -30,7 +29,6 @@ class Game {
 		this.towers = [];
 		this.enemys = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
-		this.monsterStatus = new MonsterStatus();
 		this.level = 0;
 		this.spawnVelocid = 500 - 10 * this.level;
 	}
@@ -149,12 +147,16 @@ class Game {
 	}
 
 	enemyIsDead(enemy, enemyIndex) {
-		if (enemy.health <= 0) {
-			this.enemys.splice(enemyIndex, 1);
+		if (enemy.health <= 0 && !enemy.isDying) {
 			this.player.score += 20 * (this.level + 1);
 			this.player.money += 20 * (this.level + 1);
 			this.updateScore();
 			this.updateMoney();
+			enemy.setDyingAnimation();
+		}
+
+		if (enemy.isDead) {
+			this.enemys.splice(enemyIndex, 1);
 		}
 	}
 	towerWasDestroyed(tower, towerIndex) {
@@ -165,6 +167,7 @@ class Game {
 	checkTowerCollision() {
 		this.towers.forEach((tower, towerIndex) => {
 			this.enemys.forEach((enemy, enemyIndex) => {
+				if (enemy.isDying) return;
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
 					let towerHealth = tower.health;
 					tower.health -= enemy.health;
@@ -183,6 +186,7 @@ class Game {
 		this.towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
 				this.enemys.forEach((enemy, enemyIndex) => {
+					if (enemy.isDying) return;
 					if (collision.rectRectCollisionDetection(projectile, enemy)) {
 						const audio = new Audio('../assets/audios/hit.mp3');
 						audio.play();
@@ -219,12 +223,15 @@ class Game {
 				enemy.update();
 				enemy.draw(this.ctx);
 			});
+
 			if (this.draggingElement) {
 				this.draggingElement.draw(this.ctx);
 			}
+
 			if (this.frames % this.spawnVelocid === 0) {
 				this.spawnEnemy();
 			}
+
 			this.haveEnemyInLine();
 			this.handleTowers();
 			this.checkProjectileCollision();
@@ -254,7 +261,6 @@ class Game {
 			e.preventDefault();
 
 			let towerType = e.dataTransfer.getData('text');
-			console.log(towerType);
 			this.updateMousePosition(e);
 			const newTower = new Tower(
 				this.mousePosition.x,
@@ -340,10 +346,14 @@ class Game {
 		};
 	}
 	spawnEnemy() {
-		const positions = [10, 2.5, 1.4];
+		// const positions = [10, 2.5, 1.4];
+		const yInitialpositions = [68, 325, 580];
+		const yFinalpositions = [235, 493, 743];
 		const sorted = Math.floor(Math.random() * 3);
-		let position = this.canvas.height / positions[sorted];
+		// let position = this.canvas.height / positions[sorted];
+		let position = yInitialpositions[sorted];
 		let monster = Math.ceil(Math.random() * 100);
+
 		if (monster < 40) {
 			monster = this.monster[0];
 		} else if (monster >= 40 && monster < 75) {
@@ -353,13 +363,15 @@ class Game {
 		} else {
 			monster = this.monster[3];
 		}
+
 		this.playSoundMonster(monster);
 		this.enemys.push(
 			new Enemy(
-				new Monster(monster, this.monsterStatus),
+				new Monster(monster),
 				parseInt(this.canvas.width),
 				position,
 				this.cellSize,
+				yFinalpositions[sorted] - yInitialpositions[sorted],
 				sorted,
 				this.level
 			)

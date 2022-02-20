@@ -54,7 +54,7 @@ class Tower {
 
 		if (this.isDamaged) {
 			this.#drawRedCircle(
-				this.explosionAnimation.frame,
+				this.explosionAnimation.getCurrentFrame(false),
 				this.explosionAnimation.getAnimationLength(),
 				ctx
 			);
