@@ -41,6 +41,26 @@ class Enemy {
 		if (!this.isDead) {
 			ctx.drawImage(monsterImage, this.x, this.y + delta_y);
 		}
+<<<<<<< HEAD
+		ctx.drawImage(
+			imageLoaded,
+			this.x,
+			this.y + 30 + this.monster.diferenceHeight()
+		);
+		this.drawLiveBar(ctx);
+	}
+	drawLiveBar(ctx) {
+		ctx.fillStyle = '#000';
+		ctx.fillRect(this.x, this.y, 100, this.width / 10);
+		ctx.fillStyle = '#FF0000';
+		ctx.fillRect(
+			this.x + 5,
+			this.y + 5,
+			90 * (this.health / this.maxHealth),
+			this.width / 10 - 10
+		);
+=======
+>>>>>>> 869d8808bd68198da8d44b2e93c462830207dff7
 	}
 }
 
