@@ -1,14 +1,3 @@
-const explosionsArray = [
-	'../assets/explosions/Explosion_A.png',
-	'../assets/explosions/Explosion_B.png',
-	'../assets/explosions/Explosion_C.png',
-	'../assets/explosions/Explosion_D.png',
-	'../assets/explosions/Explosion_E.png',
-	'../assets/explosions/Explosion_F.png',
-	'../assets/explosions/Explosion_G.png',
-	'../assets/explosions/Explosion_H.png',
-];
-
 export default {
 	cat_tower_base: {
 		price: 50,
@@ -21,7 +10,6 @@ export default {
 		price: 100,
 		attackSpeed: 200,
 		projectile: 'wool_ball',
-		explosions: explosionsArray,
 	},
 	cat_tower_level_2: {
 		level: 2,
@@ -31,7 +19,6 @@ export default {
 		price: 200,
 		attackSpeed: 170,
 		projectile: 'wool_ball',
-		explosions: explosionsArray,
 	},
 	cat_tower_level_3: {
 		level: 3,
@@ -41,7 +28,6 @@ export default {
 		price: 300,
 		attackSpeed: 120,
 		projectile: 'lightning',
-		explosions: explosionsArray,
 	},
 	blue_rabbit_tower_base: {
 		price: 50,
@@ -54,7 +40,6 @@ export default {
 		attackSpeed: 170,
 		price: 200,
 		projectile: 'carrot',
-		explosions: explosionsArray,
 	},
 	blue_rabbit_tower_level_2: {
 		level: 2,
@@ -64,16 +49,15 @@ export default {
 		price: 400,
 		attackSpeed: 120,
 		projectile: 'carrot',
-		explosions: explosionsArray,
 	},
 	blue_rabbit_tower_level_3: {
 		level: 3,
+		nextLevel: 'fernando_torres',
 		health: 1500,
 		damage: 300,
 		price: 800,
 		attackSpeed: 80,
 		projectile: 'lightning',
-		explosions: explosionsArray,
 	},
 	red_rabbit_tower_base: {
 		price: 50,
@@ -86,7 +70,6 @@ export default {
 		price: 500,
 		attackSpeed: 120,
 		projectile: 'carrot',
-		explosions: explosionsArray,
 	},
 	red_rabbit_tower_level_2: {
 		level: 2,
@@ -96,24 +79,22 @@ export default {
 		price: 1000,
 		attackSpeed: 90,
 		projectile: 'carrot',
-		explosions: explosionsArray,
 	},
 	red_rabbit_tower_level_3: {
 		level: 3,
+		nextLevel: 'fernando_torres',
 		health: 2000,
 		damage: 450,
 		price: 1500,
 		attackSpeed: 60,
 		projectile: 'lightning',
-		explosions: explosionsArray,
 	},
 	fernando_torres: {
 		level: 4,
-		health: 2000,
-		damage: 450,
-		price: 300,
-		attackSpeed: 60,
+		health: 100000,
+		damage: 100000,
+		price: 3000,
+		attackSpeed: 50,
 		projectile: 'football_ball',
-		explosions: explosionsArray,
 	},
 };
