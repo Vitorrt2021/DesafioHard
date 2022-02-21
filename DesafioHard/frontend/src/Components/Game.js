@@ -5,7 +5,6 @@ import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
-import animationManager from './AnimationManager.js'; //do not remove
 import * as saveScore from '../requests/save-score.js';
 
 class Game {
@@ -208,6 +207,7 @@ class Game {
 			}
 		}
 	}
+
 	drawGrid() {
 		this.gameGrid.forEach((cell, index) => {
 			//não desenha a ultima coluna
@@ -215,6 +215,7 @@ class Game {
 			cell.draw(this.ctx);
 		});
 	}
+
 	animation() {
 		if (this.runAnimationControll) {
 			this.ctx.fillStyle = 'black';
@@ -388,6 +389,7 @@ class Game {
 		}
 
 		this.playSoundMonster(monster);
+
 		this.enemys.push(
 			new Enemy(
 				new Monster(monster),
@@ -400,6 +402,7 @@ class Game {
 			)
 		);
 	}
+
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
 			const audio = new Audio('../assets/audios/robot_.mp3');

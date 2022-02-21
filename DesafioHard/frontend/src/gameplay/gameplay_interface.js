@@ -1,5 +1,6 @@
 import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
+import animationManager from '../Components/AnimationManager.js';
 import * as saveScore from '../requests/save-score.js';
 import renderRanking from '../requests/ranking.js';
 
@@ -68,12 +69,15 @@ $(document).ready(async () => {
 		await new Promise((r) => setTimeout(r, 200));
 	}
 
+	animationManager.buildAnimations(assetManager);
+
 	const game = new Game();
 	game.start();
 
 	$('canvas').click(() => {
 		game.evolveTower();
 	});
+
 	createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
 	createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
 	createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));

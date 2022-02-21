@@ -1,13 +1,10 @@
-import assetManager from './AssetManager.js';
-
 class AnimationManager {
 	#imagesForAnimation = [];
-	#animations;
+	#animations = {};
 
-	constructor() {
-		this.#animations = {};
-
+	buildAnimations(assetManager) {
 		//Explosion animation
+		// console.log(assetManager.images);
 		for (let index = 0; index < 8; index++) {
 			this.#imagesForAnimation.push(
 				assetManager.images['Explosion_' + (index + 1)]
@@ -183,5 +180,5 @@ class Animation {
 	}
 }
 
-const animationManager = new AnimationManager();
-export default animationManager;
+const instance = new AnimationManager();
+export default instance;
