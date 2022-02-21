@@ -45,6 +45,7 @@ class Game {
 	}
 	haveEnemyInLine() {
 		const position = [false, false, false];
+
 		const towerPosition = [
 			Math.floor(76.4),
 			Math.floor(326.4),
@@ -155,8 +156,8 @@ class Game {
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
+			enemy.line = null;
 		}
-
 		if (enemy.isDead) {
 			this.enemys.splice(enemyIndex, 1);
 		}
