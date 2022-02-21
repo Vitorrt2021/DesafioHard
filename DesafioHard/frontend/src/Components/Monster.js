@@ -7,6 +7,7 @@ class Monster {
 		this.speed = monsterStatus[type].speed;
 		this.health = monsterStatus[type].health;
 		this.animation = animationManager.getNewAnimationInstance(type);
+		this.#updateMaxHeight();
 	}
 
 	attack() {
@@ -15,10 +16,15 @@ class Monster {
 
 	changeAnimation(animationName) {
 		this.animation = animationManager.getNewAnimationInstance(animationName);
+		this.#updateMaxHeight();
 	}
 
 	selectImage() {
 		return this.animation.selectImage();
+	}
+
+	#updateMaxHeight() {
+		this.animationMaxHeight = this.animation.getAnimationMaxHeight();
 	}
 }
 

@@ -26,7 +26,10 @@ class Enemy {
 
 	draw(ctx) {
 		const monsterImage = this.monster.selectImage();
-		const delta_y = (this.height - monsterImage.height) / 2;
+		const animationMaxHeight = this.monster.animationMaxHeight;
+
+		let delta_y = animationMaxHeight - monsterImage.height; //Evitar pulos dos slimes
+		delta_y += (this.height - monsterImage.height) / 2; //centralizar no caminho das torres.
 
 		if (this.monster.animation.isAnimationFinished() && this.isDying) {
 			this.isDead = true;
