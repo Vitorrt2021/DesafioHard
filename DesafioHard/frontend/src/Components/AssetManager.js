@@ -1,4 +1,5 @@
-const apiURL = 'http://edtech.dudeful.com:3004';
+// const apiURL = 'http://edtech.dudeful.com:3004';
+// const apiURL = 'http://localhost:3004';
 
 class AssetManager {
 	constructor() {

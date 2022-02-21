@@ -4,7 +4,6 @@ class AnimationManager {
 
 	buildAnimations(assetManager) {
 		//Explosion animation
-		// console.log(assetManager.images);
 		for (let index = 0; index < 8; index++) {
 			this.#imagesForAnimation.push(
 				assetManager.images['Explosion_' + (index + 1)]

@@ -6,7 +6,7 @@ const renderRanking = async () => {
 
 		renderNodes();
 
-		response.data.slice(0, 20).forEach((score, index) => {
+		response.data.slice(0, 200).forEach((score, index) => {
 			$('.ranking__cell__container').append(
 				`<div class="ranking__cell">
             <span class="ranking__cell__name">

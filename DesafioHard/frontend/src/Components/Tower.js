@@ -22,7 +22,7 @@ class Tower {
 		this.explosionAnimation =
 			animationManager.getNewAnimationInstance('Explosion');
 		this.alphaRedRectangle = 0;
-		this.maxAlphaRectangle = 1.0;
+		this.maxAlphaRectangle = 0.5;
 		this.redRectDimensionModifier = 0;
 		this.image = assetManager.images[towerType];
 		this.timer = this.attackSpeed;

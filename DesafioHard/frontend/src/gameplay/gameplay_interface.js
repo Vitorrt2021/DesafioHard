@@ -66,7 +66,7 @@ $(document).ready(async () => {
 
 	//Esperando carregar as imagens e sons antes de continuar...
 	while (!assetManager.isImagesLoadCompleted()) {
-		await new Promise((r) => setTimeout(r, 200));
+		await new Promise((r) => setTimeout(r, 200)); //sleep
 	}
 
 	animationManager.buildAnimations(assetManager);
