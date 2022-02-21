@@ -8,7 +8,7 @@ export default {
 		health: 150,
 	},
 	toad: {
-		speed: 1.9,
+		speed: 1.8,
 		health: 200,
 	},
 	robot: {
