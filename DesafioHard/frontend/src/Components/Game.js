@@ -29,7 +29,10 @@ class Game {
 		this.enemys = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
-		this.spawnVelocid = 500 - 10 * this.level;
+		this.spawnVelocid = 500;
+		this.maxSpawVelocid = 60;
+
+		this.moneyDrop = 20;
 	}
 	start() {
 		this.updateLive();
@@ -105,7 +108,6 @@ class Game {
 	handleTowers() {
 		this.towers.forEach((tower) => {
 			tower.draw(this.ctx);
-
 			if (tower.isShooting) {
 				tower.update();
 			}
@@ -121,6 +123,7 @@ class Game {
 				saveScore.renderNodes();
 			}, 500);
 			$('#live_value').html('0');
+			$('#level_value').html('');
 			this.stopAnimation();
 		}
 	}
@@ -137,7 +140,7 @@ class Game {
 	checkEnemyAttackedBase() {
 		this.enemys.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
-				this.player.live -= enemy.health;
+				this.player.live -= 1;
 				this.enemys.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
@@ -148,7 +151,7 @@ class Game {
 	enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			this.player.score += 20 * (this.level + 1);
-			this.player.money += 20 * (this.level + 1);
+			this.player.money += Math.floor(this.moneyDrop);
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
@@ -215,13 +218,21 @@ class Game {
 			cell.draw(this.ctx);
 		});
 	}
-
+	changeSpawVelocid() {
+		const spawV = (this.spawnVelocid = 500 - 60 * this.level);
+		if (spawV <= this.maxSpawVelocid) {
+			this.spawnVelocid = this.maxSpawVelocid;
+		} else {
+			this.spawnVelocid = spawV;
+		}
+	}
 	animation() {
 		if (this.runAnimationControll) {
 			this.ctx.fillStyle = 'black';
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			this.canEvolveTowers();
 			this.drawGrid();
+			this.changeSpawVelocid();
 			this.enemys.forEach((enemy) => {
 				enemy.update();
 				enemy.draw(this.ctx);
@@ -420,8 +431,14 @@ class Game {
 	}
 
 	updateLevel() {
-		if (this.player.score >= 200 * (this.level + 1)) {
+		// console.log('Player ======');
+		// console.log(this.player.score);
+
+		// console.log('Nec ======');
+		// console.log(100 * Math.pow(2, this.level + 1));
+		if (this.player.score >= 100 * Math.pow(2, this.level + 1)) {
 			this.level++;
+			this.moneyDrop *= 1 + 1 / this.level;
 			const audio = new Audio('../assets/audios/level_up.mp3');
 			audio.volume = 0.3;
 			audio.play();
