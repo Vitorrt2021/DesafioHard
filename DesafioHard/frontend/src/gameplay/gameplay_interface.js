@@ -24,6 +24,7 @@ $(document).ready(async () => {
 		}
 		if (event.target === $('.close_modal')[0]) {
 			$('.modal')[0].style.display = 'none';
+			$('#level_value').html('');
 			game.startAnimation();
 		}
 	});

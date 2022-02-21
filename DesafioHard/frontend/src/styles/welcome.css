@@ -2,7 +2,19 @@
 	margin: 0;
 	padding: 0;
 }
-
+html {
+	font-size: 10px;
+}
+@media (max-width: 600px) {
+	html {
+		font-size: 8px;
+	}
+}
+@media (min-width: 1000px) {
+	html {
+		font-size: 15px;
+	}
+}
 .app__container {
 	width: 100vw;
 	height: 100vh;

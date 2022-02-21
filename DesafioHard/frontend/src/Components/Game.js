@@ -121,6 +121,7 @@ class Game {
 				saveScore.renderNodes();
 			}, 500);
 			$('#live_value').html('0');
+			$('#level_value').html('');
 			this.stopAnimation();
 		}
 	}
