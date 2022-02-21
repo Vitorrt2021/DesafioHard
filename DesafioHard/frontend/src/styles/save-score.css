@@ -2,7 +2,6 @@
 	margin: 0;
 	padding: 0;
 }
-
 .app__container {
 	width: 100vw;
 	height: 100vh;
@@ -18,17 +17,21 @@
 
 .save__container {
 	width: 70%;
-	height: 70%;
+	height: 50%;
 	background-image: url('../assets/images/save_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding-top: 6vh;
 }
-
+@media (max-width: 500px) {
+	.save__container {
+		padding-top: 10vh;
+	}
+}
 .input__container {
 	display: flex;
 	justify-content: center;
@@ -52,16 +55,26 @@
 	background-color: transparent;
 	font-family: 'Architects Daughter', cursive;
 	padding: 0 5%;
-	font-size: 1.5vw;
+	font-size: 1rem;
 	color: grey;
-	margin-top: 30%;
-	margin-bottom: 10%;
 }
 
 #save__name__input:focus {
 	outline: none;
 }
-
+#button_save {
+	font-size: 5vw;
+}
+@media (min-width: 850px) {
+	#button_save {
+		font-size: 4vw;
+	}
+}
+@media (min-width: 1040px) {
+	#button_save {
+		font-size: 3vw;
+	}
+}
 .blue__button {
 	background-image: url('../assets/images/blue_button.svg');
 	background-repeat: no-repeat;
@@ -77,5 +90,4 @@
 	font-family: 'Architects Daughter', cursive;
 	color: #ffffff;
 	cursor: pointer;
-	font-size: 1.5vw;
 }
