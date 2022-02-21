@@ -27,7 +27,7 @@ const renderNodes = () => {
 				<div class="save__container">
 					<div class="input__container">
 						<input type="text" placeholder="Nome do jogador" id="save__name__input">
-						<button type="button" class="blue__button save_score_button">Salvar</button>
+						<button type="button" class="blue__button save_score_button" id='button_save'>Salvar</button>
 					</div>
 				</div>
 		</div>`

@@ -34,6 +34,7 @@ $(document).ready(async () => {
 		if (score >= 100) {
 			game.stopAnimation();
 			saveScore.renderNodes();
+			$('#level_value').html('');
 		} else {
 			alert('Pontuação mínima para registrar ranking: 100 pontos');
 		}
