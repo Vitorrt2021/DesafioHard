@@ -1,59 +1,151 @@
-// const apiURL = 'http://edtech.dudeful.com:3004';
-// const apiURL = 'http://localhost:3004';
+import animationData from './animationData.js';
 
 class AssetManager {
-	constructor() {
-		this.images = {};
-		this.sounds = {};
+	#animations = {};
+	#images = {};
+	#sounds = {};
 
-		// $.get(apiURL + '/get-assets', (res) => {
-		$.get('/get-assets', (res) => {
-			this.#buildAssets(res);
-		});
+	async prepareAssets(assetLoaderInstance) {
+		await this.#makeImagesObject(assetLoaderInstance);
+		this.#makeAudiosObject(assetLoaderInstance);
+
+		//Dá pra melhorar ainda mais fazendo ler uma pasta animations, mas por questão de tempo, deixar pra depois.
+		this.#buildAnimation('explosion');
+		this.#buildAnimation('slimePink');
+		this.#buildAnimation('slimeGreen');
+		this.#buildAnimation('toad');
+		this.#buildAnimation('robot');
+		this.#buildAnimation('toad_dying');
+		this.#buildAnimation('robot_dying');
+		this.#buildAnimation('slimeGreen_dying');
+		this.#buildAnimation('slimePink_dying');
 	}
 
-	#buildImageObject(filePath) {
-		const image = new Image();
-		image.src = filePath;
-		return image;
+	#buildAnimation(animationName) {
+		const imagesHeight = [];
+		const imagesForAnimation = [];
+
+		for (
+			let index = 0;
+			index < animationData[animationName].animationQtyFrames;
+			index++
+		) {
+			const image = this.getImage(`${animationName}_${index + 1}`);
+			imagesHeight.push(image.height);
+			imagesForAnimation.push(image);
+		}
+
+		this.#animations[animationName] = {
+			counterIncrement: animationData[animationName].counterIncrement,
+			images: imagesForAnimation,
+			maxImageHeight: Math.max(...imagesHeight),
+		};
 	}
 
-	#buildAssets(files) {
-		for (const filePath of files) {
-			let changedFilePath = filePath.split('\\'); //Windows
-			// let changedFilePath = filePath.split('/'); //Linux
+	getAnimationInstance(animationName) {
+		const anim = this.#animations[animationName];
+		return new Animation(
+			anim.counterIncrement,
+			anim.images,
+			anim.maxImageHeight
+		);
+	}
 
-			const fileNameComplete = changedFilePath[changedFilePath.length - 1];
+	getImage(image_name) {
+		return this.#images[image_name];
+	}
 
-			const fileName = fileNameComplete.split('.')[0];
-			const fileExtension = fileNameComplete.split('.')[1];
+	getSound(sound_name) {
+		return this.#sounds[sound_name];
+	}
 
-			changedFilePath[0] = '..';
-			changedFilePath = changedFilePath.join('/');
+	async #makeImagesObject(assetLoaderInstance) {
+		for (const image in assetLoaderInstance.images) {
+			const imageObj = new Image();
+			imageObj.src = assetLoaderInstance.images[image];
 
-			if (fileExtension === 'mp3') {
-				// sounds[fileName.slice(0, -4)] = {}; //TODO, verificar depois os sons.
-			} else {
-				this.images[fileName] = this.#buildImageObject(changedFilePath);
-			}
+			this.#images[image] = imageObj;
+		}
+
+		//Esperando carregar as imagens antes de continuar...
+		while (!this.#isImagesLoadCompleted()) {
+			await new Promise((resolve) => setTimeout(resolve, 200)); //sleep
 		}
 	}
 
-	isImagesLoadCompleted() {
+	#makeAudiosObject(assetLoaderInstance) {
+		for (const sound in assetLoaderInstance.sounds) {
+			const soundObj = new Audio(assetLoaderInstance.sounds[sound]);
+
+			this.#sounds[sound] = soundObj;
+		}
+
+		// //Esperando carregar as imagens antes de continuar...
+		// while (!this.#isImagesLoadCompleted()) {
+		// 	await new Promise((resolve) => setTimeout(resolve, 200)); //sleep
+		// }
+	}
+
+	#isImagesLoadCompleted() {
 		if (
-			Object.keys(this.images).length === 0 &&
-			this.images.constructor === Object
+			Object.keys(this.#images).length === 0 &&
+			this.#images.constructor === Object
 		) {
 			return false;
 		}
 
-		for (const imageName in this.images) {
-			if (!this.images[imageName].complete) {
+		for (const image in this.#images) {
+			if (!this.#images[image].complete) {
 				return false;
 			}
 		}
 
 		return true;
+	}
+}
+
+class Animation {
+	#frame;
+	#animationImages;
+	#counterIncrement;
+	#animationMaxHeight;
+
+	constructor(counterIncrement, images, animationMax) {
+		this.#frame = 0;
+		this.#animationImages = images;
+		this.#counterIncrement = counterIncrement;
+		this.#animationMaxHeight = animationMax;
+	}
+
+	selectImage() {
+		this.isAnimationFinished();
+
+		const selectedImage = this.#animationImages[this.getCurrentFrame(true)];
+		this.#frame += this.#counterIncrement;
+
+		return selectedImage;
+	}
+
+	isAnimationFinished() {
+		const checkFrameAndLength = this.#frame >= this.getAnimationLength();
+
+		if (checkFrameAndLength) {
+			this.#frame = 0;
+		}
+		return checkFrameAndLength;
+	}
+
+	getCurrentFrame(parsed) {
+		this.isAnimationFinished();
+		return parsed ? parseInt(this.#frame) : this.#frame;
+	}
+
+	getAnimationLength() {
+		return this.#animationImages.length;
+	}
+
+	getAnimationMaxHeight() {
+		return this.#animationMaxHeight;
 	}
 }
 
