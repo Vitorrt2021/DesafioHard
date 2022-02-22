@@ -3,13 +3,7 @@ module.exports = {
 		{
 			script: 'server.js',
 			cwd: 'backend/',
-			name: 'Backend',
-			watch: false,
-		},
-		{
-			script: 'server.js',
-			cwd: 'frontend/',
-			name: 'Frontend',
+			name: 'Backend:AlphaTower',
 			watch: false,
 		},
 	],

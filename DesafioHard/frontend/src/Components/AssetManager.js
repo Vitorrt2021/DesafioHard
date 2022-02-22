@@ -1,15 +1,14 @@
-// const apiURL = 'http://edtech.dudeful.com:3004';
-// const apiURL = 'http://localhost:3004';
+import paths from './AssetPaths.js';
 
 class AssetManager {
 	constructor() {
 		this.images = {};
 		this.sounds = {};
 
-		// $.get(apiURL + '/get-assets', (res) => {
-		$.get('/get-assets', (res) => {
-			this.#buildAssets(res);
-		});
+		//FIX-IT
+		setTimeout(() => {
+			this.#buildAssets(paths);
+		}, 300);
 	}
 
 	#buildImageObject(filePath) {
@@ -20,8 +19,8 @@ class AssetManager {
 
 	#buildAssets(files) {
 		for (const filePath of files) {
-			let changedFilePath = filePath.split('\\'); //Windows
-			// let changedFilePath = filePath.split('/'); //Linux
+			// let changedFilePath = filePath.split('\\'); //Windows
+			let changedFilePath = filePath.split('/'); //Linux
 
 			const fileNameComplete = changedFilePath[changedFilePath.length - 1];
 
