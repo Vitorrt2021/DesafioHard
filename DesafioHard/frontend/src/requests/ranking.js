@@ -1,4 +1,4 @@
-const apiURL = 'http://edtech.dudeful.com:3004';
+const apiURL = 'https://data.dudeful.com';
 
 const renderRanking = async () => {
 	try {
