@@ -1,10 +1,9 @@
 import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
-import animationManager from '../Components/AnimationManager.js';
 import * as saveScore from '../requests/save-score.js';
 import renderRanking from '../requests/ranking.js';
 
-$(document).ready(async () => {
+$(document).ready(() => {
 	// Prevent user from reloading page by accident
 	window.addEventListener('beforeunload', function (e) {
 		const score = $('#score_value').html();
@@ -66,19 +65,26 @@ $(document).ready(async () => {
 		event.originalEvent.preventDefault();
 	});
 
-	//Esperando carregar as imagens e sons antes de continuar...
-	while (!assetManager.isImagesLoadCompleted()) {
-		await new Promise((r) => setTimeout(r, 200)); //sleep
-	}
+	const canvas = document.getElementById('canvas1');
+	const ctx = canvas.getContext('2d');
 
-	animationManager.buildAnimations(assetManager);
+	// const apiURL = 'http://edtech.dudeful.com:3004';
+	// const apiURL = 'http://localhost:3004';
+	const port = 3004;
 
-	const game = new Game();
-	game.start();
+	$.get(
+		`http://${location.host}:${port}/load-assets`,
+		async (assetLoaderInstance) => {
+			await assetManager.prepareAssets(assetLoaderInstance);
 
-	$('canvas').click(() => {
-		game.evolveTower();
-	});
+			const game = new Game();
+			game.start();
+
+			$('#canvas1').click(() => {
+				game.evolveTower();
+			});
+		}
+	);
 
 	createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
 	createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
