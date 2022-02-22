@@ -23,6 +23,7 @@ $(document).ready(() => {
 		}
 		if (event.target === $('.close_modal')[0]) {
 			$('.modal')[0].style.display = 'none';
+			$('#level_value').html('');
 			game.startAnimation();
 		}
 	});
@@ -32,6 +33,7 @@ $(document).ready(() => {
 		if (score >= 100) {
 			game.stopAnimation();
 			saveScore.renderNodes();
+			$('#level_value').html('');
 		} else {
 			alert('Pontuação mínima para registrar ranking: 100 pontos');
 		}

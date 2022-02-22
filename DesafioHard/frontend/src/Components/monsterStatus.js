@@ -10,7 +10,7 @@ export default {
 	},
 
 	toad: {
-		speed: 1.9,
+		speed: 1.8,
 		health: 200,
 	},
 

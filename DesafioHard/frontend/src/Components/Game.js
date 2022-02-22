@@ -30,7 +30,10 @@ class Game {
 		this.enemys = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
-		this.spawnVelocid = 500 - 10 * this.level;
+		this.spawnVelocid = 500;
+		this.maxSpawVelocid = 60;
+
+		this.moneyDrop = 20;
 	}
 	start() {
 		this.updateLive();
@@ -43,6 +46,7 @@ class Game {
 	}
 	haveEnemyInLine() {
 		const position = [false, false, false];
+
 		const towerPosition = [
 			Math.floor(76.4),
 			Math.floor(326.4),
@@ -106,7 +110,6 @@ class Game {
 	handleTowers() {
 		this.towers.forEach((tower) => {
 			tower.draw(this.ctx);
-
 			if (tower.isShooting) {
 				tower.update();
 			}
@@ -115,7 +118,6 @@ class Game {
 	}
 	gameIsOver() {
 		if (this.player.live <= 0) {
-			// const audio = new Audio('../assets/audios/titanic_flute.mp3');
 			const audio = assetManager.getSound('titanic_flute');
 			audio.play();
 			setTimeout(() => {
@@ -123,6 +125,7 @@ class Game {
 				saveScore.renderNodes();
 			}, 500);
 			$('#live_value').html('0');
+			$('#level_value').html('');
 			this.stopAnimation();
 		}
 	}
@@ -139,7 +142,7 @@ class Game {
 	checkEnemyAttackedBase() {
 		this.enemys.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
-				this.player.live -= enemy.health;
+				this.player.live -= 1;
 				this.enemys.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
@@ -150,12 +153,12 @@ class Game {
 	enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			this.player.score += 20 * (this.level + 1);
-			this.player.money += 20 * (this.level + 1);
+			this.player.money += Math.floor(this.moneyDrop);
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
+			enemy.line = null;
 		}
-
 		if (enemy.isDead) {
 			this.enemys.splice(enemyIndex, 1);
 		}
@@ -174,7 +177,6 @@ class Game {
 					tower.health -= enemy.health;
 					enemy.health -= towerHealth;
 					tower.isDamaged = true;
-					// const audio = new Audio('../assets/audios/explosion.mp3');
 					const audio = assetManager.getSound('explosion');
 					audio.volume = 0.3;
 					audio.play();
@@ -191,7 +193,6 @@ class Game {
 				this.enemys.forEach((enemy, enemyIndex) => {
 					if (enemy.isDying) return;
 					if (collision.rectRectCollisionDetection(projectile, enemy)) {
-						// const audio = new Audio('../assets/audios/hit.mp3');
 						const audio = assetManager.getSound('hit');
 						audio.volume = 0.3;
 						audio.play();
@@ -219,13 +220,21 @@ class Game {
 			cell.draw(this.ctx);
 		});
 	}
-
+	changeSpawVelocid() {
+		const spawV = (this.spawnVelocid = 500 - 60 * this.level);
+		if (spawV <= this.maxSpawVelocid) {
+			this.spawnVelocid = this.maxSpawVelocid;
+		} else {
+			this.spawnVelocid = spawV;
+		}
+	}
 	animation() {
 		if (this.runAnimationControll) {
 			this.ctx.fillStyle = 'black';
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			this.canEvolveTowers();
 			this.drawGrid();
+			this.changeSpawVelocid();
 			this.enemys.forEach((enemy) => {
 				enemy.update();
 				enemy.draw(this.ctx);
@@ -303,7 +312,6 @@ class Game {
 		}
 		tower.x = gridPositionX;
 		tower.y = gridPositionY + this.cellSize / 3.5;
-		// const audio = new Audio('../assets/audios/dropTower.mp3');
 		const audio = assetManager.getSound('dropTower');
 		audio.volume = 0.3;
 		audio.play();
@@ -357,7 +365,6 @@ class Game {
 
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
-		// const audio = new Audio('../assets/audios/envolve.mp3');
 		const audio = assetManager.getSound('envolve');
 		audio.volume = 0.3;
 		audio.play();
@@ -412,17 +419,14 @@ class Game {
 
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
-			// const audio = new Audio('../assets/audios/robot_.mp3');
 			const audio = assetManager.getSound('robot_');
 			audio.volume = 0.3;
 			audio.play();
 		} else if (monster === 'slimePink' || monster === 'slimeGreen') {
-			// const audio = new Audio('../assets/audios/slimeWalk.mp3');
 			const audio = assetManager.getSound('slimeWalk');
 			audio.volume = 0.3;
 			audio.play();
 		} else if (monster === 'toad') {
-			// const audio = new Audio('../assets/audios/monsterGreen.mp3');
 			const audio = assetManager.getSound('monsterGreen');
 			audio.volume = 0.3;
 			audio.play();
@@ -430,9 +434,14 @@ class Game {
 	}
 
 	updateLevel() {
-		if (this.player.score >= 200 * (this.level + 1)) {
+		// console.log('Player ======');
+		// console.log(this.player.score);
+
+		// console.log('Nec ======');
+		// console.log(100 * Math.pow(2, this.level + 1));
+		if (this.player.score >= 100 * Math.pow(2, this.level + 1)) {
 			this.level++;
-			// const audio = new Audio('../assets/audios/level_up.mp3');
+			this.moneyDrop *= 1 + 1 / this.level;
 			const audio = assetManager.getSound('level_up');
 			audio.volume = 0.3;
 			audio.play();

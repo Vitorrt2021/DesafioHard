@@ -5,7 +5,7 @@ class Enemy {
 		this.width = width;
 		this.height = height;
 		this.speed = monster.speed;
-		this.health = monster.health + monster.health * level * 0.5;
+		this.setHealth(level, monster);
 		this.maxHealth = this.health;
 		this.attack = this.health;
 		this.monster = monster;
@@ -13,7 +13,13 @@ class Enemy {
 		this.isDying = false;
 		this.isDead = false;
 	}
-
+	setHealth(level, monster) {
+		if (level == 0) {
+			this.health = monster.health;
+		} else {
+			this.health = monster.health + monster.health * Math.pow(1.8, level - 1);
+		}
+	}
 	update() {
 		this.x -= this.speed;
 	}
