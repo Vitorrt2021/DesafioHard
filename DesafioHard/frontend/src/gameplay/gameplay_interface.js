@@ -69,17 +69,22 @@ $(document).ready(() => {
 	const ctx = canvas.getContext('2d');
 
 	// const apiURL = 'http://edtech.dudeful.com:3004';
-	const apiURL = 'http://localhost:3004';
-	$.get(apiURL + '/load-assets', async (assetLoaderInstance) => {
-		await assetManager.prepareAssets(assetLoaderInstance);
+	// const apiURL = 'http://localhost:3004';
+	const port = 3004;
 
-		const game = new Game();
-		game.start();
+	$.get(
+		`http://${location.host}:${port}/load-assets`,
+		async (assetLoaderInstance) => {
+			await assetManager.prepareAssets(assetLoaderInstance);
 
-		$('#canvas1').click(() => {
-			game.evolveTower();
-		});
-	});
+			const game = new Game();
+			game.start();
+
+			$('#canvas1').click(() => {
+				game.evolveTower();
+			});
+		}
+	);
 
 	createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
 	createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
