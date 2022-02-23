@@ -314,7 +314,7 @@ class Game {
 		// in case of bad luck the player loses money and
 		// the tower gets damaged.
 		const jackpot = Math.random() * 100;
-		if (towerClicked.level == 3 && jackpot > 5) {
+		if (towerClicked.level == 3 && jackpot > 2) {
 			if (this.player.money >= 3000) {
 				this.player.money -= 1000;
 				this.updateMoney();
