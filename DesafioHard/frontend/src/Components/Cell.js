@@ -9,7 +9,7 @@ class Cell {
 	}
 	draw(ctx) {
 		ctx.drawImage(
-			assetManager.images['tower_symbol'],
+			assetManager.getImage('tower_symbol'),
 			this.x + this.width / 3,
 			this.y + this.height / 2,
 			this.width / 5,

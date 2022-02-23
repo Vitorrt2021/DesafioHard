@@ -1,7 +1,6 @@
 import Projectile from './Projectile.js';
 import towerStatus from './towerStatus.js';
 import assetManager from './AssetManager.js';
-import animationManager from './AnimationManager.js';
 
 class Tower {
 	constructor(x = 0, y = 0, cellSize = 0, towerType = 'cat_tower_level_1') {
@@ -14,17 +13,17 @@ class Tower {
 		this.damage = towerStatus[towerType].damage;
 		this.attackSpeed = towerStatus[towerType].attackSpeed;
 		this.projectiles = [];
-		this.projectileImage =
-			assetManager.images[towerStatus[towerType].projectile];
+		this.projectileImage = assetManager.getImage(
+			towerStatus[towerType].projectile
+		);
 		this.price = towerStatus[towerType].price;
 		this.isShooting = true;
 		this.isDamaged = false;
-		this.explosionAnimation =
-			animationManager.getNewAnimationInstance('Explosion');
+		this.explosionAnimation = assetManager.getAnimationInstance('explosion');
 		this.alphaRedRectangle = 0;
 		this.maxAlphaRectangle = 0.5;
 		this.redRectDimensionModifier = 0;
-		this.image = assetManager.images[towerType];
+		this.image = assetManager.getImage(towerType);
 		this.timer = this.attackSpeed;
 		this.level = towerStatus[towerType].level;
 		this.nextLevel = towerStatus[towerType].nextLevel;
@@ -35,7 +34,7 @@ class Tower {
 
 		if (this.canEvolve) {
 			ctx.drawImage(
-				assetManager.images['evolve_tower'],
+				assetManager.getImage('evolve_tower'),
 				this.x + this.width * 0.8,
 				this.y,
 				this.width / 5,
@@ -102,7 +101,8 @@ class Tower {
 						this.damage
 					)
 				);
-				const audio = new Audio('../assets/audios/shooting.mp3');
+				// const audio = new Audio('../assets/audios/shooting.mp3');
+				const audio = assetManager.getSound('shooting');
 				audio.volume = 0.5;
 				audio.play();
 			}

@@ -5,6 +5,7 @@ import Player from './Player.js';
 import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
+import assetManager from '../Components/AssetManager.js';
 import * as saveScore from '../requests/save-score.js';
 
 class Game {
@@ -117,7 +118,7 @@ class Game {
 	}
 	gameIsOver() {
 		if (this.player.live <= 0) {
-			const audio = new Audio('../assets/audios/titanic_flute.mp3');
+			const audio = assetManager.getSound('titanic_flute');
 			audio.play();
 			setTimeout(() => {
 				// alert('Você perdeu');
@@ -176,7 +177,7 @@ class Game {
 					tower.health -= enemy.health;
 					enemy.health -= towerHealth;
 					tower.isDamaged = true;
-					const audio = new Audio('../assets/audios/explosion.mp3');
+					const audio = assetManager.getSound('explosion');
 					audio.volume = 0.3;
 					audio.play();
 					this.enemyIsDead(enemy, enemyIndex);
@@ -192,7 +193,7 @@ class Game {
 				this.enemys.forEach((enemy, enemyIndex) => {
 					if (enemy.isDying) return;
 					if (collision.rectRectCollisionDetection(projectile, enemy)) {
-						const audio = new Audio('../assets/audios/hit.mp3');
+						const audio = assetManager.getSound('hit');
 						audio.volume = 0.3;
 						audio.play();
 						tower.projectiles.splice(index, 1);
@@ -311,7 +312,7 @@ class Game {
 		}
 		tower.x = gridPositionX;
 		tower.y = gridPositionY + this.cellSize / 3.5;
-		const audio = new Audio('../assets/audios/dropTower.mp3');
+		const audio = assetManager.getSound('dropTower');
 		audio.volume = 0.3;
 		audio.play();
 		this.player.money -= parseInt(tower.price);
@@ -345,7 +346,8 @@ class Game {
 				towerClicked.health *= 0.3;
 				towerClicked.health = parseInt(towerClicked.health);
 				towerClicked.isDamaged = true;
-				const audio = new Audio('../assets/audios/explosion.mp3');
+				// const audio = new Audio('../assets/audios/explosion.mp3');
+				const audio = assetManager.getSound('explosion');
 				audio.play();
 				this.towerWasDestroyed(towerClicked, towerIndex);
 			}
@@ -363,7 +365,7 @@ class Game {
 
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
-		const audio = new Audio('../assets/audios/envolve.mp3');
+		const audio = assetManager.getSound('envolve');
 		audio.volume = 0.3;
 		audio.play();
 
@@ -417,15 +419,15 @@ class Game {
 
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
-			const audio = new Audio('../assets/audios/robot_.mp3');
+			const audio = assetManager.getSound('robot_');
 			audio.volume = 0.3;
 			audio.play();
 		} else if (monster === 'slimePink' || monster === 'slimeGreen') {
-			const audio = new Audio('../assets/audios/slimeWalk.mp3');
+			const audio = assetManager.getSound('slimeWalk');
 			audio.volume = 0.3;
 			audio.play();
 		} else if (monster === 'toad') {
-			const audio = new Audio('../assets/audios/monsterGreen.mp3');
+			const audio = assetManager.getSound('monsterGreen');
 			audio.volume = 0.3;
 			audio.play();
 		}
@@ -440,7 +442,7 @@ class Game {
 		if (this.player.score >= 100 * Math.pow(2, this.level + 1)) {
 			this.level++;
 			this.moneyDrop *= 1 + 1 / this.level;
-			const audio = new Audio('../assets/audios/level_up.mp3');
+			const audio = assetManager.getSound('level_up');
 			audio.volume = 0.3;
 			audio.play();
 			$('#level_value').html(this.level);

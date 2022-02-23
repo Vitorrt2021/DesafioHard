@@ -42,4 +42,4 @@ const paths = () => {
 	return assetPaths.getAssetPaths();
 };
 
-export default paths();
+// export default paths();

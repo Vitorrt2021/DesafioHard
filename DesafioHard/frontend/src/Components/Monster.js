@@ -1,12 +1,12 @@
 import monsterStatus from './monsterStatus.js';
-import animationManager from './AnimationManager.js';
+import assetManager from './AssetManager.js';
 
 class Monster {
 	constructor(type) {
 		this.type = type;
 		this.speed = monsterStatus[type].speed;
 		this.health = monsterStatus[type].health;
-		this.animation = animationManager.getNewAnimationInstance(type);
+		this.animation = assetManager.getAnimationInstance(type);
 		this.#updateMaxHeight();
 	}
 
@@ -15,7 +15,7 @@ class Monster {
 	}
 
 	changeAnimation(animationName) {
-		this.animation = animationManager.getNewAnimationInstance(animationName);
+		this.animation = assetManager.getAnimationInstance(animationName);
 		this.#updateMaxHeight();
 	}
 
