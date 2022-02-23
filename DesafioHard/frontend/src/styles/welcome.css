@@ -50,7 +50,16 @@ html {
 	width: 40%;
 	height: 40%;
 }
-
+@media (max-width: 300px) {
+	.buttons__container {
+		height: 20%;
+	}
+}
+@media (max-width: 600px) {
+	.buttons__container {
+		height: 30%;
+	}
+}
 .blue__button {
 	background-image: url('../assets/images/blue_button.svg');
 	background-repeat: no-repeat;

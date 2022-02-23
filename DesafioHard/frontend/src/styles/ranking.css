@@ -28,9 +28,9 @@
 	justify-content: center;
 	align-items: center;
 }
-
 .buttons__container {
 	display: flex;
+
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
@@ -39,6 +39,12 @@
 	height: 40%;
 }
 
+@media (max-width: 300px) {
+	.buttons__container {
+		height: 10%;
+		border: solid 2px black;
+	}
+}
 .blue__button {
 	background-image: url('../assets/images/blue_button.svg');
 	background-repeat: no-repeat;

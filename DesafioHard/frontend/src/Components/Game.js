@@ -12,41 +12,33 @@ class Game {
 	constructor() {
 		this.canvas = document.getElementById('canvas1');
 		this.ctx = this.canvas.getContext('2d');
-
 		this.canvas.width = 1600;
 		this.canvas.height = 800;
-
 		this.player = new Player();
 		this.frames = 0;
-
-		this.cellOver = null;
 		this.runAnimationControll = true;
 		this.cellSize = 250;
 		this.cellGap = 5;
 		this.gameGrid = [];
-		this.draggingElement = null;
 		this.mousePosition = {};
 		this.towers = [];
 		this.enemys = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
-		this.spawnVelocid = 500;
-		this.maxSpawVelocid = 60;
-
+		this.spawnVelocity = 500;
+		this.maxSpawVelocity = 60;
 		this.moneyDrop = 20;
 	}
 	start() {
 		this.updateLive();
 		this.updateScore();
 		this.updateMoney();
-
 		this.animation();
 		this.createGrid();
 		this.catchMousePosition();
 	}
 	haveEnemyInLine() {
 		const position = [false, false, false];
-
 		const towerPosition = [
 			Math.floor(76.4),
 			Math.floor(326.4),
@@ -56,13 +48,9 @@ class Game {
 			position[enemy.line] = true;
 		});
 		this.towers.forEach((tower) => {
-			// console.log(tower.y);
-			// console.log(towerPosition.indexOf(Math.floor(tower.y)));
 			if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
-				// console.log('Outro');
 				if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
 					tower.isShooting = true;
-					// console.log('Verda');
 				} else {
 					tower.isShooting = false;
 				}
@@ -121,7 +109,6 @@ class Game {
 			const audio = assetManager.getSound('titanic_flute');
 			audio.play();
 			setTimeout(() => {
-				// alert('Você perdeu');
 				saveScore.renderNodes();
 			}, 500);
 			$('#live_value').html('0');
@@ -149,7 +136,6 @@ class Game {
 			}
 		});
 	}
-
 	enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			this.player.score += 20 * (this.level + 1);
@@ -186,7 +172,6 @@ class Game {
 			});
 		});
 	}
-
 	checkProjectileCollision() {
 		this.towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
@@ -212,7 +197,6 @@ class Game {
 			}
 		}
 	}
-
 	drawGrid() {
 		this.gameGrid.forEach((cell, index) => {
 			//não desenha a ultima coluna
@@ -220,12 +204,12 @@ class Game {
 			cell.draw(this.ctx);
 		});
 	}
-	changeSpawVelocid() {
-		const spawV = (this.spawnVelocid = 500 - 60 * this.level);
-		if (spawV <= this.maxSpawVelocid) {
-			this.spawnVelocid = this.maxSpawVelocid;
+	changeSpawVelocity() {
+		const spawV = (this.spawnVelocity = 500 - 60 * this.level);
+		if (spawV <= this.maxSpawVelocity) {
+			this.spawnVelocity = this.maxSpawVelocity;
 		} else {
-			this.spawnVelocid = spawV;
+			this.spawnVelocity = spawV;
 		}
 	}
 	animation() {
@@ -234,20 +218,14 @@ class Game {
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			this.canEvolveTowers();
 			this.drawGrid();
-			this.changeSpawVelocid();
+			this.changeSpawVelocity();
 			this.enemys.forEach((enemy) => {
 				enemy.update();
 				enemy.draw(this.ctx);
 			});
-
-			if (this.draggingElement) {
-				this.draggingElement.draw(this.ctx);
-			}
-
-			if (this.frames % this.spawnVelocid === 0) {
+			if (this.frames % this.spawnVelocity === 0) {
 				this.spawnEnemy();
 			}
-
 			this.haveEnemyInLine();
 			this.handleTowers();
 			this.checkProjectileCollision();
@@ -255,7 +233,6 @@ class Game {
 			this.checkEnemyAttackedBase();
 			this.frames++;
 			this.updateLevel();
-
 			requestAnimationFrame(() => {
 				this.animation();
 			});
@@ -267,15 +244,13 @@ class Game {
 	stopAnimation() {
 		this.runAnimationControll = false;
 	}
-
+	//FIX-IT TOUCH
 	catchMousePosition() {
 		document.querySelector('body').addEventListener('mousemove', (e) => {
 			this.updateMousePosition(e);
 		});
-
 		document.getElementById('canvas1').addEventListener('drop', (e) => {
 			e.preventDefault();
-
 			let towerType = e.dataTransfer.getData('text');
 			this.updateMousePosition(e);
 			const newTower = new Tower(
@@ -290,6 +265,7 @@ class Game {
 			this.addTowerInCell(newTower);
 		});
 	}
+	//FIX-IT SOBREPOSIÇÃO DE TORRES
 	addTowerInCell(tower) {
 		const gridPositionX =
 			this.mousePosition.x -
@@ -312,9 +288,11 @@ class Game {
 		}
 		tower.x = gridPositionX;
 		tower.y = gridPositionY + this.cellSize / 3.5;
+		//FIX-IT CÓDIGO RECORRENTE
 		const audio = assetManager.getSound('dropTower');
 		audio.volume = 0.3;
 		audio.play();
+		//
 		this.player.money -= parseInt(tower.price);
 		this.updateMoney();
 		this.towers.push(tower);
@@ -322,7 +300,6 @@ class Game {
 
 	evolveTower() {
 		const offset = 20;
-
 		const finder = (tower) =>
 			this.mousePosition.x - offset > tower.x &&
 			this.mousePosition.x + offset < tower.x + tower.width &&
@@ -331,9 +308,7 @@ class Game {
 
 		const towerClicked = this.towers.find(finder);
 		const towerIndex = this.towers.indexOf(towerClicked);
-
 		if (!towerClicked || towerClicked.level == 4) return;
-
 		// easter egg!
 		// roll the dice and check if the player will get Torres.
 		// in case of bad luck the player loses money and
@@ -346,52 +321,42 @@ class Game {
 				towerClicked.health *= 0.3;
 				towerClicked.health = parseInt(towerClicked.health);
 				towerClicked.isDamaged = true;
-				// const audio = new Audio('../assets/audios/explosion.mp3');
 				const audio = assetManager.getSound('explosion');
 				audio.play();
 				this.towerWasDestroyed(towerClicked, towerIndex);
 			}
 			return;
 		}
-
 		const evolvedTower = new Tower(
 			towerClicked.x + towerClicked.width / 2,
 			towerClicked.y + towerClicked.height / 2,
 			150,
 			towerClicked.nextLevel
 		);
-
 		if (evolvedTower.price > this.player.money) return;
-
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
 		const audio = assetManager.getSound('envolve');
 		audio.volume = 0.3;
 		audio.play();
-
 		this.towers[towerIndex] = evolvedTower;
 	}
 
 	updateMousePosition(e) {
 		let rect = this.canvas.getBoundingClientRect();
-
 		const scaleY = this.canvas.height / rect.height;
 		const scaleX = this.canvas.width / rect.width;
-
 		this.mousePosition = {
 			x: (e.clientX - rect.left) * scaleX,
 			y: (e.clientY - rect.top) * scaleY,
 		};
 	}
 	spawnEnemy() {
-		//const positions = [10, 2.5, 1.4];
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
 		const sorted = Math.floor(Math.random() * 3);
-		// let position = this.canvas.height / positions[sorted];
 		let position = yInitialpositions[sorted];
 		let monster = Math.ceil(Math.random() * 100);
-
 		if (monster < 40) {
 			monster = this.monster[0];
 		} else if (monster >= 40 && monster < 75) {
@@ -401,10 +366,9 @@ class Game {
 		} else {
 			monster = this.monster[3];
 		}
-
 		this.playSoundMonster(monster);
-
 		this.enemys.push(
+			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
 			new Enemy(
 				new Monster(monster),
 				parseInt(this.canvas.width),
@@ -416,7 +380,7 @@ class Game {
 			)
 		);
 	}
-
+	//FIX-IT TORNAR ADAPTAVEL
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
 			const audio = assetManager.getSound('robot_');
@@ -432,13 +396,7 @@ class Game {
 			audio.play();
 		}
 	}
-
 	updateLevel() {
-		// console.log('Player ======');
-		// console.log(this.player.score);
-
-		// console.log('Nec ======');
-		// console.log(100 * Math.pow(2, this.level + 1));
 		if (this.player.score >= 100 * Math.pow(2, this.level + 1)) {
 			this.level++;
 			this.moneyDrop *= 1 + 1 / this.level;
