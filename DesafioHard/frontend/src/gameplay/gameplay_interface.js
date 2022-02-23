@@ -1,7 +1,6 @@
 import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
 import * as saveScore from '../requests/save-score.js';
-import renderRanking from '../requests/ranking.js';
 
 $(document).ready(() => {
 	// Prevent user from reloading page by accident
@@ -68,8 +67,6 @@ $(document).ready(() => {
 	const canvas = document.getElementById('canvas1');
 	const ctx = canvas.getContext('2d');
 
-	// const apiURL = 'http://edtech.dudeful.com:3004';
-	// const apiURL = 'http://localhost:3004';
 	const port = 3004;
 
 	$.get(
@@ -90,7 +87,7 @@ $(document).ready(() => {
 	createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
 	createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
 });
-
+//FIX-IT OTIMIZAR O REQUEST DO HOVER
 function createTooltip(element, live, strenght, speed) {
 	$(element).tooltip({
 		classes: {
