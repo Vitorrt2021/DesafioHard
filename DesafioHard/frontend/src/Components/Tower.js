@@ -3,7 +3,7 @@ import towerStatus from './towerStatus.js';
 import assetManager from './AssetManager.js';
 
 class Tower {
-	constructor(x = 0, y = 0, cellSize = 0, towerType = 'cat_tower_level_1') {
+	constructor(x = 0, y = 0, cellSize = 0, towerType) {
 		this.x = x - cellSize / 2;
 		this.y = y - cellSize / 2;
 		this.width = cellSize;
@@ -28,7 +28,7 @@ class Tower {
 		this.level = towerStatus[towerType].level;
 		this.nextLevel = towerStatus[towerType].nextLevel;
 	}
-
+	//FIX-IT SEPARAR EM FUNÇÕES MENORES
 	draw(ctx) {
 		ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
@@ -41,7 +41,7 @@ class Tower {
 				this.height / 5
 			);
 		}
-		this.drawLiveBar(ctx);
+		this.drawLifeBar(ctx);
 
 		if (this.explosionAnimation.isAnimationFinished()) {
 			this.alphaRedRectangle = 0;
@@ -101,15 +101,14 @@ class Tower {
 						this.damage
 					)
 				);
-				// const audio = new Audio('../assets/audios/shooting.mp3');
 				const audio = assetManager.getSound('shooting');
-				audio.volume = 0.5;
+				audio.volume = 0.3;
 				audio.play();
 			}
 			this.timer++;
 		}
 	}
-	drawLiveBar(ctx) {
+	drawLifeBar(ctx) {
 		ctx.fillStyle = '#000';
 		ctx.fillRect(
 			this.x + this.width * 0.1 + 10,
@@ -120,7 +119,7 @@ class Tower {
 		ctx.fillStyle = '#FF0000';
 		ctx.fillRect(
 			this.x + this.width * 0.1 + 15,
-			this.y - 10 + 5 + this.width,
+			this.y - 5 + this.width,
 			90 * (this.health / this.maxHealth),
 			this.width / 7 - 10
 		);

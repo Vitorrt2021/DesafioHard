@@ -10,10 +10,6 @@ class Monster {
 		this.#updateMaxHeight();
 	}
 
-	attack() {
-		return this.health;
-	}
-
 	changeAnimation(animationName) {
 		this.animation = assetManager.getAnimationInstance(animationName);
 		this.#updateMaxHeight();
