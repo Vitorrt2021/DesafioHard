@@ -5,7 +5,7 @@ const saveScore = () => {
 	const score = $('#score_value').html();
 	const data = { data: { name, score } };
 
-	$.post(apiURL + '/save-game', data)
+	$.post(apiURL + '/save-score', data)
 		.done((res) => {
 			console.log(res);
 			//CUIDADO!!!
