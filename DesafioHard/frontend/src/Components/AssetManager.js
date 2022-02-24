@@ -87,6 +87,7 @@ class AssetManager {
 			this.#sounds[sound] = soundObj;
 		}
 	}
+
 	#isImagesLoadCompleted() {
 		if (
 			Object.keys(this.#images).length === 0 &&

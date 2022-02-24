@@ -5,7 +5,7 @@ const saveScore = () => {
 	const score = $('#score_value').html();
 	const data = { data: { name, score } };
 
-	$.post(apiURL + '/save-score', data)
+	$.post(apiURL + '/save-game', data)
 		.done((res) => {
 			console.log(res);
 			//CUIDADO!!!
@@ -21,7 +21,7 @@ const saveScore = () => {
 		});
 };
 
-const renderNodes = () => {
+const renderSaveScore = () => {
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">
@@ -33,7 +33,9 @@ const renderNodes = () => {
 		</div>`
 	);
 
+	$('.save_score_button').click(() => saveScore());
+
 	$('.modal')[0].style.display = 'block';
 };
 
-export { renderNodes, saveScore };
+export default renderSaveScore;

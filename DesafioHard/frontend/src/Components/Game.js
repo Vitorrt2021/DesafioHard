@@ -6,7 +6,7 @@ import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
 import assetManager from '../Components/AssetManager.js';
-import * as saveScore from '../requests/save-score.js';
+import renderSaveScore from '../requests/save-score.js';
 
 class Game {
 	constructor() {
@@ -109,7 +109,7 @@ class Game {
 			const audio = assetManager.getSound('titanic_flute');
 			audio.play();
 			setTimeout(() => {
-				saveScore.renderNodes();
+				renderSaveScore();
 			}, 500);
 			$('#live_value').html('0');
 			$('#level_value').html('');
@@ -334,6 +334,8 @@ class Game {
 			towerClicked.nextLevel
 		);
 		if (evolvedTower.price > this.player.money) return;
+		evolvedTower.damage *= 1 + this.level * 0.25;
+		evolvedTower.health *= 1 + this.level * 0.1;
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
 		const audio = assetManager.getSound('envolve');

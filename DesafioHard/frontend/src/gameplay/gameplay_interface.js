@@ -1,13 +1,12 @@
 import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
-import * as saveScore from '../requests/save-score.js';
 import renderRanking from '../requests/ranking.js';
 
 const apiURL = 'https://data.dudeful.com';
-// const apiURL = 'http://localhost:3004';
+// const apiURL = 'http://localhost:5000';
 
 $(document).ready(() => {
-	// Prevent user from reloading page by accident
+	// Prevent user from unloading the page by accident
 	window.addEventListener('beforeunload', function (e) {
 		const score = $('#score_value').html();
 
@@ -19,27 +18,9 @@ $(document).ready(() => {
 		}
 	});
 
-	// When the user clicks anywhere outside of the modal, closes it
-	$(window).click((event) => {
-		if (event.target === $('.save_score_button')[0]) {
-			saveScore.saveScore();
-		}
-		if (event.target === $('.close_modal')[0]) {
-			$('.modal')[0].style.display = 'none';
-			$('#level_value').html('');
-			game.startAnimation();
-		}
-	});
-
-	$('.save_ranking').click(() => {
-		const score = $('#score_value').html();
-		if (score >= 100) {
-			game.stopAnimation();
-			saveScore.renderNodes();
-			$('#level_value').html('');
-		} else {
-			alert('Pontuação mínima para registrar ranking: 100 pontos');
-		}
+	$('.close_modal').click(() => {
+		$('.modal')[0].style.display = 'none';
+		$('#level_value').html('');
 	});
 
 	$('.restart_level').click(() => {
