@@ -4,7 +4,7 @@ import assetManager from './AssetManager.js';
 class Monster {
 	constructor(type) {
 		this.type = type;
-		this.speed = monsterStatus[type].speed;
+		this.speed = monsterStatus[type].speed * 1.35;
 		this.health = monsterStatus[type].health;
 		this.animation = assetManager.getAnimationInstance(type);
 		this.#updateMaxHeight();

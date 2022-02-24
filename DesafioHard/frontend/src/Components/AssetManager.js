@@ -1,9 +1,11 @@
+// import paths from './AssetPaths.js';
 import animationData from './animationData.js';
 
 class AssetManager {
 	#animations = {};
 	#images = {};
 	#sounds = {};
+
 	async prepareAssets(assetLoaderInstance) {
 		await this.#makeImagesObject(assetLoaderInstance);
 		this.#makeAudiosObject(assetLoaderInstance);
@@ -39,6 +41,13 @@ class AssetManager {
 			maxImageHeight: Math.max(...imagesHeight),
 		};
 	}
+
+	// #buildAssets(files) {
+	// 	for (const filePath of files) {
+	// 		// let changedFilePath = filePath.split('\\'); //Windows
+	// 		let changedFilePath = filePath.split('/'); //Linux
+	// 	}
+	// }
 
 	getAnimationInstance(animationName) {
 		const anim = this.#animations[animationName];
@@ -78,6 +87,7 @@ class AssetManager {
 			this.#sounds[sound] = soundObj;
 		}
 	}
+
 	#isImagesLoadCompleted() {
 		if (
 			Object.keys(this.#images).length === 0 &&
