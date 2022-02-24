@@ -27,9 +27,12 @@ class Tower {
 		this.timer = this.attackSpeed;
 		this.level = towerStatus[towerType].level;
 		this.nextLevel = towerStatus[towerType].nextLevel;
+		this.isDying = true;
+		this.isDead = false;
 	}
 
 	draw(ctx) {
+		ctx.fill = 'brightness(50%)';
 		ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
 		if (this.canEvolve) {
