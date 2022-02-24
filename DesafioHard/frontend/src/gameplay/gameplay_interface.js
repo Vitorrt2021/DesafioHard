@@ -67,7 +67,7 @@ $(document).ready(() => {
 		createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
 	});
 });
-
+//FIX-IT OTIMIZAR O REQUEST DO HOVER
 function createTooltip(element, live, strenght, speed) {
 	const lifeSymbol = assetManager.getImage('live_icon_tooltip');
 	const strenghtSymbol = assetManager.getImage('strenght_icon_tooltip');
