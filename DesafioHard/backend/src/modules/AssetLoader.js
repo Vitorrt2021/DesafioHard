@@ -48,6 +48,6 @@ class AssetLoader {
 }
 
 const instance = new AssetLoader();
-loadFiles(__dirname + '/assets');
+loadFiles(__dirname + '/../assets');
 
 module.exports = instance;
