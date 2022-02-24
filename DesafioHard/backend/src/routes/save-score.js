@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const fs = require('fs');
 
+//FIX-IT: ADAPT FOR ERROR HANDLING (try catch)
 router.post('/', (req, res) => {
 	const score = req.body.data;
 
@@ -24,15 +25,11 @@ router.post('/', (req, res) => {
 
 	ranking.push(score);
 
-	fs.writeFile(
-		'src/database/ranking.json',
-		JSON.stringify(ranking),
-		(err) => {
-			if (err) {
-				return console.log(err);
-			}
+	fs.writeFile('src/database/ranking.json', JSON.stringify(ranking), (err) => {
+		if (err) {
+			return console.log(err);
 		}
-	);
+	});
 
 	res.send({ error: false, ranking: ranking });
 });

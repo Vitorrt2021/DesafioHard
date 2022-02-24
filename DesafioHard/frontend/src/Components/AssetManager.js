@@ -1,3 +1,4 @@
+// import paths from './AssetPaths.js';
 import animationData from './animationData.js';
 
 class AssetManager {
@@ -9,7 +10,7 @@ class AssetManager {
 		await this.#makeImagesObject(assetLoaderInstance);
 		this.#makeAudiosObject(assetLoaderInstance);
 
-		//Dá pra melhorar ainda mais fazendo ler uma pasta animations, mas por questão de tempo, deixar pra depois.
+		//FIX-IT Dá pra melhorar ainda mais fazendo ler uma pasta animations, mas por questão de tempo, deixar pra depois.
 		this.#buildAnimation('explosion');
 		this.#buildAnimation('slimePink');
 		this.#buildAnimation('slimeGreen');
@@ -24,7 +25,6 @@ class AssetManager {
 	#buildAnimation(animationName) {
 		const imagesHeight = [];
 		const imagesForAnimation = [];
-
 		for (
 			let index = 0;
 			index < animationData[animationName].animationQtyFrames;
@@ -41,6 +41,13 @@ class AssetManager {
 			maxImageHeight: Math.max(...imagesHeight),
 		};
 	}
+
+	// #buildAssets(files) {
+	// 	for (const filePath of files) {
+	// 		// let changedFilePath = filePath.split('\\'); //Windows
+	// 		let changedFilePath = filePath.split('/'); //Linux
+	// 	}
+	// }
 
 	getAnimationInstance(animationName) {
 		const anim = this.#animations[animationName];
@@ -79,11 +86,6 @@ class AssetManager {
 
 			this.#sounds[sound] = soundObj;
 		}
-
-		// //Esperando carregar as imagens antes de continuar...
-		// while (!this.#isImagesLoadCompleted()) {
-		// 	await new Promise((resolve) => setTimeout(resolve, 200)); //sleep
-		// }
 	}
 
 	#isImagesLoadCompleted() {
