@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+//FIX-IT: ADAPT FOR ERROR HANDLING (try catch)
 function loadFiles(directory) {
 	function readPath(directory) {
 		const dirRead = fs.readdirSync(directory);
@@ -19,6 +20,7 @@ function loadFiles(directory) {
 	readPath(directory);
 }
 
+//FIX-IT: ADAPT FOR ERROR HANDLING (try catch)
 class AssetLoader {
 	constructor() {
 		this.images = {};
@@ -46,6 +48,6 @@ class AssetLoader {
 }
 
 const instance = new AssetLoader();
-loadFiles(__dirname + '/assets');
+loadFiles(__dirname + '/../assets');
 
 module.exports = instance;

@@ -1,4 +1,4 @@
-const apiURL = 'http://edtech.dudeful.com:3004';
+const apiURL = 'https://data.dudeful.com';
 
 const saveScore = () => {
 	const name = $('#save__name__input').val();
@@ -21,7 +21,7 @@ const saveScore = () => {
 		});
 };
 
-const renderNodes = () => {
+const renderSaveScore = () => {
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">
@@ -33,7 +33,9 @@ const renderNodes = () => {
 		</div>`
 	);
 
+	$('.save_score_button').click(() => saveScore());
+
 	$('.modal')[0].style.display = 'block';
 };
 
-export { renderNodes, saveScore };
+export default renderSaveScore;

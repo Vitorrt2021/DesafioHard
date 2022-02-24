@@ -1,10 +1,12 @@
 import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
-import * as saveScore from '../requests/save-score.js';
 import renderRanking from '../requests/ranking.js';
 
+const apiURL = 'https://data.dudeful.com';
+// const apiURL = 'http://localhost:5000';
+
 $(document).ready(() => {
-	// Prevent user from reloading page by accident
+	// Prevent user from unloading the page by accident
 	window.addEventListener('beforeunload', function (e) {
 		const score = $('#score_value').html();
 
@@ -16,27 +18,9 @@ $(document).ready(() => {
 		}
 	});
 
-	// When the user clicks anywhere outside of the modal, closes it
-	$(window).click((event) => {
-		if (event.target === $('.save_score_button')[0]) {
-			saveScore.saveScore();
-		}
-		if (event.target === $('.close_modal')[0]) {
-			$('.modal')[0].style.display = 'none';
-			$('#level_value').html('');
-			game.startAnimation();
-		}
-	});
-
-	$('.save_ranking').click(() => {
-		const score = $('#score_value').html();
-		if (score >= 100) {
-			game.stopAnimation();
-			saveScore.renderNodes();
-			$('#level_value').html('');
-		} else {
-			alert('Pontuação mínima para registrar ranking: 100 pontos');
-		}
+	$('.close_modal').click(() => {
+		$('.modal')[0].style.display = 'none';
+		$('#level_value').html('');
 	});
 
 	$('.restart_level').click(() => {
@@ -68,30 +52,27 @@ $(document).ready(() => {
 	const canvas = document.getElementById('canvas1');
 	const ctx = canvas.getContext('2d');
 
-	// const apiURL = 'http://edtech.dudeful.com:3004';
-	// const apiURL = 'http://localhost:3004';
-	const port = 3004;
+	$.get(`${apiURL}/load-assets`, async (assetLoaderInstance) => {
+		await assetManager.prepareAssets(assetLoaderInstance);
 
-	$.get(
-		`http://${location.host}:${port}/load-assets`,
-		async (assetLoaderInstance) => {
-			await assetManager.prepareAssets(assetLoaderInstance);
+		const game = new Game();
+		game.start();
 
-			const game = new Game();
-			game.start();
+		$('#canvas1').click(() => {
+			game.evolveTower();
+		});
 
-			$('#canvas1').click(() => {
-				game.evolveTower();
-			});
-		}
-	);
-
-	createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
-	createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
-	createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
+		createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
+		createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
+		createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
+	});
 });
-
+//FIX-IT OTIMIZAR O REQUEST DO HOVER
 function createTooltip(element, live, strenght, speed) {
+	const lifeSymbol = assetManager.getImage('live_icon_tooltip');
+	const strenghtSymbol = assetManager.getImage('strenght_icon_tooltip');
+	const speedSymbol = assetManager.getImage('speed_icon_tooltip');
+
 	$(element).tooltip({
 		classes: {
 			'ui-tooltip': 'tooltip1',
@@ -100,15 +81,15 @@ function createTooltip(element, live, strenght, speed) {
 		content: `
 			<div class="tooltip1">
 				<div>
-					<img src="../assets/images/live_icon_tooltip.png" alt="Live">
+					${lifeSymbol.outerHTML}
 					<label id="live_value_">${live}</label>
 				</div>
 				<div>
-					<img src="../assets/images/strenght_icon_tooltip.png" alt="Força">
+					${strenghtSymbol.outerHTML}
 					<label id='strength_value_'>${strenght}</label>
 				</div>
 				<div>
-					<img src="../assets/images/speed_icon_tooltip.png" alt="spped">
+					${speedSymbol.outerHTML}
 					<label id="live_value_">${speed}</label>
 				</div>
 			</div>`,

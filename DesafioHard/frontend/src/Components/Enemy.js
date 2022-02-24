@@ -7,12 +7,12 @@ class Enemy {
 		this.speed = monster.speed;
 		this.setHealth(level, monster);
 		this.maxHealth = this.health;
-		this.attack = this.health;
 		this.monster = monster;
 		this.line = line;
 		this.isDying = false;
 		this.isDead = false;
 	}
+	//FIX-IT BALANCEAMENTO
 	setHealth(level, monster) {
 		if (level == 0) {
 			this.health = monster.health;
@@ -42,7 +42,7 @@ class Enemy {
 		}
 
 		if (!this.isDying) {
-			this.drawLiveBar(ctx);
+			this.drawLifeBar(ctx);
 		}
 
 		if (!this.isDead) {
@@ -50,7 +50,7 @@ class Enemy {
 		}
 	}
 
-	drawLiveBar(ctx) {
+	drawLifeBar(ctx) {
 		ctx.fillStyle = '#000';
 		ctx.fillRect(this.x, this.y, 100, this.width / 10);
 		ctx.fillStyle = '#FF0000';

@@ -1,12 +1,14 @@
-const apiURL = 'http://edtech.dudeful.com:3004';
+const apiURL = 'https://data.dudeful.com';
+// const apiURL = 'http://localhost:5000';
 
 const renderRanking = async () => {
+	//FIX-IT: IMPROVE ERROR HANDLING
 	try {
 		const response = await $.ajax(apiURL + '/ranking');
 
-		renderNodes();
+		renderRankingModal();
 
-		response.data.slice(0, 200).forEach((score, index) => {
+		response.data.slice(0, 63).forEach((score, index) => {
 			$('.ranking__cell__container').append(
 				`<div class="ranking__cell">
             <span class="ranking__cell__name">
@@ -24,7 +26,7 @@ const renderRanking = async () => {
 	}
 };
 
-const renderNodes = () => {
+const renderRankingModal = () => {
 	$('.modal').html(
 		`<div class="modal__content">
 				<div class="ranking__container">
@@ -34,6 +36,10 @@ const renderNodes = () => {
 				</div>
 		</div>`
 	);
+
+	$('.close_modal').click(() => {
+		$('.modal')[0].style.display = 'none';
+	});
 
 	$('.modal')[0].style.display = 'block';
 };

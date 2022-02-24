@@ -1,0 +1,110 @@
+server {
+	listen 3000 default_server;
+	listen [::]:3000 default_server;
+	
+	root /var/www/alphatower/html_old;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name edtech.dudeful.com;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
+		# rewrite ^/(.*)$ https://alphatower.dudeful.com/$1 redirect;
+	}
+
+	location /assets {
+		autoindex on;
+	}
+}
+
+# BELLOW SERVER IS JUST FOR REDIRECTING ANY DOMAIN TO https://alphatower.dudeful.com/any
+# server {
+# 	listen 80 default_server;
+# 	listen [::]:80 default_server;
+	
+# 	root /var/www/html;
+
+# 	index index.html index.htm index.nginx-debian.html;
+
+# 	server_name _;
+
+# 	location / {
+# 		# First attempt to serve request as file, then
+# 		# as directory, then fall back to displaying a 404.
+# 		try_files $uri $uri/ =404;
+# 		rewrite ^/(.*)$ https://alphatower.dudeful.com/$1 redirect;
+# 	}
+# }
+
+# BELLOW SERVER IS JUST FOR REDIRECTING "edtech.dudeful.com" TO "https://alphatower.dudeful.com/any"
+server {
+	# root /var/www/html;
+
+	# index index.html index.htm index.nginx-debian.html;
+	server_name edtech.dudeful.com; # managed by Certbot
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		# try_files $uri $uri/ =404;
+		rewrite ^/(.*)$ https://alphatower.dudeful.com/$1 redirect;
+	}
+
+	listen [::]:443 ssl; # managed by Certbot
+	listen 443 ssl; # managed by Certbot
+	ssl_certificate /etc/letsencrypt/live/edtech.dudeful.com/fullchain.pem; # managed by Certbot
+	ssl_certificate_key /etc/letsencrypt/live/edtech.dudeful.com/privkey.pem; # managed by Certbot
+	include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+#REDIRECTS HTTP TO HTTPS
+server {
+	if ($host = edtech.dudeful.com) {
+			return 301 https://$host$request_uri;
+	} # managed by Certbot
+
+	listen 80 ;
+	listen [::]:80 ;
+	server_name edtech.dudeful.com;
+	return 404; # managed by Certbot
+}
+
+# BELLOW SERVER IS JUST TO PROXY data.dudeful.com:443 TO data.dudeful.com:5000
+server {
+	# root /var/www/html;
+
+	# index index.html index.htm index.nginx-debian.html;
+  server_name data.dudeful.com; # managed by Certbot
+
+	location / {
+		proxy_pass http://data.dudeful.com:5000;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection 'upgrade';
+		proxy_set_header Host $host;
+		proxy_cache_bypass $http_upgrade;
+	}
+
+	listen [::]:443 ssl; # managed by Certbot
+	listen 443 ssl; # managed by Certbot
+	ssl_certificate /etc/letsencrypt/live/data.dudeful.com/fullchain.pem; # managed by Certbot
+	ssl_certificate_key /etc/letsencrypt/live/data.dudeful.com/privkey.pem; # managed by Certbot
+	include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+#REDIRECTS HTTP TO HTTPS
+server {
+	if ($host = data.dudeful.com) {
+			return 301 https://$host$request_uri;
+	} # managed by Certbot
+
+	listen 80 ;
+	listen [::]:80 ;
+	server_name data.dudeful.com;
+	return 404; # managed by Certbot
+}

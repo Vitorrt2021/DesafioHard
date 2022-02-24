@@ -1,7 +1,4 @@
 export default {
-	cat_tower_base: {
-		price: 50,
-	},
 	cat_tower_level_1: {
 		level: 1,
 		nextLevel: 'cat_tower_level_2',
@@ -29,9 +26,6 @@ export default {
 		attackSpeed: 120,
 		projectile: 'lightning',
 	},
-	blue_rabbit_tower_base: {
-		price: 50,
-	},
 	blue_rabbit_tower_level_1: {
 		level: 1,
 		nextLevel: 'blue_rabbit_tower_level_2',
@@ -58,9 +52,6 @@ export default {
 		price: 800,
 		attackSpeed: 80,
 		projectile: 'lightning',
-	},
-	red_rabbit_tower_base: {
-		price: 50,
 	},
 	red_rabbit_tower_level_1: {
 		level: 1,
