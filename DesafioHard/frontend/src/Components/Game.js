@@ -160,7 +160,7 @@ class Game {
 				if (enemy.isDying) return;
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
 					let towerHealth = tower.health;
-					tower.health -= enemy.health;
+					tower.health -= enemy.health / (1 + this.level * 0.5);
 					enemy.health -= towerHealth;
 					tower.isDamaged = true;
 					const audio = assetManager.getSound('explosion');
@@ -334,8 +334,7 @@ class Game {
 			towerClicked.nextLevel
 		);
 		if (evolvedTower.price > this.player.money) return;
-		evolvedTower.damage *= 1 + this.level * 0.25;
-		evolvedTower.health *= 1 + this.level * 0.1;
+		evolvedTower.damage *= 1 + this.level * 0.35;
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
 		const audio = assetManager.getSound('envolve');
