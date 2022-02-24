@@ -3,7 +3,7 @@ class Player {
 		this.name = 'Player';
 		this.score = 0;
 		this.live = 3;
-		this.money = 300;
+		this.money = 1000;
 	}
 }
 

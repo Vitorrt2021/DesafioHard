@@ -353,7 +353,6 @@ class Game {
 			}
 			return;
 		}
-
 		const evolvedTower = new Tower(
 			towerClicked.x + towerClicked.width / 2,
 			towerClicked.y + towerClicked.height / 2,
@@ -370,6 +369,7 @@ class Game {
 		audio.play();
 
 		this.towers[towerIndex] = evolvedTower;
+		console.log(this.width);
 	}
 
 	updateMousePosition(e) {
