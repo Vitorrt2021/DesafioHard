@@ -3,11 +3,11 @@ import assetManager from '../Components/AssetManager.js';
 import renderRanking from '../requests/ranking.js';
 
 const apiURL = 'https://data.dudeful.com';
-// const apiURL = 'http://localhost:5000';
+// const apiURL = 'https://data.dudeful.com';
 
 $(document).ready(() => {
 	// Prevent user from unloading the page by accident
-	window.addEventListener('beforeunload', function (e) {
+	window.onbeforeunload = (e) => {
 		const score = $('#score_value').html();
 
 		if (score >= 100) {
@@ -16,7 +16,7 @@ $(document).ready(() => {
 			// Chrome requires returnValue to be set
 			e.returnValue = '';
 		}
-	});
+	};
 
 	$('.close_modal').click(() => {
 		$('.modal')[0].style.display = 'none';
@@ -67,7 +67,7 @@ $(document).ready(() => {
 		createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
 	});
 });
-//FIX-IT OTIMIZAR O REQUEST DO HOVER
+
 function createTooltip(element, live, strenght, speed) {
 	const lifeSymbol = assetManager.getImage('live_icon_tooltip');
 	const strenghtSymbol = assetManager.getImage('strenght_icon_tooltip');

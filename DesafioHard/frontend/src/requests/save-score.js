@@ -1,11 +1,12 @@
 const apiURL = 'https://data.dudeful.com';
+// const apiURL = 'http://localhost:5000';
 
 const saveScore = () => {
 	const name = $('#save__name__input').val();
 	const score = $('#score_value').html();
 	const data = { data: { name, score } };
 
-	$.post(apiURL + '/save-game', data)
+	$.post(apiURL + '/save-score', data)
 		.done((res) => {
 			console.log(res);
 			//CUIDADO!!!
@@ -22,6 +23,10 @@ const saveScore = () => {
 };
 
 const renderSaveScore = () => {
+	window.onbeforeunload = () => {
+		return;
+	};
+
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">
