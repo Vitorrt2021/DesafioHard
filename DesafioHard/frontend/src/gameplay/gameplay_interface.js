@@ -2,8 +2,8 @@ import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
 import renderRanking from '../requests/ranking.js';
 
-const apiURL = 'https://data.dudeful.com';
-// const apiURL = 'http://localhost:5000';
+// const apiURL = 'https://data.dudeful.com';
+const apiURL = 'http://localhost:5000';
 
 $(document).ready(() => {
 	// Prevent user from unloading the page by accident
