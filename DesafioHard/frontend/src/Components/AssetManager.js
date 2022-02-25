@@ -42,13 +42,6 @@ class AssetManager {
 		};
 	}
 
-	// #buildAssets(files) {
-	// 	for (const filePath of files) {
-	// 		// let changedFilePath = filePath.split('\\'); //Windows
-	// 		let changedFilePath = filePath.split('/'); //Linux
-	// 	}
-	// }
-
 	getAnimationInstance(animationName) {
 		const anim = this.#animations[animationName];
 		return new Animation(
@@ -62,8 +55,16 @@ class AssetManager {
 		return this.#images[image_name];
 	}
 
-	getSound(sound_name) {
-		return this.#sounds[sound_name];
+	playSound(sound_name, volume = 0.2, pause = true) {
+		const soundObject = this.#sounds[sound_name];
+		soundObject.volume = volume;
+
+		if (pause) {
+			soundObject.pause();
+			soundObject.currentTime = 0;
+		}
+
+		soundObject.play();
 	}
 
 	async #makeImagesObject(assetLoaderInstance) {
