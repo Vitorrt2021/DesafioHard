@@ -8,6 +8,7 @@ class Cell {
 		this.height = cellSize;
 	}
 	draw(ctx) {
+		// ctx.strokeRect(this.x, this.y, this.width, this.height); //remove
 		ctx.drawImage(
 			assetManager.getImage('tower_symbol'),
 			this.x + this.width / 3,
