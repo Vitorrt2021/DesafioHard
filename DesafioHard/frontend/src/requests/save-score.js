@@ -1,5 +1,5 @@
-const apiURL = 'https://data.dudeful.com';
-// const apiURL = 'http://localhost:5000';
+// const apiURL = 'https://data.dudeful.com';
+const apiURL = 'http://localhost:5000';
 
 const saveScore = () => {
 	const name = $('#save__name__input').val();

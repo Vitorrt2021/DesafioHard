@@ -20,11 +20,4 @@ $(document).ready(() => {
 
 		soundToggle = !soundToggle;
 	});
-
-	// When the user clicks anywhere outside of the modal, closes it
-	$(window).click((event) => {
-		if (event.target === $('.close_modal')[0]) {
-			$('.modal')[0].style.display = 'none';
-		}
-	});
 });

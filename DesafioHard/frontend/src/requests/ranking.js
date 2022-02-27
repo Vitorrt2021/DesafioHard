@@ -1,8 +1,10 @@
-const apiURL = 'https://data.dudeful.com';
-// const apiURL = 'http://localhost:5000';
+// const apiURL = 'https://data.dudeful.com';
+const apiURL = 'http://localhost:5000';
 
 const renderRanking = async () => {
 	//FIX-IT: IMPROVE ERROR HANDLING
+	// renderRankingModal();
+	// return;
 	try {
 		const response = await $.ajax(apiURL + '/ranking');
 
@@ -42,6 +44,16 @@ const renderRankingModal = () => {
 	});
 
 	$('.modal')[0].style.display = 'block';
+
+	// When the user clicks anywhere outside of the modal, closes it
+	$(window).click((event) => {
+		if (
+			event.originalEvent.target === $('.modal')[0] ||
+			event.originalEvent.target === $('.modal__content')[0]
+		) {
+			$('.modal')[0].style.display = 'none';
+		}
+	});
 };
 
 export default renderRanking;

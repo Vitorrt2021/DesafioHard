@@ -127,6 +127,7 @@ html {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
+	background-color: #f08261;
 
 	display: flex;
 	justify-content: center;
