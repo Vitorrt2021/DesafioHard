@@ -7,7 +7,14 @@ const loadAssets = require('./routes/load-assets.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: 'https://alphatower.dudeful.com' }));
+app.use(
+	cors({
+		origin: [
+			'https://alphatower.dudeful.com',
+			'http://edtech.dudeful.com:3000',
+		],
+	})
+);
 
 app.use('/load-assets', loadAssets);
 app.use('/save-score', saveScore);

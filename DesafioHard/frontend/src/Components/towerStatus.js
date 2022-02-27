@@ -1,6 +1,7 @@
 export default {
 	cat_tower_level_1: {
 		level: 1,
+		towerType: 'cat_tower_level_1',
 		nextLevel: 'cat_tower_level_2',
 		health: 500,
 		damage: 50,
@@ -10,6 +11,7 @@ export default {
 	},
 	cat_tower_level_2: {
 		level: 2,
+		towerType: 'cat_tower_level_2',
 		nextLevel: 'cat_tower_level_3',
 		health: 750,
 		damage: 100,
@@ -19,6 +21,7 @@ export default {
 	},
 	cat_tower_level_3: {
 		level: 3,
+		towerType: 'cat_tower_level_3',
 		nextLevel: 'fernando_torres',
 		health: 1000,
 		damage: 200,
@@ -28,6 +31,7 @@ export default {
 	},
 	blue_rabbit_tower_level_1: {
 		level: 1,
+		towerType: 'blue_rabbit_tower_level_1',
 		nextLevel: 'blue_rabbit_tower_level_2',
 		health: 750,
 		damage: 75,
@@ -37,6 +41,7 @@ export default {
 	},
 	blue_rabbit_tower_level_2: {
 		level: 2,
+		towerType: 'blue_rabbit_tower_level_2',
 		nextLevel: 'blue_rabbit_tower_level_3',
 		health: 1000,
 		damage: 150,
@@ -46,6 +51,7 @@ export default {
 	},
 	blue_rabbit_tower_level_3: {
 		level: 3,
+		towerType: 'blue_rabbit_tower_level_3',
 		nextLevel: 'fernando_torres',
 		health: 1500,
 		damage: 300,
@@ -55,6 +61,7 @@ export default {
 	},
 	red_rabbit_tower_level_1: {
 		level: 1,
+		towerType: 'red_rabbit_tower_level_1',
 		nextLevel: 'red_rabbit_tower_level_2',
 		health: 1000,
 		damage: 150,
@@ -64,6 +71,7 @@ export default {
 	},
 	red_rabbit_tower_level_2: {
 		level: 2,
+		towerType: 'red_rabbit_tower_level_2',
 		nextLevel: 'red_rabbit_tower_level_3',
 		health: 1500,
 		damage: 300,
@@ -73,6 +81,7 @@ export default {
 	},
 	red_rabbit_tower_level_3: {
 		level: 3,
+		towerType: 'red_rabbit_tower_level_3',
 		nextLevel: 'fernando_torres',
 		health: 2000,
 		damage: 450,
@@ -82,6 +91,7 @@ export default {
 	},
 	fernando_torres: {
 		level: 4,
+		towerType: 'fernando_torres',
 		health: 100000,
 		damage: 100000,
 		price: 3000,
