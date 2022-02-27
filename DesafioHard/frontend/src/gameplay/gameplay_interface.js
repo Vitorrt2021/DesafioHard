@@ -31,6 +31,19 @@ $(document).ready(() => {
 		event.originalEvent.dataTransfer.setData('text', 'cat_tower_level_1');
 	});
 
+	$('.cat_tower').on('touchmove', function (event) {
+		let x = event.originalEvent.touches[0].clientX;
+		let y = event.originalEvent.touches[0].clientY;
+
+		let loc = event.originalEvent.targetTouches[0];
+		this.style.left = loc.pageX + 'px';
+		this.style.top = loc.pageY + 'px';
+		// console.log(x, y);
+		console.log(event.originalEvent['srcElement']);
+	});
+
+	$('.cat_tower').on('touchend', function (event) {});
+
 	$('.blue_rabbit_tower').on('dragstart', function (event) {
 		event.originalEvent.dataTransfer.setData(
 			'text',

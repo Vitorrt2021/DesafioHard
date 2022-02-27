@@ -2,19 +2,35 @@
 	margin: 0;
 	padding: 0;
 }
+
 html {
-	font-size: 10px;
+	font-size: 3.5em;
 }
-@media (max-width: 600px) {
+
+@media screen and (max-width: 1200px) {
 	html {
-		font-size: 8px;
+		font-size: 2.5em;
 	}
 }
-@media (min-width: 1000px) {
+
+@media screen and (max-width: 800px) {
 	html {
-		font-size: 15px;
+		font-size: 1.5em;
 	}
 }
+
+@media screen and (max-width: 500px) {
+	html {
+		font-size: 1em;
+	}
+}
+
+@media screen and (max-width: 200px) {
+	html {
+		font-size: 0.5em;
+	}
+}
+
 .app__container {
 	width: 100vw;
 	height: 100vh;
@@ -29,8 +45,8 @@ html {
 }
 
 .welcome__container {
-	width: 70%;
-	height: 70%;
+	width: 100%;
+	height: 100%;
 	background-image: url('../assets/images/welcome_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -47,55 +63,61 @@ html {
 	align-items: center;
 	flex-direction: column;
 
-	width: 40%;
-	height: 40%;
+	width: 50%;
+	height: 50%;
+
+	margin-top: 37vh;
 }
-@media (max-width: 300px) {
-	.buttons__container {
-		height: 20%;
-	}
-}
-@media (max-width: 600px) {
-	.buttons__container {
-		height: 30%;
-	}
-}
+
 .blue__button {
 	background-image: url('../assets/images/blue_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
-	background-size: 100% 100%;
-	border: none;
-	background-color: transparent;
-
-	width: 100%;
-	height: 100%;
-
-	font-family: 'Architects Daughter', cursive;
-	color: #ffffff;
-	cursor: pointer;
-	font-size: 3.5rem;
-
-	margin-bottom: 2vh;
-}
-
-.red__button {
-	background-image: url('../assets/images/red_button.svg');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-	background-size: 100% 100%;
 	border: none;
 	background-color: transparent;
 
 	width: 40%;
-	height: 40%;
+	height: 50%;
 
 	font-family: 'Architects Daughter', cursive;
 	color: #ffffff;
 	cursor: pointer;
-	font-size: 1rem;
+	font-size: inherit;
+	cursor: pointer;
+}
+
+.ranking_and_sound_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 25%;
+}
+
+.red__button {
+	background-image: url('../assets/images/ranking_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 15%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.sound__button {
+	background-image: url('../assets/images/sound_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 15%;
+	height: 100%;
+	cursor: pointer;
 }
 
 .ranking__container {
