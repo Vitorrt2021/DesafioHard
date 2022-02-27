@@ -28,6 +28,8 @@ class Game {
 		this.spawnVelocity = 500;
 		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
+		this.bgMusic = new Audio();
+		this.bgMusic.id = 'bg_music';
 	}
 
 	start() {
@@ -121,6 +123,7 @@ class Game {
 			$('#live_value').html('0');
 			$('#level_value').html('');
 			this.stopAnimation();
+			this.bgMusic.pause();
 		}
 	}
 
@@ -295,6 +298,9 @@ class Game {
 	}
 	//FIX-IT SOBREPOSIÇÃO DE TORRES
 	addTowerInCell(tower) {
+		// play background music when player put the first tower in row
+		if (!this.towers[0]) this.updateBackgroundMusic();
+
 		const gridPositionX =
 			this.mousePosition.x -
 			(this.mousePosition.x % this.cellSize) +
@@ -420,7 +426,21 @@ class Game {
 			this.moneyDrop *= 1 + 1 / this.level;
 			assetManager.playSound('level_up');
 			$('#level_value').html(this.level);
+
+			if (this.level % 2 === 0) {
+				this.updateBackgroundMusic();
+			}
 		}
+	}
+
+	updateBackgroundMusic() {
+		$(this.bgMusic).attr(
+			'src',
+			'../assets/audios/bg_music/bg_music_lvl_' + this.level + '.mp3'
+		);
+		this.bgMusic.play();
+		this.bgMusic.loop = true;
+		this.bgMusic.volume = 0.08;
 	}
 }
 

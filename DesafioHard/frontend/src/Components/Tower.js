@@ -65,36 +65,30 @@ class Tower {
 
 		this.isBigExplosionPlayed = false;
 		this.piecesTimeCounter = 80;
-		this.pieces = [
-			new PieceAnimation(
-				assetManager.getImage('cat_tower_level_1_frag_1'),
-				this.x,
-				this.y,
+
+		const fragments = [];
+
+		for (let i = 1; i < 10; i++) {
+			// set the offset for each one of the 9 fragments
+			let offsetX =
+				i === 1 || i === 4 || i === 7
+					? 0
+					: i === 2 || i === 5 || i === 8
+					? 1
+					: 2;
+			let offsetY = i <= 3 ? 0 : i >= 4 && i <= 6 ? 1 : 2;
+
+			let pieceAnimation = new PieceAnimation(
+				assetManager.getImage(towerType + '_frag_' + i),
+				this.x + this.width * offsetX,
+				this.y + this.height * offsetY,
 				this.width,
 				this.height
-			),
-			new PieceAnimation(
-				assetManager.getImage('cat_tower_level_1_frag_2'),
-				this.x + this.width / 2,
-				this.y,
-				this.width,
-				this.height
-			),
-			new PieceAnimation(
-				assetManager.getImage('cat_tower_level_1_frag_3'),
-				this.x,
-				this.y + this.height / 2,
-				this.width,
-				this.height
-			),
-			new PieceAnimation(
-				assetManager.getImage('cat_tower_level_1_frag_4'),
-				this.x + this.width / 2,
-				this.y + this.height / 2,
-				this.width,
-				this.height
-			),
-		];
+			);
+
+			fragments.push(pieceAnimation);
+		}
+		this.pieces = fragments;
 	}
 
 	setDyingAnimation() {
