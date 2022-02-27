@@ -3,24 +3,25 @@ const apiURL = 'http://localhost:5000';
 
 const renderRanking = async () => {
 	//FIX-IT: IMPROVE ERROR HANDLING
-	// renderRankingModal();
-	// return;
+
 	try {
 		const response = await $.ajax(apiURL + '/ranking');
 
 		renderRankingModal();
 
-		response.data.slice(0, 63).forEach((score, index) => {
+		response.data.slice(0, 63).forEach((userData, index) => {
 			$('.ranking__cell__container').append(
 				`<div class="ranking__cell">
-            <span class="ranking__cell__name">
-              <span class="ranking__cell__rank">${index + 1}º</span>
-              ${score.name}
-            </span>
-            <span class="ranking__cell__score">${score.score}</span>
-        </div>`
+						<div class="ranking__cell__rank">${index + 1}º</div>
+						<div class="ranking__cell__name_score_date_container">
+							<div class="ranking__cell__only_score_date_container">
+								<div class="ranking__cell__score">${userData.score}</div>
+								<div class="ranking__cell__date">${userData.date}</div>
+							</div>
+							<div class="ranking__cell__name">${userData.name}</div>
+						</div>
+				 </div>`
 			);
-			// <span class="ranking__cell__date">${score.date}</span>
 		});
 	} catch (error) {
 		alert('check console for errors');
@@ -34,7 +35,7 @@ const renderRankingModal = () => {
 				<div class="ranking__container">
 						<div class="ranking__cell__container">
 						</div>
-						<button class="close_modal" type="button">Fechar</button>
+						<button class="close_modal" type="button">FECHAR</button>
 				</div>
 		</div>`
 	);
@@ -49,7 +50,8 @@ const renderRankingModal = () => {
 	$(window).click((event) => {
 		if (
 			event.originalEvent.target === $('.modal')[0] ||
-			event.originalEvent.target === $('.modal__content')[0]
+			event.originalEvent.target === $('.modal__content')[0] ||
+			event.originalEvent.target === $('.ranking__container')[0]
 		) {
 			$('.modal')[0].style.display = 'none';
 		}
