@@ -12,9 +12,12 @@ app.use(
 		origin: [
 			'https://alphatower.dudeful.com',
 			'http://edtech.dudeful.com:3000',
+			'http://localhost:5000',
+			'http://localhost:3000',
 		],
 	})
 );
+// app.use(cors()); //comment
 
 app.use('/load-assets', loadAssets);
 app.use('/save-score', saveScore);

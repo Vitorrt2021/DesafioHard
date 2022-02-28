@@ -1,5 +1,5 @@
-const apiURL = 'https://data.dudeful.com';
-// const apiURL = 'http://localhost:5000';
+// const apiURL = 'https://data.dudeful.com';
+const apiURL = 'http://localhost:5000';
 
 const saveScore = () => {
 	const name = $('#save__name__input').val();
@@ -31,8 +31,8 @@ const renderSaveScore = () => {
 		`<div class="app__container">
 				<div class="save__container">
 					<div class="input__container">
-						<input type="text" placeholder="Nome do jogador" id="save__name__input">
-						<button type="button" class="blue__button save_score_button" id='button_save'>Salvar</button>
+						<input type="text" placeholder="NOME" id="save__name__input">
+						<button type="button" class="blue__button save_score_button" id='button_save'>SALVAR</button>
 					</div>
 				</div>
 		</div>`

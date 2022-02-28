@@ -2,8 +2,8 @@ import Game from '../Components/Game.js';
 import assetManager from '../Components/AssetManager.js';
 import renderRanking from '../requests/ranking.js';
 
-const apiURL = 'https://data.dudeful.com';
 // const apiURL = 'https://data.dudeful.com';
+const apiURL = 'http://localhost:5000';
 
 $(document).ready(() => {
 	// Prevent user from unloading the page by accident
@@ -30,6 +30,19 @@ $(document).ready(() => {
 	$('.cat_tower').on('dragstart', function (event) {
 		event.originalEvent.dataTransfer.setData('text', 'cat_tower_level_1');
 	});
+
+	// $('.cat_tower').on('touchmove', function (event) {
+	// 	let x = event.originalEvent.touches[0].clientX;
+	// 	let y = event.originalEvent.touches[0].clientY;
+
+	// 	let loc = event.originalEvent.targetTouches[0];
+	// 	this.style.left = loc.pageX + 'px';
+	// 	this.style.top = loc.pageY + 'px';
+	// 	// console.log(x, y);
+	// 	console.log(event.originalEvent['srcElement']);
+	// });
+
+	// $('.cat_tower').on('touchend', function (event) {});
 
 	$('.blue_rabbit_tower').on('dragstart', function (event) {
 		event.originalEvent.dataTransfer.setData(

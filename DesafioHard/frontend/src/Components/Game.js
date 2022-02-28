@@ -440,7 +440,7 @@ class Game {
 		);
 		this.bgMusic.play();
 		this.bgMusic.loop = true;
-		this.bgMusic.volume = 0.08;
+		this.bgMusic.volume = 0.1;
 	}
 }
 
