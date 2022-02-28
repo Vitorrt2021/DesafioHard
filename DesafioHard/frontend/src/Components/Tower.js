@@ -69,19 +69,19 @@ class Tower {
 		const fragments = [];
 
 		for (let i = 1; i < 10; i++) {
-			// set the offset for each one of the 9 fragments
-			let offsetX =
+			// set the coordinate for each one of the 9 fragments
+			let coordinateX =
 				i === 1 || i === 4 || i === 7
 					? 0
 					: i === 2 || i === 5 || i === 8
 					? 1
 					: 2;
-			let offsetY = i <= 3 ? 0 : i >= 4 && i <= 6 ? 1 : 2;
+			let coordinateY = i <= 3 ? 0 : i >= 4 && i <= 6 ? 1 : 2;
 
 			let pieceAnimation = new PieceAnimation(
 				assetManager.getImage(towerType + '_frag_' + i),
-				this.x + this.width * offsetX,
-				this.y + this.height * offsetY,
+				this.x + this.width * coordinateX,
+				this.y + this.height * coordinateY,
 				this.width,
 				this.height
 			);
