@@ -153,80 +153,111 @@ body {
 }
 
 .ranking__cell {
-	/* background-image: url('../assets/images/ranking_window_cell.svg'); */
 	background-image: url('../assets/images/ranking_cell.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
-
-	width: 70%;
-	height: 50%;
-
+	width: 100%;
+	height: 33.33%;
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
-	/* background-color: violet; */
+}
+
+.ranking__cell_1 {
+	background-image: url('../assets/images/ranking_cell_1.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.ranking__cell_2 {
+	background-image: url('../assets/images/ranking_cell_2.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.ranking__cell_3 {
+	background-image: url('../assets/images/ranking_cell_3.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
 }
 
 .ranking__cell__name_score_date_container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
-	width: 75%;
-	height: 100%;
+	width: 55%;
+	height: 70%;
 }
 
 .ranking__cell__only_score_date_container {
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	width: 100%;
-	height: 100%;
+	height: 50%;
 }
 
 .ranking__cell__rank {
 	width: 25%;
-	height: 100%;
-	font-size: 5vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-left: 4%;
-	padding-bottom: 8%;
-}
-
-.ranking__cell__name {
-	width: 25%;
-	width: 100%;
-	height: 100%;
+	width: 8vw;
+	height: 60%;
 	font-size: 4.5vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-right: 8%;
-	padding-bottom: 12%;
+	padding-left: 1.3vw;
+	padding-top: 1.1vh;
+}
+
+.ranking__cell__name {
+	width: 100%;
+	height: 50%;
+	font-size: 4vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 1.5vh;
 }
 
 .ranking__cell__score {
-	width: 25%;
 	width: 100%;
 	height: 100%;
-	font-size: 3vh;
+	font-size: 2.5vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-top: 1.5%;
+	margin-top: 0.5vh;
 }
 
 .ranking__cell__date {
-	width: 25%;
 	width: 100%;
 	height: 100%;
-	font-size: 1vh;
+	font-size: 1.5vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-right: 1.5vw;
+	padding-top: 0.5vh;
 }
 
 .modal {
@@ -259,10 +290,8 @@ body {
 	background-position: center;
 	border: none;
 	background-color: transparent;
-
 	width: 50%;
 	height: 15%;
-
 	font-family: inherit;
 	color: inherit;
 	font-family: inherit;
@@ -282,21 +311,22 @@ body {
 }
 
 /* -------------------------SCROLL BAR--------------------------- */
-/* ::-webkit-scrollbar {
-	width: 4px;
-} */
+::-webkit-scrollbar {
+	width: 25px;
+}
 
 /* Track */
-/* ::-webkit-scrollbar-track {
-	background: #f1f1f1;
-} */
+::-webkit-scrollbar-track {
+	background-image: url('../assets/images/scrollbar_track.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
 
 /* Handle */
-/* ::-webkit-scrollbar-thumb {
-	background: #f08261;
-} */
-
-/* Handle on hover */
-/* ::-webkit-scrollbar-thumb:hover {
-	background: #555;
-} */
+::-webkit-scrollbar-thumb {
+	background-image: url('../assets/images/scrollbar_thumb.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 40%;
+}
