@@ -111,18 +111,15 @@ class Tower {
 	#drawDyingAnimation(ctx) {
 		ctx.filter = `brightness(${this.imageBrightness}%)`;
 		if (this.imageBrightness <= 50) {
-			if (!this.isBigExplosionPlayed) {
-				assetManager.playSound('tower_dead_explosion', 0.5);
-				this.isBigExplosionPlayed = true;
-			}
-
-			this.#drawFallingPieces(ctx);
-
-			this.piecesTimeCounter -= 2; //Timer to count falling pieces animation ending...
-
-			if (this.piecesTimeCounter <= 0) {
-				this.isDead = true;
-			}
+			// if (!this.isBigExplosionPlayed) {
+			// 	assetManager.playSound('tower_dead_explosion', 0.5);
+			// 	this.isBigExplosionPlayed = true;
+			// }
+			// this.#drawFallingPieces(ctx);
+			// this.piecesTimeCounter -= 2; //Timer to count falling pieces animation ending...
+			// if (this.piecesTimeCounter <= 0) {
+			// 	this.isDead = true;
+			// }
 		} else {
 			assetManager.playSound('explosion', 0.2, false);
 			this.#drawBrightnessChangeAnimation(ctx);
