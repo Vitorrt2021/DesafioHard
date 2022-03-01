@@ -63,18 +63,14 @@ class Game {
 	}
 
 	canBuyTowers() {
-		$('.red_rabbit_tower').css('filter', 'brightness(100%)');
-		$('.blue_rabbit_tower').css('filter', 'brightness(100%)');
+		$('.rabbit_tower').css('filter', 'brightness(100%)');
+		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
-		if (
-			this.player.money < parseInt(towerStatus.red_rabbit_tower_level_1.price)
-		) {
-			$('.red_rabbit_tower').css('filter', 'brightness(55%)');
+		if (this.player.money < parseInt(towerStatus.rabbit_tower_level_1.price)) {
+			$('.rabbit_tower').css('filter', 'brightness(55%)');
 		}
-		if (
-			this.player.money < parseInt(towerStatus.blue_rabbit_tower_level_1.price)
-		) {
-			$('.blue_rabbit_tower').css('filter', 'brightness(55%)');
+		if (this.player.money < parseInt(towerStatus.pikachu_tower_level_1.price)) {
+			$('.pikachu_tower').css('filter', 'brightness(55%)');
 		}
 		if (this.player.money < parseInt(towerStatus.cat_tower_level_1.price)) {
 			$('.cat_tower').css('filter', 'brightness(55%)');
@@ -346,7 +342,7 @@ class Game {
 		// in case of bad luck the player loses money and
 		// the tower gets damaged.
 		const jackpot = Math.random() * 100;
-		if (towerClicked.level == 3 && jackpot > 2) {
+		if (towerClicked.level == 9 && jackpot > 2) {
 			if (this.player.money >= 3000) {
 				this.player.money -= 1000;
 				this.updateMoney();
