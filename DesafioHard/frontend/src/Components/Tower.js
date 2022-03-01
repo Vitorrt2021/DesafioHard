@@ -124,6 +124,7 @@ class Tower {
 			assetManager.playSound('explosion', 0.2, false);
 			this.#drawBrightnessChangeAnimation(ctx);
 		}
+		this.isDead = true;
 		ctx.filter = 'none'; //reset filter to not affect other images
 	}
 
