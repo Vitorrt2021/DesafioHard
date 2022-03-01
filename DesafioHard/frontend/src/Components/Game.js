@@ -340,7 +340,7 @@ class Game {
 
 		const towerClicked = this.towers.find(finder);
 		const towerIndex = this.towers.indexOf(towerClicked);
-		if (!towerClicked || towerClicked.level == 4) return;
+		if (!towerClicked || towerClicked.level == 9) return;
 		// easter egg!
 		// roll the dice and check if the player will get Torres.
 		// in case of bad luck the player loses money and
