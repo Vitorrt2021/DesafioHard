@@ -9,17 +9,15 @@ const saveScore = require('../routes/save-score.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-	cors({
-		origin: [
-			'https://alphatower.dudeful.com',
-			'http://edtech.dudeful.com:3000',
-			'http://localhost:5000',
-			'http://localhost:3000',
-		],
-	})
-);
-
+// app.use(
+// 	cors({
+// 		origin: [
+// 			'https://alphatower.dudeful.com',
+// 			'http://edtech.dudeful.com:3000',
+// 		],
+// 	})
+// );
+app.use(cors());
 dbConnection('/alphatower');
 
 app.use('/load-assets', limiter(10, 30), loadAssets);

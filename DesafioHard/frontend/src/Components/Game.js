@@ -22,7 +22,9 @@ class Game {
 		this.gameGrid = [];
 		this.mousePosition = {};
 		this.towers = [];
-		this.enemys = [];
+		this.towersDying = [];
+		this.enemies = [];
+		this.enemiesDying = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
 		this.spawnVelocity = 500;
@@ -48,7 +50,7 @@ class Game {
 			Math.floor(326.4),
 			Math.floor(576.4),
 		];
-		this.enemys.forEach((enemy) => {
+		this.enemies.forEach((enemy) => {
 			position[enemy.line] = true;
 		});
 		this.towers.forEach((tower) => {
@@ -103,6 +105,14 @@ class Game {
 	}
 
 	handleTowers() {
+		this.towersDying = this.towersDying.filter(
+			(towerDying) => !towerDying.isDead
+		);
+
+		this.towersDying.forEach((towerDying) => {
+			towerDying.draw(this.ctx);
+		});
+
 		this.towers.forEach((tower) => {
 			tower.draw(this.ctx);
 			if (tower.isShooting) {
@@ -141,10 +151,10 @@ class Game {
 	}
 
 	checkEnemyAttackedBase() {
-		this.enemys.forEach((enemy, enemyIndex) => {
+		this.enemies.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
 				this.player.live -= 1;
-				this.enemys.splice(enemyIndex, 1);
+				this.enemies.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
 			}
@@ -152,34 +162,29 @@ class Game {
 	}
 
 	enemyIsDead(enemy, enemyIndex) {
-		if (enemy.health <= 0 && !enemy.isDying) {
+		if (enemy.health <= 0) {
 			this.player.score += 20 * (this.level + 1);
 			this.player.money += Math.floor(this.moneyDrop);
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
+			this.enemiesDying.push(enemy);
+			this.enemies.splice(enemyIndex, 1);
 			enemy.line = null;
-		}
-
-		if (enemy.isDead) {
-			this.enemys.splice(enemyIndex, 1);
 		}
 	}
 
 	towerWasDestroyed(tower, towerIndex) {
 		if (tower.health <= 0) {
 			tower.isDying = true;
-		}
-
-		if (tower.isDead) {
+			this.towersDying.push(tower);
 			this.towers.splice(towerIndex, 1);
 		}
 	}
 
 	checkTowerCollision() {
 		this.towers.forEach((tower, towerIndex) => {
-			this.enemys.forEach((enemy, enemyIndex) => {
-				if (enemy.isDying) return;
+			this.enemies.forEach((enemy, enemyIndex) => {
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
 					let towerHealth = tower.health;
 					tower.health -= enemy.health / (1 + this.level * 0.5);
@@ -204,8 +209,7 @@ class Game {
 	checkProjectileCollision() {
 		this.towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
-				this.enemys.forEach((enemy, enemyIndex) => {
-					if (enemy.isDying) return;
+				this.enemies.forEach((enemy, enemyIndex) => {
 					if (collision.rectRectCollisionDetection(projectile, enemy)) {
 						assetManager.playSound('hit');
 						tower.projectiles.splice(index, 1);
@@ -249,7 +253,16 @@ class Game {
 			this.canEvolveTowers();
 			this.drawGrid();
 			this.changeSpawnVelocity();
-			this.enemys.forEach((enemy) => {
+
+			this.enemiesDying = this.enemiesDying.filter(
+				(enemyDying) => !enemyDying.isDead
+			);
+
+			this.enemiesDying.forEach((enemyDying) => {
+				enemyDying.draw(this.ctx);
+			});
+
+			this.enemies.forEach((enemy) => {
 				enemy.update();
 				enemy.draw(this.ctx);
 			});
@@ -311,7 +324,7 @@ class Game {
 			this.cellGap;
 		//Impedir de colocar a torre na ultima coluna
 		if (gridPositionX - 5 === this.gameGrid[6].x) return;
-		//Ver já tem torre nessa celula
+		//Ver se já tem torre nessa celula
 		for (let i = 0; i < this.towers.length; i++) {
 			if (
 				this.towers[i].x === gridPositionX &&
@@ -320,8 +333,21 @@ class Game {
 				return false;
 			}
 		}
-		tower.x = gridPositionX;
-		tower.y = gridPositionY + this.cellSize / 3.5;
+
+		//Ver se já tem torre nessa celula, porém ainda rodando animação de destruição.
+		for (let i = 0; i < this.towersDying.length; i++) {
+			if (
+				this.towersDying[i].x === gridPositionX &&
+				this.towersDying[i].y === gridPositionY + this.cellSize / 3.5
+			) {
+				return false;
+			}
+		}
+
+		tower.updateTowerPosition(
+			gridPositionX,
+			gridPositionY + this.cellSize / 3.5
+		);
 
 		assetManager.playSound('dropTower');
 
@@ -397,7 +423,7 @@ class Game {
 			monster = this.monster[3];
 		}
 		this.playSoundMonster(monster);
-		this.enemys.push(
+		this.enemies.push(
 			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
 			new Enemy(
 				new Monster(monster),
