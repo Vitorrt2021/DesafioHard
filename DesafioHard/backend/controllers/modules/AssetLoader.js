@@ -2,25 +2,6 @@ const fs = require('fs');
 const path = require('path');
 
 //FIX-IT: ADAPT FOR ERROR HANDLING (try catch)
-function loadFiles(directory) {
-	function readPath(directory) {
-		const dirRead = fs.readdirSync(directory);
-
-		for (const file of dirRead) {
-			const filePath = path.join(directory, file);
-
-			if (fs.statSync(filePath).isDirectory()) {
-				readPath(filePath);
-			} else {
-				instance.loadAssets(filePath);
-			}
-		}
-	}
-
-	readPath(directory);
-}
-
-//FIX-IT: ADAPT FOR ERROR HANDLING (try catch)
 class AssetLoader {
 	constructor() {
 		this.images = {};
@@ -47,7 +28,26 @@ class AssetLoader {
 	}
 }
 
-const instance = new AssetLoader();
-loadFiles(__dirname + '/../assets');
+//FIX-IT: ADAPT FOR ERROR HANDLING (try catch)
+function loadFiles(directory) {
+	function readPath(directory) {
+		const dirRead = fs.readdirSync(directory);
 
-module.exports = instance;
+		for (const file of dirRead) {
+			const filePath = path.join(directory, file);
+
+			if (fs.statSync(filePath).isDirectory()) {
+				readPath(filePath);
+			} else {
+				assets.loadAssets(filePath);
+			}
+		}
+	}
+
+	readPath(directory);
+}
+
+const assets = new AssetLoader();
+loadFiles(__dirname + '/../../assets');
+
+module.exports = assets;
