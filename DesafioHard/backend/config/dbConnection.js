@@ -1,6 +1,6 @@
 const ErrorHandler = require('../controllers/modules/ErrorHandler.js');
 const mongoose = require('mongoose');
-require('dotenv').config({ path: 'config/.env' });
+require('dotenv').config({ path: __dirname + '/.env' });
 
 const dbConnection = (db) => {
 	mongoose
