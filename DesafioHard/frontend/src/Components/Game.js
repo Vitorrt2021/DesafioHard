@@ -25,7 +25,7 @@ class Game {
 		this.enemys = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
-		this.spawnVelocity = 500;
+		this.spawnVelocity = 600;
 		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
 		this.bgMusic = new Audio();
@@ -150,7 +150,7 @@ class Game {
 	enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			this.player.score += 20 * (this.level + 1);
-			this.player.money += Math.floor(this.moneyDrop);
+			this.player.money += Math.floor(this.moneyDrop) + enemy.money;
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
@@ -231,7 +231,7 @@ class Game {
 	}
 
 	changeSpawnVelocity() {
-		const spawnV = (this.spawnVelocity = 500 - 60 * this.level);
+		const spawnV = (this.spawnVelocity = 600 - 60 * this.level);
 		if (spawnV <= this.maxSpawnVelocity) {
 			this.spawnVelocity = this.maxSpawnVelocity;
 		} else {
