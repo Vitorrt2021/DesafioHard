@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-const saveScore = require('./routes/save-score.js');
-const ranking = require('./routes/ranking.js');
-const loadAssets = require('./routes/load-assets.js');
+const dbConnection = require('../config/dbConnection.js');
+const loadAssets = require('../routes/load-assets.js');
+const ranking = require('../routes/ranking.js');
+const saveScore = require('../routes/save-score.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,10 +18,11 @@ app.use(
 		],
 	})
 );
-// app.use(cors()); //comment
+
+dbConnection('/alphatower');
 
 app.use('/load-assets', loadAssets);
-app.use('/save-score', saveScore);
 app.use('/ranking', ranking);
+app.use('/save-score', saveScore);
 
 module.exports = app;
