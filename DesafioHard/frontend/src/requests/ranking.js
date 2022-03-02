@@ -1,5 +1,5 @@
-// const apiURL = 'https://data.dudeful.com';
-const apiURL = 'http://localhost:5000';
+const apiURL = 'https://data.dudeful.com';
+// const apiURL = 'http://localhost:5000';
 
 const renderRanking = async () => {
 	//FIX-IT: IMPROVE ERROR HANDLING
@@ -7,7 +7,7 @@ const renderRanking = async () => {
 		const response = await $.ajax(apiURL + '/ranking');
 
 		renderRankingModal();
-		renderCells(response.data.slice(0, 63));
+		renderCells(response);
 	} catch (error) {
 		alert('check console for errors');
 		console.error(error);
