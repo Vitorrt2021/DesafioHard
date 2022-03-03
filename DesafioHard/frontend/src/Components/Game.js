@@ -22,13 +22,18 @@ class Game {
 		this.gameGrid = [];
 		this.mousePosition = {};
 		this.towers = [];
-		this.enemys = [];
+		this.towersDying = [];
+		this.enemies = [];
+		this.enemiesDying = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
 		this.spawnVelocity = 500;
-		this.maxSpawVelocity = 60;
+		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
+		this.bgMusic = new Audio();
+		this.bgMusic.id = 'bg_music';
 	}
+
 	start() {
 		this.updateLive();
 		this.updateScore();
@@ -37,6 +42,7 @@ class Game {
 		this.createGrid();
 		this.catchMousePosition();
 	}
+
 	haveEnemyInLine() {
 		const position = [false, false, false];
 		const towerPosition = [
@@ -44,7 +50,7 @@ class Game {
 			Math.floor(326.4),
 			Math.floor(576.4),
 		];
-		this.enemys.forEach((enemy) => {
+		this.enemies.forEach((enemy) => {
 			position[enemy.line] = true;
 		});
 		this.towers.forEach((tower) => {
@@ -57,6 +63,7 @@ class Game {
 			}
 		});
 	}
+
 	canBuyTowers() {
 		$('.red_rabbit_tower').css('filter', 'brightness(100%)');
 		$('.blue_rabbit_tower').css('filter', 'brightness(100%)');
@@ -75,6 +82,7 @@ class Game {
 			$('.cat_tower').css('filter', 'brightness(55%)');
 		}
 	}
+
 	canEvolveTowers() {
 		this.towers.forEach((tower) => {
 			const nextLevel = tower.nextLevel;
@@ -95,92 +103,115 @@ class Game {
 			}
 		});
 	}
+
 	handleTowers() {
+		this.towersDying = this.towersDying.filter(
+			(towerDying) => !towerDying.isDead
+		);
+
+		this.towersDying.forEach((towerDying) => {
+			towerDying.draw(this.ctx);
+		});
+
 		this.towers.forEach((tower) => {
 			tower.draw(this.ctx);
 			if (tower.isShooting) {
 				tower.update();
 			}
+
 			tower.handleProjectiles(this.ctx, this.canvas.width, this.cellSize);
 		});
 	}
+
 	gameIsOver() {
 		if (this.player.live <= 0) {
-			const audio = assetManager.getSound('titanic_flute');
-			audio.play();
+			assetManager.playSound('titanic_flute');
+
 			setTimeout(() => {
 				renderSaveScore();
 			}, 500);
 			$('#live_value').html('0');
 			$('#level_value').html('');
 			this.stopAnimation();
+			this.bgMusic.pause();
 		}
 	}
+
 	updateScore() {
 		$('#score_value').html(this.player.score);
 	}
+
 	updateMoney() {
 		this.canBuyTowers();
 		$('#money_value').html(this.player.money);
 	}
+
 	updateLive() {
 		$('#live_value').html(this.player.live);
 	}
+
 	checkEnemyAttackedBase() {
-		this.enemys.forEach((enemy, enemyIndex) => {
+		this.enemies.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
 				this.player.live -= 1;
-				this.enemys.splice(enemyIndex, 1);
+				this.enemies.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
 			}
 		});
 	}
+
 	enemyIsDead(enemy, enemyIndex) {
-		if (enemy.health <= 0 && !enemy.isDying) {
+		if (enemy.health <= 0) {
 			this.player.score += 20 * (this.level + 1);
 			this.player.money += Math.floor(this.moneyDrop);
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
+			this.enemiesDying.push(enemy);
+			this.enemies.splice(enemyIndex, 1);
 			enemy.line = null;
 		}
-		if (enemy.isDead) {
-			this.enemys.splice(enemyIndex, 1);
-		}
 	}
+
 	towerWasDestroyed(tower, towerIndex) {
 		if (tower.health <= 0) {
+			tower.isDying = true;
+			this.towersDying.push(tower);
 			this.towers.splice(towerIndex, 1);
 		}
 	}
+
 	checkTowerCollision() {
 		this.towers.forEach((tower, towerIndex) => {
-			this.enemys.forEach((enemy, enemyIndex) => {
-				if (enemy.isDying) return;
+			this.enemies.forEach((enemy, enemyIndex) => {
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
 					let towerHealth = tower.health;
 					tower.health -= enemy.health / (1 + this.level * 0.5);
-					enemy.health -= towerHealth;
+
+					if (tower.health > 0) {
+						enemy.health -= towerHealth;
+					}
+
 					tower.isDamaged = true;
-					const audio = assetManager.getSound('explosion');
-					audio.volume = 0.3;
-					audio.play();
+
 					this.enemyIsDead(enemy, enemyIndex);
 					this.towerWasDestroyed(tower, towerIndex);
+
+					if (!tower.isDying) {
+						assetManager.playSound('explosion');
+					}
 				}
 			});
 		});
 	}
+
 	checkProjectileCollision() {
 		this.towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
-				this.enemys.forEach((enemy, enemyIndex) => {
-					if (enemy.isDying) return;
+				this.enemies.forEach((enemy, enemyIndex) => {
 					if (collision.rectRectCollisionDetection(projectile, enemy)) {
-						const audio = assetManager.getSound('hit');
-						audio.volume = 0.3;
-						audio.play();
+						assetManager.playSound('hit');
 						tower.projectiles.splice(index, 1);
 						enemy.health -= projectile.power;
 						this.enemyIsDead(enemy, enemyIndex);
@@ -189,6 +220,7 @@ class Game {
 			});
 		});
 	}
+
 	createGrid() {
 		for (let y = 0; y < this.canvas.height; y += this.cellSize) {
 			for (let x = 0; x < this.canvas.width; x += this.cellSize) {
@@ -197,6 +229,7 @@ class Game {
 			}
 		}
 	}
+
 	drawGrid() {
 		this.gameGrid.forEach((cell, index) => {
 			//não desenha a ultima coluna
@@ -204,12 +237,13 @@ class Game {
 			cell.draw(this.ctx);
 		});
 	}
-	changeSpawVelocity() {
-		const spawV = (this.spawnVelocity = 500 - 60 * this.level);
-		if (spawV <= this.maxSpawVelocity) {
-			this.spawnVelocity = this.maxSpawVelocity;
+
+	changeSpawnVelocity() {
+		const spawnV = (this.spawnVelocity = 500 - 60 * this.level);
+		if (spawnV <= this.maxSpawnVelocity) {
+			this.spawnVelocity = this.maxSpawnVelocity;
 		} else {
-			this.spawnVelocity = spawV;
+			this.spawnVelocity = spawnV;
 		}
 	}
 	animation() {
@@ -218,8 +252,17 @@ class Game {
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 			this.canEvolveTowers();
 			this.drawGrid();
-			this.changeSpawVelocity();
-			this.enemys.forEach((enemy) => {
+			this.changeSpawnVelocity();
+
+			this.enemiesDying = this.enemiesDying.filter(
+				(enemyDying) => !enemyDying.isDead
+			);
+
+			this.enemiesDying.forEach((enemyDying) => {
+				enemyDying.draw(this.ctx);
+			});
+
+			this.enemies.forEach((enemy) => {
 				enemy.update();
 				enemy.draw(this.ctx);
 			});
@@ -249,6 +292,7 @@ class Game {
 		document.querySelector('body').addEventListener('mousemove', (e) => {
 			this.updateMousePosition(e);
 		});
+
 		document.getElementById('canvas1').addEventListener('drop', (e) => {
 			e.preventDefault();
 			let towerType = e.dataTransfer.getData('text');
@@ -267,6 +311,9 @@ class Game {
 	}
 	//FIX-IT SOBREPOSIÇÃO DE TORRES
 	addTowerInCell(tower) {
+		// play background music when player put the first tower in row
+		if (!this.towers[0]) this.updateBackgroundMusic();
+
 		const gridPositionX =
 			this.mousePosition.x -
 			(this.mousePosition.x % this.cellSize) +
@@ -277,7 +324,7 @@ class Game {
 			this.cellGap;
 		//Impedir de colocar a torre na ultima coluna
 		if (gridPositionX - 5 === this.gameGrid[6].x) return;
-		//Ver já tem torre nessa celula
+		//Ver se já tem torre nessa celula
 		for (let i = 0; i < this.towers.length; i++) {
 			if (
 				this.towers[i].x === gridPositionX &&
@@ -286,13 +333,24 @@ class Game {
 				return false;
 			}
 		}
-		tower.x = gridPositionX;
-		tower.y = gridPositionY + this.cellSize / 3.5;
-		//FIX-IT CÓDIGO RECORRENTE
-		const audio = assetManager.getSound('dropTower');
-		audio.volume = 0.3;
-		audio.play();
-		//
+
+		//Ver se já tem torre nessa celula, porém ainda rodando animação de destruição.
+		for (let i = 0; i < this.towersDying.length; i++) {
+			if (
+				this.towersDying[i].x === gridPositionX &&
+				this.towersDying[i].y === gridPositionY + this.cellSize / 3.5
+			) {
+				return false;
+			}
+		}
+
+		tower.updateTowerPosition(
+			gridPositionX,
+			gridPositionY + this.cellSize / 3.5
+		);
+
+		assetManager.playSound('dropTower');
+
 		this.player.money -= parseInt(tower.price);
 		this.updateMoney();
 		this.towers.push(tower);
@@ -321,8 +379,7 @@ class Game {
 				towerClicked.health *= 0.3;
 				towerClicked.health = parseInt(towerClicked.health);
 				towerClicked.isDamaged = true;
-				const audio = assetManager.getSound('explosion');
-				audio.play();
+				assetManager.playSound('explosion');
 				this.towerWasDestroyed(towerClicked, towerIndex);
 			}
 			return;
@@ -337,9 +394,7 @@ class Game {
 		evolvedTower.damage *= 1 + this.level * 0.35;
 		this.player.money -= parseInt(evolvedTower.price);
 		this.updateMoney();
-		const audio = assetManager.getSound('envolve');
-		audio.volume = 0.3;
-		audio.play();
+		assetManager.playSound('evolve');
 		this.towers[towerIndex] = evolvedTower;
 		console.log(this.width);
 	}
@@ -369,7 +424,7 @@ class Game {
 			monster = this.monster[3];
 		}
 		this.playSoundMonster(monster);
-		this.enemys.push(
+		this.enemies.push(
 			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
 			new Enemy(
 				new Monster(monster),
@@ -385,28 +440,34 @@ class Game {
 	//FIX-IT TORNAR ADAPTAVEL
 	playSoundMonster(monster) {
 		if (monster === 'robot') {
-			const audio = assetManager.getSound('robot_');
-			audio.volume = 0.3;
-			audio.play();
+			assetManager.playSound('robot');
 		} else if (monster === 'slimePink' || monster === 'slimeGreen') {
-			const audio = assetManager.getSound('slimeWalk');
-			audio.volume = 0.3;
-			audio.play();
+			assetManager.playSound('slimeWalk');
 		} else if (monster === 'toad') {
-			const audio = assetManager.getSound('monsterGreen');
-			audio.volume = 0.3;
-			audio.play();
+			assetManager.playSound('monsterGreen');
 		}
 	}
 	updateLevel() {
 		if (this.player.score >= 100 * Math.pow(2, this.level + 1)) {
 			this.level++;
 			this.moneyDrop *= 1 + 1 / this.level;
-			const audio = assetManager.getSound('level_up');
-			audio.volume = 0.3;
-			audio.play();
+			assetManager.playSound('level_up');
 			$('#level_value').html(this.level);
+
+			if (this.level % 2 === 0) {
+				this.updateBackgroundMusic();
+			}
 		}
+	}
+
+	updateBackgroundMusic() {
+		$(this.bgMusic).attr(
+			'src',
+			'../assets/audios/bg_music/bg_music_lvl_' + this.level + '.mp3'
+		);
+		this.bgMusic.play();
+		this.bgMusic.loop = true;
+		this.bgMusic.volume = 0.1;
 	}
 }
 

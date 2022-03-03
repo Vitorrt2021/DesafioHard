@@ -1,33 +1,32 @@
-const apiURL = 'https://data.dudeful.com';
+// const apiURL = 'https://data.dudeful.com';
+const apiURL = 'http://localhost:5000';
 
-const saveScore = () => {
+const saveScore = async () => {
 	const name = $('#save__name__input').val();
 	const score = $('#score_value').html();
 	const data = { data: { name, score } };
 
-	$.post(apiURL + '/save-game', data)
-		.done((res) => {
-			console.log(res);
-			//CUIDADO!!!
-			//SE O PM2 ESTIVER COM A FLAG "--watch" ou A CONFIG "watch: true" O SERVIDOR
-			//SERÁ REINICIADO DURANTE O SALVAMENTO DO NOVO SCORE NO ARQUIVO JSON
-			//E PORTANTO, AO TENTAR CHAMAR A FUNÇÃO ABAIXO HAVERÁ UM ERRO, POIS
-			//A REQUISIÇÃO ACONTECERÁ NO MOMENTO EM QUE O SERVIDOR ESTÁ SENDO REINICIADO!
-			window.location = '/';
-		})
-		.fail((error) => {
-			console.error(error);
-			alert(error.responseText);
-		});
+	try {
+		const response = await $.post(apiURL + '/save-score', data);
+
+		window.location = '/';
+	} catch (error) {
+		alert('check the console for errors');
+		console.error(error.responseJSON || error);
+	}
 };
 
 const renderSaveScore = () => {
+	window.onbeforeunload = () => {
+		return;
+	};
+
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">
 					<div class="input__container">
-						<input type="text" placeholder="Nome do jogador" id="save__name__input">
-						<button type="button" class="blue__button save_score_button" id='button_save'>Salvar</button>
+						<input type="text" placeholder="NOME" id="save__name__input">
+						<button type="button" class="blue__button save_score_button" id='button_save'>SALVAR</button>
 					</div>
 				</div>
 		</div>`
