@@ -283,6 +283,7 @@ class Game {
 	}
 	startAnimation() {
 		this.runAnimationControll = true;
+		this.animation();
 	}
 	stopAnimation() {
 		this.runAnimationControll = false;
