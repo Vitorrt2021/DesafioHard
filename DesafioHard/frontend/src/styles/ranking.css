@@ -39,12 +39,6 @@
 	height: 40%;
 }
 
-@media (max-width: 300px) {
-	.buttons__container {
-		height: 10%;
-		border: solid 2px black;
-	}
-}
 .blue__button {
 	background-image: url('../assets/images/blue_button.svg');
 	background-repeat: no-repeat;

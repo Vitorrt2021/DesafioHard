@@ -283,6 +283,7 @@ class Game {
 	}
 	startAnimation() {
 		this.runAnimationControll = true;
+		this.animation();
 	}
 	stopAnimation() {
 		this.runAnimationControll = false;
@@ -396,6 +397,7 @@ class Game {
 		this.updateMoney();
 		assetManager.playSound('evolve');
 		this.towers[towerIndex] = evolvedTower;
+		console.log(this.width);
 	}
 
 	updateMousePosition(e) {
