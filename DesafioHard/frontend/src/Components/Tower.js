@@ -12,6 +12,7 @@ class Tower {
 		this.y = y - cellSize / 2;
 		this.width = cellSize;
 		this.height = cellSize;
+		this.towerType = towerType;
 
 		this.health = towerStatus[towerType].health;
 		this.maxHealth = this.health;
@@ -25,37 +26,13 @@ class Tower {
 		this.isShooting = true;
 		this.isDamaged = false;
 
-		this.explosionAnimations = [
-			new DyingExplosion(
-				assetManager.getAnimationInstance('explosion'),
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			),
-			new DyingExplosion(
-				assetManager.getAnimationInstance('explosion'),
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			),
-			new DyingExplosion(
-				assetManager.getAnimationInstance('explosion'),
-				this.x,
-				this.y,
-				this.width,
-				this.height
-			),
-		];
-
 		this.alphaRedRectangle = 0;
 		this.maxAlphaRectangle = 0.5;
 		this.redRectDimensionModifier = 0;
 
 		this.image = assetManager.getImage(towerType);
 		this.imageBrightness = 100;
-		this.imageBrightnessRatioChange = 0.5;
+		this.imageBrightnessRatioChange = 0.32;
 
 		this.timer = this.attackSpeed;
 		this.level = towerStatus[towerType].level;
@@ -64,31 +41,63 @@ class Tower {
 		this.isDead = false;
 
 		this.isBigExplosionPlayed = false;
-		this.piecesTimeCounter = 80;
+		this.piecesTimeCounter = 100;
 
-		const fragments = [];
+		this.#buildExplosionsAnimation();
+		this.#buildPiecesAnimation();
+	}
 
-		for (let i = 1; i < 10; i++) {
-			// set the coordinate for each one of the 9 fragments
-			let coordinateX =
-				i === 1 || i === 4 || i === 7
-					? 0
-					: i === 2 || i === 5 || i === 8
-					? 1
-					: 2;
-			let coordinateY = i <= 3 ? 0 : i >= 4 && i <= 6 ? 1 : 2;
+	updateTowerPosition(newX, newY) {
+		this.x = newX;
+		this.y = newY;
 
-			let pieceAnimation = new PieceAnimation(
-				assetManager.getImage(towerType + '_frag_' + i),
-				this.x + this.width * coordinateX,
-				this.y + this.height * coordinateY,
-				this.width,
-				this.height
+		this.#buildExplosionsAnimation();
+		this.#buildPiecesAnimation();
+	}
+
+	#buildExplosionsAnimation() {
+		this.explosionAnimations = [];
+		const numberOfExplosions = 3;
+
+		for (let index = 0; index < numberOfExplosions; index++) {
+			this.explosionAnimations.push(
+				new DyingExplosion(
+					assetManager.getAnimationInstance('explosion'),
+					this.x,
+					this.y,
+					this.width,
+					this.height
+				)
 			);
-
-			fragments.push(pieceAnimation);
 		}
-		this.pieces = fragments;
+	}
+
+	#buildPiecesAnimation() {
+		this.pieces = [];
+		const numberOfPieces = 9; //must be a number who has an integer square root: 4, 9, 16, 25...
+		const squareRootNumberPieces = Math.sqrt(numberOfPieces);
+
+		let imageIndex = 1;
+
+		for (let index_Y = 0; index_Y < squareRootNumberPieces; index_Y++) {
+			let matrix_Y = this.y;
+			matrix_Y += (index_Y * this.height) / squareRootNumberPieces;
+
+			for (let index_X = 0; index_X < squareRootNumberPieces; index_X++) {
+				let matrix_X = this.x;
+				matrix_X += (index_X * this.width) / squareRootNumberPieces;
+
+				this.pieces.push(
+					new PieceAnimation(
+						assetManager.getImage(this.towerType + '_frag_' + imageIndex++),
+						matrix_X,
+						matrix_Y,
+						this.width / squareRootNumberPieces,
+						this.height / squareRootNumberPieces
+					)
+				);
+			}
+		}
 	}
 
 	setDyingAnimation() {
@@ -116,10 +125,6 @@ class Tower {
 			// 	this.isBigExplosionPlayed = true;
 			// }
 			// this.#drawFallingPieces(ctx);
-			// this.piecesTimeCounter -= 2; //Timer to count falling pieces animation ending...
-			// if (this.piecesTimeCounter <= 0) {
-			// 	this.isDead = true;
-			// }
 		} else {
 			assetManager.playSound('explosion', 0.2, false);
 			this.#drawBrightnessChangeAnimation(ctx);
@@ -142,6 +147,12 @@ class Tower {
 		this.pieces.forEach((piece) => {
 			piece.drawPiece(ctx);
 		});
+
+		this.piecesTimeCounter -= 1; //Timer to count falling pieces animation ending...
+
+		if (this.piecesTimeCounter <= 0) {
+			this.isDead = true;
+		}
 	}
 
 	#drawEvolveIcon(ctx) {
@@ -251,7 +262,6 @@ class Tower {
 
 class DyingExplosion {
 	#explosionArea;
-	explosionAnimation;
 	#towerX;
 	#towerY;
 	#towerWidth;
@@ -260,8 +270,8 @@ class DyingExplosion {
 	constructor(explosionAnimation, towerX, towerY, towerWidth, towerHeight) {
 		this.#towerX = towerX;
 		this.#towerY = towerY;
-		this.#towerWidth = towerWidth;
-		this.#towerHeight = towerHeight;
+		this.#towerWidth = towerWidth / 2;
+		this.#towerHeight = towerHeight / 2;
 		this.explosionAnimation = explosionAnimation;
 		this.#explosionArea = this.#calculateExplosionsArea();
 	}
@@ -275,18 +285,15 @@ class DyingExplosion {
 			this.explosionAnimation.selectImage(),
 			this.#explosionArea.x,
 			this.#explosionArea.y,
-			getRandomNumber(this.#towerWidth / 3, this.#towerWidth),
-			getRandomNumber(this.#towerHeight / 3, this.#towerHeight)
+			this.#towerWidth,
+			this.#towerHeight
 		);
 	}
 
 	#calculateExplosionsArea() {
 		return {
-			x: this.#towerX + Math.random() * this.#towerWidth - this.#towerWidth / 3,
-			y:
-				this.#towerY +
-				Math.random() * this.#towerHeight -
-				this.#towerHeight / 3,
+			x: this.#towerX + Math.random() * this.#towerWidth,
+			y: this.#towerY + Math.random() * this.#towerHeight,
 		};
 	}
 }
@@ -302,13 +309,13 @@ class PieceAnimation {
 
 	constructor(image, x, y, width, height) {
 		this.towerPieceSpeedX =
-			(Math.random() < 0.5 ? -1 : 1) * getRandomNumber(5, 20);
-		this.towerPieceSpeedY = getRandomNumber(5, -20);
-		this.towerPieceSpeedYChangeRatio = getRandomNumber(1, 0.5);
+			(Math.random() < 0.5 ? -1 : 1) * getRandomNumber(2.5, 10);
+		this.towerPieceSpeedY = getRandomNumber(-5, -20);
+		this.towerPieceSpeedYChangeRatio = getRandomNumber(1, 0.1);
 		this.#x = x;
 		this.#y = y;
-		this.#width = width / 2;
-		this.#height = height / 2;
+		this.#width = width;
+		this.#height = height;
 		this.#image = image;
 		this.#angle = Math.PI / 360;
 		this.#angleChangeRatio = getRandomNumber(0.05, 0.3);
