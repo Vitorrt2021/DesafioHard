@@ -1,30 +1,27 @@
-// import paths from './AssetPaths.js';
 import animationData from './animationData.js';
 
+const sleep = 200;
+
 class AssetManager {
-	#animations = {};
 	#images = {};
 	#sounds = {};
+	#volume = 0.2;
+	#animations = {};
 
 	async prepareAssets(assetLoaderInstance) {
 		await this.#makeImagesObject(assetLoaderInstance);
-		this.#makeAudiosObject(assetLoaderInstance);
+		await this.#makeAudiosObject(assetLoaderInstance);
 
-		//FIX-IT Dá pra melhorar ainda mais fazendo ler uma pasta animations, mas por questão de tempo, deixar pra depois.
-		this.#buildAnimation('explosion');
-		this.#buildAnimation('slimePink');
-		this.#buildAnimation('slimeGreen');
-		this.#buildAnimation('toad');
-		this.#buildAnimation('robot');
-		this.#buildAnimation('toad_dying');
-		this.#buildAnimation('robot_dying');
-		this.#buildAnimation('slimeGreen_dying');
-		this.#buildAnimation('slimePink_dying');
+		const animDataKeys = Object.keys(animationData);
+		for (const animationName of animDataKeys) {
+			this.#buildAnimation(animationName);
+		}
 	}
 
 	#buildAnimation(animationName) {
 		const imagesHeight = [];
 		const imagesForAnimation = [];
+
 		for (
 			let index = 0;
 			index < animationData[animationName].animationQtyFrames;
@@ -55,16 +52,34 @@ class AssetManager {
 		return this.#images[image_name];
 	}
 
-	playSound(sound_name, volume = 0.2, pause = true) {
+	async playSound(sound_name, volume = this.#volume, loop = false) {
+		if (!this.#sounds[sound_name]) {
+			await this.#makeAudioObjectFromFrontEnd(sound_name);
+		}
+
 		const soundObject = this.#sounds[sound_name];
 		soundObject.volume = volume;
 
-		if (pause) {
-			soundObject.pause();
-			soundObject.currentTime = 0;
+		if (loop) {
+			soundObject.loop = loop;
 		}
 
 		soundObject.play();
+
+		//just in case the programmer wants to do more complex things
+		return soundObject;
+	}
+
+	pauseSound(sound_name) {
+		this.#sounds[sound_name]?.pause();
+	}
+
+	stopSound(sound_name) {
+		this.pauseSound(sound_name);
+
+		if (this.#sounds[sound_name]) {
+			this.#sounds[sound_name].currentTime = 0;
+		}
 	}
 
 	async #makeImagesObject(assetLoaderInstance) {
@@ -77,15 +92,32 @@ class AssetManager {
 
 		//Esperando carregar as imagens antes de continuar...
 		while (!this.#isImagesLoadCompleted()) {
-			await new Promise((resolve) => setTimeout(resolve, 200)); //sleep
+			await new Promise((resolve) => setTimeout(resolve, sleep)); //sleep
 		}
 	}
 
-	#makeAudiosObject(assetLoaderInstance) {
+	async #makeAudiosObject(assetLoaderInstance) {
 		for (const sound in assetLoaderInstance.sounds) {
 			const soundObj = new Audio(assetLoaderInstance.sounds[sound]);
 
 			this.#sounds[sound] = soundObj;
+		}
+
+		//Esperando carregar os sons antes de continuar...
+		while (!this.#isAudiosLoadCompleted()) {
+			await new Promise((resolve) => setTimeout(resolve, sleep)); //sleep
+		}
+	}
+
+	async #makeAudioObjectFromFrontEnd(sound_name) {
+		const frontendSound = new Audio(
+			'../assets/audios/bg_music/' + sound_name + '.mp3'
+		);
+
+		this.#sounds[sound_name] = frontendSound;
+
+		while (!this.#isAudiosLoadCompleted()) {
+			await new Promise((resolve) => setTimeout(resolve, sleep)); //sleep
 		}
 	}
 
@@ -99,6 +131,23 @@ class AssetManager {
 
 		for (const image in this.#images) {
 			if (!this.#images[image].complete) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	#isAudiosLoadCompleted() {
+		if (
+			Object.keys(this.#sounds).length === 0 &&
+			this.#sounds.constructor === Object
+		) {
+			return false;
+		}
+
+		for (const sound in this.#sounds) {
+			if (this.#sounds[sound].readyState === 0) {
 				return false;
 			}
 		}
