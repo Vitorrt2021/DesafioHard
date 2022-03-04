@@ -156,7 +156,7 @@ class Game {
 		this.enemies.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
 				this.player.deductLive();
-				this.enemys.splice(enemyIndex, 1);
+				this.enemies.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
 			}

@@ -79,7 +79,6 @@ class Tower {
 		let namePieces = this.towerType.slice(0, this.towerType.length - 1);
 
 		let imageIndex = 1;
-		console.log(namePieces);
 
 		for (let index_Y = 0; index_Y < squareRootNumberPieces; index_Y++) {
 			let matrix_Y = this.y;
