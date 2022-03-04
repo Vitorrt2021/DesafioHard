@@ -69,14 +69,12 @@ class Game {
 		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
 		if (
-			this.player.getMoney() <
-			parseInt(towerStatus.red_rabbit_tower_level_1.price)
+			this.player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
 			$('.rabbit_tower').css('filter', 'brightness(55%)');
 		}
 		if (
-			this.player.getMoney() <
-			parseInt(towerStatus.blue_rabbit_tower_level_1.price)
+			this.player.getMoney() < parseInt(towerStatus.pikachu_tower_level_1.price)
 		) {
 			$('.pikachu_tower').css('filter', 'brightness(55%)');
 		}
