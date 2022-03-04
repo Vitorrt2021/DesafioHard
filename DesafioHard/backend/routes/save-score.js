@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const ErrorHandler = require('../controllers/modules/ErrorHandler.js');
 const Ranking = require('../models/ranking.js');
+const validation = require('../controllers/middlewares/validation.js');
 
-router.post('/', async (req, res) => {
+router.post('/', validation, async (req, res) => {
 	try {
 		const { data } = req.body;
 
-		const playerScore = { name: data.name, score: Number(data.score) };
+		const playerScore = { name: data.name, score: data.score };
 
 		const date = new Date().getTime();
 
@@ -20,11 +20,8 @@ router.post('/', async (req, res) => {
 
 		res.send(response);
 	} catch (error) {
-		const newError = new ErrorHandler(error);
-
-		console.log(newError.digest(new Error()));
-
-		res.send({ error: true });
+		console.error(error);
+		res.status(400).send(error);
 	}
 });
 
