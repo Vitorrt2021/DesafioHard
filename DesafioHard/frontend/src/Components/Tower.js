@@ -76,6 +76,7 @@ class Tower {
 		this.pieces = [];
 		const numberOfPieces = 9; //must be a number who has an integer square root: 4, 9, 16, 25...
 		const squareRootNumberPieces = Math.sqrt(numberOfPieces);
+		let namePieces = this.towerType.slice(0, this.towerType.length - 1);
 
 		let imageIndex = 1;
 
@@ -86,16 +87,43 @@ class Tower {
 			for (let index_X = 0; index_X < squareRootNumberPieces; index_X++) {
 				let matrix_X = this.x;
 				matrix_X += (index_X * this.width) / squareRootNumberPieces;
-
-				this.pieces.push(
-					new PieceAnimation(
-						assetManager.getImage(this.towerType + '_frag_' + imageIndex++),
-						matrix_X,
-						matrix_Y,
-						this.width / squareRootNumberPieces,
-						this.height / squareRootNumberPieces
-					)
-				);
+				if (
+					towerStatus[this.towerType].level > 0 &&
+					towerStatus[this.towerType].level < 4
+				) {
+					this.pieces.push(
+						new PieceAnimation(
+							assetManager.getImage(namePieces + '1_frag_' + imageIndex++),
+							matrix_X,
+							matrix_Y,
+							this.width / squareRootNumberPieces,
+							this.height / squareRootNumberPieces
+						)
+					);
+				} else if (
+					towerStatus[this.towerType].level >= 4 &&
+					towerStatus[this.towerType].level < 7
+				) {
+					this.pieces.push(
+						new PieceAnimation(
+							assetManager.getImage(namePieces + '2_frag_' + imageIndex++),
+							matrix_X,
+							matrix_Y,
+							this.width / squareRootNumberPieces,
+							this.height / squareRootNumberPieces
+						)
+					);
+				} else {
+					this.pieces.push(
+						new PieceAnimation(
+							assetManager.getImage(namePieces + '3_frag_' + imageIndex++),
+							matrix_X,
+							matrix_Y,
+							this.width / squareRootNumberPieces,
+							this.height / squareRootNumberPieces
+						)
+					);
+				}
 			}
 		}
 	}
@@ -124,7 +152,6 @@ class Tower {
 				assetManager.playSound('tower_dead_explosion', 0.5);
 				this.isBigExplosionPlayed = true;
 			}
-
 			this.#drawFallingPieces(ctx);
 		} else {
 			assetManager.playSound('explosion', 0.2, false);

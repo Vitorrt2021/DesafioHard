@@ -27,7 +27,7 @@ class Game {
 		this.enemiesDying = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
-		this.spawnVelocity = 500;
+		this.spawnVelocity = 600;
 		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
 		this.bgMusic = new Audio();
@@ -65,20 +65,18 @@ class Game {
 	}
 
 	canBuyTowers() {
-		$('.red_rabbit_tower').css('filter', 'brightness(100%)');
-		$('.blue_rabbit_tower').css('filter', 'brightness(100%)');
+		$('.rabbit_tower').css('filter', 'brightness(100%)');
+		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
 		if (
-			this.player.getMoney() <
-			parseInt(towerStatus.red_rabbit_tower_level_1.price)
+			this.player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
-			$('.red_rabbit_tower').css('filter', 'brightness(55%)');
+			$('.rabbit_tower').css('filter', 'brightness(55%)');
 		}
 		if (
-			this.player.getMoney() <
-			parseInt(towerStatus.blue_rabbit_tower_level_1.price)
+			this.player.getMoney() < parseInt(towerStatus.pikachu_tower_level_1.price)
 		) {
-			$('.blue_rabbit_tower').css('filter', 'brightness(55%)');
+			$('.pikachu_tower').css('filter', 'brightness(55%)');
 		}
 		if (
 			this.player.getMoney() < parseInt(towerStatus.cat_tower_level_1.price)
@@ -158,7 +156,7 @@ class Game {
 		this.enemies.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
 				this.player.deductLive();
-				this.enemys.splice(enemyIndex, 1);
+				this.enemies.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
 			}
@@ -168,7 +166,7 @@ class Game {
 	enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			this.player.addScore(20 * (this.level + 1));
-			this.player.addMoney(Math.floor(this.moneyDrop));
+			this.player.addMoney(Math.floor(this.moneyDrop) + enemy.money);
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
@@ -242,7 +240,7 @@ class Game {
 	}
 
 	changeSpawnVelocity() {
-		const spawnV = (this.spawnVelocity = 500 - 60 * this.level);
+		const spawnV = (this.spawnVelocity = 600 - 60 * this.level);
 		if (spawnV <= this.maxSpawnVelocity) {
 			this.spawnVelocity = this.maxSpawnVelocity;
 		} else {
@@ -370,13 +368,13 @@ class Game {
 
 		const towerClicked = this.towers.find(finder);
 		const towerIndex = this.towers.indexOf(towerClicked);
-		if (!towerClicked || towerClicked.level == 4) return;
+		if (!towerClicked || towerClicked.level == 9) return;
 		// easter egg!
 		// roll the dice and check if the player will get Torres.
 		// in case of bad luck the player loses money and
 		// the tower gets damaged.
 		const jackpot = Math.random() * 100;
-		if (towerClicked.level == 3 && jackpot > 2) {
+		if (towerClicked.level == 9 && jackpot > 2) {
 			if (this.player.getMoney() >= 3000) {
 				this.player.buy(1000);
 				this.updateMoney();
@@ -471,7 +469,7 @@ class Game {
 		);
 		this.bgMusic.play();
 		this.bgMusic.loop = true;
-		this.bgMusic.volume = 0.1;
+		this.bgMusic.volume = 0.15;
 	}
 }
 
