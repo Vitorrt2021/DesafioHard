@@ -27,7 +27,7 @@ class Game {
 		this.enemiesDying = [];
 		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
 		this.level = 0;
-		this.spawnVelocity = 500;
+		this.spawnVelocity = 600;
 		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
 		this.bgMusic = new Audio();
@@ -65,20 +65,22 @@ class Game {
 	}
 
 	canBuyTowers() {
-		$('.red_rabbit_tower').css('filter', 'brightness(100%)');
-		$('.blue_rabbit_tower').css('filter', 'brightness(100%)');
+		$('.rabbit_tower').css('filter', 'brightness(100%)');
+		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
 		if (
-			this.player.money < parseInt(towerStatus.red_rabbit_tower_level_1.price)
+			this.player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
-			$('.red_rabbit_tower').css('filter', 'brightness(55%)');
+			$('.rabbit_tower').css('filter', 'brightness(55%)');
 		}
 		if (
-			this.player.money < parseInt(towerStatus.blue_rabbit_tower_level_1.price)
+			this.player.getMoney() < parseInt(towerStatus.pikachu_tower_level_1.price)
 		) {
-			$('.blue_rabbit_tower').css('filter', 'brightness(55%)');
+			$('.pikachu_tower').css('filter', 'brightness(55%)');
 		}
-		if (this.player.money < parseInt(towerStatus.cat_tower_level_1.price)) {
+		if (
+			this.player.getMoney() < parseInt(towerStatus.cat_tower_level_1.price)
+		) {
 			$('.cat_tower').css('filter', 'brightness(55%)');
 		}
 	}
@@ -93,7 +95,7 @@ class Game {
 			) {
 				tower.canEvolve = false;
 			} else if (towerStatus[nextLevel].hasOwnProperty('price')) {
-				if (parseInt(towerStatus[nextLevel].price) <= this.player.money) {
+				if (parseInt(towerStatus[nextLevel].price) <= this.player.getMoney()) {
 					tower.canEvolve = true;
 				} else {
 					tower.canEvolve = false;
@@ -124,7 +126,7 @@ class Game {
 	}
 
 	gameIsOver() {
-		if (this.player.live <= 0) {
+		if (this.player.getLive() <= 0) {
 			assetManager.playSound('titanic_flute');
 
 			setTimeout(() => {
@@ -138,23 +140,23 @@ class Game {
 	}
 
 	updateScore() {
-		$('#score_value').html(this.player.score);
+		$('#score_value').html(this.player.getScore());
 	}
 
 	updateMoney() {
 		this.canBuyTowers();
-		$('#money_value').html(this.player.money);
+		$('#money_value').html(this.player.getMoney());
 	}
 
 	updateLive() {
-		$('#live_value').html(this.player.live);
+		$('#live_value').html(this.player.getLive());
 	}
 
 	checkEnemyAttackedBase() {
 		this.enemies.forEach((enemy, enemyIndex) => {
 			if (enemy.x + this.cellSize / 3 < 0) {
-				this.player.live -= 1;
-				this.enemies.splice(enemyIndex, 1);
+				this.player.deductLive();
+				this.enemys.splice(enemyIndex, 1);
 				this.updateLive();
 				this.gameIsOver();
 			}
@@ -162,9 +164,9 @@ class Game {
 	}
 
 	enemyIsDead(enemy, enemyIndex) {
-		if (enemy.health <= 0) {
-			this.player.score += 20 * (this.level + 1);
-			this.player.money += Math.floor(this.moneyDrop);
+		if (enemy.health <= 0 && !enemy.isDying) {
+			this.player.addScore(20 * (this.level + 1));
+			this.player.addMoney(Math.floor(this.moneyDrop) + enemy.money);
 			this.updateScore();
 			this.updateMoney();
 			enemy.setDyingAnimation();
@@ -205,7 +207,6 @@ class Game {
 			});
 		});
 	}
-
 	checkProjectileCollision() {
 		this.towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
@@ -239,7 +240,7 @@ class Game {
 	}
 
 	changeSpawnVelocity() {
-		const spawnV = (this.spawnVelocity = 500 - 60 * this.level);
+		const spawnV = (this.spawnVelocity = 600 - 60 * this.level);
 		if (spawnV <= this.maxSpawnVelocity) {
 			this.spawnVelocity = this.maxSpawnVelocity;
 		} else {
@@ -283,6 +284,7 @@ class Game {
 	}
 	startAnimation() {
 		this.runAnimationControll = true;
+		this.animation();
 	}
 	stopAnimation() {
 		this.runAnimationControll = false;
@@ -303,7 +305,7 @@ class Game {
 				150,
 				towerType
 			);
-			if (newTower.price > this.player.money) {
+			if (newTower.price > this.player.getMoney()) {
 				return;
 			}
 			this.addTowerInCell(newTower);
@@ -351,7 +353,7 @@ class Game {
 
 		assetManager.playSound('dropTower');
 
-		this.player.money -= parseInt(tower.price);
+		this.player.buy(parseInt(tower.price));
 		this.updateMoney();
 		this.towers.push(tower);
 	}
@@ -366,15 +368,15 @@ class Game {
 
 		const towerClicked = this.towers.find(finder);
 		const towerIndex = this.towers.indexOf(towerClicked);
-		if (!towerClicked || towerClicked.level == 4) return;
+		if (!towerClicked || towerClicked.level == 9) return;
 		// easter egg!
 		// roll the dice and check if the player will get Torres.
 		// in case of bad luck the player loses money and
 		// the tower gets damaged.
 		const jackpot = Math.random() * 100;
-		if (towerClicked.level == 3 && jackpot > 2) {
-			if (this.player.money >= 3000) {
-				this.player.money -= 1000;
+		if (towerClicked.level == 9 && jackpot > 2) {
+			if (this.player.getMoney() >= 3000) {
+				this.player.buy(1000);
 				this.updateMoney();
 				towerClicked.health *= 0.3;
 				towerClicked.health = parseInt(towerClicked.health);
@@ -390,12 +392,13 @@ class Game {
 			150,
 			towerClicked.nextLevel
 		);
-		if (evolvedTower.price > this.player.money) return;
+		if (evolvedTower.price > this.player.getMoney()) return;
 		evolvedTower.damage *= 1 + this.level * 0.35;
-		this.player.money -= parseInt(evolvedTower.price);
+		this.player.buy(parseInt(evolvedTower.price));
 		this.updateMoney();
 		assetManager.playSound('evolve');
 		this.towers[towerIndex] = evolvedTower;
+		console.log(this.width);
 	}
 
 	updateMousePosition(e) {
@@ -447,7 +450,7 @@ class Game {
 		}
 	}
 	updateLevel() {
-		if (this.player.score >= 100 * Math.pow(2, this.level + 1)) {
+		if (this.player.getScore() >= 100 * Math.pow(2, this.level + 1)) {
 			this.level++;
 			this.moneyDrop *= 1 + 1 / this.level;
 			assetManager.playSound('level_up');
