@@ -30,8 +30,7 @@ class Game {
 		this.spawnVelocity = 600;
 		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
-		this.bgMusic = new Audio();
-		this.bgMusic.id = 'bg_music';
+		this.backgroundMusic = '';
 	}
 
 	start() {
@@ -135,7 +134,7 @@ class Game {
 			$('#live_value').html('0');
 			$('#level_value').html('');
 			this.stopAnimation();
-			this.bgMusic.pause();
+			assetManager.stopSound(this.backgroundMusic);
 		}
 	}
 
@@ -463,13 +462,9 @@ class Game {
 	}
 
 	updateBackgroundMusic() {
-		$(this.bgMusic).attr(
-			'src',
-			'../assets/audios/bg_music/bg_music_lvl_' + this.level + '.mp3'
-		);
-		this.bgMusic.play();
-		this.bgMusic.loop = true;
-		this.bgMusic.volume = 0.15;
+		assetManager.stopSound(this.backgroundMusic);
+		this.backgroundMusic = 'bg_music_lvl_' + this.level;
+		assetManager.playSound(this.backgroundMusic, 0.175, true);
 	}
 }
 
