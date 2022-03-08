@@ -428,7 +428,7 @@ class Game {
 		this.enemies.push(
 			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
 			new Enemy(
-				new Monster(monster),
+				monster,
 				parseInt(this.canvas.width),
 				position,
 				this.cellSize,
