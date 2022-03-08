@@ -2,7 +2,6 @@ import Cell from './Cell.js';
 import Tower from './Tower.js';
 import collision from './Collision.js';
 import Player from './Player.js';
-import Monster from './Monster.js';
 import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
 import assetManager from '../Components/AssetManager.js';
