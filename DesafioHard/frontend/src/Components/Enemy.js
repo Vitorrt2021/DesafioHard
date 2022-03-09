@@ -12,11 +12,9 @@ class Enemy {
 		this.line = line;
 		this.isDying = false;
 		this.isDead = false;
-
 		this.speed = monsterStatus[type].speed * 1.15;
 		this.money = monsterStatus[type].money;
 		this.animation = assetManager.getAnimationInstance(type);
-
 		this.type = type;
 		this.animation = assetManager.getAnimationInstance(type);
 		this.#updateMaxHeight();

@@ -56,6 +56,11 @@ $(document).ready(() => {
 			game.evolveTower();
 		});
 
+		$('.configuration_button').click(() => {
+			game.stopAnimation();
+			renderConfigurationModal(game);
+		});
+
 		createTooltip('.pikachu_tower', 750, 75, Math.floor(10000 / 170));
 		createTooltip('.rabbit_tower', 500, 100, Math.floor(10000 / 120));
 		createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
@@ -89,3 +94,32 @@ function createTooltip(element, live, strenght, speed) {
 			</div>`,
 	});
 }
+const renderConfigurationModal = (game) => {
+	$('.configuration_modal').html(
+		`<div class="configuration_modal_content">
+				<div>
+					Bom dia
+						<button class="close_configuration_modal" type="button">FECHAR</button>
+				</div>
+		</div>
+		`
+	);
+
+	$('.close_configuration_modal').click(closeModal);
+
+	$('.configuration_modal')[0].style.display = 'block';
+
+	// When the user clicks anywhere outside of the modal, closes it
+	$(window).click((event) => {
+		if (
+			event.originalEvent.target === $('.configuration_modal')[0] ||
+			event.originalEvent.target === $('.configuration_modal_content')[0]
+		) {
+			closeModal();
+		}
+	});
+	function closeModal() {
+		$('.configuration_modal')[0].style.display = 'none';
+		game.startAnimation();
+	}
+};

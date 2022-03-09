@@ -26,7 +26,7 @@ html body {
 	color: rgb(241, 241, 241);
 	position: absolute;
 	top: 2vw;
-	left: 3.3vw;
+	left: 5vw;
 	font-size: 3em;
 	z-index: 4;
 }
@@ -189,4 +189,28 @@ html body {
 }
 .tooltip1 div label {
 	font-size: 1rem;
+}
+.configuration_button {
+	width: 5vw;
+	cursor: pointer;
+}
+.configuration_button:hover {
+	filter: brightness(0.7);
+}
+
+/* Configuration modal */
+/* $('.configuration_modal').html(
+	`<div class="configuration_modal_content">
+			<div>
+				Bom dia
+					<button class="close_configuration_modal" type="button">FECHAR</button>
+			</div>
+	</div>
+	`
+); */
+.configuration_modal {
+	position: absolute;
+	z-index: 10;
+	left: 50%;
+	margin-left: -50px;
 }
