@@ -108,7 +108,7 @@ const renderConfigurationModal = (game) => {
 
 function eventCloseConfiguration(game) {
 	// When the user clicks anywhere outside of the modal, closes it
-	$(window).click((event) => {
+	$(window).mousedown((event) => {
 		if (
 			event.originalEvent.target !== $('.configuration_modal')[0] &&
 			event.originalEvent.target !== $('.configuration_modal_content')[0] &&
