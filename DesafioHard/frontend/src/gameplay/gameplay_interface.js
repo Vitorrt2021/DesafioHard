@@ -56,6 +56,7 @@ $(document).ready(() => {
 			game.evolveTower();
 		});
 
+		eventCloseConfiguration(game);
 		$('.configuration_button').click(() => {
 			game.stopAnimation();
 			renderConfigurationModal(game);
@@ -97,29 +98,32 @@ function createTooltip(element, live, strenght, speed) {
 const renderConfigurationModal = (game) => {
 	$('.configuration_modal').html(
 		`<div class="configuration_modal_content">
-				<div>
-					Bom dia
-						<button class="close_configuration_modal" type="button">FECHAR</button>
-				</div>
+				Bom dia
+				<button class="close_configuration_modal" type="button">FECHAR</button>		
 		</div>
 		`
 	);
-
-	$('.close_configuration_modal').click(closeModal);
-
 	$('.configuration_modal')[0].style.display = 'block';
+};
 
+function eventCloseConfiguration(game) {
 	// When the user clicks anywhere outside of the modal, closes it
 	$(window).click((event) => {
 		if (
-			event.originalEvent.target === $('.configuration_modal')[0] ||
-			event.originalEvent.target === $('.configuration_modal_content')[0]
+			event.originalEvent.target !== $('.configuration_modal')[0] &&
+			event.originalEvent.target !== $('.configuration_modal_content')[0] &&
+			event.originalEvent.target !== $('.close_configuration_modal')[0] &&
+			event.originalEvent.target !== $('.configuration_button')[0]
 		) {
 			closeModal();
 		}
+
+		function closeModal() {
+			$('.configuration_modal')[0].style.display = 'none';
+
+			if (game.isStop()) {
+				game.startAnimation();
+			}
+		}
 	});
-	function closeModal() {
-		$('.configuration_modal')[0].style.display = 'none';
-		game.startAnimation();
-	}
-};
+}

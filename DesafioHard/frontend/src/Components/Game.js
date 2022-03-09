@@ -15,16 +15,13 @@ class Game {
 	#runAnimationControl = true;
 	#cellSize = 250;
 	#cellGap = 5;
-
 	#gameGrid = [];
 	#mousePosition = {};
 	#towers = [];
 	#towersDying = [];
-
 	#enemies = [];
 	#enemiesDying = [];
 	#monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
-
 	#level = 0;
 	#spawnVelocity = 600;
 	#maxSpawnVelocity = 60;
@@ -35,7 +32,9 @@ class Game {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 	}
-
+	isStop() {
+		return !this.#runAnimationControl;
+	}
 	start() {
 		this.#updateLive();
 		this.#updateScore();
