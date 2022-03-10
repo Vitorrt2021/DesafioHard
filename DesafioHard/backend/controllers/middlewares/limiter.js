@@ -1,4 +1,5 @@
 const rateLimit = require('express-rate-limit');
+const ErrorHandler = require('../modules/ErrorHandler.js');
 
 const limiter = (win, max) => {
 	try {
@@ -9,8 +10,14 @@ const limiter = (win, max) => {
 			legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 		});
 	} catch (error) {
-		console.error(error);
-		res.status(error.code).send(error);
+		const errorHandler = new ErrorHandler.InternalServerError(
+			'Failure while limiting requests',
+			error
+		);
+
+		console.error(errorHandler);
+
+		res.status(errorHandler.code).send(errorHandler);
 	}
 };
 
