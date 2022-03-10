@@ -5,11 +5,25 @@
 	box-sizing: border-box;
 }
 
+@keyframes animatedBackground {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100000% 0;
+	}
+}
+
 html {
 	font-size: 1.44vw;
-	background: url('../assets/images/clouds_background.png') no-repeat center
+	/* background: url('../assets/images/clouds_background.png') no-repeat center
 		center fixed;
-	background-size: cover;
+	background-size: cover; */
+	background-image: url('../assets/images/clouds_background_1.png');
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-size: auto 100%;
+	animation: animatedBackground 24000s linear infinite;
 	color: white;
 	font-weight: bolder;
 	text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
