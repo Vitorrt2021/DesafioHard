@@ -1,6 +1,9 @@
 import renderRanking from './requests/ranking.js';
+import assetManager from '../Components/AssetManager.js';
 
 $(document).ready(() => {
+	assetManager.playSound('bg_music_lvl_14');
+
 	$('#play_game').click(() => {
 		window.location = '/gameplay';
 	});
@@ -40,17 +43,22 @@ function renderSoundMenu() {
 
 	$('.volumeSlider').on('input', function (e) {
 		$('.volumeInfo_container').text($('.volumeSlider').val() + '%');
+		assetManager.changeVolume($('.volumeSlider').val());
 	});
 
 	$('.sound_button_modal_empty').click(() => {
-		$('.volumeSlider').val(0);
-		$('.volumeInfo_container').text($('.volumeSlider').val() + '%');
+		updateVolume(0);
 	});
 
 	$('.sound_button_modal_full').click(() => {
-		$('.volumeSlider').val(100);
-		$('.volumeInfo_container').text($('.volumeSlider').val() + '%');
+		updateVolume(100);
 	});
+
+	function updateVolume(newVolume) {
+		$('.volumeSlider').val(newVolume);
+		$('.volumeInfo_container').text($('.volumeSlider').val() + '%');
+		assetManager.changeVolume(newVolume);
+	}
 
 	// When the user clicks anywhere outside of the modal, closes it
 	$(window).click((event) => {
