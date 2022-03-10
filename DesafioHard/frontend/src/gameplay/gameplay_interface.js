@@ -1,6 +1,6 @@
 import Game from '../Components/Game.js';
-import assetManager from '../Components/AssetManager.js';
 import renderRanking from '../requests/ranking.js';
+import assetManager from '../Components/AssetManager.js';
 
 // const apiURL = 'https://data.dudeful.com';
 const apiURL = 'http://localhost:5000';

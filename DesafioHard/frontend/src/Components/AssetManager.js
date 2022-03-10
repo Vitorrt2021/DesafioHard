@@ -82,6 +82,20 @@ class AssetManager {
 		}
 	}
 
+	changeVolume(newVolume) {
+		if (newVolume >= 0 && newVolume <= 100) {
+			this.#volume = newVolume / 100;
+
+			for (const sound in this.#sounds) {
+				const soundObj = this.#sounds[sound];
+
+				if (soundObj.duration > 0 && !soundObj.paused) {
+					soundObj.volume = this.#volume;
+				}
+			}
+		}
+	}
+
 	async #makeImagesObject(assetLoaderInstance) {
 		for (const image in assetLoaderInstance.images) {
 			const imageObj = new Image();
