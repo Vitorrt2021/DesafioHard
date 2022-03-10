@@ -38,13 +38,24 @@ body {
 	}
 }
 
+@keyframes animatedBackground {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100000% 0;
+	}
+}
+
 .app__container {
 	width: 100vw;
 	height: 100vh;
-	background-image: url('../assets/images/clouds_background.png');
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+	/* background-image: url('../assets/images/clouds_background.png'); */
+	background-image: url('../assets/images/clouds_background_1.png');
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-size: auto 100%;
+	animation: animatedBackground 12000s linear infinite;
 
 	display: flex;
 	justify-content: center;
@@ -66,40 +77,39 @@ body {
 
 .buttons__container {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
 
 	width: 50%;
 	height: 50%;
 
-	margin-top: 37vh;
+	margin-top: 25vh;
 }
 
 .blue__button {
-	background-image: url('../assets/images/blue_button.svg');
+	background-image: url('../assets/images/play_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 	border: none;
 	background-color: transparent;
-
-	width: 40%;
-	height: 50%;
-
-	color: inherit;
-	font-family: inherit;
-	font-size: inherit;
+	width: 50%;
+	height: 60%;
 	cursor: pointer;
+}
+
+.blue__button:active {
+	transform: translateY(4px);
+	background-image: url('../assets/images/play_button_green.svg');
 }
 
 .ranking_and_sound_container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	width: 100%;
-	height: 25%;
+	height: 40%;
 }
 
 .red__button {
@@ -109,9 +119,15 @@ body {
 	background-position: center;
 	border: none;
 	background-color: transparent;
-	width: 15%;
+	width: 25%;
 	height: 100%;
+	margin-right: 15vw;
 	cursor: pointer;
+}
+
+.red__button:active {
+	transform: translateY(4px);
+	background-image: url('../assets/images/ranking_button_green.svg');
 }
 
 .sound__button {
@@ -121,8 +137,124 @@ body {
 	background-position: center;
 	border: none;
 	background-color: transparent;
-	width: 15%;
+	width: 25%;
 	height: 100%;
+	cursor: pointer;
+}
+
+.sound__button:active {
+	transform: translateY(4px);
+	background-image: url('../assets/images/sound_button_green.svg');
+}
+
+.volume_menu {
+	width: 60%;
+	height: 55%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.volumeSlider_container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.sound_button_modal_full {
+	background-image: url('../assets/images/sound_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 25%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.sound_button_modal_full:active {
+	transform: translateY(4px);
+	background-image: url('../assets/images/sound_button_green.svg');
+}
+
+.sound_button_modal_empty {
+	background-image: url('../assets/images/sound_button_disabled.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 25%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.sound_button_modal_empty:active {
+	transform: translateY(4px);
+}
+
+.volumeInfo_container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	font-size: 0.75em;
+}
+
+.volumeSlider {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	border: 0;
+	width: 50%;
+	height: 100%;
+	cursor: pointer;
+	background: transparent;
+}
+
+.volumeSlider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	margin-top: -12px;
+	background-image: url('../assets/images/slider_thumb.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+}
+
+.volumeSlider::-moz-range-thumb {
+	-moz-appearance: none;
+	appearance: none;
+	border: 0;
+	border-radius: 0;
+	width: 25px;
+	height: 25px;
+	background-image: url('../assets/images/slider_thumb.svg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	cursor: pointer;
+}
+
+.volumeSlider::-webkit-slider-runnable-track {
+	-webkit-appearance: none;
+	appearance: none;
+	height: 0.5vh;
+	background: #f1c383;
+	cursor: pointer;
+}
+
+.volumeSlider::-moz-range-track {
+	-moz-appearance: none;
+	appearance: none;
+	height: 0.5vh;
+	background: #f1c383;
 	cursor: pointer;
 }
 
@@ -131,6 +263,21 @@ body {
 	height: 80%;
 
 	background-image: url('../assets/images/ranking_window.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.sound__menu {
+	width: 20%;
+	height: 75%;
+
+	background-image: url('../assets/images/sound_menu_background.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -268,7 +415,6 @@ body {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgb(0, 0, 0);
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -280,7 +426,9 @@ body {
 	position: relative;
 	animation-name: animatetop;
 	animation-duration: 0.4s;
-	margin: 5% 0 0 15%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .close_modal {
@@ -295,8 +443,13 @@ body {
 	font-family: inherit;
 	color: inherit;
 	font-family: inherit;
-	font-size: 5vh;
+	font-size: 3vh;
 	cursor: pointer;
+}
+
+.close_modal:active {
+	transform: translateY(4px);
+	background-image: url('../assets/images/red_button_green.svg');
 }
 
 @keyframes animatetop {
