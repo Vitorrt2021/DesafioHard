@@ -31,18 +31,12 @@ $(document).ready(() => {
 		event.originalEvent.dataTransfer.setData('text', 'cat_tower_level_1');
 	});
 
-	$('.blue_rabbit_tower').on('dragstart', function (event) {
-		event.originalEvent.dataTransfer.setData(
-			'text',
-			'blue_rabbit_tower_level_1'
-		);
+	$('.pikachu_tower').on('dragstart', function (event) {
+		event.originalEvent.dataTransfer.setData('text', 'pikachu_tower_level_1');
 	});
 
-	$('.red_rabbit_tower').on('dragstart', function (event) {
-		event.originalEvent.dataTransfer.setData(
-			'text',
-			'red_rabbit_tower_level_1'
-		);
+	$('.rabbit_tower').on('dragstart', function (event) {
+		event.originalEvent.dataTransfer.setData('text', 'rabbit_tower_level_1');
 	});
 
 	$('#canvas1').on('dragover', function (event) {
@@ -62,8 +56,8 @@ $(document).ready(() => {
 			game.evolveTower();
 		});
 
-		createTooltip('.blue_rabbit_tower', 750, 75, Math.floor(10000 / 170));
-		createTooltip('.red_rabbit_tower', 500, 100, Math.floor(10000 / 120));
+		createTooltip('.pikachu_tower', 750, 75, Math.floor(10000 / 170));
+		createTooltip('.rabbit_tower', 500, 100, Math.floor(10000 / 120));
 		createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
 	});
 });

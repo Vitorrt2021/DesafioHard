@@ -11,6 +11,7 @@ class Enemy {
 		this.line = line;
 		this.isDying = false;
 		this.isDead = false;
+		this.money = monster.money;
 	}
 	//FIX-IT BALANCEAMENTO
 	setHealth(level, monster) {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const ErrorHandler = require('../controllers/modules/ErrorHandler.js');
 const Ranking = require('../models/ranking.js');
+const ErrorHandler = require('../controllers/modules/ErrorHandler.js');
 
 router.get('/', async (req, res) => {
 	try {
@@ -8,13 +8,16 @@ router.get('/', async (req, res) => {
 			.sort({ score: 'descending' })
 			.limit(20);
 
+		if (!rankingData[0]) {
+			throw new ErrorHandler.NotFound(
+				'No data has been found in our database regarding your request'
+			);
+		}
+
 		res.send(rankingData);
 	} catch (error) {
-		const newError = new ErrorHandler(error);
-
-		console.log(newError.digest(new Error()));
-
-		res.send({ error: true });
+		console.error(error);
+		res.status(500).send(error);
 	}
 });
 

@@ -8,8 +8,8 @@ const renderRanking = async () => {
 		renderRankingModal();
 		renderCells(response);
 	} catch (error) {
-		alert('check console for errors');
-		console.error(error);
+		alert('check the console for errors');
+		console.error(error.responseJSON || error);
 	}
 };
 
