@@ -12,8 +12,12 @@ const dbConnection = (db) => {
 			console.log('MongoDB Connected Successfully');
 		})
 		.catch((error) => {
-			const errorHandler = new ErrorHandler(error);
-			errorHandler.digest(new Error());
+			const errorHandler = new ErrorHandler.InternalServerError(
+				'The server could not establish a connection with MongoDB',
+				error
+			);
+
+			console.error(errorHandler);
 		});
 };
 

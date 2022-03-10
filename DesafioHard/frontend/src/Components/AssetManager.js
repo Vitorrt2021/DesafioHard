@@ -52,12 +52,18 @@ class AssetManager {
 		return this.#images[image_name];
 	}
 
-	async playSound(sound_name, volume = this.#volume, loop = false) {
+	async playSound(
+		sound_name,
+		volume = this.#volume,
+		loop = false,
+		autoplay = false
+	) {
 		if (!this.#sounds[sound_name]) {
 			await this.#makeAudioObjectFromFrontEnd(sound_name);
 		}
 
 		const soundObject = this.#sounds[sound_name];
+		soundObject.autoplay = autoplay;
 		soundObject.volume = volume;
 
 		if (loop) {
@@ -79,6 +85,20 @@ class AssetManager {
 
 		if (this.#sounds[sound_name]) {
 			this.#sounds[sound_name].currentTime = 0;
+		}
+	}
+
+	changeVolume(newVolume) {
+		if (newVolume >= 0 && newVolume <= 100) {
+			this.#volume = newVolume / 100;
+
+			for (const sound in this.#sounds) {
+				const soundObj = this.#sounds[sound];
+
+				if (soundObj.duration > 0 && !soundObj.paused) {
+					soundObj.volume = this.#volume;
+				}
+			}
 		}
 	}
 
