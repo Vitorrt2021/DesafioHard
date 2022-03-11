@@ -7,6 +7,7 @@ import Enemy from './Enemy.js';
 import towerStatus from './towerStatus.js';
 import assetManager from '../Components/AssetManager.js';
 import renderSaveScore from '../requests/save-score.js';
+import EnemysController from '../Components/EnemysController.js';
 
 class Game {
 	constructor() {
@@ -25,21 +26,23 @@ class Game {
 		this.towersDying = [];
 		this.enemies = [];
 		this.enemiesDying = [];
-		this.monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
-		this.level = 0;
 		this.spawnVelocity = 600;
 		this.maxSpawnVelocity = 60;
 		this.moneyDrop = 20;
 		this.backgroundMusic = '';
+		this.monsterCout = 0;
 	}
 
 	start() {
 		this.updateLive();
 		this.updateScore();
 		this.updateMoney();
+		// this.animation();
+		// this.animation();
 		this.animation();
 		this.createGrid();
 		this.catchMousePosition();
+		console.log(EnemysController.horda);
 	}
 
 	haveEnemyInLine() {
@@ -164,7 +167,7 @@ class Game {
 
 	enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
-			this.player.addScore(20 * (this.level + 1));
+			this.player.addScore(20 * (EnemysController.horda + 1));
 			this.player.addMoney(Math.floor(this.moneyDrop) + enemy.money);
 			this.updateScore();
 			this.updateMoney();
@@ -172,6 +175,7 @@ class Game {
 			this.enemiesDying.push(enemy);
 			this.enemies.splice(enemyIndex, 1);
 			enemy.line = null;
+			this.monsterCout++;
 		}
 	}
 
@@ -188,7 +192,7 @@ class Game {
 			this.enemies.forEach((enemy, enemyIndex) => {
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
 					let towerHealth = tower.health;
-					tower.health -= enemy.health / (1 + this.level * 0.5);
+					tower.health -= enemy.health / (1 + EnemysController.horda * 0.5);
 
 					if (tower.health > 0) {
 						enemy.health -= towerHealth;
@@ -239,7 +243,7 @@ class Game {
 	}
 
 	changeSpawnVelocity() {
-		const spawnV = (this.spawnVelocity = 600 - 60 * this.level);
+		const spawnV = (this.spawnVelocity = 600 - 60 * EnemysController.horda);
 		if (spawnV <= this.maxSpawnVelocity) {
 			this.spawnVelocity = this.maxSpawnVelocity;
 		} else {
@@ -392,12 +396,11 @@ class Game {
 			towerClicked.nextLevel
 		);
 		if (evolvedTower.price > this.player.getMoney()) return;
-		evolvedTower.damage *= 1 + this.level * 0.35;
+		evolvedTower.damage *= 1 + EnemysController.horda * 0.35;
 		this.player.buy(parseInt(evolvedTower.price));
 		this.updateMoney();
 		assetManager.playSound('evolve');
 		this.towers[towerIndex] = evolvedTower;
-		console.log(this.width);
 	}
 
 	updateMousePosition(e) {
@@ -412,18 +415,9 @@ class Game {
 	spawnEnemy() {
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
-		const sorted = Math.floor(Math.random() * 3);
+		let sorted = EnemysController.sortPosition();
 		let position = yInitialpositions[sorted];
-		let monster = Math.ceil(Math.random() * 100);
-		if (monster < 40) {
-			monster = this.monster[0];
-		} else if (monster >= 40 && monster < 75) {
-			monster = this.monster[1];
-		} else if (monster >= 75 && monster < 95) {
-			monster = this.monster[2];
-		} else {
-			monster = this.monster[3];
-		}
+		let monster = EnemysController.sortMonster();
 		this.playSoundMonster(monster);
 		this.enemies.push(
 			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
@@ -434,7 +428,7 @@ class Game {
 				this.cellSize,
 				yFinalpositions[sorted] - yInitialpositions[sorted],
 				sorted,
-				this.level
+				EnemysController.horda
 			)
 		);
 	}
@@ -449,13 +443,16 @@ class Game {
 		}
 	}
 	updateLevel() {
-		if (this.player.getScore() >= 100 * Math.pow(2, this.level + 1)) {
-			this.level++;
-			this.moneyDrop *= 1 + 1 / this.level;
+		if (
+			this.player.getScore() >=
+			100 * Math.pow(2, EnemysController.horda + 1)
+		) {
+			EnemysController.update();
+			this.moneyDrop *= 1 + 1 / EnemysController.horda + 1;
 			assetManager.playSound('level_up');
-			$('#level_value').html(this.level);
+			$('#level_value').html(EnemysController.horda + 1);
 
-			if (this.level % 2 === 0) {
+			if (EnemysController.horda % 2 === 0) {
 				this.updateBackgroundMusic();
 			}
 		}
@@ -463,7 +460,7 @@ class Game {
 
 	updateBackgroundMusic() {
 		assetManager.stopSound(this.backgroundMusic);
-		this.backgroundMusic = 'bg_music_lvl_' + this.level;
+		this.backgroundMusic = 'bg_music_lvl_' + EnemysController.horda;
 		assetManager.playSound(this.backgroundMusic, 0.175, true);
 	}
 }
