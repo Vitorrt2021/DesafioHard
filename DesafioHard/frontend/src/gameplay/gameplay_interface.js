@@ -7,6 +7,7 @@ const apiURL = 'http://localhost:5000';
 
 $(document).ready(() => {
 	// Prevent user from unloading the page by accident
+
 	window.onbeforeunload = (e) => {
 		const score = $('#score_value').html();
 
@@ -21,10 +22,6 @@ $(document).ready(() => {
 	$('.close__modal').click(() => {
 		$('.modal')[0].style.display = 'none';
 		$('#level_value').html('');
-	});
-
-	$('.restart_level').click(() => {
-		window.location.reload();
 	});
 
 	$('.cat_tower').on('dragstart', function (event) {
@@ -108,6 +105,8 @@ const renderConfigurationModal = (game) => {
 			</div>
 			<button class='configuration_buttons configuration_modal_restart_button'></button>
 			<button class='configuration_buttons configuration_modal_exit_button'></button>
+			<button class='configuration_buttons configuration_modal_close_button'></button>
+	
 		</div>
 		`
 	);
@@ -124,6 +123,10 @@ const renderConfigurationModal = (game) => {
 	});
 	$('.configuration_modal_speed_button').click(() => {
 		changeSpeed(game);
+	});
+
+	$('.configuration_modal_exit_button').click(() => {
+		window.history.back();
 	});
 	$('.configuration_sound_button').click(() => {
 		$('.configuration_modal')[0].style.display = 'none';
@@ -165,7 +168,8 @@ function eventCloseConfiguration(game) {
 			event.originalEvent.target !== $('.volumeInfo_container')[0] &&
 			event.originalEvent.target !== $('.sound_button_modal_empty')[0] &&
 			event.originalEvent.target !== $('.sound_button_modal_full')[0] &&
-			event.originalEvent.target !== $('.sound__menu')[0]
+			event.originalEvent.target !== $('.sound__menu')[0] &&
+			event.originalEvent.target !== $('.configuration_modal_exit_button')[0]
 		) {
 			closeModal();
 		}

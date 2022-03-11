@@ -239,8 +239,8 @@ html body {
 	background-size: cover;
 
 	padding: 5vw;
-	padding-top: 9vw;
-	padding-bottom: 7vw;
+	padding-top: 7vw;
+	padding-bottom: 4vw;
 	display: none;
 	flex-direction: column;
 	justify-content: space-around;
@@ -263,6 +263,10 @@ html body {
 	background-size: cover;
 	width: 10vw;
 	height: 5vw;
+	font-family: 'Architects Daughter', cursive;
+	font-weight: 700;
+	color: white;
+	font-size: 2vw;
 }
 .configuration_modal_exit_button {
 	background-image: url('../assets/images/exit_button.svg');
@@ -275,6 +279,11 @@ html body {
 	transform: translateY(1px);
 	background-image: url('../assets/images/speed_control.svg');
 }
+.configuration_modal_close_button {
+	background-image: url('../assets/images/button_close.svg');
+	height: 5vw;
+}
+
 .buttons_container {
 	display: flex;
 	justify-content: space-around;
@@ -445,7 +454,7 @@ html body {
 }
 
 .close_modal {
-	background-image: url('../assets/images/red_button.svg');
+	background-image: url('../assets/images/button_close_red.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -456,9 +465,11 @@ html body {
 	color: white;
 	font-size: 2vw;
 	cursor: pointer;
+	font-family: 'Architects Daughter', cursive;
+	font-weight: 700;
 }
 
 .close_modal:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/red_button_green.svg');
+	background-image: url('../assets/images/button_close_green.svg');
 }

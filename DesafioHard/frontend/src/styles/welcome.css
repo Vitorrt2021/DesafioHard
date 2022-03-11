@@ -432,7 +432,7 @@ body {
 }
 
 .close_modal {
-	background-image: url('../assets/images/red_button.svg');
+	background-image: url('../assets/images/button_close_red.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -449,7 +449,7 @@ body {
 
 .close_modal:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/red_button_green.svg');
+	background-image: url('../assets/images/button_close_green.svg');
 }
 
 @keyframes animatetop {

@@ -12,6 +12,7 @@ const saveScore = async () => {
 		window.location = '/';
 	} catch (error) {
 		alert('check the console for errors');
+
 		console.error(error.responseJSON || error);
 	}
 };
