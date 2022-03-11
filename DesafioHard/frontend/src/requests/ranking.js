@@ -19,12 +19,12 @@ const renderRankingModal = () => {
 				<div class="ranking__container">
 						<div class="ranking__cell__container">
 						</div>
-						<button class="close_modal" type="button">FECHAR</button>
+						<button class="close__modal" type="button">FECHAR</button>
 				</div>
 		</div>`
 	);
 
-	$('.close_modal').click(() => {
+	$('.close__modal').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 

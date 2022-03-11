@@ -1,44 +1,63 @@
+import monsterStatus from './monsterStatus.js';
+import assetManager from './AssetManager.js';
+
 class Enemy {
-	constructor(monster, x, y, width, height, line, level) {
+	constructor(type, x, y, width, height, line, level) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.speed = monster.speed;
-		this.setHealth(level, monster);
+		this.setHealth(level, monsterStatus[type].health);
 		this.maxHealth = this.health;
-		this.monster = monster;
 		this.line = line;
 		this.isDying = false;
 		this.isDead = false;
-		this.money = monster.money;
+		this.speed = monsterStatus[type].speed * 1.15;
+		this.money = monsterStatus[type].money;
+		this.animation = assetManager.getAnimationInstance(type);
+		this.type = type;
+		this.animation = assetManager.getAnimationInstance(type);
+		this.#updateMaxHeight();
 	}
 	//FIX-IT BALANCEAMENTO
-	setHealth(level, monster) {
+	setHealth(level, health) {
 		if (level == 0) {
-			this.health = monster.health;
+			this.health = parseInt(health);
 		} else {
-			this.health = monster.health + monster.health * Math.pow(1.8, level - 1);
+			this.health =
+				parseInt(health) + parseInt(health) * Math.pow(1.8, level - 1);
 		}
 	}
 	update() {
 		this.x -= this.speed;
 	}
 
+	changeAnimation(animationName) {
+		this.animation = assetManager.getAnimationInstance(animationName);
+		this.#updateMaxHeight();
+	}
+
+	selectImage() {
+		return this.animation.selectImage();
+	}
+
+	#updateMaxHeight() {
+		this.animationMaxHeight = this.animation.getAnimationMaxHeight();
+	}
 	setDyingAnimation() {
 		this.isDying = true;
 		this.speed = 0;
-		this.monster.changeAnimation(this.monster.type + '_dying');
+		this.changeAnimation(this.type + '_dying');
 	}
 
 	draw(ctx) {
-		const monsterImage = this.monster.selectImage();
-		const animationMaxHeight = this.monster.animationMaxHeight;
+		const monsterImage = this.selectImage();
+		const animationMaxHeight = this.animationMaxHeight;
 
 		let delta_y = animationMaxHeight - monsterImage.height; //Evitar pulos dos slimes
 		delta_y += (this.height - monsterImage.height) / 2; //centralizar no caminho das torres.
 
-		if (this.monster.animation.isAnimationFinished() && this.isDying) {
+		if (this.animation.isAnimationFinished() && this.isDying) {
 			this.isDead = true;
 		}
 
