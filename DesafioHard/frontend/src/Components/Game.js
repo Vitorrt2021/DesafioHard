@@ -459,7 +459,7 @@ class Game {
 			$('#level_value').html(EnemysController.horda);
 
 			if (EnemysController.horda % 2 === 0) {
-				this.updateBackgroundMusic();
+				this.#updateBackgroundMusic();
 			}
 		}
 	}
