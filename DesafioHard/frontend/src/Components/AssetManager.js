@@ -87,7 +87,9 @@ class AssetManager {
 			this.#sounds[sound_name].currentTime = 0;
 		}
 	}
-
+	getVolume() {
+		return Math.floor(this.#volume * 100);
+	}
 	changeVolume(newVolume) {
 		if (newVolume >= 0 && newVolume <= 100) {
 			this.#volume = newVolume / 100;
