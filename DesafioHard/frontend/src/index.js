@@ -30,7 +30,7 @@ function renderSoundMenu() {
 						 <button class="sound_button_modal_full"></button>
 						</div>
 					</div>
-		 			<button class="close_modal">FECHAR</button>
+		 			<button class="close_modal">CLOSE</button>
 		 		</div>
 		 </div>`
 	);
@@ -70,3 +70,5 @@ function renderSoundMenu() {
 		}
 	});
 }
+
+export default renderSoundMenu;

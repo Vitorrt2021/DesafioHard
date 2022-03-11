@@ -1,7 +1,7 @@
 import Game from '../Components/Game.js';
 import renderRanking from '../requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
-
+import renderSoundMenu from '../index.js';
 // const apiURL = 'https://data.dudeful.com';
 const apiURL = 'http://localhost:5000';
 
@@ -18,7 +18,7 @@ $(document).ready(() => {
 		}
 	};
 
-	$('.close_modal').click(() => {
+	$('.close__modal').click(() => {
 		$('.modal')[0].style.display = 'none';
 		$('#level_value').html('');
 	});
@@ -95,25 +95,77 @@ function createTooltip(element, live, strenght, speed) {
 			</div>`,
 	});
 }
+
 const renderConfigurationModal = (game) => {
+	$('.configuration_modal')[0].style.display = 'flex';
 	$('.configuration_modal').html(
-		`<div class="configuration_modal_content">
-				Bom dia
-				<button class="close_configuration_modal" type="button">FECHAR</button>		
+		`
+		<div class='modal_blur'></div>
+		<div class="configuration_modal_content">
+			<div class='buttons_container'>
+				<button class='configuration_sound_button '></button>
+				<button class='configuration_buttons configuration_modal_speed_button'></button>
+			</div>
+			<button class='configuration_buttons configuration_modal_restart_button'></button>
+			<button class='configuration_buttons configuration_modal_exit_button'></button>
 		</div>
 		`
 	);
-	$('.configuration_modal')[0].style.display = 'block';
-};
+	if (game.isQuickness) {
+		$('.configuration_modal_speed_button').css(
+			'background-image',
+			`url('../assets/images/speed_control_selected.svg')`
+		);
+	}
+	$('.configuration_modal_content')[0].style.display = 'flex';
 
+	$('.configuration_modal_restart_button').click(() => {
+		location.reload();
+	});
+	$('.configuration_modal_speed_button').click(() => {
+		changeSpeed(game);
+	});
+	$('.configuration_sound_button').click(() => {
+		$('.configuration_modal')[0].style.display = 'none';
+		renderSoundMenu();
+		$('.close_modal').click(() => {
+			if (game.isStop()) {
+				game.startAnimation();
+			}
+		});
+	});
+};
+function changeSpeed(game) {
+	game.isQuickness = !game.isQuickness;
+	if (game.isQuickness) {
+		$('.configuration_modal_speed_button').css(
+			'background-image',
+			`url('../assets/images/speed_control_selected.svg')`
+		);
+	} else {
+		$('.configuration_modal_speed_button').css(
+			'background-image',
+			`url('../assets/images/speed_control.svg')`
+		);
+	}
+}
 function eventCloseConfiguration(game) {
 	// When the user clicks anywhere outside of the modal, closes it
+
 	$(window).mousedown((event) => {
 		if (
 			event.originalEvent.target !== $('.configuration_modal')[0] &&
 			event.originalEvent.target !== $('.configuration_modal_content')[0] &&
-			event.originalEvent.target !== $('.close_configuration_modal')[0] &&
-			event.originalEvent.target !== $('.configuration_button')[0]
+			event.originalEvent.target !==
+				$('.configuration_modal_speed_button')[0] &&
+			event.originalEvent.target !== $('.configuration_sound_button')[0] &&
+			event.originalEvent.target !==
+				$('.configuration_modal_restart_button')[0] &&
+			event.originalEvent.target !== $('.volumeSlider')[0] &&
+			event.originalEvent.target !== $('.volumeInfo_container')[0] &&
+			event.originalEvent.target !== $('.sound_button_modal_empty')[0] &&
+			event.originalEvent.target !== $('.sound_button_modal_full')[0] &&
+			event.originalEvent.target !== $('.sound__menu')[0]
 		) {
 			closeModal();
 		}

@@ -27,14 +27,15 @@ class Game {
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
-
 	constructor() {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
+		this.isQuickness = false;
 	}
 	isStop() {
 		return !this.#runAnimationControl;
 	}
+
 	start() {
 		this.#updateLive();
 		this.#updateScore();
@@ -286,7 +287,12 @@ class Game {
 	}
 	startAnimation() {
 		this.#runAnimationControl = true;
-		this.#animation();
+		if (this.isQuickness) {
+			this.#animation();
+			this.#animation();
+		} else {
+			this.#animation();
+		}
 	}
 	stopAnimation() {
 		this.#runAnimationControl = false;
