@@ -47,6 +47,8 @@
 		<title>ANIMALS AND MONSTERS</title>
 	</head>
 	<body>
+		<div class="configuration_modal"></div>
+
 		<div id="container_gameplay_interface">
 			<section id="gameplay_interface">
 				<h4 id="level_value" title="level">0</h4>
@@ -90,9 +92,6 @@
 							</div>
 						</div>
 					</section>
-					<section id="live_display">
-						<p id="live_value">0</p>
-					</section>
 					<section id="money_display">
 						<p id="money_value">0</p>
 					</section>
@@ -100,9 +99,15 @@
 						<p id="score_value">0</p>
 					</section>
 
-					<button class="blue_buttons restart_level">Reiniciar</button>
+					<section id="live_display">
+						<p id="live_value">0</p>
+					</section>
+					<button class="configuration_button" alt="configuração"></button>
+
+					<!-- <button class="blue_buttons restart_level">Reiniciar</button> -->
 				</header>
-				<canvas id="canvas1"></canvas>
+
+				<canvas id="canvas1"> </canvas>
 			</section>
 		</div>
 

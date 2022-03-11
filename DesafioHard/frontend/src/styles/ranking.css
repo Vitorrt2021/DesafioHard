@@ -171,7 +171,7 @@
 	margin: 5% 0 0 15%;
 }
 
-.close_modal {
+.close__modal {
 	box-sizing: border-box;
 	cursor: pointer;
 	border: none;
@@ -184,7 +184,7 @@
 	transition: all 0.2s ease-in-out;
 }
 
-.close_modal:hover {
+.close__modal:hover {
 	box-shadow: 0 0 8px 0 #20202020;
 	font-weight: 600;
 	color: whitesmoke;

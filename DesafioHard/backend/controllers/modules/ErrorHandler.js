@@ -1,11 +1,12 @@
 // FIX-IT: Add fine treatment in digest() method
 
 class BadRequest extends Error {
-	constructor(message) {
+	constructor(message, error) {
 		super(message);
 		this.code = 400;
 		this.name = 'Bad Request';
 		this.msg = message;
+		this.error = error;
 	}
 
 	// Future update
@@ -15,11 +16,12 @@ class BadRequest extends Error {
 }
 
 class NotFound extends Error {
-	constructor(message) {
+	constructor(message, error) {
 		super(message);
 		this.code = 404;
 		this.name = 'Not Found';
 		this.msg = message;
+		this.error = error;
 	}
 
 	// Future update
@@ -29,11 +31,12 @@ class NotFound extends Error {
 }
 
 class TooManyRequests extends Error {
-	constructor(message) {
+	constructor(message, error) {
 		super(message);
 		this.code = 429;
 		this.name = 'Too Many Requests';
 		this.msg = message;
+		this.error = error;
 	}
 
 	// Future update
@@ -43,11 +46,12 @@ class TooManyRequests extends Error {
 }
 
 class InternalServerError extends Error {
-	constructor(message) {
+	constructor(message, error) {
 		super(message);
 		this.code = 500;
 		this.name = 'Internal Server Error';
 		this.msg = message;
+		this.error = error;
 	}
 
 	// Future update
@@ -57,11 +61,12 @@ class InternalServerError extends Error {
 }
 
 class ServiceUnavailable extends Error {
-	constructor(message) {
+	constructor(message, error) {
 		super(message);
 		this.code = 503;
 		this.name = 'Service Unavailable';
 		this.msg = message;
+		this.error = error;
 	}
 
 	// Future update

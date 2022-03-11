@@ -16,7 +16,7 @@ const validation = (req, res, next) => {
 		next();
 	} catch (error) {
 		console.error(error);
-		res.status(400).send(error);
+		res.status(error.code).send(error);
 	}
 };
 
