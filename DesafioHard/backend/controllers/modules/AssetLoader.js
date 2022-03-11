@@ -8,7 +8,6 @@ class AssetLoader {
 		this.sounds = {};
 	}
 
-	//FIX-IT: Find a way to use the ErrorHandler class in here
 	loadAssets(filePath) {
 		try {
 			let changedFilePath = filePath.replaceAll('\\', '/').split('/');
@@ -28,14 +27,19 @@ class AssetLoader {
 				this.images[fileName] = `data:image/png;base64,${fileAsBase64}`;
 			}
 		} catch (error) {
-			console.error(error);
-			res.status(error.code).send(error);
+			const errorHandler = new ErrorHandler.InternalServerError(
+				'Failure while loading assets',
+				error
+			);
+
+			console.error(errorHandler);
+
+			res.status(errorHandler.code).send(errorHandler);
 		}
 	}
 }
 
 function loadFiles(directory) {
-	//FIX-IT: Find a way to use the ErrorHandler class in here
 	function readPath(directory) {
 		try {
 			const dirRead = fs.readdirSync(directory);
@@ -50,8 +54,14 @@ function loadFiles(directory) {
 				}
 			}
 		} catch (error) {
+			const errorHandler = new ErrorHandler.InternalServerError(
+				'Failure while reading assets paths',
+				error
+			);
+
 			console.error(error);
-			res.status(error.code).send(error);
+
+			res.status(error.code).send(errorHandler);
 		}
 	}
 

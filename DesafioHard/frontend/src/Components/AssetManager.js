@@ -52,12 +52,18 @@ class AssetManager {
 		return this.#images[image_name];
 	}
 
-	async playSound(sound_name, volume = this.#volume, loop = false) {
+	async playSound(
+		sound_name,
+		volume = this.#volume,
+		loop = false,
+		autoplay = false
+	) {
 		if (!this.#sounds[sound_name]) {
 			await this.#makeAudioObjectFromFrontEnd(sound_name);
 		}
 
 		const soundObject = this.#sounds[sound_name];
+		soundObject.autoplay = autoplay;
 		soundObject.volume = volume;
 
 		if (loop) {

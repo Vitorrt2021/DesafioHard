@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 		res.send(rankingData);
 	} catch (error) {
 		console.error(error);
-		res.status(500).send(error);
+		res.status(error.code).send(error);
 	}
 });
 
