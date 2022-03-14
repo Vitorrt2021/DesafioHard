@@ -18,76 +18,86 @@
 .save__container {
 	width: 70%;
 	height: 50%;
-	background-image: url('../assets/images/save_window.svg');
+	background-image: url('../assets/images/save_score_table.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-top: 6vh;
-}
-@media (max-width: 500px) {
-	.save__container {
-		padding-top: 10vh;
-	}
-}
-.input__container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 
-	width: 40%;
-	height: 50%;
+	padding-top: 100px;
+	padding-bottom: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
+/* @media (max-width: 500px) {
+	.save__container {
+		padding-top: 10;
+	}
+} */
 
 #save__name__input {
-	width: 50%;
-	height: 50%;
+	width: 250px;
+	height: 100px;
 
 	background-image: url('../assets/images/save_window_input.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
 	background-size: 100% 100%;
+
 	border: none;
 	background-color: transparent;
 	font-family: 'Architects Daughter', cursive;
 	padding: 0 5%;
-	font-size: 1rem;
+	font-size: 20px;
 	color: grey;
 }
 
 #save__name__input:focus {
 	outline: none;
 }
+
+@media (max-width: 400px) {
+	#save__name__input {
+		font-size: 10px;
+		width: 150px;
+	}
+	.save__container {
+		padding-top: 150px;
+		padding-bottom: 150px;
+	}
+	#button_save {
+		width: 150px;
+		height: 100px;
+	}
+}
+@media (max-width: 850px) {
+	#save__name__input {
+		font-size: 15px;
+	}
+}
+@media (max-width: 1040px) {
+	#save__name__input {
+		font-size: 20px;
+	}
+}
 #button_save {
-	font-size: 5vw;
-}
-@media (min-width: 850px) {
-	#button_save {
-		font-size: 4vw;
-	}
-}
-@media (min-width: 1040px) {
-	#button_save {
-		font-size: 3vw;
-	}
-}
-.blue__button {
-	background-image: url('../assets/images/blue_button.svg');
+	background-image: url('../assets/images/save_button.svg');
 	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
+	background-size: cover;
 	background-size: 100% 100%;
 	border: none;
 	background-color: transparent;
 
-	width: 50%;
-	height: 50%;
+	width: 250px;
+	height: 125px;
 
 	font-family: 'Architects Daughter', cursive;
 	color: #ffffff;
 	cursor: pointer;
+}
+#button_save:active {
+	transform: translateY(4px);
+	background-image: url('../assets/images/save_button_hover.svg');
 }

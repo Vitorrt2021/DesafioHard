@@ -25,10 +25,8 @@ const renderSaveScore = () => {
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">
-					<div class="input__container">
-						<input type="text" placeholder="NOME" id="save__name__input">
-						<button type="button" class="blue__button save_score_button" id='button_save'>SALVAR</button>
-					</div>
+					<input type="text" placeholder="NAME" id="save__name__input">
+					<button type="button" class="blue__button save_score_button" id='button_save'></button>
 				</div>
 		</div>`
 	);

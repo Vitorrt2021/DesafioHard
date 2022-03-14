@@ -1,15 +1,32 @@
+@keyframes animatedBackground {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100000% 0;
+	}
+}
 * {
 	margin: 0;
 	padding: 0;
 }
 
 .app__container {
-	width: 100vw;
+	/* width: 100vw;
 	height: 100vh;
 	background-image: url('../assets/images/clouds_background.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;
+	background-size: cover; */
+
+	width: 100vw;
+	height: 100vh;
+	/* background-image: url('../assets/images/clouds_background.png'); */
+	background-image: url('../assets/images/clouds_background_1.png');
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-size: auto 100%;
+	animation: animatedBackground 12000s linear infinite;
 
 	display: flex;
 	justify-content: center;
