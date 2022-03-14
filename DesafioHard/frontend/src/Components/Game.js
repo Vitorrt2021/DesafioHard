@@ -41,16 +41,6 @@ class Game {
 		this.#updateScore();
 		this.#updateMoney();
 		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-		this.#animation();
-
 		this.#createGrid();
 		this.#catchMousePosition();
 	}

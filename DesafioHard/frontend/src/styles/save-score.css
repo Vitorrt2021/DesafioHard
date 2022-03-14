@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 .app__container {
 	width: 100vw;
 	height: 100vh;
@@ -16,72 +17,43 @@
 }
 
 .save__container {
-	width: 70%;
-	height: 50%;
+	width: 50vh;
+	height: 50vh;
 	background-image: url('../assets/images/save_score_table.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
 
-	padding-top: 100px;
-	padding-bottom: 100px;
+	padding-top: 15vh;
+	padding-bottom: 10vh;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 }
-/* @media (max-width: 500px) {
-	.save__container {
-		padding-top: 10;
-	}
-} */
 
 #save__name__input {
-	width: 250px;
-	height: 100px;
+	width: 30vh;
+	height: 4vh;
 
 	background-image: url('../assets/images/save_window_input.svg');
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 	background-position: center;
-	background-size: 100% 100%;
 
 	border: none;
 	background-color: transparent;
 	font-family: 'Architects Daughter', cursive;
 	padding: 0 5%;
-	font-size: 20px;
-	color: grey;
+	font-size: 4vh;
+	color: rgb(73, 73, 73);
 }
 
 #save__name__input:focus {
 	outline: none;
 }
 
-@media (max-width: 400px) {
-	#save__name__input {
-		font-size: 10px;
-		width: 150px;
-	}
-	.save__container {
-		padding-top: 150px;
-		padding-bottom: 150px;
-	}
-	#button_save {
-		width: 150px;
-		height: 100px;
-	}
-}
-@media (max-width: 850px) {
-	#save__name__input {
-		font-size: 15px;
-	}
-}
-@media (max-width: 1040px) {
-	#save__name__input {
-		font-size: 20px;
-	}
-}
 #button_save {
 	background-image: url('../assets/images/save_button.svg');
 	background-repeat: no-repeat;
@@ -90,8 +62,8 @@
 	border: none;
 	background-color: transparent;
 
-	width: 250px;
-	height: 125px;
+	width: 30vh;
+	height: 15vh;
 
 	font-family: 'Architects Daughter', cursive;
 	color: #ffffff;
