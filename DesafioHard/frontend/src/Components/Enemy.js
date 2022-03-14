@@ -16,7 +16,6 @@ class Enemy {
 		this.money = monsterStatus[type].money;
 		this.animation = assetManager.getAnimationInstance(type);
 		this.type = type;
-		this.animation = assetManager.getAnimationInstance(type);
 		this.#updateMaxHeight();
 	}
 	//FIX-IT BALANCEAMENTO
@@ -66,6 +65,8 @@ class Enemy {
 		}
 
 		if (!this.isDead) {
+			ctx.strokeStyle = 'red';
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
 			ctx.drawImage(monsterImage, this.x, this.y + delta_y);
 		}
 	}

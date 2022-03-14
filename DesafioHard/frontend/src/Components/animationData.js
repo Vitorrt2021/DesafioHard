@@ -24,6 +24,16 @@ export default {
 		counterIncrement: 0.1,
 	},
 
+	minotaur: {
+		animationQtyFrames: 18,
+		counterIncrement: 0.2,
+	},
+
+	minotaur_dying: {
+		animationQtyFrames: 12,
+		counterIncrement: 0.2,
+	},
+
 	toad_dying: {
 		animationQtyFrames: 3,
 		counterIncrement: 0.05,

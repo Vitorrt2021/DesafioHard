@@ -12,6 +12,9 @@ class Projectile {
 		this.x += this.speed;
 	}
 	draw(ctx) {
+		// ctx.strokeStyle = 'red';
+		// ctx.strokeRect(this.x, this.y, this.image.width, this.image.height);
+		ctx.strokeRect(this.x, this.y, this.width, this.height);
 		ctx.drawImage(this.image, this.x, this.y);
 	}
 }

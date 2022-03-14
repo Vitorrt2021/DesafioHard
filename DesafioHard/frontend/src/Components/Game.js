@@ -22,16 +22,21 @@ class Game {
 	#enemies = [];
 	#enemiesDying = [];
 	#monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
+	#boss = ['minotaur'];
+	#bossLevel = 0;
+	#isBossSpawned = false;
 	#level = 0;
 	#spawnVelocity = 600;
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
+
 	constructor() {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 		this.isQuickness = false;
 	}
+
 	isStop() {
 		return !this.#runAnimationControl;
 	}
@@ -55,6 +60,13 @@ class Game {
 		this.#enemies.forEach((enemy) => {
 			position[enemy.line] = true;
 		});
+
+		if (this.#level === this.#bossLevel) {
+			position[0] = true;
+			position[1] = true;
+			position[2] = true;
+		}
+
 		this.#towers.forEach((tower) => {
 			if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
 				if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
@@ -417,45 +429,87 @@ class Game {
 			y: (e.clientY - rect.top) * scaleY,
 		};
 	}
+
 	#spawnEnemy() {
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
 		const sorted = Math.floor(Math.random() * 3);
+
 		let position = yInitialpositions[sorted];
-		let monster = Math.ceil(Math.random() * 100);
-		if (monster < 40) {
-			monster = this.#monster[0];
-		} else if (monster >= 40 && monster < 75) {
-			monster = this.#monster[1];
-		} else if (monster >= 75 && monster < 95) {
-			monster = this.#monster[2];
+		let monsterType = Math.ceil(Math.random() * 100);
+
+		if (monsterType < 40) {
+			monsterType = this.#monster[0];
+		} else if (monsterType >= 40 && monsterType < 75) {
+			monsterType = this.#monster[1];
+		} else if (monsterType >= 75 && monsterType < 95) {
+			monsterType = this.#monster[2];
 		} else {
-			monster = this.#monster[3];
+			monsterType = this.#monster[3];
 		}
-		this.#playSoundMonster(monster);
+
+		if (this.#level === this.#bossLevel) {
+			if (!this.#isBossSpawned) {
+				this.#isBossSpawned = true;
+
+				monsterType = this.#boss[0];
+
+				this.#createEnemy(
+					monsterType,
+					position,
+					yFinalpositions[sorted] - yInitialpositions[sorted],
+					1
+				);
+			}
+
+			return;
+		}
+
+		this.#isBossSpawned = false;
+		this.#createEnemy(
+			monsterType,
+			position,
+			yFinalpositions[sorted] - yInitialpositions[sorted],
+			sorted
+		);
+	}
+
+	#createEnemy(monsterType, position, yPositions, sorted) {
+		this.#playSoundMonster(monsterType);
 		this.#enemies.push(
-			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
 			new Enemy(
-				monster,
+				monsterType,
 				parseInt(this.#canvas.width),
 				position,
 				this.#cellSize,
-				yFinalpositions[sorted] - yInitialpositions[sorted],
+				yPositions,
 				sorted,
 				this.#level
 			)
 		);
 	}
+
 	//FIX-IT TORNAR ADAPTAVEL
 	#playSoundMonster(monster) {
-		if (monster === 'robot') {
-			assetManager.playSound('robot');
-		} else if (monster === 'slimePink' || monster === 'slimeGreen') {
-			assetManager.playSound('slimeWalk');
-		} else if (monster === 'toad') {
-			assetManager.playSound('monsterGreen');
+		switch (monster) {
+			case 'robot':
+				assetManager.playSound('robot');
+				break;
+			case 'slimePink':
+			case 'slimeGreen':
+				assetManager.playSound('slimeWalk');
+				break;
+			case 'toad':
+				assetManager.playSound('monsterGreen');
+				break;
+			// case 'minotaur':
+			// 	assetManager.playSound('minotaur');
+			// 	break;
+			default:
+				break;
 		}
 	}
+
 	#updateLevel() {
 		if (this.#player.getScore() >= 100 * Math.pow(2, this.#level + 1)) {
 			this.#level++;
@@ -464,7 +518,7 @@ class Game {
 			$('#level_value').html(this.#level);
 
 			if (this.#level % 2 === 0) {
-				this.updateBackgroundMusic();
+				this.#updateBackgroundMusic();
 			}
 		}
 	}
