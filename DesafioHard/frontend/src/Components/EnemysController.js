@@ -1,15 +1,15 @@
-import monsterStatus from './monsterStatus.js';
+import enemyData from './EnemyData.js';
 
 class EnemysController {
 	constructor() {
 		this.horda = 0;
-		this.monsters = Object.entries(monsterStatus).slice(0, this.horda + 1);
+		this.monsters = Object.entries(enemyData).slice(0, this.horda + 1);
 	}
 	setMonsters() {
-		if (this.horda > Object.entries(monsterStatus).length) {
+		if (this.horda > Object.entries(enemyData).length) {
 			return;
 		}
-		this.monsters = Object.entries(monsterStatus).slice(0, this.horda + 1);
+		this.monsters = Object.entries(enemyData).slice(0, this.horda + 1);
 		return;
 	}
 	updateHorda() {

@@ -88,7 +88,7 @@ class Game {
 			position[enemy.line] = true;
 		});
 
-		if ((this.#level + 1) % this.#bossLevelMultiple === 0) {
+		if ((EnemysController.horda + 1) % this.#bossLevelMultiple === 0) {
 			position[0] = true;
 			position[1] = true;
 			position[2] = true;
@@ -471,7 +471,7 @@ class Game {
 		let position = yInitialpositions[sorted];
 		let monsterType = EnemysController.sortMonster();
 
-		if ((this.#level + 1) % this.#bossLevelMultiple === 0) {
+		if ((EnemysController.horda + 1) % this.#bossLevelMultiple === 0) {
 			if (!this.#isBossSpawned) {
 				this.#isBossSpawned = true;
 

@@ -175,13 +175,11 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	border: none;
-	border-radius: 3px;
-	background-color: tomato;
-	padding: 6px 12px;
-	position: absolute;
-	bottom: 200px;
+	background-image: url('../assets/images/red_button_exit.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 	font-size: 18px;
-	transition: all 0.2s ease-in-out;
 }
 
 .close__modal:hover {

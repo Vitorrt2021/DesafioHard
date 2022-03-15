@@ -431,8 +431,8 @@ body {
 	align-items: center;
 }
 
-.close_modal {
-	background-image: url('../assets/images/red_button.svg');
+.close__modal {
+	background-image: url('../assets/images/red_button_exit.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -447,7 +447,7 @@ body {
 	cursor: pointer;
 }
 
-.close_modal:active {
+.close__modal:active {
 	transform: translateY(4px);
 	background-image: url('../assets/images/red_button_green.svg');
 }
