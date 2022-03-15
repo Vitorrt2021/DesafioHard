@@ -119,7 +119,11 @@ const renderConfigurationModal = (game) => {
 	$('.configuration_modal_content')[0].style.display = 'flex';
 
 	$('.configuration_modal_restart_button').click(() => {
-		location.reload();
+		game.restart();
+		if (game.isStop()) {
+			game.startAnimation();
+		}
+		$('.configuration_modal')[0].style.display = 'none';
 	});
 	$('.configuration_modal_speed_button').click(() => {
 		changeSpeed(game);
