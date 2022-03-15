@@ -2,7 +2,7 @@ import renderRanking from './requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
 
 $(document).ready(() => {
-	$(window).hover(() => {
+	$('.welcome__container').hover(() => {
 		assetManager.playSound('bg_music_lvl_14', undefined, true, true);
 	});
 
