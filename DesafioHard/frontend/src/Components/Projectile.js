@@ -2,19 +2,27 @@ class Projectile {
 	constructor(x, y, image, damage) {
 		this.x = x;
 		this.y = y;
-		this.width = 10;
-		this.height = 10;
+		this.width = image.width;
+		this.height = image.height;
+		this.collisionX = x;
+		this.collisionY = y;
+		this.collisionWidth = this.width;
+		this.collisionHeight = this.height;
 		this.power = parseInt(damage);
 		this.speed = 5;
 		this.image = image;
 	}
 	update() {
 		this.x += this.speed;
+		this.collisionX = this.x;
 	}
 	draw(ctx) {
-		// ctx.strokeStyle = 'red';
-		// ctx.strokeRect(this.x, this.y, this.image.width, this.image.height);
-		ctx.strokeRect(this.x, this.y, this.width, this.height);
+		ctx.strokeRect(
+			this.collisionX,
+			this.collisionY,
+			this.collisionWidth,
+			this.collisionHeight
+		);
 		ctx.drawImage(this.image, this.x, this.y);
 	}
 }

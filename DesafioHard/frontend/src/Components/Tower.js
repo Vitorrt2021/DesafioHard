@@ -1,5 +1,5 @@
 import Projectile from './Projectile.js';
-import towerStatus from './towerStatus.js';
+import towerStatus from './TowerData.js';
 import assetManager from './AssetManager.js';
 
 function getRandomNumber(min, max) {
@@ -12,6 +12,10 @@ class Tower {
 		this.y = y - cellSize / 2;
 		this.width = cellSize;
 		this.height = cellSize;
+		this.collisionX = this.x;
+		this.collisionY = this.y;
+		this.collisionWidth = cellSize;
+		this.collisionHeight = cellSize;
 		this.towerType = towerType;
 
 		this.health = towerStatus[towerType].health;
@@ -50,6 +54,8 @@ class Tower {
 	updateTowerPosition(newX, newY) {
 		this.x = newX;
 		this.y = newY;
+		this.collisionX = this.x;
+		this.collisionY = this.y;
 
 		this.#buildExplosionsAnimation();
 		this.#buildPiecesAnimation();
@@ -138,6 +144,12 @@ class Tower {
 		if (this.isDying) {
 			this.#drawDyingAnimation(ctx);
 		} else {
+			ctx.strokeRect(
+				this.collisionX,
+				this.collisionY,
+				this.collisionWidth,
+				this.collisionHeight
+			);
 			ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 			this.#drawEvolveIcon(ctx);
 			this.#drawLifeBar(ctx);

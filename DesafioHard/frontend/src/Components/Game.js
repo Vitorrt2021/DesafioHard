@@ -3,7 +3,7 @@ import Tower from './Tower.js';
 import collision from './Collision.js';
 import Player from './Player.js';
 import Enemy from './Enemy.js';
-import towerStatus from './towerStatus.js';
+import towerStatus from './TowerData.js';
 import assetManager from '../Components/AssetManager.js';
 import renderSaveScore from '../requests/save-score.js';
 
@@ -22,8 +22,8 @@ class Game {
 	#enemies = [];
 	#enemiesDying = [];
 	#monster = ['slimePink', 'slimeGreen', 'toad', 'robot'];
-	#boss = ['minotaur'];
-	#bossLevel = 0;
+	#boss = ['golem'];
+	#bossLevelMultiple = 3;
 	#isBossSpawned = false;
 	#level = 0;
 	#spawnVelocity = 600;
@@ -61,7 +61,7 @@ class Game {
 			position[enemy.line] = true;
 		});
 
-		if (this.#level === this.#bossLevel) {
+		if ((this.#level + 1) % this.#bossLevelMultiple === 0) {
 			position[0] = true;
 			position[1] = true;
 			position[2] = true;
@@ -140,8 +140,8 @@ class Game {
 		});
 	}
 
-	#gameIsOver() {
-		if (this.#player.getLive() <= 0) {
+	#gameIsOver(enemy) {
+		if (this.#player.getLive() <= 0 || enemy.type === 'golem') {
 			assetManager.playSound('titanic_flute');
 
 			setTimeout(() => {
@@ -169,18 +169,24 @@ class Game {
 
 	#checkEnemyAttackedBase() {
 		this.#enemies.forEach((enemy, enemyIndex) => {
-			if (enemy.x + this.#cellSize / 3 < 0) {
+			if (enemy.collisionX + enemy.collisionWidth < 0) {
 				this.#player.deductLive();
 				this.#enemies.splice(enemyIndex, 1);
 				this.#updateLive();
-				this.#gameIsOver();
+				this.#gameIsOver(enemy);
 			}
 		});
 	}
 
 	#enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
-			this.#player.addScore(20 * (this.#level + 1));
+			if (enemy.type === 'golem') {
+				assetManager.playSound('golem_dying');
+				this.#player.addScore(100 * Math.pow(2, this.#level + 1));
+			} else {
+				this.#player.addScore(20 * (this.#level + 1));
+			}
+
 			this.#player.addMoney(Math.floor(this.#moneyDrop) + enemy.money);
 			this.#updateScore();
 			this.#updateMoney();
@@ -448,7 +454,7 @@ class Game {
 			monsterType = this.#monster[3];
 		}
 
-		if (this.#level === this.#bossLevel) {
+		if ((this.#level + 1) % this.#bossLevelMultiple === 0) {
 			if (!this.#isBossSpawned) {
 				this.#isBossSpawned = true;
 
@@ -456,8 +462,8 @@ class Game {
 
 				this.#createEnemy(
 					monsterType,
-					position,
-					yFinalpositions[sorted] - yInitialpositions[sorted],
+					yInitialpositions[1],
+					yFinalpositions[0] - yInitialpositions[0],
 					1
 				);
 			}
@@ -502,9 +508,9 @@ class Game {
 			case 'toad':
 				assetManager.playSound('monsterGreen');
 				break;
-			// case 'minotaur':
-			// 	assetManager.playSound('minotaur');
-			// 	break;
+			case 'golem':
+				assetManager.playSound('golem');
+				break;
 			default:
 				break;
 		}

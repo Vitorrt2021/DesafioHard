@@ -2,9 +2,9 @@ import renderRanking from './requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
 
 $(document).ready(() => {
-	$(window).hover(() => {
-		assetManager.playSound('bg_music_lvl_14', undefined, true, true);
-	});
+	// $(window).hover(() => {
+	// 	assetManager.playSound('bg_music_lvl_14', undefined, true, true);
+	// });
 
 	$('#play_game').click(() => {
 		window.location = '/gameplay';

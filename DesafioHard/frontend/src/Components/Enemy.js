@@ -1,4 +1,4 @@
-import monsterStatus from './monsterStatus.js';
+import monsterStatus from './EnemyData.js';
 import assetManager from './AssetManager.js';
 
 class Enemy {
@@ -7,6 +7,10 @@ class Enemy {
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.collisionX = x;
+		this.collisionY = y;
+		this.collisionWidth = 0;
+		this.collisionHeight = 0;
 		this.setHealth(level, monsterStatus[type].health);
 		this.maxHealth = this.health;
 		this.line = line;
@@ -29,6 +33,7 @@ class Enemy {
 	}
 	update() {
 		this.x -= this.speed;
+		this.collisionX = this.x;
 	}
 
 	changeAnimation(animationName) {
@@ -56,6 +61,11 @@ class Enemy {
 		let delta_y = animationMaxHeight - monsterImage.height; //Evitar pulos dos slimes
 		delta_y += (this.height - monsterImage.height) / 2; //centralizar no caminho das torres.
 
+		//atualizar dados de colisão
+		this.collisionWidth = monsterImage.width;
+		this.collisionHeight = monsterImage.height;
+		this.collisionY = this.y + delta_y;
+
 		if (this.animation.isAnimationFinished() && this.isDying) {
 			this.isDead = true;
 		}
@@ -66,7 +76,12 @@ class Enemy {
 
 		if (!this.isDead) {
 			ctx.strokeStyle = 'red';
-			ctx.strokeRect(this.x, this.y, this.width, this.height);
+			ctx.strokeRect(
+				this.collisionX,
+				this.collisionY,
+				this.collisionWidth,
+				this.collisionHeight
+			);
 			ctx.drawImage(monsterImage, this.x, this.y + delta_y);
 		}
 	}

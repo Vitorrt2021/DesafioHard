@@ -24,14 +24,14 @@ export default {
 		counterIncrement: 0.1,
 	},
 
-	minotaur: {
-		animationQtyFrames: 18,
-		counterIncrement: 0.2,
+	golem: {
+		animationQtyFrames: 9,
+		counterIncrement: 0.1,
 	},
 
-	minotaur_dying: {
-		animationQtyFrames: 12,
-		counterIncrement: 0.2,
+	golem_dying: {
+		animationQtyFrames: 5,
+		counterIncrement: 0.05,
 	},
 
 	toad_dying: {

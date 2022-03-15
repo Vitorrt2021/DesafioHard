@@ -23,7 +23,7 @@ export default {
 		money: 30,
 	},
 
-	minotaur: {
+	golem: {
 		speed: 1,
 		health: 1000,
 		money: 300,

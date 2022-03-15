@@ -1,4 +1,4 @@
-import animationData from './animationData.js';
+import animationData from './AnimationData.js';
 
 const sleep = 200;
 
