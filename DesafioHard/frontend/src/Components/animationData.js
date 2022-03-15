@@ -31,7 +31,7 @@ export default {
 
 	golem_dying: {
 		animationQtyFrames: 5,
-		counterIncrement: 0.05,
+		counterIncrement: 0.025,
 	},
 
 	toad_dying: {
