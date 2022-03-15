@@ -32,12 +32,12 @@ function renderSoundMenu() {
 						 <button class="sound_button_modal_full"></button>
 						</div>
 					</div>
-		 			<button class="close_modal">CLOSE</button>
+		 			<button class="close__modal">FECHAR</button>
 		 		</div>
 		 </div>`
 	);
 
-	$('.close_modal').click(() => {
+	$('.close__modal').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 
