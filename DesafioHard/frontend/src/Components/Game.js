@@ -36,6 +36,32 @@ class Game {
 		return !this.#runAnimationControl;
 	}
 
+	restart() {
+		this.#canvas = document.getElementById('canvas1');
+		this.#ctx = this.#canvas.getContext('2d');
+		this.#player = new Player();
+		this.#frames = 0;
+		this.#runAnimationControl = false;
+		this.#cellSize = 250;
+		this.#cellGap = 5;
+		this.#gameGrid = [];
+		this.#mousePosition = {};
+		this.#towers = [];
+		this.#towersDying = [];
+		this.#enemies = [];
+		this.#enemiesDying = [];
+		this.#spawnVelocity = 600;
+		this.#maxSpawnVelocity = 60;
+		this.#moneyDrop = 20;
+		this.#backgroundMusic = '';
+		this.#canvas.width = 1600;
+		this.#canvas.height = 800;
+		this.isQuickness = false;
+		this.monsterCout = 0;
+
+		this.start();
+	}
+
 	start() {
 		this.#updateLive();
 		this.#updateScore();
