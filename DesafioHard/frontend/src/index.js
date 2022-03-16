@@ -1,13 +1,15 @@
 import renderRanking from './requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
 
+window.volume = 0.2;
+
 $(document).ready(() => {
 	$('.welcome__container').hover(() => {
 		assetManager.playSound('bg_music_lvl_14', undefined, true, true);
 	});
 
 	$('#play_game').click(() => {
-		window.location = '/gameplay';
+		window.location = `/gameplay`;
 	});
 
 	// When the user clicks on the button, render the ranking modal
@@ -25,19 +27,21 @@ function renderSoundMenu() {
 		`<div class="modal__content">
 		 		<div class="sound__menu">
 				 <div class="volume_menu">
-				 		<p class="volumeInfo_container">20%</p>
+				 		<p class="volumeInfo_container">${assetManager.getVolume() * 100}%</p>
 				 		<div class="volumeSlider_container">
 						 <button class="sound_button_modal_empty"></button>
-						 <input type="range" min="0" max="100" value="20" step="1" class="volumeSlider"/>
+						 <input type="range" min="0" max="100" value="${
+								assetManager.getVolume() * 100
+							}" step="1" class="volumeSlider"/>
 						 <button class="sound_button_modal_full"></button>
 						</div>
 					</div>
-		 			<button class="close_modal">CLOSE</button>
+		 			<button class="close__modal">FECHAR</button>
 		 		</div>
 		 </div>`
 	);
 
-	$('.close_modal').click(() => {
+	$('.close__modal').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 

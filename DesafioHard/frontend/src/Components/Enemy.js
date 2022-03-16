@@ -1,4 +1,5 @@
-import monsterStatus from './monsterStatus.js';
+import enemyData from './EnemyData.js';
+import bossData from './BossData.js';
 import assetManager from './AssetManager.js';
 
 class Enemy {
@@ -7,16 +8,27 @@ class Enemy {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.setHealth(level, monsterStatus[type].health);
+		this.collisionX = x;
+		this.collisionY = y;
+		this.collisionWidth = 0;
+		this.collisionHeight = 0;
+
+		if (type === 'golem') {
+			this.setHealth(level, bossData[type].health);
+			this.speed = bossData[type].speed * 1.15;
+			this.money = bossData[type].money;
+		} else {
+			this.setHealth(level, enemyData[type].health);
+			this.speed = enemyData[type].speed * 1.15;
+			this.money = enemyData[type].money;
+		}
+
 		this.maxHealth = this.health;
 		this.line = line;
 		this.isDying = false;
 		this.isDead = false;
-		this.speed = monsterStatus[type].speed * 1.15;
-		this.money = monsterStatus[type].money;
 		this.animation = assetManager.getAnimationInstance(type);
 		this.type = type;
-		this.animation = assetManager.getAnimationInstance(type);
 		this.#updateMaxHeight();
 	}
 	//FIX-IT BALANCEAMENTO
@@ -30,6 +42,7 @@ class Enemy {
 	}
 	update() {
 		this.x -= this.speed;
+		this.collisionX = this.x;
 	}
 
 	changeAnimation(animationName) {
@@ -44,6 +57,7 @@ class Enemy {
 	#updateMaxHeight() {
 		this.animationMaxHeight = this.animation.getAnimationMaxHeight();
 	}
+
 	setDyingAnimation() {
 		this.isDying = true;
 		this.speed = 0;
@@ -57,6 +71,11 @@ class Enemy {
 		let delta_y = animationMaxHeight - monsterImage.height; //Evitar pulos dos slimes
 		delta_y += (this.height - monsterImage.height) / 2; //centralizar no caminho das torres.
 
+		//atualizar dados de colisão
+		this.collisionWidth = monsterImage.width;
+		this.collisionHeight = monsterImage.height;
+		this.collisionY = this.y + delta_y;
+
 		if (this.animation.isAnimationFinished() && this.isDying) {
 			this.isDead = true;
 		}
@@ -66,6 +85,13 @@ class Enemy {
 		}
 
 		if (!this.isDead) {
+			// ctx.strokeStyle = 'red';
+			// ctx.strokeRect(
+			// 	this.collisionX,
+			// 	this.collisionY,
+			// 	this.collisionWidth,
+			// 	this.collisionHeight
+			// );
 			ctx.drawImage(monsterImage, this.x, this.y + delta_y);
 		}
 	}
