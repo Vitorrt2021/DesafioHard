@@ -85,13 +85,13 @@ class Enemy {
 		}
 
 		if (!this.isDead) {
-			ctx.strokeStyle = 'red';
-			ctx.strokeRect(
-				this.collisionX,
-				this.collisionY,
-				this.collisionWidth,
-				this.collisionHeight
-			);
+			// ctx.strokeStyle = 'red';
+			// ctx.strokeRect(
+			// 	this.collisionX,
+			// 	this.collisionY,
+			// 	this.collisionWidth,
+			// 	this.collisionHeight
+			// );
 			ctx.drawImage(monsterImage, this.x, this.y + delta_y);
 		}
 	}

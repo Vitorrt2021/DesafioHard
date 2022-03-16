@@ -17,12 +17,12 @@ class Projectile {
 		this.collisionX = this.x;
 	}
 	draw(ctx) {
-		ctx.strokeRect(
-			this.collisionX,
-			this.collisionY,
-			this.collisionWidth,
-			this.collisionHeight
-		);
+		// ctx.strokeRect(
+		// 	this.collisionX,
+		// 	this.collisionY,
+		// 	this.collisionWidth,
+		// 	this.collisionHeight
+		// );
 		ctx.drawImage(this.image, this.x, this.y);
 	}
 }

@@ -144,12 +144,12 @@ class Tower {
 		if (this.isDying) {
 			this.#drawDyingAnimation(ctx);
 		} else {
-			ctx.strokeRect(
-				this.collisionX,
-				this.collisionY,
-				this.collisionWidth,
-				this.collisionHeight
-			);
+			// ctx.strokeRect(
+			// 	this.collisionX,
+			// 	this.collisionY,
+			// 	this.collisionWidth,
+			// 	this.collisionHeight
+			// );
 			ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 			this.#drawEvolveIcon(ctx);
 			this.#drawLifeBar(ctx);
