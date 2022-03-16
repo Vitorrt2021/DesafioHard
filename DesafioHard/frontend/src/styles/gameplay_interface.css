@@ -16,10 +16,7 @@
 
 html {
 	font-size: 1.44vw;
-	/* background: url('../assets/images/clouds_background.png') no-repeat center
-		center fixed;
-	background-size: cover; */
-	background-image: url('../assets/images/clouds_background_1.png');
+	background-image: url('../assets/interface_images/clouds_background.png');
 	background-repeat: repeat-x;
 	background-position: 0 0;
 	background-size: auto 100%;
@@ -74,7 +71,7 @@ html body {
 
 	overflow-y: hidden;
 
-	background-image: url('../assets/images/backgroundGame.png');
+	background-image: url('../assets/interface_images/backgroundGame.png');
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -82,7 +79,7 @@ html body {
 	width: 35%;
 	height: 100%;
 	position: relative;
-	background: url('../assets/images/towers_buttons_display.svg');
+	background: url('../assets/interface_images/towers_buttons_display.svg');
 	background-size: 100% 100%;
 	display: flex;
 	justify-content: flex-end;
@@ -110,7 +107,8 @@ html body {
 
 .tower_money_cost_visor {
 	width: 75%;
-	background: url('../assets/images/tower_cost_display.svg') no-repeat center;
+	background: url('../assets/interface_images/tower_cost_display.svg') no-repeat
+		center;
 	background-size: 75% 100%;
 }
 
@@ -126,7 +124,7 @@ html body {
 	padding-left: 2%;
 	padding-bottom: 1%;
 	margin-top: 0.5%;
-	background: url('../assets/images/live_display.svg');
+	background: url('../assets/interface_images/live_display.svg');
 	background-size: 100% 100%;
 	display: flex;
 	justify-content: center;
@@ -138,7 +136,7 @@ html body {
 	height: 75%;
 
 	padding-left: 2%;
-	background: url('../assets/images/score_display.svg');
+	background: url('../assets/interface_images/score_display.svg');
 	background-size: 100% 100%;
 	display: flex;
 	justify-content: center;
@@ -149,7 +147,7 @@ html body {
 	width: 15%;
 	height: 75%;
 	padding-left: 2%;
-	background: url('../assets/images/money_display.svg');
+	background: url('../assets/interface_images/money_display.svg');
 	background-size: 100% 100%;
 	display: flex;
 	justify-content: space-around;
@@ -169,7 +167,7 @@ html body {
 	width: 15%;
 	height: 50%;
 	border: none;
-	background: url('../assets/images/blue_button.svg');
+	background: url('../assets/interface_images/blue_button.svg');
 	background-size: 100% 100%;
 	color: inherit;
 	font-weight: inherit;
@@ -213,14 +211,14 @@ html body {
 	cursor: pointer;
 	border: none;
 	background-color: rgba(0, 0, 0, 0);
-	background-image: url('../assets/images/configuration_button.svg');
+	background-image: url('../assets/interface_images/configuration_button.svg');
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 }
 .configuration_button:active {
 	transform: translateY(1px);
-	background-image: url('../assets/images/configuration_button_hover.svg');
+	background-image: url('../assets/interface_images/configuration_button_hover.svg');
 }
 
 .configuration_modal_content {
@@ -235,7 +233,7 @@ html body {
 	margin-left: -50px;
 	width: 20vw;
 	height: 35vw;
-	background-image: url('../assets/images/configuration_modal.svg');
+	background-image: url('../assets/interface_images/configuration_modal.svg');
 	background-size: cover;
 
 	padding: 5vw;
@@ -265,15 +263,15 @@ html body {
 	height: 5vw;
 }
 .configuration_modal_exit_button {
-	background-image: url('../assets/images/exit_button.svg');
+	background-image: url('../assets/interface_images/exit_button.svg');
 }
 .configuration_modal_restart_button {
-	background-image: url('../assets/images/restart_button.svg');
+	background-image: url('../assets/interface_images/restart_button.svg');
 }
 .configuration_modal_speed_button {
 	width: 4.5vw;
 	transform: translateY(1px);
-	background-image: url('../assets/images/speed_control.svg');
+	background-image: url('../assets/interface_images/speed_control.svg');
 }
 .buttons_container {
 	display: flex;
@@ -305,7 +303,7 @@ html body {
 	animation-duration: 0.4s;
 }
 .configuration_sound_button {
-	background-image: url('../assets/images/sound_button_blue.svg');
+	background-image: url('../assets/interface_images/sound_button_blue.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -336,7 +334,7 @@ html body {
 }
 
 .sound_button_modal_full {
-	background-image: url('../assets/images/sound_button.svg');
+	background-image: url('../assets/interface_images/sound_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -349,11 +347,11 @@ html body {
 
 .sound_button_modal_full:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/sound_button_green.svg');
+	background-image: url('../assets/interface_images/sound_button_green.svg');
 }
 
 .sound_button_modal_empty {
-	background-image: url('../assets/images/sound_button_disabled.svg');
+	background-image: url('../assets/interface_images/sound_button_disabled.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -394,7 +392,7 @@ html body {
 	width: 25px;
 	height: 25px;
 	margin-top: -12px;
-	background-image: url('../assets/images/slider_thumb.svg');
+	background-image: url('../assets/interface_images/slider_thumb.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	cursor: pointer;
@@ -407,7 +405,7 @@ html body {
 	border-radius: 0;
 	width: 25px;
 	height: 25px;
-	background-image: url('../assets/images/slider_thumb.svg');
+	background-image: url('../assets/interface_images/slider_thumb.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	cursor: pointer;
@@ -433,7 +431,7 @@ html body {
 	width: 20%;
 	height: 75%;
 
-	background-image: url('../assets/images/sound_menu_background.svg');
+	background-image: url('../assets/interface_images/sound_menu_background.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -445,7 +443,7 @@ html body {
 }
 
 .close_modal {
-	background-image: url('../assets/images/red_button.svg');
+	background-image: url('../assets/interface_images/red_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -460,5 +458,5 @@ html body {
 
 .close_modal:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/red_button_green.svg');
+	background-image: url('../assets/interface_images/red_button_green.svg');
 }

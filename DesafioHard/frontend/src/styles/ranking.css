@@ -6,7 +6,7 @@
 .app__container {
 	width: 100vw;
 	height: 100vh;
-	background-image: url('../assets/images/clouds_background.png');
+	background-image: url('../assets/interface_images/clouds_background.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -19,7 +19,7 @@
 .welcome__container {
 	width: 70%;
 	height: 70%;
-	background-image: url('../assets/images/welcome_window.svg');
+	background-image: url('../assets/interface_images/welcome_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -40,7 +40,7 @@
 }
 
 .blue__button {
-	background-image: url('../assets/images/blue_button.svg');
+	background-image: url('../assets/interface_images/blue_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -60,7 +60,7 @@
 }
 
 .red__button {
-	background-image: url('../assets/images/red_button.svg');
+	background-image: url('../assets/interface_images/red_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -80,7 +80,7 @@
 .ranking__container {
 	width: 70%;
 	height: 80%;
-	background-image: url('../assets/images/ranking_window.svg');
+	background-image: url('../assets/interface_images/ranking_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -102,7 +102,7 @@
 }
 
 .ranking__cell {
-	background-image: url('../assets/images/ranking_window_cell.svg');
+	background-image: url('../assets/interface_images/ranking_window_cell.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -175,7 +175,7 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	border: none;
-	background-image: url('../assets/images/red_button_exit.svg');
+	background-image: url('../assets/interface_images/red_button_exit.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;

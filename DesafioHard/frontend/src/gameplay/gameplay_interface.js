@@ -1,5 +1,4 @@
 import Game from '../Components/Game.js';
-import renderRanking from '../requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
 import renderSoundMenu from '../index.js';
 // const apiURL = 'https://data.dudeful.com';
@@ -114,7 +113,7 @@ const renderConfigurationModal = (game) => {
 	if (game.isQuickness) {
 		$('.configuration_modal_speed_button').css(
 			'background-image',
-			`url('../assets/images/speed_control_selected.svg')`
+			`url('../assets/interface_images/speed_control_selected.svg')`
 		);
 	}
 	$('.configuration_modal_content')[0].style.display = 'flex';
@@ -144,12 +143,12 @@ function changeSpeed(game) {
 	if (game.isQuickness) {
 		$('.configuration_modal_speed_button').css(
 			'background-image',
-			`url('../assets/images/speed_control_selected.svg')`
+			`url('../assets/interface_images/speed_control_selected.svg')`
 		);
 	} else {
 		$('.configuration_modal_speed_button').css(
 			'background-image',
-			`url('../assets/images/speed_control.svg')`
+			`url('../assets/interface_images/speed_control.svg')`
 		);
 	}
 }
