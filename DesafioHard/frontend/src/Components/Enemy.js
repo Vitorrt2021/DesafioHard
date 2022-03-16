@@ -1,4 +1,5 @@
-import monsterStatus from './EnemyData.js';
+import enemyData from './EnemyData.js';
+import bossData from './BossData.js';
 import assetManager from './AssetManager.js';
 
 class Enemy {
@@ -11,13 +12,21 @@ class Enemy {
 		this.collisionY = y;
 		this.collisionWidth = 0;
 		this.collisionHeight = 0;
-		this.setHealth(level, monsterStatus[type].health);
+
+		if (type === 'golem') {
+			this.setHealth(level, bossData[type].health);
+			this.speed = bossData[type].speed * 1.15;
+			this.money = bossData[type].money;
+		} else {
+			this.setHealth(level, enemyData[type].health);
+			this.speed = enemyData[type].speed * 1.15;
+			this.money = enemyData[type].money;
+		}
+
 		this.maxHealth = this.health;
 		this.line = line;
 		this.isDying = false;
 		this.isDead = false;
-		this.speed = monsterStatus[type].speed * 1.15;
-		this.money = monsterStatus[type].money;
 		this.animation = assetManager.getAnimationInstance(type);
 		this.type = type;
 		this.#updateMaxHeight();
@@ -48,6 +57,7 @@ class Enemy {
 	#updateMaxHeight() {
 		this.animationMaxHeight = this.animation.getAnimationMaxHeight();
 	}
+
 	setDyingAnimation() {
 		this.isDying = true;
 		this.speed = 0;

@@ -22,10 +22,8 @@ class Game {
 	#towersDying = [];
 	#enemies = [];
 	#enemiesDying = [];
-	#boss = ['golem'];
 	#bossLevelMultiple = 3;
 	#isBossSpawned = false;
-	#level = 0;
 	#spawnVelocity = 600;
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
@@ -35,7 +33,7 @@ class Game {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 		this.isQuickness = false;
-		this.monsterCout = 0;
+		this.monsterCount = 0;
 	}
 
 	isStop() {
@@ -56,6 +54,8 @@ class Game {
 		this.#towersDying = [];
 		this.#enemies = [];
 		this.#enemiesDying = [];
+		this.#bossLevelMultiple = 3;
+		this.#isBossSpawned = false;
 		this.#spawnVelocity = 600;
 		this.#maxSpawnVelocity = 60;
 		this.#moneyDrop = 20;
@@ -63,7 +63,7 @@ class Game {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 		this.isQuickness = false;
-		this.monsterCout = 0;
+		this.monsterCount = 0;
 
 		this.start();
 	}
@@ -221,7 +221,7 @@ class Game {
 			this.#enemiesDying.push(enemy);
 			this.#enemies.splice(enemyIndex, 1);
 			enemy.line = null;
-			this.monsterCout++;
+			this.monsterCount++;
 		}
 	}
 
@@ -256,6 +256,7 @@ class Game {
 			});
 		});
 	}
+
 	#checkProjectileCollision() {
 		this.#towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
@@ -296,6 +297,7 @@ class Game {
 			this.#spawnVelocity = spawnV;
 		}
 	}
+
 	#animation() {
 		if (this.#runAnimationControl) {
 			this.#ctx.fillStyle = 'black';
@@ -474,28 +476,22 @@ class Game {
 		if ((EnemysController.horda + 1) % this.#bossLevelMultiple === 0) {
 			if (!this.#isBossSpawned) {
 				this.#isBossSpawned = true;
-
-				monsterType = this.#boss[0];
-
 				this.#createEnemy(
-					monsterType,
+					EnemysController.getBoss(),
 					yInitialpositions[1],
 					yFinalpositions[0] - yInitialpositions[0],
 					1
 				);
 			}
-
-			return;
+		} else {
+			this.#isBossSpawned = false;
+			this.#createEnemy(
+				monsterType,
+				position,
+				yFinalpositions[sorted] - yInitialpositions[sorted],
+				sorted
+			);
 		}
-
-		this.#isBossSpawned = false;
-		this.#playSoundMonster(monsterType);
-		this.#createEnemy(
-			monsterType,
-			position,
-			yFinalpositions[sorted] - yInitialpositions[sorted],
-			sorted
-		);
 	}
 
 	#createEnemy(monsterType, position, yPositions, sorted) {
@@ -513,7 +509,6 @@ class Game {
 		);
 	}
 
-	//FIX-IT TORNAR ADAPTAVEL
 	#playSoundMonster(monster) {
 		switch (monster) {
 			case 'robot':
@@ -553,7 +548,7 @@ class Game {
 	#updateBackgroundMusic() {
 		assetManager.stopSound(this.#backgroundMusic);
 		this.#backgroundMusic = 'bg_music_lvl_' + EnemysController.horda;
-		assetManager.playSound(this.#backgroundMusic, 0.175, true);
+		assetManager.playSound(this.#backgroundMusic, undefined, true);
 	}
 }
 

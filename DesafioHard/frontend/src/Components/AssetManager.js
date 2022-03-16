@@ -5,7 +5,6 @@ const sleep = 200;
 class AssetManager {
 	#images = {};
 	#sounds = {};
-	#volume = 0.2;
 	#animations = {};
 
 	async prepareAssets(assetLoaderInstance) {
@@ -54,7 +53,7 @@ class AssetManager {
 
 	async playSound(
 		sound_name,
-		volume = this.#volume,
+		volume = window.volume,
 		loop = false,
 		autoplay = false
 	) {
@@ -90,16 +89,20 @@ class AssetManager {
 
 	changeVolume(newVolume) {
 		if (newVolume >= 0 && newVolume <= 100) {
-			this.#volume = newVolume / 100;
+			window.volume = newVolume / 100;
 
 			for (const sound in this.#sounds) {
 				const soundObj = this.#sounds[sound];
 
 				if (soundObj.duration > 0 && !soundObj.paused) {
-					soundObj.volume = this.#volume;
+					soundObj.volume = window.volume;
 				}
 			}
 		}
+	}
+
+	getVolume() {
+		return window.volume;
 	}
 
 	async #makeImagesObject(assetLoaderInstance) {

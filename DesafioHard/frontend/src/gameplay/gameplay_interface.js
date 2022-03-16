@@ -42,9 +42,6 @@ $(document).ready(() => {
 		event.originalEvent.preventDefault();
 	});
 
-	const canvas = document.getElementById('canvas1');
-	const ctx = canvas.getContext('2d');
-
 	$.get(`${apiURL}/load-assets`, async (assetLoaderInstance) => {
 		await assetManager.prepareAssets(assetLoaderInstance);
 
@@ -131,13 +128,14 @@ const renderConfigurationModal = (game) => {
 	$('.configuration_sound_button').click(() => {
 		$('.configuration_modal')[0].style.display = 'none';
 		renderSoundMenu();
-		$('.close_modal').click(() => {
+		$('.close__modal').click(() => {
 			if (game.isStop()) {
 				game.startAnimation();
 			}
 		});
 	});
 };
+
 function changeSpeed(game) {
 	game.isQuickness = !game.isQuickness;
 	if (game.isQuickness) {
@@ -152,9 +150,9 @@ function changeSpeed(game) {
 		);
 	}
 }
+
 function eventCloseConfiguration(game) {
 	// When the user clicks anywhere outside of the modal, closes it
-
 	$(window).mousedown((event) => {
 		if (
 			event.originalEvent.target !== $('.configuration_modal')[0] &&
