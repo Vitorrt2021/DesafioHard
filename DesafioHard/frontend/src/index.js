@@ -33,6 +33,7 @@ function renderSoundMenu() {
 						</div>
 						
 						<button class="close_modal"></button>
+						
 					</div>
 		 		</div>
 		 </div>`
