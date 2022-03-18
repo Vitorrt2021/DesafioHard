@@ -265,13 +265,13 @@ body {
 }
 
 .ranking__container {
-	width: 70%;
-	height: 80%;
+	width: calc(34vh + 20vw);
+	height: calc(30vh + 20vw);
 
 	background-image: url('../assets/images/ranking_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
 
 	display: flex;
 	flex-direction: column;
@@ -294,15 +294,17 @@ body {
 	align-items: center;
 }
 
+/* Ranking */
 .ranking__cell__container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	width: 60%;
+	width: 80%;
 	height: 50%;
 	overflow-y: auto;
-	margin-top: 15vh;
+
+	margin-top: 15%;
 }
 
 .ranking__cell {
@@ -358,59 +360,56 @@ body {
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	width: 55%;
-	height: 70%;
+	width: 72%;
+	height: 100%;
 }
 
 .ranking__cell__only_score_date_container {
 	display: flex;
-	justify-content: center;
-	align-items: flex-start;
+	margin-top: 3.5%;
 	width: 100%;
-	height: 50%;
+	height: 20%;
 }
 
 .ranking__cell__rank {
-	width: 25%;
-	width: 8vw;
-	height: 60%;
-	font-size: 4.5vh;
+	width: 28%;
+	height: 100%;
+	font-size: calc(2vh + 1vw);
+
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	padding-left: 1.3vw;
-	padding-top: 1.1vh;
 }
-
+.ranking__cell__rank > p {
+	margin-top: 10%;
+	margin-left: 25%;
+}
 .ranking__cell__name {
 	width: 100%;
-	height: 50%;
-	font-size: 4vh;
+	height: 45%;
+	font-size: calc(1.5vh + 1vw);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 1.5vh;
 }
 
 .ranking__cell__score {
 	width: 100%;
 	height: 100%;
-	font-size: 2.5vh;
+	font-size: 30%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 0.5vh;
 }
 
 .ranking__cell__date {
 	width: 100%;
 	height: 100%;
-	font-size: 1.5vh;
+	font-size: 20%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 1.5vw;
-	padding-top: 0.5vh;
+
+	margin-right: 2.5%;
 }
 
 .modal {

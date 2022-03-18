@@ -44,6 +44,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	border: solid red 2px;
 }
 .buttons__container {
 	display: flex;
@@ -54,6 +56,8 @@
 
 	width: 40%;
 	height: 40%;
+
+	border: solid yellow 2px;
 }
 
 .blue__button {

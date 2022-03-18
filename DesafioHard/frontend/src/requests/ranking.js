@@ -19,12 +19,12 @@ const renderRankingModal = () => {
 				<div class="ranking__container">
 						<div class="ranking__cell__container">
 						</div>
-						<button class="close__modal" type="button">FECHAR</button>
+						<button class="close_modal" id='close_modal_ranking' type="button"></button>
 				</div>
 		</div>`
 	);
 
-	$('.close__modal').click(() => {
+	$('#close_modal_ranking').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 
@@ -50,6 +50,7 @@ const renderCells = (ajaxResponse) => {
 
 		$('.ranking__cell__container').append(
 			`<div class="ranking__cell_${index + 1}">
+					
 					<div class="ranking__cell__rank"></div>
 					<div class="ranking__cell__name_score_date_container">
 						<div class="ranking__cell__only_score_date_container">
@@ -67,7 +68,9 @@ const renderCells = (ajaxResponse) => {
 
 		$('.ranking__cell__container').append(
 			`<div class="ranking__cell">
-					<div class="ranking__cell__rank">${index + 1}º</div>
+					<div class="ranking__cell__rank">
+						<p>${index + 1}º</p>
+					</div>
 					<div class="ranking__cell__name_score_date_container">
 						<div class="ranking__cell__only_score_date_container">
 							<div class="ranking__cell__score">${userData.score}</div>
