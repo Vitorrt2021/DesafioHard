@@ -27,12 +27,13 @@ function renderSoundMenu() {
 				 <div class="volume_menu">
 				 		<p class="volumeInfo_container">${assetManager.getVolume()}%</p>
 				 		<div class="volumeSlider_container">
-						 <button class="sound_button_modal_empty"></button>
-						 <input type="range" min="0" max="100" value="${assetManager.getVolume()}" step="1" class="volumeSlider"/>
-						 <button class="sound_button_modal_full"></button>
+							<button class="sound_button_modal_empty sound_control_button"></button>
+							<input type="range" min="0" max="100" value="${assetManager.getVolume()}" step="1" class="volumeSlider"/>
+							<button class="sound_button_modal_full sound_control_button"></button>
 						</div>
+						
+						<button class="close_modal"></button>
 					</div>
-		 			<button class="close_modal"></button>
 		 		</div>
 		 </div>`
 	);

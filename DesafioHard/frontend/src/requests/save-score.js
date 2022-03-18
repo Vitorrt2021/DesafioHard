@@ -21,7 +21,7 @@ const renderSaveScore = () => {
 	window.onbeforeunload = () => {
 		return;
 	};
-
+	console.log('Open Modal');
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">
