@@ -34,14 +34,14 @@ function renderSoundMenu() {
 							<button class="sound_button_modal_full sound_control_button"></button>
 						</div>
 						
-						<button class="close_modal"></button>
+						<button class="close_modal" id='close_modal_sound'></button>
 						
 					</div>
 		 		</div>
 		 </div>`
 	);
 
-	$('.close__modal').click(() => {
+	$('#close_modal_sound').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 

@@ -19,7 +19,7 @@
 .save__container {
 	width: 50vh;
 	height: 50vh;
-	background-image: url('../assets/images/save_score_table.svg');
+	background-image: url('../assets/interface_images/save_score_table.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
@@ -55,7 +55,7 @@
 }
 
 #button_save {
-	background-image: url('../assets/images/save_button.svg');
+	background-image: url('../assets/interface_images/save_button.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-size: 100% 100%;
@@ -71,5 +71,5 @@
 }
 #button_save:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/save_button_hover.svg');
+	background-image: url('../assets/interface_images/save_button_hover.svg');
 }

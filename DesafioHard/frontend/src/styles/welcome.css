@@ -67,7 +67,7 @@ body {
 	width: calc(42vh + 20.6vw);
 	height: calc(38.1vh + 20vw);
 
-	background-image: url('../assets/images/welcome_window_2.svg');
+	background-image: url('../assets/interface_images/welcome_window_2.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -195,7 +195,7 @@ body {
 }
 
 .sound_button_modal_empty {
-	background-image: url('../assets/images/sound_button_disabled.svg');
+	background-image: url('../assets/interface_images/sound_button_disabled.svg');
 }
 
 .sound_button_modal_empty:active {
@@ -282,7 +282,7 @@ body {
 	width: calc(30vh + 5vw);
 	height: calc(53vh + 7.5vw);
 
-	background-image: url('../assets/images/sound_window.svg');
+	background-image: url('../assets/interface_images/sound_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -436,7 +436,7 @@ body {
 }
 
 .close_modal {
-	background-image: url('../assets/images/button_close_red.svg');
+	background-image: url('../assets/interface_images/button_close_red.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -452,7 +452,7 @@ body {
 
 .close__modal:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/button_close_green.svg');
+	background-image: url('../assets/interface_images/button_close_green.svg');
 }
 
 @keyframes animatetop {

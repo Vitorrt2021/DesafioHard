@@ -86,9 +86,6 @@ class AssetManager {
 			this.#sounds[sound_name].currentTime = 0;
 		}
 	}
-	getVolume() {
-		return Math.floor(this.#volume * 100);
-	}
 	changeVolume(newVolume) {
 		if (newVolume >= 0 && newVolume <= 100) {
 			window.volume = newVolume / 100;
@@ -104,7 +101,7 @@ class AssetManager {
 	}
 
 	getVolume() {
-		return window.volume;
+		return Math.floor(window.volume * 100);
 	}
 
 	async #makeImagesObject(assetLoaderInstance) {
