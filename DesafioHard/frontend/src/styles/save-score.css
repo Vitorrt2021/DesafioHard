@@ -6,7 +6,7 @@
 .app__container {
 	width: 100vw;
 	height: 100vh;
-	background-image: url('../assets/images/clouds_background.png');
+	background-image: url('../assets/interface_images/clouds_background.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -37,7 +37,7 @@
 	width: 30vh;
 	height: 4vh;
 
-	background-image: url('../assets/images/save_window_input.svg');
+	background-image: url('../assets/interface_images/save_window_input.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;

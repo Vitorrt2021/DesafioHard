@@ -3,7 +3,7 @@ import Tower from './Tower.js';
 import collision from './Collision.js';
 import Player from './Player.js';
 import Enemy from './Enemy.js';
-import towerStatus from './towerStatus.js';
+import towerStatus from './TowerData.js';
 import assetManager from '../Components/AssetManager.js';
 import renderSaveScore from '../requests/save-score.js';
 import EnemysController from '../Components/EnemysController.js';
@@ -22,16 +22,20 @@ class Game {
 	#towersDying = [];
 	#enemies = [];
 	#enemiesDying = [];
+	#bossLevelMultiple = 3;
+	#isBossSpawned = false;
 	#spawnVelocity = 600;
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
+
 	constructor() {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 		this.isQuickness = false;
-		this.monsterCout = 0;
+		this.monsterCount = 0;
 	}
+
 	isStop() {
 		return !this.#runAnimationControl;
 	}
@@ -50,6 +54,8 @@ class Game {
 		this.#towersDying = [];
 		this.#enemies = [];
 		this.#enemiesDying = [];
+		this.#bossLevelMultiple = 3;
+		this.#isBossSpawned = false;
 		this.#spawnVelocity = 600;
 		this.#maxSpawnVelocity = 60;
 		this.#moneyDrop = 20;
@@ -57,7 +63,7 @@ class Game {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 		this.isQuickness = false;
-		this.monsterCout = 0;
+		this.monsterCount = 0;
 
 		this.start();
 	}
@@ -81,6 +87,13 @@ class Game {
 		this.#enemies.forEach((enemy) => {
 			position[enemy.line] = true;
 		});
+
+		if ((EnemysController.horda + 1) % this.#bossLevelMultiple === 0) {
+			position[0] = true;
+			position[1] = true;
+			position[2] = true;
+		}
+
 		this.#towers.forEach((tower) => {
 			if (towerPosition.indexOf(Math.floor(tower.y)) != -1) {
 				if (position[towerPosition.indexOf(Math.floor(tower.y))]) {
@@ -154,8 +167,8 @@ class Game {
 		});
 	}
 
-	#gameIsOver() {
-		if (this.#player.getLive() <= 0) {
+	#gameIsOver(enemy) {
+		if (this.#player.getLive() <= 0 || enemy.type === 'golem') {
 			assetManager.playSound('titanic_flute');
 
 			setTimeout(() => {
@@ -183,18 +196,24 @@ class Game {
 
 	#checkEnemyAttackedBase() {
 		this.#enemies.forEach((enemy, enemyIndex) => {
-			if (enemy.x + this.#cellSize / 3 < 0) {
+			if (enemy.collisionX + enemy.collisionWidth < 0) {
 				this.#player.deductLive();
 				this.#enemies.splice(enemyIndex, 1);
 				this.#updateLive();
-				this.#gameIsOver();
+				this.#gameIsOver(enemy);
 			}
 		});
 	}
 
 	#enemyIsDead(enemy, enemyIndex) {
 		if (enemy.health <= 0 && !enemy.isDying) {
-			this.#player.addScore(20 * (EnemysController.horda + 1));
+			if (enemy.type === 'golem') {
+				assetManager.playSound('golem_dying');
+				this.#player.addScore(100 * Math.pow(2, EnemysController.horda + 1));
+			} else {
+				this.#player.addScore(20 * (EnemysController.horda + 1));
+			}
+
 			this.#player.addMoney(Math.floor(this.#moneyDrop) + enemy.money);
 			this.#updateScore();
 			this.#updateMoney();
@@ -202,7 +221,7 @@ class Game {
 			this.#enemiesDying.push(enemy);
 			this.#enemies.splice(enemyIndex, 1);
 			enemy.line = null;
-			this.monsterCout++;
+			this.monsterCount++;
 		}
 	}
 
@@ -237,6 +256,7 @@ class Game {
 			});
 		});
 	}
+
 	#checkProjectileCollision() {
 		this.#towers.forEach((tower) => {
 			tower.projectiles.forEach((projectile, index) => {
@@ -277,6 +297,7 @@ class Game {
 			this.#spawnVelocity = spawnV;
 		}
 	}
+
 	#animation() {
 		if (this.#runAnimationControl) {
 			this.#ctx.fillStyle = 'black';
@@ -444,36 +465,70 @@ class Game {
 			y: (e.clientY - rect.top) * scaleY,
 		};
 	}
+
 	#spawnEnemy() {
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
 		let sorted = EnemysController.sortPosition();
 		let position = yInitialpositions[sorted];
-		let monster = EnemysController.sortMonster();
-		this.#playSoundMonster(monster);
+		let monsterType = EnemysController.sortMonster();
+
+		if ((EnemysController.horda + 1) % this.#bossLevelMultiple === 0) {
+			if (!this.#isBossSpawned) {
+				this.#isBossSpawned = true;
+				this.#createEnemy(
+					EnemysController.getBoss(),
+					yInitialpositions[1],
+					yFinalpositions[0] - yInitialpositions[0],
+					1
+				);
+			}
+		} else {
+			this.#isBossSpawned = false;
+			this.#createEnemy(
+				monsterType,
+				position,
+				yFinalpositions[sorted] - yInitialpositions[sorted],
+				sorted
+			);
+		}
+	}
+
+	#createEnemy(monsterType, position, yPositions, sorted) {
+		this.#playSoundMonster(monsterType);
 		this.#enemies.push(
-			//FIX-IT JUNTAR CLASS ENEMY COM MONSTER
 			new Enemy(
-				monster,
+				monsterType,
 				parseInt(this.#canvas.width),
 				position,
 				this.#cellSize,
-				yFinalpositions[sorted] - yInitialpositions[sorted],
+				yPositions,
 				sorted,
 				EnemysController.horda
 			)
 		);
 	}
-	//FIX-IT TORNAR ADAPTAVEL
+
 	#playSoundMonster(monster) {
-		if (monster === 'robot') {
-			assetManager.playSound('robot');
-		} else if (monster === 'slimePink' || monster === 'slimeGreen') {
-			assetManager.playSound('slimeWalk');
-		} else if (monster === 'toad') {
-			assetManager.playSound('monsterGreen');
+		switch (monster) {
+			case 'robot':
+				assetManager.playSound('robot');
+				break;
+			case 'slimePink':
+			case 'slimeGreen':
+				assetManager.playSound('slimeWalk');
+				break;
+			case 'toad':
+				assetManager.playSound('monsterGreen');
+				break;
+			case 'golem':
+				assetManager.playSound('golem');
+				break;
+			default:
+				break;
 		}
 	}
+
 	#updateLevel() {
 		if (
 			this.#player.getScore() >=
@@ -493,7 +548,7 @@ class Game {
 	#updateBackgroundMusic() {
 		assetManager.stopSound(this.#backgroundMusic);
 		this.#backgroundMusic = 'bg_music_lvl_' + EnemysController.horda;
-		assetManager.playSound(this.#backgroundMusic, 0.175, true);
+		assetManager.playSound(this.#backgroundMusic, undefined, true);
 	}
 }
 

@@ -52,8 +52,7 @@ body {
 .app__container {
 	width: 100vw;
 	height: 100vh;
-	/* background-image: url('../assets/images/clouds_background.png'); */
-	background-image: url('../assets/images/clouds_background_1.png');
+	background-image: url('../assets/interface_images/clouds_background.png');
 	background-repeat: repeat-x;
 	background-position: 0 0;
 	background-size: auto 100%;
@@ -90,7 +89,7 @@ body {
 }
 
 .blue__button {
-	background-image: url('../assets/images/play_button.svg');
+	background-image: url('../assets/interface_images/play_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -105,7 +104,7 @@ body {
 
 .blue__button:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/play_button_green.svg');
+	background-image: url('../assets/interface_images/play_button_green.svg');
 }
 
 .ranking_and_sound_container {
@@ -117,7 +116,7 @@ body {
 	height: calc(25vh + 5vw);
 }
 .red__button {
-	background-image: url('../assets/images/ranking_button.svg');
+	background-image: url('../assets/interface_images/ranking_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -130,11 +129,11 @@ body {
 
 .red__button:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/ranking_button_green.svg');
+	background-image: url('../assets/interface_images/ranking_button_green.svg');
 }
 
 .sound__button {
-	background-image: url('../assets/images/sound_button.svg');
+	background-image: url('../assets/interface_images/sound_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -147,7 +146,7 @@ body {
 
 .sound__button:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/sound_button_green.svg');
+	background-image: url('../assets/interface_images/sound_button_green.svg');
 }
 
 .volume_menu {
@@ -169,7 +168,7 @@ body {
 }
 
 .sound_button_modal_full {
-	background-image: url('../assets/images/sound_button.svg');
+	background-image: url('../assets/interface_images/sound_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -192,7 +191,7 @@ body {
 }
 .sound_button_modal_full:active {
 	transform: translateY(4px);
-	background-image: url('../assets/images/sound_button_green.svg');
+	background-image: url('../assets/interface_images/sound_button_green.svg');
 }
 
 .sound_button_modal_empty {
@@ -229,7 +228,7 @@ body {
 	width: 25px;
 	height: 25px;
 	margin-top: -12px;
-	background-image: url('../assets/images/slider_thumb.svg');
+	background-image: url('../assets/interface_images/slider_thumb.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	cursor: pointer;
@@ -242,7 +241,7 @@ body {
 	border-radius: 0;
 	width: 25px;
 	height: 25px;
-	background-image: url('../assets/images/slider_thumb.svg');
+	background-image: url('../assets/interface_images/slider_thumb.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	cursor: pointer;
@@ -268,7 +267,7 @@ body {
 	width: calc(34vh + 20vw);
 	height: calc(30vh + 20vw);
 
-	background-image: url('../assets/images/ranking_window.svg');
+	background-image: url('../assets/interface_images/ranking_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -308,7 +307,7 @@ body {
 }
 
 .ranking__cell {
-	background-image: url('../assets/images/ranking_cell.svg');
+	background-image: url('../assets/interface_images/ranking_cell.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -320,7 +319,7 @@ body {
 }
 
 .ranking__cell_1 {
-	background-image: url('../assets/images/ranking_cell_1.svg');
+	background-image: url('../assets/interface_images/ranking_cell_1.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -332,7 +331,7 @@ body {
 }
 
 .ranking__cell_2 {
-	background-image: url('../assets/images/ranking_cell_2.svg');
+	background-image: url('../assets/interface_images/ranking_cell_2.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -344,7 +343,7 @@ body {
 }
 
 .ranking__cell_3 {
-	background-image: url('../assets/images/ranking_cell_3.svg');
+	background-image: url('../assets/interface_images/ranking_cell_3.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -447,12 +446,11 @@ body {
 	height: 15%;
 	font-family: inherit;
 	color: inherit;
-	font-family: inherit;
 	font-size: 3vh;
 	cursor: pointer;
 }
 
-.close_modal:active {
+.close__modal:active {
 	transform: translateY(4px);
 	background-image: url('../assets/images/button_close_green.svg');
 }
@@ -475,7 +473,7 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background-image: url('../assets/images/scrollbar_track.svg');
+	background-image: url('../assets/interface_images/scrollbar_track.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -483,7 +481,7 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background-image: url('../assets/images/scrollbar_thumb.svg');
+	background-image: url('../assets/interface_images/scrollbar_thumb.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: 40%;

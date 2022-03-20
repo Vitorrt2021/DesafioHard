@@ -1,5 +1,4 @@
 import Game from '../Components/Game.js';
-import renderRanking from '../requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
 import renderSoundMenu from '../index.js';
 // const apiURL = 'https://data.dudeful.com';
@@ -39,9 +38,6 @@ $(document).ready(() => {
 	$('#canvas1').on('dragover', function (event) {
 		event.originalEvent.preventDefault();
 	});
-
-	const canvas = document.getElementById('canvas1');
-	const ctx = canvas.getContext('2d');
 
 	$.get(`${apiURL}/load-assets`, async (assetLoaderInstance) => {
 		await assetManager.prepareAssets(assetLoaderInstance);
@@ -113,7 +109,7 @@ const renderConfigurationModal = (game) => {
 	if (game.isQuickness) {
 		$('.configuration_modal_speed_button').css(
 			'background-image',
-			`url('../assets/images/speed_control_selected.svg')`
+			`url('../assets/interface_images/speed_control_selected.svg')`
 		);
 	}
 	$('.configuration_modal_content')[0].style.display = 'flex';
@@ -135,30 +131,31 @@ const renderConfigurationModal = (game) => {
 	$('.configuration_sound_button').click(() => {
 		$('.configuration_modal')[0].style.display = 'none';
 		renderSoundMenu();
-		$('.close_modal').click(() => {
+		$('.close__modal').click(() => {
 			if (game.isStop()) {
 				game.startAnimation();
 			}
 		});
 	});
 };
+
 function changeSpeed(game) {
 	game.isQuickness = !game.isQuickness;
 	if (game.isQuickness) {
 		$('.configuration_modal_speed_button').css(
 			'background-image',
-			`url('../assets/images/speed_control_selected.svg')`
+			`url('../assets/interface_images/speed_control_selected.svg')`
 		);
 	} else {
 		$('.configuration_modal_speed_button').css(
 			'background-image',
-			`url('../assets/images/speed_control.svg')`
+			`url('../assets/interface_images/speed_control.svg')`
 		);
 	}
 }
+
 function eventCloseConfiguration(game) {
 	// When the user clicks anywhere outside of the modal, closes it
-
 	$(window).mousedown((event) => {
 		if (
 			event.originalEvent.target !== $('.configuration_modal')[0] &&

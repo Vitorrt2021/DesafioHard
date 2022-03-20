@@ -1,13 +1,15 @@
 import renderRanking from './requests/ranking.js';
 import assetManager from '../Components/AssetManager.js';
 
+window.volume = 0.2;
+
 $(document).ready(() => {
 	$('.welcome__container').hover(() => {
 		assetManager.playSound('bg_music_lvl_14', undefined, true, true);
 	});
 
 	$('#play_game').click(() => {
-		window.location = '/gameplay';
+		window.location = `/gameplay`;
 	});
 
 	// When the user clicks on the button, render the ranking modal
@@ -39,7 +41,7 @@ function renderSoundMenu() {
 		 </div>`
 	);
 
-	$('.close_modal').click(() => {
+	$('.close__modal').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 
