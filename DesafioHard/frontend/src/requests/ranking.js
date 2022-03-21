@@ -3,7 +3,8 @@ const apiURL = 'http://localhost:5000';
 
 const renderRanking = async () => {
 	try {
-		const response = await $.ajax(apiURL + '/ranking');
+		// FIXME change to ${}
+		const response = await $.ajax(`${apiURL}/ranking`);
 
 		renderRankingModal();
 		renderCells(response);
@@ -25,6 +26,7 @@ const renderRankingModal = () => {
 	);
 
 	$('.close__modal').click(() => {
+		// FIXME change from class to id (.modal > #modal)
 		$('.modal')[0].style.display = 'none';
 	});
 

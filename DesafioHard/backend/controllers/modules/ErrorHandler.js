@@ -1,4 +1,5 @@
 // FIX-IT: Add fine treatment in digest() method
+// FIX-IT: Add unexpected error
 
 class BadRequest extends Error {
 	constructor(message, error) {

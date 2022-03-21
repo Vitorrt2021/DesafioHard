@@ -109,6 +109,7 @@ class Game {
 		$('.rabbit_tower').css('filter', 'brightness(100%)');
 		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
+		// FIXME test for errors (parseInt)
 		if (
 			this.#player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
