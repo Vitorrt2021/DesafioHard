@@ -13,6 +13,8 @@ class Enemy {
 		this.collisionWidth = 0;
 		this.collisionHeight = 0;
 
+		this.isBlocked = false;
+
 		if (type === 'golem') {
 			this.setHealth(level, bossData[type].health);
 			this.speed = bossData[type].speed * 1.15;
@@ -41,8 +43,10 @@ class Enemy {
 		}
 	}
 	update() {
-		this.x -= this.speed;
-		this.collisionX = this.x;
+		if (!this.isBlocked) {
+			this.x -= this.speed;
+			this.collisionX = this.x;
+		}
 	}
 
 	changeAnimation(animationName) {

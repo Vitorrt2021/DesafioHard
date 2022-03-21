@@ -18,6 +18,8 @@ class Tower {
 		this.collisionHeight = cellSize;
 		this.towerType = towerType;
 
+		this.isBarrier = towerStatus[towerType].barrier || false;
+
 		this.health = towerStatus[towerType].health;
 		this.maxHealth = this.health;
 		this.damage = towerStatus[towerType].damage;
@@ -271,20 +273,22 @@ class Tower {
 	}
 
 	update() {
-		if (this.isShooting && !this.isDying) {
-			if (this.timer % this.attackSpeed === 0) {
-				this.projectiles.push(
-					new Projectile(
-						this.x + this.width,
-						this.y + 30,
-						this.projectileImage,
-						this.damage
-					)
-				);
+		if (!this.isBarrier) {
+			if (this.isShooting && !this.isDying) {
+				if (this.timer % this.attackSpeed === 0) {
+					this.projectiles.push(
+						new Projectile(
+							this.x + this.width,
+							this.y + 30,
+							this.projectileImage,
+							this.damage
+						)
+					);
 
-				assetManager.playSound('shooting');
+					assetManager.playSound('shooting');
+				}
+				this.timer++;
 			}
-			this.timer++;
 		}
 	}
 

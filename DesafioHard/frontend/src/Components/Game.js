@@ -109,10 +109,17 @@ class Game {
 		$('.rabbit_tower').css('filter', 'brightness(100%)');
 		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
+		$('.stone_tower').css('filter', 'brightness(100%)');
+
 		if (
 			this.#player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
 			$('.rabbit_tower').css('filter', 'brightness(55%)');
+		}
+		if (
+			this.#player.getMoney() < parseInt(towerStatus.stone_tower_level_1.price)
+		) {
+			$('.stone_tower').css('filter', 'brightness(55%)');
 		}
 		if (
 			this.#player.getMoney() <
@@ -230,27 +237,41 @@ class Game {
 			tower.isDying = true;
 			this.#towersDying.push(tower);
 			this.#towers.splice(towerIndex, 1);
+			return true;
+		}
+		return false;
+	}
+	#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex) {
+		let towerHealth = tower.health;
+		tower.health -= enemy.health / (1 + EnemysController.horda * 0.5);
+
+		if (tower.health > 0) {
+			enemy.health -= towerHealth;
+		}
+
+		tower.isDamaged = true;
+
+		this.#enemyIsDead(enemy, enemyIndex);
+		this.#towerWasDestroyed(tower, towerIndex);
+
+		if (!tower.isDying) {
+			assetManager.playSound('explosion');
 		}
 	}
-
 	#checkTowerCollision() {
+		this.#enemies.forEach((enemy) => {
+			enemy.isBlocked = false;
+		});
+
 		this.#towers.forEach((tower, towerIndex) => {
 			this.#enemies.forEach((enemy, enemyIndex) => {
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
-					let towerHealth = tower.health;
-					tower.health -= enemy.health / (1 + EnemysController.horda * 0.5);
-
-					if (tower.health > 0) {
-						enemy.health -= towerHealth;
-					}
-
-					tower.isDamaged = true;
-
-					this.#enemyIsDead(enemy, enemyIndex);
-					this.#towerWasDestroyed(tower, towerIndex);
-
-					if (!tower.isDying) {
-						assetManager.playSound('explosion');
+					if (!tower.isBarrier) {
+						this.#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex);
+					} else {
+						enemy.isBlocked = true;
+						tower.health -= enemy.health / 100;
+						this.#towerWasDestroyed(tower, towerIndex);
 					}
 				}
 			});
@@ -470,6 +491,7 @@ class Game {
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
 		let sorted = EnemysController.sortPosition();
+
 		let position = yInitialpositions[sorted];
 		let monsterType = EnemysController.sortMonster();
 

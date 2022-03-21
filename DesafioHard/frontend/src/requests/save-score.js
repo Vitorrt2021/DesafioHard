@@ -18,9 +18,9 @@ const saveScore = async () => {
 };
 
 const renderSaveScore = () => {
-	window.onbeforeunload = () => {
-		return;
-	};
+	// window.onbeforeunload = () => {
+	// 	return;
+	// };
 	console.log('Open Modal');
 	$('.modal').html(
 		`<div class="app__container">

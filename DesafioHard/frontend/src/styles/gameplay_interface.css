@@ -38,7 +38,7 @@ html body {
 	color: rgb(241, 241, 241);
 	position: absolute;
 	top: 2vw;
-	left: 4.7vw;
+	left: 4.4vw;
 	font-size: 3em;
 	z-index: 2;
 }
@@ -64,7 +64,6 @@ html body {
 	height: 25%;
 	max-height: 25vh;
 }
-
 #canvas1 {
 	width: 100%;
 	height: 75%;
@@ -77,11 +76,12 @@ html body {
 	background-repeat: no-repeat;
 }
 #tower_selection {
-	width: 35%;
-	height: 100%;
+	width: 35vw;
+	height: 10vw;
 	position: relative;
-	background: url('../assets/interface_images/towers_buttons_display.svg');
-	background-size: 100% 100%;
+	background: url('../assets/interface_images/towers_buttons_display_2.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -89,8 +89,9 @@ html body {
 
 #buttons_area {
 	position: relative;
-	margin-top: 1%;
-	width: 90%;
+	margin-top: 1vw;
+	width: 80%;
+	margin-right: 3%;
 	display: flex;
 	justify-content: flex-end;
 }
@@ -100,8 +101,12 @@ html body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 }
-
+.stone_tower {
+	height: 50%;
+	cursor: pointer;
+}
 .tower_button {
 	width: 45%;
 }

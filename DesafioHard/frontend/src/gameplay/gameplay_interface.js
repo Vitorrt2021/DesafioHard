@@ -35,6 +35,10 @@ $(document).ready(() => {
 		event.originalEvent.dataTransfer.setData('text', 'rabbit_tower_level_1');
 	});
 
+	$('.stone_tower').on('dragstart', function (event) {
+		event.originalEvent.dataTransfer.setData('text', 'stone_tower_level_1');
+	});
+
 	$('#canvas1').on('dragover', function (event) {
 		event.originalEvent.preventDefault();
 	});
@@ -58,6 +62,7 @@ $(document).ready(() => {
 		createTooltip('.pikachu_tower', 750, 75, Math.floor(10000 / 170));
 		createTooltip('.rabbit_tower', 500, 100, Math.floor(10000 / 120));
 		createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
+		createTooltip('.stone_tower', 1000, 0, 0);
 	});
 });
 
