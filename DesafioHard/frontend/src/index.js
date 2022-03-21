@@ -27,21 +27,21 @@ function renderSoundMenu() {
 		`<div class="modal__content">
 		 		<div class="sound__menu">
 				 <div class="volume_menu">
-				 		<p class="volumeInfo_container">${assetManager.getVolume() * 100}%</p>
+				 		<p class="volumeInfo_container">${assetManager.getVolume()}%</p>
 				 		<div class="volumeSlider_container">
-						 <button class="sound_button_modal_empty"></button>
-						 <input type="range" min="0" max="100" value="${
-								assetManager.getVolume() * 100
-							}" step="1" class="volumeSlider"/>
-						 <button class="sound_button_modal_full"></button>
+							<button class="sound_button_modal_empty sound_control_button"></button>
+							<input type="range" min="0" max="100" value="${assetManager.getVolume()}" step="1" class="volumeSlider"/>
+							<button class="sound_button_modal_full sound_control_button"></button>
 						</div>
+						
+						<button class="close_modal" id='close_modal_sound'></button>
+						
 					</div>
-		 			<button class="close__modal">FECHAR</button>
 		 		</div>
 		 </div>`
 	);
 
-	$('.close__modal').click(() => {
+	$('#close_modal_sound').click(() => {
 		$('.modal')[0].style.display = 'none';
 	});
 
