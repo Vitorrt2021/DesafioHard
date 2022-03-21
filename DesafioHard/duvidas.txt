@@ -1,0 +1,14 @@
+Como criar um modal sem usar string dentro do script, mas usando arquivo .html
+
+$('.modal').html(
+  `<div class="modal__content">
+      <div class="ranking__container">
+          <div class="ranking__cell__container">
+          </div>
+          <button class="close__modal">FECHAR</button>
+      </div>
+  </div>`
+);
+
+//
+modal de save-score apagando texto do input

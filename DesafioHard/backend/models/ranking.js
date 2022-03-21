@@ -1,9 +1,10 @@
 const { Schema, model } = require('mongoose');
 
+// FIXME add required field
 const rankingSchema = new Schema(
 	{
-		name: String,
-		score: Number,
+		name: { type: String, required: true },
+		score: { type: Number, required: true },
 		date: String,
 	},
 	{ timestamps: true }
