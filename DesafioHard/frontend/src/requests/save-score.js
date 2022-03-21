@@ -11,6 +11,7 @@ const saveScore = async () => {
 
 		window.location = '/';
 	} catch (error) {
+		// FIXME: add message above "save" button
 		alert('check the console for errors');
 
 		console.error(error.responseJSON || error);
@@ -22,6 +23,10 @@ const renderSaveScore = () => {
 	// 	return;
 	// };
 	console.log('Open Modal');
+	window.onbeforeunload = () => {
+		return;
+	};
+	//FIXME	improve layout
 	$('.modal').html(
 		`<div class="app__container">
 				<div class="save__container">

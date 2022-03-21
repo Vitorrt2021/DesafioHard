@@ -15,7 +15,7 @@ class Enemy {
 
 		this.isBlocked = false;
 
-		if (type === 'golem') {
+		if (type === 'golem' || type === 'goblin' || type === 'gorilla') {
 			this.setHealth(level, bossData[type].health);
 			this.speed = bossData[type].speed * 1.15;
 			this.money = bossData[type].money;

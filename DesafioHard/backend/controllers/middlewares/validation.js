@@ -1,6 +1,7 @@
 const badwords = require('../../json/badwords.json');
 const ErrorHandler = require('../modules/ErrorHandler.js');
 
+//FIXME: USE REGEX INSTEAD
 // Separated as a middleware because in the future it will
 // have more validations
 const validation = (req, res, next) => {
