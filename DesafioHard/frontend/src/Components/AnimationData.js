@@ -34,6 +34,26 @@ export default {
 		counterIncrement: 0.025,
 	},
 
+	goblin: {
+		animationQtyFrames: 12,
+		counterIncrement: 0.1,
+	},
+
+	goblin_dying: {
+		animationQtyFrames: 5,
+		counterIncrement: 0.025,
+	},
+
+	gorilla: {
+		animationQtyFrames: 10,
+		counterIncrement: 0.1,
+	},
+
+	gorilla_dying: {
+		animationQtyFrames: 4,
+		counterIncrement: 0.025,
+	},
+
 	toad_dying: {
 		animationQtyFrames: 3,
 		counterIncrement: 0.05,
