@@ -9,3 +9,6 @@ $('.modal').html(
       </div>
   </div>`
 );
+
+//
+modal de save-score apagando texto do input
