@@ -50,8 +50,8 @@ html {
 
 #level_value {
 	position: absolute;
-	top: 2%;
-	left: 5%;
+	top: 3%;
+	left: 4.5%;
 	font-size: calc(3vw + 3vh);
 	z-index: 2;
 }
@@ -65,11 +65,12 @@ html {
 }
 
 #tower_selection {
-	width: 35%;
+	width: 40%;
 	height: 100%;
 	position: relative;
 	background: url('images/towers_buttons_display.svg');
 	background-size: 100% 100%;
+	background-position: center;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -77,16 +78,17 @@ html {
 
 #buttons_area {
 	position: relative;
-	margin-top: 1%;
-	width: 90%;
+	margin-right: 2.5%;
+	width: 80%;
 	display: flex;
 	justify-content: flex-end;
 }
 
 .tower_area {
-	width: 30%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -124,23 +126,29 @@ html {
 }
 
 .tooltip_cat_tower {
-	top: 105%;
-	left: 12.5%;
+	top: 106%;
+	left: 0.5%;
 }
 
 .tooltip_pikachu_tower {
-	top: 105%;
-	left: 42.5%;
+	top: 106%;
+	left: 25.5%;
+}
+
+.tooltip_stone_tower {
+	top: 106%;
+	left: 50.5%;
 }
 
 .tooltip_rabbit_tower {
-	top: 105%;
-	left: 72.5%;
+	top: 106%;
+	left: 75.5%;
 }
 
 .tooltip_cat_tower,
 .tooltip_pikachu_tower,
-.tooltip_rabbit_tower {
+.tooltip_rabbit_tower,
+.tooltip_stone_tower {
 	display: none;
 }
 
@@ -160,8 +168,13 @@ html {
 
 .cat_tower,
 .pikachu_tower,
-.rabbit_tower {
+.rabbit_tower,
+.stone_tower {
 	cursor: pointer;
+}
+
+.stone_tower {
+	height: 50%;
 }
 
 #money_display {

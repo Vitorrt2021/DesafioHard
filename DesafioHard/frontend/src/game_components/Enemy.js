@@ -46,8 +46,6 @@ class Enemy {
 			this.type === 'gorilla' ||
 			this.type === 'iceman'
 		) {
-			console.log(`${level - bossData[this.type].level} | ${this.type}`);
-			console.log(bossData[this.type]);
 			if (bossData[this.type].level >= level) {
 				this.health = parseInt(health);
 			} else {
@@ -57,8 +55,6 @@ class Enemy {
 						Math.pow(1.8, level + 1 - bossData[this.type].level);
 			}
 		} else {
-			console.log(`${level - enemyData[this.type].level} | ${this.type}`);
-			console.log(enemyData[this.type]);
 			if (enemyData[this.type].level >= level) {
 				this.health = parseInt(health);
 			} else {

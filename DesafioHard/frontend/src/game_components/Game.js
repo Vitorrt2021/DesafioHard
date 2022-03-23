@@ -255,7 +255,7 @@ class Game {
 	}
 	#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex) {
 		let towerHealth = tower.health;
-		tower.health -= enemy.health / (1 + EnemysController.horda * 0.5);
+		tower.health -= enemy.health / (1 + EnemiesController.horda * 0.5);
 
 		if (tower.health > 0) {
 			enemy.health -= towerHealth;
