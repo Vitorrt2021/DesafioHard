@@ -56,6 +56,7 @@ class Enemy {
 						Math.pow(1.8, level + 1 - bossData[this.type].level);
 			}
 		} else {
+			console.log(this.type);
 			console.log(`${level - enemyData[this.type].level} | ${this.type}`);
 			console.log(enemyData[this.type]);
 			if (enemyData[this.type].level >= level) {

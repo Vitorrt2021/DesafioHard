@@ -24,6 +24,8 @@ export default {
 	},
 
 	iceman: {
+		level: 2,
+		type: 'boss',
 		speed: 1,
 		health: 1000,
 		money: 300,
