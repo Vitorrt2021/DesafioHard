@@ -42,8 +42,7 @@
 			type="text/css"
 		/>
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="gameplay_page.js" type="module"></script>
 
 		<title>ANIMALS VS MONSTERS</title>
@@ -57,41 +56,78 @@
 						<div id="buttons_area">
 							<div class="tower_area">
 								<img
-									title="Tower"
 									class="tower_button cat_tower"
 									src="images/cat_tower_level_1.png"
 									draggable="true"
 								/>
+
 								<div class="tower_money_cost_visor">
 									<p class="price" id="cat_cost_value">100</p>
+								</div>
+
+								<div class="tooltip tooltip_cat_tower">
+									<div id="live_icon_cat_tower">
+										<label id="live_value_cat_tower"></label>
+									</div>
+									<div id="strength_icon_cat_tower">
+										<label id="strength_value_cat_tower"></label>
+									</div>
+									<div id="speed_icon_cat_tower">
+										<label id="speed_value_cat_tower"></label>
+									</div>
 								</div>
 							</div>
 
 							<div class="tower_area">
 								<img
-									title="Tower"
 									class="tower_button pikachu_tower"
 									src="images/pikachu_tower_level_1.png"
 									draggable="true"
 								/>
+
 								<div class="tower_money_cost_visor">
 									<p class="price" id="blue_rabbit_cost_value">200</p>
+								</div>
+
+								<div class="tooltip tooltip_pikachu_tower">
+									<div id="live_icon_pikachu_tower">
+										<label id="live_value_pikachu_tower"></label>
+									</div>
+									<div id="strength_icon_pikachu_tower">
+										<label id="strength_value_pikachu_tower"></label>
+									</div>
+									<div id="speed_icon_pikachu_tower">
+										<label id="speed_value_pikachu_tower"></label>
+									</div>
 								</div>
 							</div>
 
 							<div class="tower_area">
 								<img
-									title="Tower"
 									class="tower_button rabbit_tower"
 									src="images/rabbit_tower_level_1.png"
 									draggable="true"
 								/>
+
 								<div class="tower_money_cost_visor">
 									<p class="price" id="red_rabbit_cost_value">500</p>
+								</div>
+
+								<div class="tooltip tooltip_rabbit_tower">
+									<div id="live_icon_rabbit_tower">
+										<label id="live_value_rabbit_tower"></label>
+									</div>
+									<div id="strength_icon_rabbit_tower">
+										<label id="strength_value_rabbit_tower"></label>
+									</div>
+									<div id="speed_icon_rabbit_tower">
+										<label id="speed_value_rabbit_tower"></label>
+									</div>
 								</div>
 							</div>
 						</div>
 					</section>
+
 					<section id="money_display">
 						<p id="money_value">0</p>
 					</section>

@@ -19,7 +19,7 @@ html {
 	color: white;
 	font-weight: bolder;
 	font-family: 'brady_bunch_remastered';
-	text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
+	text-shadow: 1px 0 0 gray, 0 1px 0 gray, -1px 0 0 gray, 0 -1px 0 gray;
 }
 
 @keyframes animatedBackground {
@@ -91,6 +91,7 @@ html {
 }
 
 .tower_button {
+	position: relative;
 	width: 45%;
 }
 
@@ -106,6 +107,55 @@ html {
 .price {
 	font-size: calc(1vw + 1vh);
 	margin-left: 20%;
+}
+
+.tooltip {
+	position: absolute;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	width: 7.5vw;
+	height: 15vh;
+	border-radius: 5px;
+	padding: 0px !important;
+	border: solid 2px #efb469;
+	background-color: #f3db95 !important;
+}
+
+.tooltip_cat_tower {
+	top: 105%;
+	left: 12.5%;
+}
+
+.tooltip_pikachu_tower {
+	top: 105%;
+	left: 42.5%;
+}
+
+.tooltip_rabbit_tower {
+	top: 105%;
+	left: 72.5%;
+}
+
+.tooltip_cat_tower,
+.tooltip_pikachu_tower,
+.tooltip_rabbit_tower {
+	display: none;
+}
+
+.tooltip img {
+	width: 30%;
+}
+
+.tooltip div {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.tooltip div label {
+	font-size: calc(1vw + 1vh);
 }
 
 .cat_tower,
@@ -182,32 +232,4 @@ html {
 	background-image: url('images/canvas_background.png');
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-}
-
-.tooltip {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	flex-direction: column;
-	color: white;
-	height: 10vw;
-	width: 7.5vw;
-	border-radius: 5px;
-	padding: 0px !important;
-	border: solid 2px #efb469;
-	background-color: #f3db95 !important;
-}
-
-.tooltip img {
-	width: 30%;
-}
-
-.tooltip div {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-
-.tooltip div label {
-	font-size: 1rem;
 }

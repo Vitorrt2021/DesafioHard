@@ -49,10 +49,9 @@ $(document).ready(() => {
 			renderConfigurationModal(game);
 		});
 
-		//refazer tooltip sem jquery ui
-		// createTooltip('.pikachu_tower', 750, 75, Math.floor(10000 / 170));
-		// createTooltip('.rabbit_tower', 500, 100, Math.floor(10000 / 120));
-		// createTooltip('.cat_tower', 500, 50, Math.floor(10000 / 200));
+		createTooltip('cat_tower', 500, 50, Math.floor(10000 / 200));
+		createTooltip('pikachu_tower', 750, 75, Math.floor(10000 / 170));
+		createTooltip('rabbit_tower', 500, 100, Math.floor(10000 / 120));
 	});
 });
 
@@ -61,25 +60,23 @@ function createTooltip(element, live, strength, speed) {
 	const strenghtSymbol = assetManager.getImage('strength_icon_tooltip');
 	const speedSymbol = assetManager.getImage('speed_icon_tooltip');
 
-	$(element).tooltip({
-		classes: {
-			'ui-tooltip': 'tooltip',
-			'ui-tooltip-content': 'tooltip',
-		},
-		content: `
-			<div class="tooltip">
-				<div>
-					${lifeSymbol.outerHTML}
-					<label id="live_value_">${live}</label>
-				</div>
-				<div>
-					${strenghtSymbol.outerHTML}
-					<label id='strength_value_'>${strength}</label>
-				</div>
-				<div>
-					${speedSymbol.outerHTML}
-					<label id="live_value_">${speed}</label>
-				</div>
-			</div>`,
-	});
+	$(`#live_icon_${element}`).prepend(lifeSymbol.outerHTML);
+	$(`#strength_icon_${element}`).prepend(strenghtSymbol.outerHTML);
+	$(`#speed_icon_${element}`).prepend(speedSymbol.outerHTML);
+
+	$(`#live_value_${element}`).html(live);
+	$(`#strength_value_${element}`).html(strength);
+	$(`#speed_value_${element}`).html(speed);
+
+	$(`.${element}`)
+		.unbind('mouseenter')
+		.on('mouseenter', () => {
+			$(`.tooltip_${element}`).css('display', 'flex');
+		});
+
+	$(`.${element}`)
+		.unbind('mouseleave')
+		.on('mouseleave', () => {
+			$(`.tooltip_${element}`).css('display', 'none');
+		});
 }

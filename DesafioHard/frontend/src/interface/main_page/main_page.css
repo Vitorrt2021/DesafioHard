@@ -12,7 +12,7 @@ html {
 	font-family: 'brady_bunch_remastered';
 	color: white;
 	font-weight: normal;
-	text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
+	text-shadow: 1px 0 0 gray, 0 1px 0 gray, -1px 0 0 gray, 0 -1px 0 gray;
 	overflow-y: hidden;
 	overflow-x: hidden;
 }

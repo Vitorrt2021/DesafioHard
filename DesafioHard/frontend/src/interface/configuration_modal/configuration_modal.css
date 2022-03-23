@@ -91,11 +91,6 @@
 	background-image: url('images/speed_control.svg');
 }
 
-/* .configuration_modal_speed_button:active {
-	transform: translateY(4px);
-	background-image: url('images/speed_control_selected.svg');
-} */
-
 .configuration_modal_resume_button {
 	background-image: url('images/resume_button.svg');
 }
