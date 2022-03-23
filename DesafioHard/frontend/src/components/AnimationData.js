@@ -74,43 +74,63 @@ export default {
 		counterIncrement: 0.05,
 	},
 
-	// mushroom: {
-	// 	animationQtyFrames: 8,
-	// 	counterIncrement: 0.1,
-	// },
+	mushroom: {
+		animationQtyFrames: 8,
+		counterIncrement: 0.1,
+	},
 
-	// mushroom_dying: {
-	// 	animationQtyFrames: 4,
-	// 	counterIncrement: 0.05,
-	// },
+	mushroom_dying: {
+		animationQtyFrames: 4,
+		counterIncrement: 0.05,
+	},
 
-	// giantbee: {
-	// 	animationQtyFrames: 8,
-	// 	counterIncrement: 0.1,
-	// },
+	giantbee: {
+		animationQtyFrames: 8,
+		counterIncrement: 0.1,
+	},
 
-	// giantbee_dying: {
-	// 	animationQtyFrames: 3,
-	// 	counterIncrement: 0.05,
-	// },
+	giantbee_dying: {
+		animationQtyFrames: 3,
+		counterIncrement: 0.05,
+	},
 
-	// hedgehog: {
-	// 	animationQtyFrames: 8,
-	// 	counterIncrement: 0.1,
-	// },
+	hedgehog: {
+		animationQtyFrames: 8,
+		counterIncrement: 0.1,
+	},
 
-	// hedgehog_dying: {
-	// 	animationQtyFrames: 3,
-	// 	counterIncrement: 0.05,
-	// },
+	hedgehog_dying: {
+		animationQtyFrames: 3,
+		counterIncrement: 0.05,
+	},
 
-	// vulture: {
-	// 	animationQtyFrames: 4,
-	// 	counterIncrement: 0.1,
-	// },
+	snailBlue: {
+		animationQtyFrames: 6,
+		counterIncrement: 0.1,
+	},
 
-	// vulture_dying: {
-	// 	animationQtyFrames: 3,
-	// 	counterIncrement: 0.05,
-	// },
+	snailBlue_dying: {
+		animationQtyFrames: 3,
+		counterIncrement: 0.05,
+	},
+
+	snailPink: {
+		animationQtyFrames: 6,
+		counterIncrement: 0.1,
+	},
+
+	snailPink_dying: {
+		animationQtyFrames: 3,
+		counterIncrement: 0.05,
+	},
+
+	stoneGolem: {
+		animationQtyFrames: 11,
+		counterIncrement: 0.15,
+	},
+
+	stoneGolem_dying: {
+		animationQtyFrames: 3,
+		counterIncrement: 0.05,
+	},
 };
