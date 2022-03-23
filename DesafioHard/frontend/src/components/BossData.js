@@ -22,4 +22,10 @@ export default {
 		health: 1000,
 		money: 300,
 	},
+
+	iceman: {
+		speed: 1,
+		health: 1000,
+		money: 300,
+	},
 };

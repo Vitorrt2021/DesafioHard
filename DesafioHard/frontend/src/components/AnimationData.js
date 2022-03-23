@@ -53,6 +53,15 @@ export default {
 		animationQtyFrames: 4,
 		counterIncrement: 0.025,
 	},
+	iceman: {
+		animationQtyFrames: 9,
+		counterIncrement: 0.1,
+	},
+
+	iceman_dying: {
+		animationQtyFrames: 4,
+		counterIncrement: 0.025,
+	},
 
 	toad_dying: {
 		animationQtyFrames: 3,

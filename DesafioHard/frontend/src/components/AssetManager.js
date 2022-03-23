@@ -34,7 +34,6 @@ class AssetManager {
 				console.log(e);
 			}
 		}
-
 		this.#animations[animationName] = {
 			counterIncrement: animationData[animationName].counterIncrement,
 			images: imagesForAnimation,
