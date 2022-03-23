@@ -26,9 +26,13 @@ class AssetManager {
 			index < animationData[animationName].animationQtyFrames;
 			index++
 		) {
-			const image = this.getImage(`${animationName}_${index + 1}`);
-			imagesHeight.push(image.height);
-			imagesForAnimation.push(image);
+			try {
+				const image = this.getImage(`${animationName}_${index + 1}`);
+				imagesHeight.push(image.height);
+				imagesForAnimation.push(image);
+			} catch (e) {
+				console.log(e);
+			}
 		}
 
 		this.#animations[animationName] = {
