@@ -1,5 +1,5 @@
 import renderRanking from './requests/ranking.js';
-import assetManager from '../Components/AssetManager.js';
+import assetManager from '../components/AssetManager.js';
 
 window.volume = 0.2;
 

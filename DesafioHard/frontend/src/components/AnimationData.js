@@ -73,4 +73,44 @@ export default {
 		animationQtyFrames: 2,
 		counterIncrement: 0.05,
 	},
+
+	// mushroom: {
+	// 	animationQtyFrames: 8,
+	// 	counterIncrement: 0.1,
+	// },
+
+	// mushroom_dying: {
+	// 	animationQtyFrames: 4,
+	// 	counterIncrement: 0.05,
+	// },
+
+	// giantbee: {
+	// 	animationQtyFrames: 8,
+	// 	counterIncrement: 0.1,
+	// },
+
+	// giantbee_dying: {
+	// 	animationQtyFrames: 3,
+	// 	counterIncrement: 0.05,
+	// },
+
+	// hedgehog: {
+	// 	animationQtyFrames: 8,
+	// 	counterIncrement: 0.1,
+	// },
+
+	// hedgehog_dying: {
+	// 	animationQtyFrames: 3,
+	// 	counterIncrement: 0.05,
+	// },
+
+	// vulture: {
+	// 	animationQtyFrames: 4,
+	// 	counterIncrement: 0.1,
+	// },
+
+	// vulture_dying: {
+	// 	animationQtyFrames: 3,
+	// 	counterIncrement: 0.05,
+	// },
 };

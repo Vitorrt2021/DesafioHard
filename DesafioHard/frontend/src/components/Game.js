@@ -4,9 +4,9 @@ import collision from './Collision.js';
 import Player from './Player.js';
 import Enemy from './Enemy.js';
 import towerStatus from './TowerData.js';
-import assetManager from '../Components/AssetManager.js';
+import assetManager from './AssetManager.js';
 import renderSaveScore from '../requests/save-score.js';
-import EnemysController from '../Components/EnemysController.js';
+import EnemysController from './EnemysController.js';
 
 class Game {
 	#canvas = document.getElementById('canvas1');
@@ -378,7 +378,7 @@ class Game {
 	stopAnimation() {
 		this.#runAnimationControl = false;
 	}
-	//FIX-IT TOUCH
+	//FIXME TOUCH
 	#catchMousePosition() {
 		document.querySelector('body').addEventListener('mousemove', (e) => {
 			this.#updateMousePosition(e);
@@ -400,7 +400,7 @@ class Game {
 			this.#addTowerInCell(newTower);
 		});
 	}
-	//FIX-IT SOBREPOSIÇÃO DE TORRES
+	//FIXME SOBREPOSIÇÃO DE TORRES
 	#addTowerInCell(tower) {
 		// play background music when player put the first tower in row
 		if (!this.#towers[0]) this.#updateBackgroundMusic();
@@ -529,7 +529,7 @@ class Game {
 	}
 
 	#createEnemy(monsterType, position, yPositions, sorted) {
-		this.#playSoundMonster(monsterType);
+		// this.#playSoundMonster(monsterType);
 		this.#enemies.push(
 			new Enemy(
 				monsterType,
@@ -578,7 +578,7 @@ class Game {
 			this.#moneyDrop *= 1 + 1 / EnemysController.horda;
 			assetManager.playSound('level_up');
 			$('#level_value').html(EnemysController.horda);
-
+			console.log(this.#spawnVelocity);
 			if (EnemysController.horda % 2 === 0) {
 				this.#updateBackgroundMusic();
 			}

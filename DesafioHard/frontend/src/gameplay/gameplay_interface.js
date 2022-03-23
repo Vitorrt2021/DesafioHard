@@ -1,5 +1,5 @@
-import Game from '../Components/Game.js';
-import assetManager from '../Components/AssetManager.js';
+import Game from '../components/Game.js';
+import assetManager from '../components/AssetManager.js';
 import renderSoundMenu from '../index.js';
 // const apiURL = 'https://data.dudeful.com';
 const apiURL = 'http://localhost:5000';
