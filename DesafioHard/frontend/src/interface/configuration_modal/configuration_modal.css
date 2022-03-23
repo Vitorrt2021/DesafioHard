@@ -75,13 +75,13 @@
 }
 
 .configuration_modal_sound_button {
-	background-image: url('images/sound_button.svg');
+	background-image: url('../../assets/interface_shared_images/sound_button.svg');
 	width: 12.5vw;
 }
 
 .configuration_modal_sound_button:active {
 	transform: translateY(4px);
-	background-image: url('images/sound_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/sound_button_active.svg');
 }
 
 .configuration_modal_speed_button {
@@ -101,19 +101,19 @@
 }
 
 .configuration_modal_restart_button {
-	background-image: url('images/restart_button.svg');
+	background-image: url('../../assets/interface_shared_images/restart_button.svg');
 }
 
 .configuration_modal_restart_button:active {
 	transform: translateY(4px);
-	background-image: url('images/restart_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/restart_button_active.svg');
 }
 
 .configuration_modal_exit_button {
-	background-image: url('images/exit_game_button.svg');
+	background-image: url('../../assets/interface_shared_images/exit_game_button.svg');
 }
 
 .configuration_modal_exit_button:active {
 	transform: translateY(4px);
-	background-image: url('images/exit_game_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/exit_game_button_active.svg');
 }

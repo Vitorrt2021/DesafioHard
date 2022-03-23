@@ -135,7 +135,7 @@ html {
 }
 
 #save_score_modal_restart_button {
-	background-image: url('images/restart_button.svg');
+	background-image: url('../../assets/interface_shared_images/restart_button.svg');
 	cursor: pointer;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -148,11 +148,11 @@ html {
 
 #save_score_modal_restart_button:active {
 	transform: translateY(4px);
-	background-image: url('images/restart_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/restart_button_active.svg');
 }
 
 #save_score_modal_exit_button {
-	background-image: url('images/exit_game_button.svg');
+	background-image: url('../../assets/interface_shared_images/exit_game_button.svg');
 	cursor: pointer;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -165,5 +165,5 @@ html {
 
 #save_score_modal_exit_button:active {
 	transform: translateY(4px);
-	background-image: url('images/exit_game_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/exit_game_button_active.svg');
 }

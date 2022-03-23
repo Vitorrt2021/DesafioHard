@@ -29,7 +29,7 @@ html {
 #app_container {
 	width: 100vw;
 	height: 100vh;
-	background-image: url('images/clouds_background.png');
+	background-image: url('../../assets/interface_shared_images/clouds_background.png');
 	background-repeat: repeat-x;
 	background-position: 0 0;
 	background-size: auto 100%;
@@ -87,7 +87,7 @@ html {
 }
 
 #sound_button {
-	background-image: url('images/sound_button.svg');
+	background-image: url('../../assets/interface_shared_images/sound_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -100,7 +100,7 @@ html {
 
 #sound_button:active {
 	transform: translateY(4px);
-	background-image: url('images/sound_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/sound_button_active.svg');
 }
 
 #play_button {

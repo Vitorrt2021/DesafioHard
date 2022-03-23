@@ -192,7 +192,7 @@
 	box-sizing: border-box;
 	cursor: pointer;
 	border: none;
-	background-image: url('images/close_button.svg');
+	background-image: url('../../assets/interface_shared_images/close_button.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -204,5 +204,5 @@
 
 #ranking_modal_close_button:active {
 	transform: translateY(4px);
-	background-image: url('images/close_button_active.svg');
+	background-image: url('../../assets/interface_shared_images/close_button_active.svg');
 }
