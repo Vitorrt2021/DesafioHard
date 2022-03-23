@@ -30,12 +30,14 @@ class EnemysController {
 	getBoss() {
 		const random = Math.random();
 
-		if (random <= 0.3333) {
+		if (random <= 0.2) {
 			return 'golem';
-		} else if (random <= 0.6666) {
+		} else if (random <= 0.4) {
 			return 'gorilla';
-		} else {
+		} else if (random <= 0.6) {
 			return 'goblin';
+		} else {
+			return 'iceman';
 		}
 	}
 
