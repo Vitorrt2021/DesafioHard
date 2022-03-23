@@ -180,7 +180,8 @@ class Game {
 			this.#player.getLive() <= 0 ||
 			enemy.type === 'golem' ||
 			enemy.type === 'goblin' ||
-			enemy.type === 'gorilla'
+			enemy.type === 'gorilla' ||
+			type === 'iceman'
 		) {
 			assetManager.playSound('titanic_flute');
 
@@ -229,7 +230,11 @@ class Game {
 			} else if (enemy.type === 'gorilla') {
 				assetManager.playSound('gorilla_dying');
 				this.#player.addScore(100 * Math.pow(2, EnemysController.horda + 1));
-			} else {
+			} else if (enemy.type === 'iceman'){
+				//FIXME add iceman sound
+				// assetManager.playSound('iceman_dying');
+				this.#player.addScore(100 * Math.pow(2, EnemysController.horda + 1));
+				else{
 				this.#player.addScore(20 * (EnemysController.horda + 1));
 			}
 
@@ -564,6 +569,10 @@ class Game {
 			case 'gorilla':
 				assetManager.playSound('gorilla');
 				break;
+			//FIXME add iceman sound
+			// case 'iceman':
+			// 	assetManager.playSound('iceman');
+			// 	break;
 			default:
 				break;
 		}

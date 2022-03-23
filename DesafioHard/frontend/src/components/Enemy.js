@@ -43,7 +43,8 @@ class Enemy {
 		if (
 			this.type === 'golem' ||
 			this.type === 'goblin' ||
-			this.type === 'gorilla'
+			this.type === 'gorilla' ||
+			this.type === 'iceman'
 		) {
 			console.log(`${level - bossData[this.type].level} | ${this.type}`);
 			console.log(bossData[this.type]);
