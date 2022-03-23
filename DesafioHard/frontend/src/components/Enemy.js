@@ -13,7 +13,7 @@ class Enemy {
 		this.collisionWidth = 0;
 		this.collisionHeight = 0;
 		this.type = type;
-		if (type === 'golem') {
+		if (type === 'golem' || type === 'goblin' || type === 'gorilla') {
 			this.setHealth(level, bossData[type].health);
 			this.speed = bossData[type].speed * 1.15;
 			this.money = bossData[type].money;

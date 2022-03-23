@@ -5,6 +5,8 @@
 
 html {
 	font-size: 3.5em;
+	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 body {
@@ -62,12 +64,13 @@ body {
 }
 
 .welcome__container {
-	width: 100%;
-	height: 100%;
-	background-image: url('../assets/interface_images/welcome_window.svg');
+	width: calc(42vh + 20.6vw);
+	height: calc(38.1vh + 20vw);
+
+	background-image: url('../assets/interface_images/welcome_window_2.svg');
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
 
 	display: flex;
 	justify-content: center;
@@ -80,10 +83,9 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	width: 50%;
-	height: 50%;
-
-	margin-top: 25vh;
+	width: calc(33vh + 20vw);
+	height: calc(20vh + 15vw);
+	padding-top: calc(6vh + 5vw);
 }
 
 .blue__button {
@@ -93,8 +95,10 @@ body {
 	background-position: center;
 	border: none;
 	background-color: transparent;
-	width: 50%;
-	height: 60%;
+
+	width: calc(10vh + 5vw);
+	height: calc(10vh + 7vw);
+	margin-bottom: calc(1vh + 1.5vw);
 	cursor: pointer;
 }
 
@@ -105,12 +109,12 @@ body {
 
 .ranking_and_sound_container {
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	width: 100%;
-	height: 40%;
-}
+	width: 80%;
 
+	height: calc(25vh + 5vw);
+}
 .red__button {
 	background-image: url('../assets/interface_images/ranking_button.svg');
 	background-repeat: no-repeat;
@@ -118,9 +122,8 @@ body {
 	background-position: center;
 	border: none;
 	background-color: transparent;
-	width: 25%;
-	height: 100%;
-	margin-right: 15vw;
+	width: 40%;
+	height: 55%;
 	cursor: pointer;
 }
 
@@ -136,8 +139,8 @@ body {
 	background-position: center;
 	border: none;
 	background-color: transparent;
-	width: 25%;
-	height: 100%;
+	width: 40%;
+	height: 55%;
 	cursor: pointer;
 }
 
@@ -147,8 +150,9 @@ body {
 }
 
 .volume_menu {
-	width: 60%;
-	height: 55%;
+	width: 100%;
+	height: 100%;
+
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -156,8 +160,8 @@ body {
 }
 
 .volumeSlider_container {
-	width: 100%;
-	height: 100%;
+	width: 60%;
+	height: 30%;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -175,6 +179,16 @@ body {
 	cursor: pointer;
 }
 
+.sound_control_button {
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: calc(5vh + 2vw);
+	height: calc(5vh + 2vw);
+	cursor: pointer;
+}
 .sound_button_modal_full:active {
 	transform: translateY(4px);
 	background-image: url('../assets/interface_images/sound_button_green.svg');
@@ -182,14 +196,6 @@ body {
 
 .sound_button_modal_empty {
 	background-image: url('../assets/interface_images/sound_button_disabled.svg');
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
-	border: none;
-	background-color: transparent;
-	width: 25%;
-	height: 100%;
-	cursor: pointer;
 }
 
 .sound_button_modal_empty:active {
@@ -198,11 +204,11 @@ body {
 
 .volumeInfo_container {
 	width: 100%;
-	height: 100%;
+	height: 30%;
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-	font-size: 0.75em;
+	font-size: calc(3.5vh + 1.5vw);
 }
 
 .volumeSlider {
@@ -211,7 +217,7 @@ body {
 	-moz-appearance: none;
 	border: 0;
 	width: 50%;
-	height: 100%;
+	height: 10%;
 	cursor: pointer;
 	background: transparent;
 }
@@ -258,13 +264,13 @@ body {
 }
 
 .ranking__container {
-	width: 70%;
-	height: 80%;
+	width: calc(34vh + 20vw);
+	height: calc(30vh + 20vw);
 
 	background-image: url('../assets/interface_images/ranking_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
 
 	display: flex;
 	flex-direction: column;
@@ -273,13 +279,13 @@ body {
 }
 
 .sound__menu {
-	width: 20%;
-	height: 75%;
+	width: calc(30vh + 5vw);
+	height: calc(53vh + 7.5vw);
 
-	background-image: url('../assets/interface_images/sound_menu_background.svg');
+	background-image: url('../assets/interface_images/sound_window.svg');
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	background-size: cover;
 
 	display: flex;
 	flex-direction: column;
@@ -287,15 +293,17 @@ body {
 	align-items: center;
 }
 
+/* Ranking */
 .ranking__cell__container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	width: 60%;
+	width: 80%;
 	height: 50%;
 	overflow-y: auto;
-	margin-top: 15vh;
+
+	margin-top: 15%;
 }
 
 .ranking__cell {
@@ -351,59 +359,56 @@ body {
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	width: 55%;
-	height: 70%;
+	width: 72%;
+	height: 100%;
 }
 
 .ranking__cell__only_score_date_container {
 	display: flex;
-	justify-content: center;
-	align-items: flex-start;
+	margin-top: 3.5%;
 	width: 100%;
-	height: 50%;
+	height: 20%;
 }
 
 .ranking__cell__rank {
-	width: 25%;
-	width: 8vw;
-	height: 60%;
-	font-size: 4.5vh;
+	width: 28%;
+	height: 100%;
+	font-size: calc(2vh + 1vw);
+
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	padding-left: 1.3vw;
-	padding-top: 1.1vh;
 }
-
+.ranking__cell__rank > p {
+	margin-top: 10%;
+	margin-left: 25%;
+}
 .ranking__cell__name {
 	width: 100%;
-	height: 50%;
-	font-size: 4vh;
+	height: 45%;
+	font-size: calc(1.5vh + 1vw);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 1.5vh;
 }
 
 .ranking__cell__score {
 	width: 100%;
 	height: 100%;
-	font-size: 2.5vh;
+	font-size: 30%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 0.5vh;
 }
 
 .ranking__cell__date {
 	width: 100%;
 	height: 100%;
-	font-size: 1.5vh;
+	font-size: 20%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-right: 1.5vw;
-	padding-top: 0.5vh;
+
+	margin-right: 2.5%;
 }
 
 .modal {
@@ -430,8 +435,8 @@ body {
 	align-items: center;
 }
 
-.close__modal {
-	background-image: url('../assets/interface_images/red_button_exit.svg');
+.close_modal {
+	background-image: url('../assets/interface_images/button_close_red.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -447,7 +452,7 @@ body {
 
 .close__modal:active {
 	transform: translateY(4px);
-	background-image: url('../assets/interface_images/red_button_green.svg');
+	background-image: url('../assets/interface_images/button_close_green.svg');
 }
 
 @keyframes animatetop {

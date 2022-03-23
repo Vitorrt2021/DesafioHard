@@ -21,7 +21,8 @@ router.post('/', validation, async (req, res) => {
 		res.send(response);
 	} catch (error) {
 		console.error(error);
-		res.status(400).send(error);
+		// FIXME remove database error from client-side (do not send raw error)
+		res.status(503).send(error);
 	}
 });
 

@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 .app__container {
 	width: 100vw;
 	height: 100vh;
@@ -16,78 +17,59 @@
 }
 
 .save__container {
-	width: 70%;
-	height: 50%;
-	background-image: url('../assets/interface_images/save_window.svg');
+	width: 50vh;
+	height: 50vh;
+	background-image: url('../assets/interface_images/save_score_table.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: contain;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-top: 6vh;
-}
-@media (max-width: 500px) {
-	.save__container {
-		padding-top: 10vh;
-	}
-}
-.input__container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 
-	width: 40%;
-	height: 50%;
+	padding-top: 15vh;
+	padding-bottom: 10vh;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
 
 #save__name__input {
-	width: 50%;
-	height: 50%;
+	width: 30vh;
+	height: 4vh;
 
 	background-image: url('../assets/interface_images/save_window_input.svg');
 	background-repeat: no-repeat;
-	background-size: contain;
+	background-size: cover;
 	background-position: center;
-	background-size: 100% 100%;
+
 	border: none;
 	background-color: transparent;
 	font-family: 'Architects Daughter', cursive;
 	padding: 0 5%;
-	font-size: 1rem;
-	color: grey;
+	font-size: 4vh;
+	color: rgb(73, 73, 73);
 }
 
 #save__name__input:focus {
 	outline: none;
 }
+
 #button_save {
-	font-size: 5vw;
-}
-@media (min-width: 850px) {
-	#button_save {
-		font-size: 4vw;
-	}
-}
-@media (min-width: 1040px) {
-	#button_save {
-		font-size: 3vw;
-	}
-}
-.blue__button {
-	background-image: url('../assets/interface_interface_images/blue_button.svg');
+	background-image: url('../assets/interface_images/save_button.svg');
 	background-repeat: no-repeat;
-	background-size: contain;
-	background-position: center;
+	background-size: cover;
 	background-size: 100% 100%;
 	border: none;
 	background-color: transparent;
 
-	width: 50%;
-	height: 50%;
+	width: 30vh;
+	height: 15vh;
 
 	font-family: 'Architects Daughter', cursive;
 	color: #ffffff;
 	cursor: pointer;
+}
+#button_save:active {
+	transform: translateY(4px);
+	background-image: url('../assets/interface_images/save_button_hover.svg');
 }

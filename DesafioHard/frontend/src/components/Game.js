@@ -4,9 +4,9 @@ import collision from './Collision.js';
 import Player from './Player.js';
 import Enemy from './Enemy.js';
 import towerStatus from './TowerData.js';
-import assetManager from '../Components/AssetManager.js';
+import assetManager from './AssetManager.js';
 import renderSaveScore from '../requests/save-score.js';
-import EnemysController from '../Components/EnemysController.js';
+import EnemysController from './EnemysController.js';
 
 class Game {
 	#canvas = document.getElementById('canvas1');
@@ -109,6 +109,7 @@ class Game {
 		$('.rabbit_tower').css('filter', 'brightness(100%)');
 		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
+		// FIXME test for errors (parseInt)
 		if (
 			this.#player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
@@ -168,7 +169,12 @@ class Game {
 	}
 
 	#gameIsOver(enemy) {
-		if (this.#player.getLive() <= 0 || enemy.type === 'golem') {
+		if (
+			this.#player.getLive() <= 0 ||
+			enemy.type === 'golem' ||
+			enemy.type === 'goblin' ||
+			enemy.type === 'gorilla'
+		) {
 			assetManager.playSound('titanic_flute');
 
 			setTimeout(() => {
@@ -209,6 +215,12 @@ class Game {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			if (enemy.type === 'golem') {
 				assetManager.playSound('golem_dying');
+				this.#player.addScore(100 * Math.pow(2, EnemysController.horda + 1));
+			} else if (enemy.type === 'goblin') {
+				assetManager.playSound('goblin_dying');
+				this.#player.addScore(100 * Math.pow(2, EnemysController.horda + 1));
+			} else if (enemy.type === 'gorilla') {
+				assetManager.playSound('gorilla_dying');
 				this.#player.addScore(100 * Math.pow(2, EnemysController.horda + 1));
 			} else {
 				this.#player.addScore(20 * (EnemysController.horda + 1));
@@ -523,6 +535,12 @@ class Game {
 				break;
 			case 'golem':
 				assetManager.playSound('golem');
+				break;
+			case 'goblin':
+				assetManager.playSound('goblin');
+				break;
+			case 'gorilla':
+				assetManager.playSound('gorilla');
 				break;
 			default:
 				break;

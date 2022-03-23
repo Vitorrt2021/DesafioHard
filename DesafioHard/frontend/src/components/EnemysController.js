@@ -28,7 +28,15 @@ class EnemysController {
 	}
 
 	getBoss() {
-		return 'golem';
+		const random = Math.random();
+
+		if (random <= 0.3333) {
+			return 'golem';
+		} else if (random <= 0.6666) {
+			return 'gorilla';
+		} else {
+			return 'goblin';
+		}
 	}
 
 	update() {
