@@ -33,7 +33,11 @@ class Enemy {
 	}
 	//FIX-IT BALANCEAMENTO
 	setHealth(level, health) {
-		if (this.type === 'golem') {
+		if (
+			this.type === 'golem' ||
+			this.type === 'goblin' ||
+			this.type === 'gorilla'
+		) {
 			console.log(`${level - bossData[this.type].level} | ${this.type}`);
 			console.log(bossData[this.type]);
 			if (bossData[this.type].level >= level) {

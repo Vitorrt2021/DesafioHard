@@ -6,7 +6,6 @@ export default {
 		health: 100,
 		money: 0,
 	},
-
 	slimeGreen: {
 		type: 'monster',
 		level: 1,
@@ -14,7 +13,13 @@ export default {
 		health: 150,
 		money: 5,
 	},
-
+	// mushroom: {
+	// 	type: 'monster',
+	// 	level: 6,
+	// 	speed: 1,
+	// 	health: 600,
+	// 	money: 30,
+	// },
 	toad: {
 		type: 'monster',
 		level: 4,
@@ -22,7 +27,27 @@ export default {
 		health: 350,
 		money: 15,
 	},
-
+	// giantbee: {
+	// 	type: 'monster',
+	// 	level: 6,
+	// 	speed: 1,
+	// 	health: 600,
+	// 	money: 30,
+	// },
+	// hedgehog: {
+	// 	type: 'monster',
+	// 	level: 6,
+	// 	speed: 1,
+	// 	health: 600,
+	// 	money: 30,
+	// },
+	// vulture: {
+	// 	type: 'monster',
+	// 	level: 6,
+	// 	speed: 1,
+	// 	health: 600,
+	// 	money: 30,
+	// },
 	robot: {
 		type: 'monster',
 		level: 6,

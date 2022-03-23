@@ -357,7 +357,7 @@ class Game {
 	stopAnimation() {
 		this.#runAnimationControl = false;
 	}
-	//FIX-IT TOUCH
+	//FIXME TOUCH
 	#catchMousePosition() {
 		document.querySelector('body').addEventListener('mousemove', (e) => {
 			this.#updateMousePosition(e);
@@ -379,7 +379,7 @@ class Game {
 			this.#addTowerInCell(newTower);
 		});
 	}
-	//FIX-IT SOBREPOSIÇÃO DE TORRES
+	//FIXME SOBREPOSIÇÃO DE TORRES
 	#addTowerInCell(tower) {
 		// play background music when player put the first tower in row
 		if (!this.#towers[0]) this.#updateBackgroundMusic();
@@ -507,7 +507,7 @@ class Game {
 	}
 
 	#createEnemy(monsterType, position, yPositions, sorted) {
-		this.#playSoundMonster(monsterType);
+		// this.#playSoundMonster(monsterType);
 		this.#enemies.push(
 			new Enemy(
 				monsterType,
