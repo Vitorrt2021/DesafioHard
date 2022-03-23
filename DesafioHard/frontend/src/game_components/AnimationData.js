@@ -142,4 +142,9 @@ export default {
 		animationQtyFrames: 3,
 		counterIncrement: 0.05,
 	},
+
+	evolve_tower_arrow: {
+		animationQtyFrames: 6,
+		counterIncrement: 0.125,
+	},
 };
