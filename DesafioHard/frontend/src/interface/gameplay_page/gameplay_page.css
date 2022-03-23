@@ -31,17 +31,13 @@ html {
 	}
 }
 
-p {
-	font-size: 1rem;
-}
-
 #gameplay_page_container {
 	width: 100%;
 	padding-top: 56.25%;
 	position: relative;
 	overflow-x: hidden;
 	overflow-y: hidden;
-	/* border: outset 1vh #efb469; */
+	border: outset 1vh #efb469;
 }
 
 #gameplay_interface {
@@ -54,9 +50,9 @@ p {
 
 #level_value {
 	position: absolute;
-	top: 2vw;
-	left: 4.7vw;
-	font-size: 3em;
+	top: 2%;
+	left: 5%;
+	font-size: calc(3vw + 3vh);
 	z-index: 2;
 }
 
@@ -102,11 +98,14 @@ p {
 	width: 75%;
 	background: url('images/tower_cost_display.svg') no-repeat center;
 	background-size: 75% 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .price {
-	font-size: 1rem;
-	margin-left: 35%;
+	font-size: calc(1vw + 1vh);
+	margin-left: 20%;
 }
 
 .cat_tower,
@@ -118,19 +117,20 @@ p {
 #money_display {
 	width: 15%;
 	height: 75%;
-	padding-left: 2%;
+	padding-left: 3%;
+	padding-bottom: 1%;
 	background: url('images/money_display.svg');
 	background-size: 100% 100%;
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 }
 
 #score_display {
 	width: 15%;
 	height: 75%;
-
-	padding-left: 2%;
+	padding-left: 3%;
+	padding-bottom: 1.2%;
 	background: url('images/score_display.svg');
 	background-size: 100% 100%;
 	display: flex;
@@ -141,9 +141,9 @@ p {
 #live_display {
 	width: 15%;
 	height: 75%;
-	padding-left: 2%;
-	padding-bottom: 1%;
-	margin-top: 0.5%;
+	padding-left: 3%;
+	padding-bottom: 1.85%;
+	margin-top: 0.7%;
 	background: url('images/live_display.svg');
 	background-size: 100% 100%;
 	display: flex;
@@ -154,7 +154,7 @@ p {
 #live_value,
 #score_value,
 #money_value {
-	font-size: 2rem;
+	font-size: calc(2.5vw + 2.5vh);
 }
 
 #configuration_button {

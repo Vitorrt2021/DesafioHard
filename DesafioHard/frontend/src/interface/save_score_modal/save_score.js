@@ -18,9 +18,10 @@ function renderSaveScoreModal(game) {
 	$('#save_score_modal_restart_button')
 		.unbind('click')
 		.click(() => {
-			game.restart();
-			game.startAnimation();
+			// game.restart();
+			// game.startAnimation();
 			$('#save_score_modal').css('display', 'none');
+			window.location.reload();
 		});
 
 	$('#save_score_modal_exit_button')
