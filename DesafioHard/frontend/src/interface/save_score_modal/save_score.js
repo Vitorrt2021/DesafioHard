@@ -3,6 +3,8 @@ const apiURL = 'http://localhost:5000';
 
 function renderSaveScoreModal(game) {
 	$('#save_score_modal').css('display', 'flex');
+	$('#save_score_modal_input').focus();
+	$('#save_score_error_display').text('  ');
 
 	window.onbeforeunload = () => {
 		return;
@@ -12,14 +14,11 @@ function renderSaveScoreModal(game) {
 		.unbind('click')
 		.click(() => {
 			saveScore();
-			$('#save_score_modal').css('display', 'none');
 		});
 
 	$('#save_score_modal_restart_button')
 		.unbind('click')
 		.click(() => {
-			// game.restart();
-			// game.startAnimation();
 			$('#save_score_modal').css('display', 'none');
 			window.location.reload();
 		});
@@ -27,8 +26,21 @@ function renderSaveScoreModal(game) {
 	$('#save_score_modal_exit_button')
 		.unbind('click')
 		.click(() => {
-			window.location = '/';
+			restartGame();
 		});
+
+	// When the user clicks anywhere outside of the modal, closes it
+	$(window)
+		.unbind('click')
+		.click((event) => {
+			if (event.originalEvent.target === $('#save_score_modal')[0]) {
+				restartGame();
+			}
+		});
+}
+
+function restartGame() {
+	window.location = '/';
 }
 
 async function saveScore() {
@@ -37,12 +49,14 @@ async function saveScore() {
 	const data = { data: { name, score } };
 
 	try {
-		const response = await $.post(apiURL + '/save-score', data);
-		console.log(response);
+		await $.post(apiURL + '/save-score', data);
+		$('#save_score_error_display').css('color', 'green');
+		$('#save_score_error_display').text('SAVED, CHECK RANKING!');
+		setTimeout(() => {
+			restartGame();
+		}, 3000);
 	} catch (error) {
-		// FIXME: add message above "save" button
-		alert('check the console for errors');
-		console.error(error.responseJSON || error);
+		$('#save_score_error_display').text(`${error.responseJSON.message}`);
 	}
 }
 

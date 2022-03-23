@@ -160,10 +160,19 @@
 		<div id="save_score_modal">
 			<div id="save_score_modal_content">
 				<div id="save_score_modal_container">
-					<input id="save_score_modal_input" type="text" placeholder="NAME" />
-					<button id="save_score_modal_save_button"></button>
-					<button id="save_score_modal_restart_button"></button>
-					<button id="save_score_modal_exit_button"></button>
+					<div id="save_score_buttons_container">
+						<input
+							id="save_score_modal_input"
+							type="text"
+							placeholder="NAME"
+							maxlength="17"
+							autocomplete="off"
+						/>
+						<p id="save_score_error_display"></p>
+						<button id="save_score_modal_save_button"></button>
+						<button id="save_score_modal_restart_button"></button>
+						<button id="save_score_modal_exit_button"></button>
+					</div>
 				</div>
 			</div>
 		</div>
