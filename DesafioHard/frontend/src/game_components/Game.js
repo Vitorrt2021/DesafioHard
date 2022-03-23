@@ -5,7 +5,7 @@ import Player from './Player.js';
 import Enemy from './Enemy.js';
 import towerStatus from './TowerData.js';
 import assetManager from './AssetManager.js';
-// import renderSaveScore from '../interface/requests/save-score.js';
+import renderSaveScoreModal from '../interface/save_score_modal/save_score.js';
 import EnemiesController from './EnemiesController.js';
 
 class Game {
@@ -171,15 +171,14 @@ class Game {
 			enemy.type === 'goblin' ||
 			enemy.type === 'gorilla'
 		) {
-			assetManager.playSound('titanic_flute');
-
 			setTimeout(() => {
-				renderSaveScore();
+				renderSaveScoreModal();
 			}, 500);
 			$('#live_value').html('0');
 			$('#level_value').html('');
 			this.stopAnimation();
 			assetManager.stopSound(this.#backgroundMusic);
+			assetManager.playSound('titanic_flute');
 		}
 	}
 
