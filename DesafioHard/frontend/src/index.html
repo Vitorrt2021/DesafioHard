@@ -4,53 +4,94 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 		<!-- --------------------OPENGRAPH START-------------------- -->
 		<meta property="og:title" content="Alpha Tower" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://alphatower.dudeful.com" />
 		<meta
 			property="og:image"
-			content="https://raw.githubusercontent.com/Vitorrt2021/DesafioHard/main/DesafioHard/frontend/src/assets/interface_images/opengraph.png"
+			content="https://raw.githubusercontent.com/Vitorrt2021/DesafioHard/main/DesafioHard/frontend/src/assets/interface_shared_images/opengraph.png"
 		/>
-		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:type" content="image/png" />
 		<meta property="og:image:width" content="300" />
 		<meta property="og:image:height" content="300" />
 		<meta property="og:image:alt" content="Torre Coelho Vermelho - Level 3" />
 		<meta
 			property="og:description"
-			content="Jogue agora o que há de mais sofisticado no gênero Tower Defense!"
+			content="Play now the most sofisticated Tower Defense game ever!!"
 		/>
 		<!-- --------------------OPENGRAPH END-------------------- -->
-		<link rel="stylesheet" href="./styles/welcome.css" />
 
 		<link
 			rel="shortcut icon"
-			href="./assets/interface_images/favicon.png"
+			href="assets/interface_shared_images/favicon.png"
 			type="image/x-icon"
 		/>
 		<link
 			rel="stylesheet"
-			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+			href="interface/main_page/main_page.css"
+			type="text/css"
 		/>
-		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-		<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-		<script src="index.js" type="module" defer></script>
+		<link
+			rel="stylesheet"
+			href="interface/ranking_modal/ranking_modal.css"
+			type="text/css"
+		/>
+		<link
+			rel="stylesheet"
+			href="interface/sound_modal/sound_modal.css"
+			type="text/css"
+		/>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="interface/main_page/main_page.js" type="module"></script>
+
 		<title>ANIMALS VS MONSTERS</title>
 	</head>
 
 	<body>
-		<div class="app__container">
-			<div class="welcome__container">
-				<div class="buttons__container">
-					<div class="ranking_and_sound_container">
-						<input type="button" class="red__button" />
-						<input type="button" class="sound__button" />
+		<div id="app_container">
+			<div id="welcome_container">
+				<div id="buttons_container">
+					<div id="ranking_and_sound_container">
+						<button id="ranking_button"></button>
+						<button id="sound_button"></button>
 					</div>
-					<button class="blue__button" id="play_game"></button>
+					<button id="play_button"></button>
 				</div>
 			</div>
 		</div>
 
-		<div class="modal"></div>
+		<div id="ranking_modal">
+			<div id="ranking_modal_content">
+				<div id="ranking_container">
+					<div id="ranking_cell_container"></div>
+					<button id="ranking_modal_close_button"></button>
+				</div>
+			</div>
+		</div>
+
+		<div id="sound_modal">
+			<div id="sound_modal_content">
+				<div id="sound_container">
+					<div id="volume_menu">
+						<p id="volume_value"></p>
+						<div id="volume_slider_container">
+							<button id="sound_button_modal_zero"></button>
+							<input
+								id="volume_slider"
+								type="range"
+								min="0"
+								max="100"
+								step="1"
+							/>
+							<button id="sound_button_modal_100"></button>
+						</div>
+						<button id="sound_modal_close_button"></button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
