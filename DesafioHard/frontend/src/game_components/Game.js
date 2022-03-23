@@ -105,11 +105,18 @@ class Game {
 		$('.rabbit_tower').css('filter', 'brightness(100%)');
 		$('.pikachu_tower').css('filter', 'brightness(100%)');
 		$('.cat_tower').css('filter', 'brightness(100%)');
+		$('.stone_tower').css('filter', 'brightness(100%)');
+
 		// FIXME test for errors (parseInt)
 		if (
 			this.#player.getMoney() < parseInt(towerStatus.rabbit_tower_level_1.price)
 		) {
 			$('.rabbit_tower').css('filter', 'brightness(55%)');
+		}
+		if (
+			this.#player.getMoney() < parseInt(towerStatus.stone_tower_level_1.price)
+		) {
+			$('.stone_tower').css('filter', 'brightness(55%)');
 		}
 		if (
 			this.#player.getMoney() <
@@ -169,7 +176,8 @@ class Game {
 			this.#player.getLive() <= 0 ||
 			enemy.type === 'golem' ||
 			enemy.type === 'goblin' ||
-			enemy.type === 'gorilla'
+			enemy.type === 'gorilla' ||
+			enemy.type === 'iceman'
 		) {
 			setTimeout(() => {
 				renderSaveScoreModal(this);
@@ -217,6 +225,10 @@ class Game {
 			} else if (enemy.type === 'gorilla') {
 				assetManager.playSound('gorilla_dying');
 				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+			} else if (enemy.type === 'iceman') {
+				//FIXME add iceman sound
+				// assetManager.playSound('iceman_dying');
+				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
 			} else {
 				this.#player.addScore(20 * (EnemiesController.horda + 1));
 			}
@@ -237,27 +249,41 @@ class Game {
 			tower.isDying = true;
 			this.#towersDying.push(tower);
 			this.#towers.splice(towerIndex, 1);
+			return true;
+		}
+		return false;
+	}
+	#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex) {
+		let towerHealth = tower.health;
+		tower.health -= enemy.health / (1 + EnemysController.horda * 0.5);
+
+		if (tower.health > 0) {
+			enemy.health -= towerHealth;
+		}
+
+		tower.isDamaged = true;
+
+		this.#enemyIsDead(enemy, enemyIndex);
+		this.#towerWasDestroyed(tower, towerIndex);
+
+		if (!tower.isDying) {
+			assetManager.playSound('explosion');
 		}
 	}
-
 	#checkTowerCollision() {
+		this.#enemies.forEach((enemy) => {
+			enemy.isBlocked = false;
+		});
+
 		this.#towers.forEach((tower, towerIndex) => {
 			this.#enemies.forEach((enemy, enemyIndex) => {
 				if (collision.rectRectCollisionDetection(tower, enemy)) {
-					let towerHealth = tower.health;
-					tower.health -= enemy.health / (1 + EnemiesController.horda * 0.5);
-
-					if (tower.health > 0) {
-						enemy.health -= towerHealth;
-					}
-
-					tower.isDamaged = true;
-
-					this.#enemyIsDead(enemy, enemyIndex);
-					this.#towerWasDestroyed(tower, towerIndex);
-
-					if (!tower.isDying) {
-						assetManager.playSound('explosion');
+					if (!tower.isBarrier) {
+						this.#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex);
+					} else {
+						enemy.isBlocked = true;
+						tower.health -= enemy.health / 100;
+						this.#towerWasDestroyed(tower, towerIndex);
 					}
 				}
 			});
@@ -360,7 +386,7 @@ class Game {
 		return !this.#runAnimationControl;
 	}
 
-	//FIX-IT TOUCH
+	//FIXME TOUCH
 	#catchMousePosition() {
 		document.querySelector('body').addEventListener('mousemove', (e) => {
 			this.#updateMousePosition(e);
@@ -382,7 +408,7 @@ class Game {
 			this.#addTowerInCell(newTower);
 		});
 	}
-	//FIX-IT SOBREPOSIÇÃO DE TORRES
+	//FIXME SOBREPOSIÇÃO DE TORRES
 	#addTowerInCell(tower) {
 		// play background music when player put the first tower in row
 		if (!this.#towers[0]) this.#updateBackgroundMusic();
@@ -510,7 +536,7 @@ class Game {
 	}
 
 	#createEnemy(monsterType, position, yPositions, sorted) {
-		this.#playSoundMonster(monsterType);
+		// this.#playSoundMonster(monsterType);
 		this.#enemies.push(
 			new Enemy(
 				monsterType,
@@ -545,6 +571,10 @@ class Game {
 			case 'gorilla':
 				assetManager.playSound('gorilla');
 				break;
+			//FIXME add iceman sound
+			// case 'iceman':
+			// 	assetManager.playSound('iceman');
+			// 	break;
 			default:
 				break;
 		}

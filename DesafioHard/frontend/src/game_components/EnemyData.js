@@ -1,25 +1,72 @@
 export default {
 	slimePink: {
+		type: 'monster',
+		level: 0,
 		speed: 1,
 		health: 100,
 		money: 0,
 	},
-
 	slimeGreen: {
+		type: 'monster',
+		level: 1,
 		speed: 1.5,
 		health: 150,
 		money: 5,
 	},
-
+	snailPink: {
+		type: 'monster',
+		level: 6,
+		speed: 1,
+		health: 600,
+		money: 30,
+	},
+	snailBlue: {
+		type: 'monster',
+		level: 6,
+		speed: 1,
+		health: 600,
+		money: 30,
+	},
+	mushroom: {
+		type: 'monster',
+		level: 6,
+		speed: 1,
+		health: 600,
+		money: 30,
+	},
 	toad: {
+		type: 'monster',
+		level: 4,
 		speed: 1.7,
-		health: 200,
+		health: 350,
 		money: 15,
 	},
-
-	robot: {
+	giantbee: {
+		type: 'monster',
+		level: 6,
 		speed: 1,
-		health: 400,
+		health: 600,
+		money: 30,
+	},
+	hedgehog: {
+		type: 'monster',
+		level: 6,
+		speed: 1,
+		health: 600,
+		money: 30,
+	},
+	stoneGolem: {
+		type: 'monster',
+		level: 6,
+		speed: 1,
+		health: 600,
+		money: 30,
+	},
+	robot: {
+		type: 'monster',
+		level: 6,
+		speed: 1,
+		health: 600,
 		money: 30,
 	},
 };
