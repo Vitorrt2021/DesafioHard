@@ -51,7 +51,7 @@
 	align-items: center;
 }
 
-#save_name_input {
+#save_score_modal_input {
 	width: 30vh;
 	height: 4vh;
 
@@ -68,20 +68,57 @@
 	color: rgb(73, 73, 73);
 }
 
-#save_name_input:focus {
+#save_score_modal_input:focus {
 	outline: none;
 }
 
-#button_save {
-	border: none;
-	background-color: red;
-
-	width: 30vh;
-	height: 15vh;
+#save_score_modal_save_button {
+	background-image: url('images/save_button.svg');
 	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 27.5vw;
+	height: 12.5vh;
 }
 
-#button_save:active {
+#save_score_modal_save_button:active {
 	transform: translateY(4px);
-	background-color: aqua;
+	background-image: url('images/save_button_active.svg');
+}
+
+#save_score_modal_restart_button {
+	background-image: url('images/restart_button.svg');
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 27.5vw;
+	height: 12.5vh;
+}
+
+#save_score_modal_restart_button:active {
+	transform: translateY(4px);
+	background-image: url('images/restart_button_active.svg');
+}
+
+#save_score_modal_exit_button {
+	background-image: url('images/exit_game_button.svg');
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 27.5vw;
+	height: 12.5vh;
+}
+
+#save_score_modal_exit_button:active {
+	transform: translateY(4px);
+	background-image: url('images/exit_game_button_active.svg');
 }

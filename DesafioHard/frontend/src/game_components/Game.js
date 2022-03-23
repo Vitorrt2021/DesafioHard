@@ -172,7 +172,7 @@ class Game {
 			enemy.type === 'gorilla'
 		) {
 			setTimeout(() => {
-				renderSaveScoreModal();
+				renderSaveScoreModal(this);
 			}, 500);
 			$('#live_value').html('0');
 			$('#level_value').html('');

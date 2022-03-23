@@ -37,7 +37,7 @@ function renderConfigurationModal(game) {
 	$('.configuration_modal_exit_button')
 		.unbind('click')
 		.click(() => {
-			window.history.back();
+			window.location = '/';
 		});
 
 	// When the user clicks anywhere outside of the modal, closes it
