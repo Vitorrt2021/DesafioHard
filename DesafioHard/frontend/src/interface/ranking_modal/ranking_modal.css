@@ -1,0 +1,208 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+
+#ranking_modal {
+	display: none;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+#ranking_modal_content {
+	background-color: transparent;
+	width: calc(42.5vh + 25vw);
+	height: calc(37.5vh + 25vw);
+	z-index: 1;
+	position: relative;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+}
+
+#ranking_container {
+	width: calc(42.5vh + 25vw);
+	height: calc(37.5vh + 25vw);
+	background-image: url('images/ranking_window.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#ranking_cell_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 80%;
+	height: 50%;
+	overflow-y: auto;
+	margin-top: 15%;
+}
+
+#ranking_cell_1 {
+	background-image: url('images/ranking_cell_1.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+#ranking_cell_2 {
+	background-image: url('images/ranking_cell_2.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+#ranking_cell_3 {
+	background-image: url('images/ranking_cell_3.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.ranking_cell {
+	background-image: url('images/ranking_cell.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 100%;
+	height: 33.33%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.ranking_cell_rank {
+	width: 28%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.ranking_cell_rank > p {
+	font-size: calc(2.5vh + 2.5vw);
+	margin-bottom: 20%;
+	margin-left: 12.5%;
+}
+
+.ranking_cell_data_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	width: 72%;
+	height: 100%;
+}
+
+.ranking_cell_score_date_container {
+	display: flex;
+	margin-top: 3.5%;
+	width: 100%;
+	height: 20%;
+}
+
+.ranking_cell_score {
+	width: 100%;
+	height: 100%;
+	font-size: calc(2vh + 0.75vw);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5%;
+	margin-right: 5%;
+}
+
+.ranking_cell_date {
+	width: 100%;
+	height: 100%;
+	font-size: calc(1vh + 1vw);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 7.5%;
+}
+
+.ranking_cell_name {
+	width: 100%;
+	height: 45%;
+	font-size: calc(2vh + 2vw);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+::-webkit-scrollbar {
+	width: 25px;
+}
+
+::-webkit-scrollbar-track {
+	background-image: url('images/scrollbar_track.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+}
+
+::-webkit-scrollbar-thumb {
+	background-image: url('images/scrollbar_thumb.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: 40%;
+}
+
+#ranking_modal_close_button {
+	box-sizing: border-box;
+	cursor: pointer;
+	border: none;
+	background-image: url('images/close_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-color: transparent;
+	margin-top: 1vh;
+	width: 10vw;
+	height: 10vh;
+}
+
+#ranking_modal_close_button:active {
+	transform: translateY(4px);
+	background-image: url('images/close_button_active.svg');
+}

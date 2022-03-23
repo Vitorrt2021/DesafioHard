@@ -1,0 +1,124 @@
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: 7vw;
+		opacity: 1;
+	}
+}
+
+#configuration_modal {
+	display: none;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+#configuration_modal_content {
+	background-color: transparent;
+	width: calc(37.5vh + 6.25vw);
+	height: calc(66.25vh + 9.375vw);
+	z-index: 1;
+	position: relative;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+}
+
+#configuration_container {
+	width: calc(37.5vh + 6.25vw);
+	height: calc(66.25vh + 9.375vw);
+	background-image: url('images/configuration_window.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#buttons_container {
+	width: 60%;
+	height: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10%;
+}
+
+#sound_speed_container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.configuration_buttons {
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 27.5vw;
+	height: 12.5vh;
+}
+
+.configuration_modal_sound_button {
+	background-image: url('images/sound_button.svg');
+	width: 12.5vw;
+}
+
+.configuration_modal_sound_button:active {
+	transform: translateY(4px);
+	background-image: url('images/sound_button_active.svg');
+}
+
+.configuration_modal_speed_button {
+	margin-bottom: 3%;
+	width: 13.5vw;
+	height: 13.5vh;
+	background-image: url('images/speed_control.svg');
+}
+
+/* .configuration_modal_speed_button:active {
+	transform: translateY(4px);
+	background-image: url('images/speed_control_selected.svg');
+} */
+
+.configuration_modal_resume_button {
+	background-image: url('images/resume_button.svg');
+}
+
+.configuration_modal_resume_button:active {
+	transform: translateY(4px);
+	background-image: url('images/resume_button_active.svg');
+}
+
+.configuration_modal_restart_button {
+	background-image: url('images/restart_button.svg');
+}
+
+.configuration_modal_restart_button:active {
+	transform: translateY(4px);
+	background-image: url('images/restart_button_active.svg');
+}
+
+.configuration_modal_exit_button {
+	background-image: url('images/exit_game_button.svg');
+}
+
+.configuration_modal_exit_button:active {
+	transform: translateY(4px);
+	background-image: url('images/exit_game_button_active.svg');
+}

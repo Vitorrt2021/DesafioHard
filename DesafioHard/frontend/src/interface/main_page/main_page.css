@@ -1,0 +1,122 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	font-family: 'brady_bunch_remastered';
+	src: url('../../assets/fonts/brady_bunch_remastered.woff') format('woff');
+}
+
+html {
+	font-family: 'brady_bunch_remastered';
+	color: white;
+	font-weight: normal;
+	text-shadow: 1px 0 0 black, 0 1px 0 black, -1px 0 0 black, 0 -1px 0 black;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+@keyframes animatedBackground {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100000% 0;
+	}
+}
+
+#app_container {
+	width: 100vw;
+	height: 100vh;
+	background-image: url('images/clouds_background.png');
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-size: auto 100%;
+	animation: animatedBackground 12000s linear infinite;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#welcome_container {
+	width: calc(52.5vh + 25.75vw);
+	height: calc(47.625vh + 24.5vw);
+	background-image: url('images/welcome_window.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#buttons_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: calc(41.25vh + 25vw);
+	height: calc(25vh + 18.75vw);
+	padding-top: calc(7.5vh + 6.25vw);
+}
+
+#ranking_and_sound_container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+	height: calc(31.25vh + 6.25vw);
+}
+
+#ranking_button {
+	background-image: url('images/ranking_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-color: transparent;
+	border: none;
+	width: 40%;
+	height: 55%;
+	cursor: pointer;
+}
+
+#ranking_button:active {
+	transform: translateY(4px);
+	background-image: url('images/ranking_button_active.svg');
+}
+
+#sound_button {
+	background-image: url('images/sound_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-color: transparent;
+	border: none;
+	width: 40%;
+	height: 55%;
+	cursor: pointer;
+}
+
+#sound_button:active {
+	transform: translateY(4px);
+	background-image: url('images/sound_button_active.svg');
+}
+
+#play_button {
+	background-image: url('images/play_button.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	background-color: transparent;
+	border: none;
+	width: calc(12.5vh + 6.25vw);
+	height: calc(12.5vh + 8.75vw);
+	margin-bottom: calc(1.25vh + 1.875vw);
+	cursor: pointer;
+}
+
+#play_button:active {
+	transform: translateY(4px);
+	background-image: url('images/play_button_active.svg');
+}

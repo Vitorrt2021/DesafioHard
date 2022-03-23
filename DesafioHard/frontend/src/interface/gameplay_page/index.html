@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- --------------------OPENGRAPH START-------------------- -->
+		<meta property="og:title" content="Alpha Tower" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://alphatower.dudeful.com" />
+		<meta
+			property="og:image"
+			content="https://raw.githubusercontent.com/Vitorrt2021/DesafioHard/main/DesafioHard/frontend/src/interface/main_page/images/opengraph.png"
+		/>
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:image:width" content="300" />
+		<meta property="og:image:height" content="300" />
+		<meta property="og:image:alt" content="Torre Coelho Vermelho - Level 3" />
+		<meta
+			property="og:description"
+			content="Play now the most sofisticated Tower Defense game ever!!"
+		/>
+		<!-- --------------------OPENGRAPH END-------------------- -->
+
+		<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
+		<!-- <link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+		/> -->
+		<link rel="stylesheet" href="gameplay_page.css" type="text/css" />
+		<link
+			rel="stylesheet"
+			href="../configuration_modal/configuration_modal.css"
+			type="text/css"
+		/>
+		<link
+			rel="stylesheet"
+			href="../sound_modal/sound_modal.css"
+			type="text/css"
+		/>
+		<!-- <link
+			rel="stylesheet"
+			href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+		/> -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+		<!-- <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script> -->
+		<script src="gameplay_page.js" type="module"></script>
+
+		<title>ANIMALS VS MONSTERS</title>
+	</head>
+	<body>
+		<div id="gameplay_page_container">
+			<section id="gameplay_interface">
+				<h4 id="level_value" title="level">0</h4>
+				<header id="gameplay_page_header">
+					<section id="tower_selection">
+						<div id="buttons_area">
+							<div class="tower_area">
+								<img
+									title="Tower"
+									class="tower_button cat_tower"
+									src="images/cat_tower_level_1.png"
+									draggable="true"
+								/>
+								<div class="tower_money_cost_visor">
+									<p class="price" id="cat_cost_value">100</p>
+								</div>
+							</div>
+
+							<div class="tower_area">
+								<img
+									title="Tower"
+									class="tower_button pikachu_tower"
+									src="images/pikachu_tower_level_1.png"
+									draggable="true"
+								/>
+								<div class="tower_money_cost_visor">
+									<p class="price" id="blue_rabbit_cost_value">200</p>
+								</div>
+							</div>
+
+							<div class="tower_area">
+								<img
+									title="Tower"
+									class="tower_button rabbit_tower"
+									src="images/rabbit_tower_level_1.png"
+									draggable="true"
+								/>
+								<div class="tower_money_cost_visor">
+									<p class="price" id="red_rabbit_cost_value">500</p>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section id="money_display">
+						<p id="money_value">0</p>
+					</section>
+					<section id="score_display">
+						<p id="score_value">0</p>
+					</section>
+
+					<section id="live_display">
+						<p id="live_value">0</p>
+					</section>
+					<button id="configuration_button" alt="configuração"></button>
+				</header>
+
+				<canvas id="canvas"> </canvas>
+			</section>
+		</div>
+
+		<div id="configuration_modal">
+			<div id="configuration_modal_content">
+				<div id="configuration_container">
+					<div id="buttons_container">
+						<div id="sound_speed_container">
+							<button
+								class="configuration_buttons configuration_modal_sound_button"
+							></button>
+							<button
+								class="configuration_buttons configuration_modal_speed_button"
+							></button>
+						</div>
+						<button
+							class="configuration_buttons configuration_modal_resume_button"
+						></button>
+						<button
+							class="configuration_buttons configuration_modal_restart_button"
+						></button>
+						<button
+							class="configuration_buttons configuration_modal_exit_button"
+						></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="sound_modal">
+			<div id="sound_modal_content">
+				<div id="sound_container">
+					<div id="volume_menu">
+						<p id="volume_value"></p>
+						<div id="volume_slider_container">
+							<button id="sound_button_modal_zero"></button>
+							<input
+								id="volume_slider"
+								type="range"
+								min="0"
+								max="100"
+								step="1"
+							/>
+							<button id="sound_button_modal_100"></button>
+						</div>
+						<button id="sound_modal_close_button"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
