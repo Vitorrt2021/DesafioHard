@@ -1,0 +1,169 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@font-face {
+	font-family: 'brady_bunch_remastered';
+	src: url('../../assets/fonts/brady_bunch_remastered.woff') format('woff');
+}
+
+html {
+	color: white;
+	font-weight: bolder;
+	font-family: 'brady_bunch_remastered';
+	text-shadow: 1px 0 0 gray, 0 1px 0 gray, -1px 0 0 gray, 0 -1px 0 gray;
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+
+#save_score_modal {
+	display: none;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+#save_score_modal_content {
+	background-color: transparent;
+	width: calc(42.5vh + 25vw);
+	height: calc(37.5vh + 25vw);
+	z-index: 1;
+	position: relative;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+}
+
+#save_score_modal_container {
+	width: calc(42.5vh + 25vw);
+	height: calc(37.5vh + 25vw);
+	background-image: url('images/save_score_window.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#save_score_buttons_container {
+	width: 50%;
+	height: 75%;
+	margin-right: 2%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#save_score_modal_input {
+	width: 100%;
+	height: 50%;
+	margin-top: 25%;
+	appearance: none;
+	outline: none;
+	color: inherit;
+	vertical-align: middle;
+	text-align: center;
+	caret-color: black;
+	font-weight: inherit;
+	font-family: inherit;
+	text-shadow: inherit;
+	font-size: calc(2vw + 2vh);
+	background-image: url('images/save_input.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+}
+
+#save_score_modal_input::placeholder {
+	appearance: none;
+	outline: none;
+	color: inherit;
+	font-weight: inherit;
+	font-family: inherit;
+	text-shadow: inherit;
+}
+
+#save_score_modal_input:focus {
+	outline: none;
+}
+
+#save_score_error_display {
+	font-size: calc(1vw + 1vh);
+	color: rgb(119, 10, 32);
+	text-shadow: none;
+	text-align: center;
+	vertical-align: middle;
+	width: 100%;
+	height: 25%;
+}
+
+#save_score_modal_save_button {
+	background-image: url('images/save_button.svg');
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 50%;
+	height: 50%;
+}
+
+#save_score_modal_save_button:active {
+	transform: translateY(4px);
+	background-image: url('images/save_button_active.svg');
+}
+
+#save_score_modal_restart_button {
+	background-image: url('../../assets/interface_shared_images/restart_button.svg');
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 50%;
+	height: 50%;
+}
+
+#save_score_modal_restart_button:active {
+	transform: translateY(4px);
+	background-image: url('../../assets/interface_shared_images/restart_button_active.svg');
+}
+
+#save_score_modal_exit_button {
+	background-image: url('../../assets/interface_shared_images/exit_game_button.svg');
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	border: none;
+	background-color: transparent;
+	width: 50%;
+	height: 50%;
+}
+
+#save_score_modal_exit_button:active {
+	transform: translateY(4px);
+	background-image: url('../../assets/interface_shared_images/exit_game_button_active.svg');
+}
