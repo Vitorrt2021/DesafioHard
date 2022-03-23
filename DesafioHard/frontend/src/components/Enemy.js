@@ -12,8 +12,15 @@ class Enemy {
 		this.collisionY = y;
 		this.collisionWidth = 0;
 		this.collisionHeight = 0;
+		this.isBlocked = false;
+		this.type = type;
 
-		if (type === 'golem' || type === 'goblin' || type === 'gorilla') {
+		if (
+			type === 'golem' ||
+			type === 'goblin' ||
+			type === 'gorilla' ||
+			type === 'iceman'
+		) {
 			this.setHealth(level, bossData[type].health);
 			this.speed = bossData[type].speed * 1.15;
 			this.money = bossData[type].money;
@@ -28,21 +35,44 @@ class Enemy {
 		this.isDying = false;
 		this.isDead = false;
 		this.animation = assetManager.getAnimationInstance(type);
-		this.type = type;
+
 		this.#updateMaxHeight();
 	}
 	//FIX-IT BALANCEAMENTO
 	setHealth(level, health) {
-		if (level == 0) {
-			this.health = parseInt(health);
+		if (
+			this.type === 'golem' ||
+			this.type === 'goblin' ||
+			this.type === 'gorilla' ||
+			this.type === 'iceman'
+		) {
+			console.log(`${level - bossData[this.type].level} | ${this.type}`);
+			console.log(bossData[this.type]);
+			if (bossData[this.type].level >= level) {
+				this.health = parseInt(health);
+			} else {
+				this.health =
+					parseInt(health) +
+					parseInt(health) *
+						Math.pow(1.8, level + 1 - bossData[this.type].level);
+			}
 		} else {
-			this.health =
-				parseInt(health) + parseInt(health) * Math.pow(1.8, level - 1);
+			console.log(`${level - enemyData[this.type].level} | ${this.type}`);
+			console.log(enemyData[this.type]);
+			if (enemyData[this.type].level >= level) {
+				this.health = parseInt(health);
+			} else {
+				this.health =
+					parseInt(health) +
+					parseInt(health) * Math.pow(1.8, level - enemyData[this.type].level);
+			}
 		}
 	}
 	update() {
-		this.x -= this.speed;
-		this.collisionX = this.x;
+		if (!this.isBlocked) {
+			this.x -= this.speed;
+			this.collisionX = this.x;
+		}
 	}
 
 	changeAnimation(animationName) {
