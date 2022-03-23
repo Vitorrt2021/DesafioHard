@@ -1,4 +1,25 @@
 export default {
+	cat_tower_base: {
+		type: 'tower',
+		level: 1,
+		health: 500,
+		damage: 50,
+		attackSpeed: 200,
+	},
+	pikachu_tower_base: {
+		type: 'tower',
+		level: 1,
+		health: 750,
+		damage: 100,
+		attackSpeed: 170,
+	},
+	rabbit_tower_base: {
+		type: 'tower',
+		level: 1,
+		health: 1000,
+		damage: 300,
+		attackSpeed: 120,
+	},
 	cat_tower_level_1: {
 		level: 1,
 		towerType: 'cat_tower_level_1',

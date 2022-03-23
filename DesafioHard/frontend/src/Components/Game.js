@@ -538,7 +538,7 @@ class Game {
 			this.#moneyDrop *= 1 + 1 / EnemysController.horda;
 			assetManager.playSound('level_up');
 			$('#level_value').html(EnemysController.horda);
-
+			console.log(this.#spawnVelocity);
 			if (EnemysController.horda % 2 === 0) {
 				this.#updateBackgroundMusic();
 			}
