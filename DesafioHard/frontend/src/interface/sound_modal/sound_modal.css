@@ -171,8 +171,8 @@
 	background-size: contain;
 	background-position: center;
 	background-color: transparent;
-	width: 10vw;
-	height: 10vh;
+	width: 40%;
+	height: 15%;
 }
 
 #sound_modal_close_button:active {

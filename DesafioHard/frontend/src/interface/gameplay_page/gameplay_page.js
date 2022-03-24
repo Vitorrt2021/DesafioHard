@@ -44,10 +44,22 @@ $(document).ready(() => {
 		const game = new Game();
 		game.start();
 
+		// $('#canvas').mousemove(() => {
+		// 	game.darkenTower();
+		// });
 		$('#canvas').click(() => {
+			game.removeTower();
 			game.evolveTower();
 		});
-
+		$('#remove_button').click(() => {
+			game.setRemoveTower();
+			$('#remove_button').css(
+				'background-image',
+				game.getRemoveTower()
+					? `url('images/remove_button_active.svg')`
+					: `url('images/remove_button.svg')`
+			);
+		});
 		$('#configuration_button').click(() => {
 			game.stopAnimation();
 			renderConfigurationModal(game);
