@@ -1,8 +1,8 @@
 import enemyData from './EnemyData.js';
 
 class EnemiesController {
-	constructor() {
-		this.horda = 0;
+	constructor(horda = 0) {
+		this.horda = horda;
 		this.monsters = Object.entries(enemyData).slice(0, this.horda + 1);
 	}
 
@@ -47,5 +47,4 @@ class EnemiesController {
 	}
 }
 
-const enemy = new EnemiesController();
-export default enemy;
+export default EnemiesController;

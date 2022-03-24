@@ -6,7 +6,7 @@ import Enemy from './Enemy.js';
 import towerStatus from './TowerData.js';
 import assetManager from './AssetManager.js';
 import renderSaveScoreModal from '../interface/save_score_modal/save_score.js';
-import EnemiesController from './EnemiesController.js';
+import EnemiesControl from './EnemiesController.js';
 
 class Game {
 	#canvas = document.getElementById('canvas');
@@ -34,6 +34,7 @@ class Game {
 		this.#canvas.height = 800;
 		this.isAccelerated = false;
 		this.monsterCount = 0;
+		this.enemiesController = new EnemiesControl();
 	}
 
 	restart() {
@@ -60,6 +61,8 @@ class Game {
 		this.#canvas.height = 800;
 		this.isAccelerated = false;
 		this.monsterCount = 0;
+		this.enemiesController = new EnemiesControl();
+		$('#level_value').html(this.enemiesController.horda);
 
 		this.start();
 	}
@@ -84,7 +87,7 @@ class Game {
 			position[enemy.line] = true;
 		});
 
-		if ((EnemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
+		if ((this.enemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
 			position[0] = true;
 			position[1] = true;
 			position[2] = true;
@@ -218,19 +221,27 @@ class Game {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			if (enemy.type === 'golem') {
 				assetManager.playSound('golem_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else if (enemy.type === 'goblin') {
 				assetManager.playSound('goblin_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else if (enemy.type === 'gorilla') {
 				assetManager.playSound('gorilla_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else if (enemy.type === 'iceman') {
 				//FIXME add iceman sound
 				// assetManager.playSound('iceman_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else {
-				this.#player.addScore(20 * (EnemiesController.horda + 1));
+				this.#player.addScore(20 * (this.enemiesController.horda + 1));
 			}
 
 			this.#player.addMoney(Math.floor(this.#moneyDrop) + enemy.money);
@@ -255,7 +266,7 @@ class Game {
 	}
 	#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex) {
 		let towerHealth = tower.health;
-		tower.health -= enemy.health / (1 + EnemiesController.horda * 0.5);
+		tower.health -= enemy.health / (1 + this.enemiesController.horda * 0.5);
 
 		if (tower.health > 0) {
 			enemy.health -= towerHealth;
@@ -324,7 +335,8 @@ class Game {
 	}
 
 	#changeSpawnVelocity() {
-		const spawnV = (this.#spawnVelocity = 600 - 60 * EnemiesController.horda);
+		const spawnV = (this.#spawnVelocity =
+			600 - 60 * this.enemiesController.horda);
 		if (spawnV <= this.#maxSpawnVelocity) {
 			this.#spawnVelocity = this.#maxSpawnVelocity;
 		} else {
@@ -490,7 +502,7 @@ class Game {
 			towerClicked.nextLevel
 		);
 		if (evolvedTower.price > this.#player.getMoney()) return;
-		evolvedTower.damage *= 1 + EnemiesController.horda * 0.35;
+		evolvedTower.damage *= 1 + this.enemiesController.horda * 0.35;
 		this.#player.buy(parseInt(evolvedTower.price));
 		this.#updateMoney();
 		assetManager.playSound('evolve');
@@ -510,15 +522,15 @@ class Game {
 	#spawnEnemy() {
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
-		let sorted = EnemiesController.sortPosition();
+		let sorted = this.enemiesController.sortPosition();
 		let position = yInitialpositions[sorted];
-		let monsterType = EnemiesController.sortMonster();
+		let monsterType = this.enemiesController.sortMonster();
 
-		if ((EnemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
+		if ((this.enemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
 			if (!this.#isBossSpawned) {
 				this.#isBossSpawned = true;
 				this.#createEnemy(
-					EnemiesController.getBoss(),
+					this.enemiesController.getBoss(),
 					yInitialpositions[1],
 					yFinalpositions[0] - yInitialpositions[0],
 					1
@@ -545,7 +557,7 @@ class Game {
 				this.#cellSize,
 				yPositions,
 				sorted,
-				EnemiesController.horda
+				this.enemiesController.horda
 			)
 		);
 	}
@@ -583,14 +595,14 @@ class Game {
 	#updateLevel() {
 		if (
 			this.#player.getScore() >=
-			100 * Math.pow(2, EnemiesController.horda + 1)
+			100 * Math.pow(2, this.enemiesController.horda + 1)
 		) {
-			EnemiesController.update();
-			this.#moneyDrop *= 1 + 1 / EnemiesController.horda;
+			this.enemiesController.update();
+			this.#moneyDrop *= 1 + 1 / this.enemiesController.horda;
 			assetManager.playSound('level_up');
-			$('#level_value').html(EnemiesController.horda);
+			$('#level_value').html(this.enemiesController.horda);
 
-			if (EnemiesController.horda % 2 === 0) {
+			if (this.enemiesController.horda % 2 === 0) {
 				this.#updateBackgroundMusic();
 			}
 		}
@@ -598,7 +610,7 @@ class Game {
 
 	#updateBackgroundMusic() {
 		assetManager.stopSound(this.#backgroundMusic);
-		this.#backgroundMusic = 'bg_music_lvl_' + EnemiesController.horda;
+		this.#backgroundMusic = 'bg_music_lvl_' + this.enemiesController.horda;
 		assetManager.playSound(this.#backgroundMusic, undefined, true);
 	}
 }
