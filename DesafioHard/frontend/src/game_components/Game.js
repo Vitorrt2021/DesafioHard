@@ -265,8 +265,7 @@ class Game {
 					100 * Math.pow(2, this.enemiesController.horda + 1)
 				);
 			} else if (enemy.type === 'iceman') {
-				//FIXME add iceman sound
-				// assetManager.playSound('iceman_dying');
+				assetManager.playSound('iceman_dying');
 				this.#player.addScore(
 					100 * Math.pow(2, this.enemiesController.horda + 1)
 				);
@@ -582,7 +581,7 @@ class Game {
 	}
 
 	#createEnemy(monsterType, position, yPositions, sorted) {
-		// this.#playSoundMonster(monsterType);
+		this.#playSoundMonster(monsterType);
 		this.#enemies.push(
 			new Enemy(
 				monsterType,
@@ -617,10 +616,19 @@ class Game {
 			case 'gorilla':
 				assetManager.playSound('gorilla');
 				break;
-			//FIXME add iceman sound
-			// case 'iceman':
-			// 	assetManager.playSound('iceman');
-			// 	break;
+			case 'snailPink':
+			case 'snailBlue':
+				assetManager.playSound('snail');
+				break;
+			case 'bee':
+				assetManager.playSound('bee');
+				break;
+			case 'mushroom':
+				assetManager.playSound('mushroom');
+				break;
+			case 'hedgehog':
+				assetManager.playSound('hedgehog');
+				break;
 			default:
 				break;
 		}
