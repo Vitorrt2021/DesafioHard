@@ -28,6 +28,7 @@ class Game {
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
+	#removeTower = true;
 
 	constructor() {
 		this.#canvas.width = 1600;
@@ -72,7 +73,59 @@ class Game {
 		this.#createGrid();
 		this.#catchMousePosition();
 	}
+	setRemoveTower() {
+		this.#removeTower = !this.#removeTower;
+	}
+	#darkenTower() {
+		if (this.#removeTower) {
+			this.#towers.forEach((element) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					// this.#ctx.globalAlpha = 0.2;
+					this.#ctx.fillStyle = 'black';
 
+					// this.#ctx.fillRect(
+					// 	element.x,
+					// 	element.y,
+					// 	element.width,
+					// 	element.height + 20
+					// );
+					// this.#ctx.globalAlpha = 1;
+
+					const img = new Image();
+					img.src = 'as.png';
+					this.#ctx.drawImage(
+						img,
+						element.x + element.width / 3.5,
+						element.y + element.height / 3.5,
+						element.width / 2,
+						element.height / 2
+					);
+					this.#ctx.font = '37px sans-serif';
+					this.#ctx.fillText(
+						Math.floor(element.price * 0.4),
+						element.x + element.width / 3.5,
+						element.y + 20
+					);
+				}
+			});
+		}
+	}
+	removeTower() {
+		if (this.#removeTower) {
+			this.#towers.forEach((element, indexOf) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					element.health = 0;
+					this.#player.addMoney(Math.floor(element.price * 0.4));
+					this.#updateMoney();
+					this.#towerWasDestroyed(element, indexOf);
+				}
+			});
+		}
+	}
 	#haveEnemyInLine() {
 		const position = [false, false, false];
 		const towerPosition = [
@@ -362,6 +415,9 @@ class Game {
 			this.#checkEnemyAttackedBase();
 			this.#frames++;
 			this.#updateLevel();
+
+			this.#darkenTower();
+
 			requestAnimationFrame(() => {
 				this.#animation();
 			});

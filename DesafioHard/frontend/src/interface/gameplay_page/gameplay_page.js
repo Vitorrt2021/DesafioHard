@@ -44,10 +44,17 @@ $(document).ready(() => {
 		const game = new Game();
 		game.start();
 
+		// $('#canvas').mousemove(() => {
+		// 	game.darkenTower();
+		// });
 		$('#canvas').click(() => {
+			game.removeTower();
 			game.evolveTower();
 		});
-
+		$('#martelo_button').click(() => {
+			game.setRemoveTower();
+			alert('Coisa');
+		});
 		$('#configuration_button').click(() => {
 			game.stopAnimation();
 			renderConfigurationModal(game);
