@@ -616,12 +616,15 @@ class Game {
 			case 'gorilla':
 				assetManager.playSound('gorilla');
 				break;
+			case 'iceman':
+				assetManager.playSound('iceman');
+				break;
 			case 'snailPink':
 			case 'snailBlue':
 				assetManager.playSound('snail');
 				break;
-			case 'bee':
-				assetManager.playSound('bee');
+			case 'giantbee':
+				assetManager.playSound('giantbee');
 				break;
 			case 'mushroom':
 				assetManager.playSound('mushroom');
