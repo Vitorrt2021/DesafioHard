@@ -5,7 +5,7 @@ class Player {
 	constructor() {
 		this.#score = 0;
 		this.#live = 3;
-		this.#money = 500;
+		this.#money = 50000;
 	}
 
 	deductLive() {

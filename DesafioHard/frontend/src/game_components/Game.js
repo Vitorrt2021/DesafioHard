@@ -659,11 +659,11 @@ class Game {
 					};
 					//data
 					this.#ctx.fillStyle = 'black';
-					this.#ctx.font = '20px sans-serif';
+					this.#ctx.font = '20px Arial, sans-serif';
 					//Old Data
 
-					write(element.maxHealth, 1.32, 2.8);
-					write(element.damage, 1.32, 1.6);
+					write(Math.floor(element.maxHealth), 1.32, 2.8);
+					write(Math.floor(element.damage), 1.32, 1.6);
 					let attackSpeed = element.attackSpeed;
 					if (attackSpeed == 0) {
 						attackSpeed = 0;
@@ -678,8 +678,8 @@ class Game {
 
 					//New Data
 
-					write(towerStatus[element.nextLevel].health, 1.8, 2.8);
-					write(towerStatus[element.nextLevel].damage, 1.8, 1.6);
+					write(Math.floor(towerStatus[element.nextLevel].health), 1.8, 2.8);
+					write(Math.floor(towerStatus[element.nextLevel].damage), 1.8, 1.6);
 					let nextAttackSpeed = towerStatus[element.nextLevel].attackSpeed;
 					if (nextAttackSpeed == 0) {
 						nextAttackSpeed = 0;
@@ -726,7 +726,7 @@ class Game {
 						element.width / 2,
 						element.height / 2
 					);
-					this.#ctx.font = '37px sans-serif';
+					this.#ctx.font = '37px Arial, sans-serif';
 					let cost = Math.floor(element.price * 0.4);
 					if (cost > 1000) {
 						let uni = cost / 1000;
