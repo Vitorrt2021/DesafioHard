@@ -114,7 +114,7 @@ html {
 .tooltip {
 	position: absolute;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	color: white;
 	width: 7vw;
