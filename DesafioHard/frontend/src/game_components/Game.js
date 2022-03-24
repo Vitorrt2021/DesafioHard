@@ -213,12 +213,20 @@ class Game {
 	}
 
 	#updateScore() {
-		$('#score_value').html(this.#player.getScore());
+		let score = this.#player.getScore();
+		if (score >= 1000) {
+			score = score / 1000 + 'k';
+		}
+		$('#score_value').html(score);
 	}
 
 	#updateMoney() {
 		this.#canBuyTowers();
-		$('#money_value').html(this.#player.getMoney());
+		let money = this.#player.getMoney();
+		if (money >= 1000) {
+			money = money / 1000 + 'k';
+		}
+		$('#money_value').html(money);
 	}
 
 	#updateLive() {

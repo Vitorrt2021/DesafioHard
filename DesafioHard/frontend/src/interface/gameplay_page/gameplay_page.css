@@ -50,9 +50,9 @@ html {
 
 #level_value {
 	position: absolute;
-	top: 3%;
-	left: 4vw;
-	font-size: calc(3vw + 3vh);
+	top: 1vw;
+	left: 3.4vw;
+	font-size: 5vw;
 	z-index: 2;
 }
 
@@ -107,7 +107,7 @@ html {
 }
 
 .price {
-	font-size: calc(1vw + 1vh);
+	font-size: 2vw;
 	margin-left: 20%;
 }
 
@@ -218,7 +218,7 @@ html {
 #live_value,
 #score_value,
 #money_value {
-	font-size: calc(2.5vw + 2.5vh);
+	font-size: 3.5vw;
 }
 
 #configuration_button {
