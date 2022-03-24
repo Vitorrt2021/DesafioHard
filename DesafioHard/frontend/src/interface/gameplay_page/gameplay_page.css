@@ -51,7 +51,7 @@ html {
 #level_value {
 	position: absolute;
 	top: 3%;
-	left: 4.5%;
+	left: 4.5vw;
 	font-size: calc(3vw + 3vh);
 	z-index: 2;
 }

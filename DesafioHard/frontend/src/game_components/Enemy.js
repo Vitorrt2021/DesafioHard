@@ -55,12 +55,6 @@ class Enemy {
 						Math.pow(1.8, level + 1 - bossData[this.type].level);
 			}
 		} else {
-<<<<<<< HEAD:DesafioHard/frontend/src/components/Enemy.js
-			console.log(this.type);
-			console.log(`${level - enemyData[this.type].level} | ${this.type}`);
-			console.log(enemyData[this.type]);
-=======
->>>>>>> b1394379a9a47b9eeb1c4f770fa616f3e2f4d00c:DesafioHard/frontend/src/game_components/Enemy.js
 			if (enemyData[this.type].level >= level) {
 				this.health = parseInt(health);
 			} else {
