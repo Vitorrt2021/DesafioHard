@@ -205,7 +205,7 @@ class Game {
 			enemy.type === 'iceman'
 		) {
 			setTimeout(() => {
-				renderSaveScoreModal(this);
+				renderSaveScoreModal(this, this.#player.getScore());
 			}, 500);
 			$('#live_value').html('0');
 			$('#level_value').html('');
@@ -218,7 +218,7 @@ class Game {
 	#updateScore() {
 		let score = this.#player.getScore();
 		if (score >= 1000) {
-			score = score / 1000 + 'k';
+			score = parseFloat(score / 1000).toFixed(1) + 'k';
 		}
 		$('#score_value').html(score);
 	}
@@ -227,7 +227,7 @@ class Game {
 		this.#canBuyTowers();
 		let money = this.#player.getMoney();
 		if (money >= 1000) {
-			money = money / 1000 + 'k';
+			money = parseFloat(money / 1000).toFixed(1) + 'k';
 		}
 		$('#money_value').html(money);
 	}
@@ -687,7 +687,7 @@ class Game {
 					);
 					const write = (string, x, y) => {
 						this.#ctx.fillText(
-							string,
+							string.toFixed(),
 							element.x + element.width * x,
 							element.y + element.height / y
 						);
