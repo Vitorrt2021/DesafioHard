@@ -18,24 +18,35 @@ class Tower {
 		this.collisionHeight = cellSize;
 
 		if (typeof level === 'number') {
-			this.towerType = `${towerType.slice(0, towerType.length - 1)}${
-				level + 1
-			}`;
-			console.log(this.towerType);
-			this.isBarrier = towerStatus[this.towerType].barrier || false;
+			if (level >= 9) {
+				this.towerType = `${towerType.slice(0, towerType.length - 1)}9`;
+				this.isBarrier = towerStatus[this.towerType].barrier || false;
 
-			this.health = towerStatus[this.towerType].health;
-			this.projectileImage = assetManager.getImage(
-				towerStatus[this.towerType].projectile
-			);
-			this.damage = towerStatus[this.towerType].damage;
-			this.attackSpeed = towerStatus[this.towerType].attackSpeed;
-			this.price = towerStatus[this.towerType].price;
-			this.image = assetManager.getImage(this.towerType);
-			console.log(this.health);
+				this.health = towerStatus[this.towerType].health;
+				this.projectileImage = assetManager.getImage(
+					towerStatus[this.towerType].projectile
+				);
+				this.damage = towerStatus[this.towerType].damage;
+				this.attackSpeed = towerStatus[this.towerType].attackSpeed;
+				this.price = towerStatus[this.towerType].price;
+				this.image = assetManager.getImage(this.towerType);
+			} else {
+				this.towerType = `${towerType.slice(0, towerType.length - 1)}${
+					level + 1
+				}`;
+				this.isBarrier = towerStatus[this.towerType].barrier || false;
+
+				this.health = towerStatus[this.towerType].health;
+				this.projectileImage = assetManager.getImage(
+					towerStatus[this.towerType].projectile
+				);
+				this.damage = towerStatus[this.towerType].damage;
+				this.attackSpeed = towerStatus[this.towerType].attackSpeed;
+				this.price = towerStatus[this.towerType].price;
+				this.image = assetManager.getImage(this.towerType);
+			}
 		} else {
 			this.towerType = towerType;
-			console.log(this.towerType);
 			this.health = towerStatus[towerType].health;
 			this.projectileImage = assetManager.getImage(
 				towerStatus[towerType].projectile

@@ -24,7 +24,7 @@ class Game {
 	#enemiesDying = [];
 	#bossLevelMultiple = 3;
 	#isBossSpawned = false;
-	#spawnVelocity = 600;
+	#spawnVelocity = 400;
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
@@ -53,7 +53,7 @@ class Game {
 		this.#enemiesDying = [];
 		this.#bossLevelMultiple = 3;
 		this.#isBossSpawned = false;
-		this.#spawnVelocity = 600;
+		this.#spawnVelocity = 400;
 		this.#maxSpawnVelocity = 60;
 		this.#moneyDrop = 20;
 		this.#backgroundMusic = '';
@@ -336,7 +336,7 @@ class Game {
 
 	#changeSpawnVelocity() {
 		const spawnV = (this.#spawnVelocity =
-			600 - 60 * this.enemiesController.horda);
+			400 - 30 * this.enemiesController.horda);
 		if (spawnV <= this.#maxSpawnVelocity) {
 			this.#spawnVelocity = this.#maxSpawnVelocity;
 		} else {
@@ -407,17 +407,32 @@ class Game {
 		document.getElementById('canvas').addEventListener('drop', (e) => {
 			e.preventDefault();
 			let towerType = e.dataTransfer.getData('text');
-			this.#updateMousePosition(e);
-			const newTower = new Tower(
-				this.#mousePosition.x,
-				this.#mousePosition.y,
-				150,
-				towerType
-			);
-			if (newTower.price > this.#player.getMoney()) {
-				return;
+			if (towerType === 'stone_tower_level_1') {
+				this.#updateMousePosition(e);
+				const newTower = new Tower(
+					this.#mousePosition.x,
+					this.#mousePosition.y,
+					150,
+					towerType,
+					this.enemiesController.horda
+				);
+				if (newTower.price > this.#player.getMoney()) {
+					return;
+				}
+				this.#addTowerInCell(newTower);
+			} else {
+				this.#updateMousePosition(e);
+				const newTower = new Tower(
+					this.#mousePosition.x,
+					this.#mousePosition.y,
+					150,
+					towerType
+				);
+				if (newTower.price > this.#player.getMoney()) {
+					return;
+				}
+				this.#addTowerInCell(newTower);
 			}
-			this.#addTowerInCell(newTower);
 		});
 	}
 	//FIXME SOBREPOSIÇÃO DE TORRES
