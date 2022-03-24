@@ -50,9 +50,9 @@ html {
 
 #level_value {
 	position: absolute;
-	top: 3%;
-	left: 4.5%;
-	font-size: calc(3vw + 3vh);
+	top: 1vw;
+	left: 3.4vw;
+	font-size: 5vw;
 	z-index: 2;
 }
 
@@ -107,18 +107,19 @@ html {
 }
 
 .price {
-	font-size: calc(1vw + 1vh);
+	font-size: 2vw;
 	margin-left: 20%;
 }
 
 .tooltip {
 	position: absolute;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 	color: white;
-	width: 7.5vw;
-	height: 15vh;
+	width: 7vw;
+	height: 10vw;
+
 	border-radius: 5px;
 	padding: 0px !important;
 	border: solid 2px #efb469;
@@ -217,7 +218,7 @@ html {
 #live_value,
 #score_value,
 #money_value {
-	font-size: calc(2.5vw + 2.5vh);
+	font-size: 3.5vw;
 }
 
 #configuration_button {
@@ -231,7 +232,21 @@ html {
 	background-repeat: no-repeat;
 	background-position: center;
 }
-
+#remove_button {
+	width: 7vw;
+	height: 6vw;
+	cursor: pointer;
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url('images/remove_button.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#remove_button:active {
+	transform: translateY(4px);
+	background-image: url('images/remove_button_active.svg');
+}
 #configuration_button:active {
 	transform: translateY(4px);
 	background-image: url('images/configuration_button_active.svg');
