@@ -80,112 +80,7 @@ class Game {
 	getRemoveTower() {
 		return this.#removeTower;
 	}
-	#evolutionStatistics() {
-		if (!this.#removeTower) {
-			this.#towers.forEach((element) => {
-				if (
-					collision.pointRectCollisionDetection(this.#mousePosition, element)
-				) {
-					if (!element.nextLevel) return 0;
-					const img = assetManager.getImage('upgrade_info');
-					this.#ctx.drawImage(
-						img,
-						element.x + element.width,
-						element.y,
-						element.width * 1.3,
-						element.height * 1.3
-					);
-					function write(string, x, y) {
-						this.#ctx.fillText(
-							string,
-							element.x + element.width * x,
-							element.y + element.height / y
-						);
-					}
-					//data
-					this.#ctx.fillStyle = 'black';
-					this.#ctx.font = '20px sans-serif';
-					this.#ctx.fillText(
-						element.attackSpeed,
-						element.x + element.width * 1.32,
-						element.y + element.height / 2.8
-					);
-					this.#ctx.fillText(
-						element.damage,
-						element.x + element.width * 1.32,
-						element.y + element.height / 1.6
-					);
-					this.#ctx.fillText(
-						element.maxHealth,
-						element.x + element.width * 1.32,
-						element.y + element.height * 0.86
-					);
-					//New
-					this.#ctx.fillText(
-						towerStatus[element.nextLevel].attackSpeed,
-						element.x + element.width * 1.8,
-						element.y + element.height / 2.8
-					);
-					this.#ctx.fillText(
-						towerStatus[element.nextLevel].damage,
-						element.x + element.width * 1.8,
-						element.y + element.height / 1.6
-					);
-					this.#ctx.fillText(
-						towerStatus[element.nextLevel].health,
-						element.x + element.width * 1.8,
-						element.y + element.height * 0.86
-					);
-					//money
-					let cost = towerStatus[element.nextLevel].price;
-					if (cost > 1000) {
-						let uni = cost / 1000;
-						cost = uni + 'k';
-					}
-					this.#ctx.fillText(
-						cost,
-						element.x + element.width * 1.95,
-						element.y + element.height * 1.1
-					);
-				}
-			});
-		}
-	}
-	#darkenTower() {
-		if (this.#removeTower) {
-			this.#towers.forEach((element) => {
-				if (
-					collision.pointRectCollisionDetection(this.#mousePosition, element)
-				) {
-					// this.#ctx.globalAlpha = 0.2;
-					this.#ctx.fillStyle = 'black';
 
-					// this.#ctx.fillRect(
-					// 	element.x,
-					// 	element.y,
-					// 	element.width,
-					// 	element.height + 20
-					// );
-					// this.#ctx.globalAlpha = 1;
-					const img = assetManager.getImage('delete_tower');
-
-					this.#ctx.drawImage(
-						img,
-						element.x + element.width / 3.5,
-						element.y + element.height / 3.5,
-						element.width / 2,
-						element.height / 2
-					);
-					this.#ctx.font = '37px sans-serif';
-					this.#ctx.fillText(
-						Math.floor(element.price * 0.4),
-						element.x + element.width / 3.5,
-						element.y + 20
-					);
-				}
-			});
-		}
-	}
 	removeTower() {
 		if (this.#removeTower) {
 			this.#towers.forEach((element, indexOf) => {
@@ -731,6 +626,112 @@ class Game {
 		assetManager.stopSound(this.#backgroundMusic);
 		this.#backgroundMusic = 'bg_music_lvl_' + EnemiesController.horda;
 		assetManager.playSound(this.#backgroundMusic, undefined, true);
+	}
+	#evolutionStatistics() {
+		if (!this.#removeTower) {
+			this.#towers.forEach((element) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					if (!element.nextLevel) return 0;
+					const img = assetManager.getImage('upgrade_info');
+					this.#ctx.drawImage(
+						img,
+						element.x + element.width,
+						element.y,
+						element.width * 1.3,
+						element.height * 1.3
+					);
+					const write = (string, x, y) => {
+						this.#ctx.fillText(
+							string,
+							element.x + element.width * x,
+							element.y + element.height / y
+						);
+					};
+					//data
+					this.#ctx.fillStyle = 'black';
+					this.#ctx.font = '20px sans-serif';
+					//Old Data
+
+					write(element.maxHealth, 1.32, 2.8);
+					write(element.damage, 1.32, 1.6);
+					let attackSpeed = element.attackSpeed;
+					if (attackSpeed == 0) {
+						attackSpeed = 0;
+					} else {
+						attackSpeed = Math.floor(10000 / element.attackSpeed);
+					}
+					this.#ctx.fillText(
+						attackSpeed,
+						element.x + element.width * 1.32,
+						element.y + element.height * 0.86
+					);
+
+					//New Data
+
+					write(towerStatus[element.nextLevel].health, 1.8, 2.8);
+					write(towerStatus[element.nextLevel].damage, 1.8, 1.6);
+					let nextAttackSpeed = towerStatus[element.nextLevel].attackSpeed;
+					if (nextAttackSpeed == 0) {
+						nextAttackSpeed = 0;
+					} else {
+						nextAttackSpeed = Math.floor(
+							10000 / towerStatus[element.nextLevel].attackSpeed
+						);
+					}
+
+					this.#ctx.fillText(
+						nextAttackSpeed,
+						element.x + element.width * 1.8,
+						element.y + element.height * 0.86
+					);
+
+					//money
+					let cost = towerStatus[element.nextLevel].price;
+					if (cost >= 1000) {
+						let uni = cost / 1000;
+						cost = uni + 'k';
+					}
+					this.#ctx.fillText(
+						cost,
+						element.x + element.width * 1.95,
+						element.y + element.height * 1.1
+					);
+				}
+			});
+		}
+	}
+	#darkenTower() {
+		if (this.#removeTower) {
+			this.#towers.forEach((element) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					this.#ctx.fillStyle = 'black';
+					const img = assetManager.getImage('delete_tower');
+
+					this.#ctx.drawImage(
+						img,
+						element.x + element.width / 3.5,
+						element.y + element.height / 3.5,
+						element.width / 2,
+						element.height / 2
+					);
+					this.#ctx.font = '37px sans-serif';
+					let cost = Math.floor(element.price * 0.4);
+					if (cost > 1000) {
+						let uni = cost / 1000;
+						cost = uni + 'k';
+					}
+					this.#ctx.fillText(
+						'$' + cost,
+						element.x + element.width / 3,
+						element.y
+					);
+				}
+			});
+		}
 	}
 }
 

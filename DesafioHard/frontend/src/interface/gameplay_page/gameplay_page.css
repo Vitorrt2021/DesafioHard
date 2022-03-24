@@ -51,7 +51,7 @@ html {
 #level_value {
 	position: absolute;
 	top: 3%;
-	left: 4.5vw;
+	left: 4vw;
 	font-size: calc(3vw + 3vh);
 	z-index: 2;
 }
@@ -117,8 +117,9 @@ html {
 	justify-content: space-between;
 	align-items: center;
 	color: white;
-	width: 7.5vw;
-	height: 15vh;
+	width: 7vw;
+	height: 10vw;
+
 	border-radius: 5px;
 	padding: 0px !important;
 	border: solid 2px #efb469;
