@@ -28,7 +28,7 @@ class Game {
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
-	#removeTower = true;
+	#removeTower = false;
 
 	constructor() {
 		this.#canvas.width = 1600;
@@ -61,6 +61,7 @@ class Game {
 		this.#canvas.height = 800;
 		this.isAccelerated = false;
 		this.monsterCount = 0;
+		this.#removeTower = false;
 
 		this.start();
 	}
@@ -75,6 +76,68 @@ class Game {
 	}
 	setRemoveTower() {
 		this.#removeTower = !this.#removeTower;
+	}
+	getRemoveTower() {
+		return this.#removeTower;
+	}
+	#evolutionStatistics() {
+		if (!this.#removeTower) {
+			this.#towers.forEach((element) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					const img = new Image();
+					img.src = 'upgrade_info.png';
+					this.#ctx.drawImage(
+						img,
+						element.x + element.width,
+						element.y,
+						element.width,
+						element.height
+					);
+					//data
+					this.#ctx.fillStyle = 'black';
+					this.#ctx.font = '15px sans-serif';
+					this.#ctx.fillText(
+						element.attackSpeed,
+						element.x + element.width * 1.25,
+						element.y + element.height / 3.9
+					);
+					this.#ctx.fillText(
+						element.damage,
+						element.x + element.width * 1.25,
+						element.y + element.height / 2.1
+					);
+					this.#ctx.fillText(
+						element.maxHealth,
+						element.x + element.width * 1.25,
+						element.y + element.height / 1.5
+					);
+					//New
+					this.#ctx.fillText(
+						towerStatus[element.nextLevel].attackSpeed,
+						element.x + element.width * 1.65,
+						element.y + element.height / 3.9
+					);
+					this.#ctx.fillText(
+						towerStatus[element.nextLevel].damage,
+						element.x + element.width * 1.65,
+						element.y + element.height / 2.1
+					);
+					this.#ctx.fillText(
+						towerStatus[element.nextLevel].health,
+						element.x + element.width * 1.65,
+						element.y + element.height / 1.5
+					);
+					//money
+					this.#ctx.fillText(
+						towerStatus[element.nextLevel].price,
+						element.x + element.width * 1.45,
+						element.y + element.height / 1.2
+					);
+				}
+			});
+		}
 	}
 	#darkenTower() {
 		if (this.#removeTower) {
@@ -94,7 +157,7 @@ class Game {
 					// this.#ctx.globalAlpha = 1;
 
 					const img = new Image();
-					img.src = 'as.png';
+					img.src = 'delete.png';
 					this.#ctx.drawImage(
 						img,
 						element.x + element.width / 3.5,
@@ -416,6 +479,7 @@ class Game {
 			this.#frames++;
 			this.#updateLevel();
 
+			this.#evolutionStatistics();
 			this.#darkenTower();
 
 			requestAnimationFrame(() => {

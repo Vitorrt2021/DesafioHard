@@ -51,9 +51,14 @@ $(document).ready(() => {
 			game.removeTower();
 			game.evolveTower();
 		});
-		$('#martelo_button').click(() => {
+		$('#remove_button').click(() => {
 			game.setRemoveTower();
-			alert('Coisa');
+			$('#remove_button').css(
+				'background-image',
+				game.getRemoveTower()
+					? `url('images/remove_button_active.svg')`
+					: `url('images/remove_button.svg')`
+			);
 		});
 		$('#configuration_button').click(() => {
 			game.stopAnimation();

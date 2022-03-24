@@ -231,7 +231,21 @@ html {
 	background-repeat: no-repeat;
 	background-position: center;
 }
-
+#remove_button {
+	width: 7vw;
+	height: 6vw;
+	cursor: pointer;
+	border: none;
+	background-color: rgba(0, 0, 0, 0);
+	background-image: url('images/remove_button.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#remove_button:active {
+	transform: translateY(4px);
+	background-image: url('images/remove_button_active.svg');
+}
 #configuration_button:active {
 	transform: translateY(4px);
 	background-image: url('images/configuration_button_active.svg');
