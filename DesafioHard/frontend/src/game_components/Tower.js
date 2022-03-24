@@ -200,12 +200,19 @@ class Tower {
 
 	#drawEvolveIcon(ctx) {
 		if (this.canEvolve) {
+			const image = this.evolveTowerAnimation.selectImage();
+			// ctx.strokeRect(
+			// 	this.collisionX,
+			// 	this.collisionY,
+			// 	image.width,
+			// 	image.height
+			// );
 			ctx.drawImage(
-				this.evolveTowerAnimation.selectImage(),
-				this.x + this.width * 0.8,
-				this.y,
-				this.width / 5,
-				this.height / 5
+				image,
+				this.x + this.width * 0.6,
+				this.y - this.height * 0.4,
+				this.width / 2,
+				this.height / 2
 			);
 		}
 	}
