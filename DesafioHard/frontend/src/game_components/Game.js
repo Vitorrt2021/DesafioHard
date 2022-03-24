@@ -86,54 +86,66 @@ class Game {
 				if (
 					collision.pointRectCollisionDetection(this.#mousePosition, element)
 				) {
-					const img = new Image();
-					img.src = 'upgrade_info.png';
+					if (!element.nextLevel) return 0;
+					const img = assetManager.getImage('upgrade_info');
 					this.#ctx.drawImage(
 						img,
 						element.x + element.width,
 						element.y,
-						element.width,
-						element.height
+						element.width * 1.3,
+						element.height * 1.3
 					);
+					function write(string, x, y) {
+						this.#ctx.fillText(
+							string,
+							element.x + element.width * x,
+							element.y + element.height / y
+						);
+					}
 					//data
 					this.#ctx.fillStyle = 'black';
-					this.#ctx.font = '15px sans-serif';
+					this.#ctx.font = '20px sans-serif';
 					this.#ctx.fillText(
 						element.attackSpeed,
-						element.x + element.width * 1.25,
-						element.y + element.height / 3.9
+						element.x + element.width * 1.32,
+						element.y + element.height / 2.8
 					);
 					this.#ctx.fillText(
 						element.damage,
-						element.x + element.width * 1.25,
-						element.y + element.height / 2.1
+						element.x + element.width * 1.32,
+						element.y + element.height / 1.6
 					);
 					this.#ctx.fillText(
 						element.maxHealth,
-						element.x + element.width * 1.25,
-						element.y + element.height / 1.5
+						element.x + element.width * 1.32,
+						element.y + element.height * 0.86
 					);
 					//New
 					this.#ctx.fillText(
 						towerStatus[element.nextLevel].attackSpeed,
-						element.x + element.width * 1.65,
-						element.y + element.height / 3.9
+						element.x + element.width * 1.8,
+						element.y + element.height / 2.8
 					);
 					this.#ctx.fillText(
 						towerStatus[element.nextLevel].damage,
-						element.x + element.width * 1.65,
-						element.y + element.height / 2.1
+						element.x + element.width * 1.8,
+						element.y + element.height / 1.6
 					);
 					this.#ctx.fillText(
 						towerStatus[element.nextLevel].health,
-						element.x + element.width * 1.65,
-						element.y + element.height / 1.5
+						element.x + element.width * 1.8,
+						element.y + element.height * 0.86
 					);
 					//money
+					let cost = towerStatus[element.nextLevel].price;
+					if (cost > 1000) {
+						let uni = cost / 1000;
+						cost = uni + 'k';
+					}
 					this.#ctx.fillText(
-						towerStatus[element.nextLevel].price,
-						element.x + element.width * 1.45,
-						element.y + element.height / 1.2
+						cost,
+						element.x + element.width * 1.95,
+						element.y + element.height * 1.1
 					);
 				}
 			});
@@ -155,9 +167,8 @@ class Game {
 					// 	element.height + 20
 					// );
 					// this.#ctx.globalAlpha = 1;
+					const img = assetManager.getImage('delete_tower');
 
-					const img = new Image();
-					img.src = 'delete.png';
 					this.#ctx.drawImage(
 						img,
 						element.x + element.width / 3.5,
