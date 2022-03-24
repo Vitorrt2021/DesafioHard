@@ -37,6 +37,8 @@ class Tower {
 		this.redRectDimensionModifier = 0;
 
 		this.image = assetManager.getImage(towerType);
+		this.evolveTowerAnimation =
+			assetManager.getAnimationInstance('evolve_tower_arrow');
 		this.imageBrightness = 100;
 		this.imageBrightnessRatioChange = 0.32;
 
@@ -199,7 +201,7 @@ class Tower {
 	#drawEvolveIcon(ctx) {
 		if (this.canEvolve) {
 			ctx.drawImage(
-				assetManager.getImage('evolve_tower'),
+				this.evolveTowerAnimation.selectImage(),
 				this.x + this.width * 0.8,
 				this.y,
 				this.width / 5,
