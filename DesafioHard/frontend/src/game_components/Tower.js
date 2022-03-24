@@ -7,7 +7,7 @@ function getRandomNumber(min, max) {
 }
 
 class Tower {
-	constructor(x = 0, y = 0, cellSize = 0, towerType) {
+	constructor(x = 0, y = 0, cellSize = 0, towerType, level = false) {
 		this.x = x - cellSize / 2;
 		this.y = y - cellSize / 2;
 		this.width = cellSize;
@@ -16,19 +16,41 @@ class Tower {
 		this.collisionY = this.y;
 		this.collisionWidth = cellSize;
 		this.collisionHeight = cellSize;
-		this.towerType = towerType;
 
-		this.isBarrier = towerStatus[towerType].barrier || false;
+		if (typeof level === 'number') {
+			this.towerType = `${towerType.slice(0, towerType.length - 1)}${
+				level + 1
+			}`;
+			console.log(this.towerType);
+			this.isBarrier = towerStatus[this.towerType].barrier || false;
 
-		this.health = towerStatus[towerType].health;
-		this.maxHealth = this.health;
-		this.damage = towerStatus[towerType].damage;
-		this.attackSpeed = towerStatus[towerType].attackSpeed;
+			this.health = towerStatus[this.towerType].health;
+			this.projectileImage = assetManager.getImage(
+				towerStatus[this.towerType].projectile
+			);
+			this.damage = towerStatus[this.towerType].damage;
+			this.attackSpeed = towerStatus[this.towerType].attackSpeed;
+			this.price = towerStatus[this.towerType].price;
+			this.image = assetManager.getImage(this.towerType);
+			console.log(this.health);
+		} else {
+			this.towerType = towerType;
+			console.log(this.towerType);
+			this.health = towerStatus[towerType].health;
+			this.projectileImage = assetManager.getImage(
+				towerStatus[towerType].projectile
+			);
+			this.damage = towerStatus[towerType].damage;
+			this.attackSpeed = towerStatus[towerType].attackSpeed;
+			this.price = towerStatus[towerType].price;
+			this.level = towerStatus[towerType].level;
+			this.nextLevel = towerStatus[towerType].nextLevel;
+			this.image = assetManager.getImage(towerType);
+		}
+
 		this.projectiles = [];
-		this.projectileImage = assetManager.getImage(
-			towerStatus[towerType].projectile
-		);
-		this.price = towerStatus[towerType].price;
+		this.maxHealth = this.health;
+
 		this.isShooting = true;
 		this.isDamaged = false;
 
@@ -36,15 +58,13 @@ class Tower {
 		this.maxAlphaRectangle = 0.5;
 		this.redRectDimensionModifier = 0;
 
-		this.image = assetManager.getImage(towerType);
 		this.evolveTowerAnimation =
 			assetManager.getAnimationInstance('evolve_tower_arrow');
 		this.imageBrightness = 100;
 		this.imageBrightnessRatioChange = 0.32;
 
 		this.timer = this.attackSpeed;
-		this.level = towerStatus[towerType].level;
-		this.nextLevel = towerStatus[towerType].nextLevel;
+
 		this.isDying = false;
 		this.isDead = false;
 
