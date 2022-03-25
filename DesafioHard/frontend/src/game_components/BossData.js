@@ -3,7 +3,7 @@ export default {
 		level: 2,
 		type: 'boss',
 		speed: 1,
-		health: 1000,
+		health: 1200,
 		money: 300,
 	},
 
@@ -11,7 +11,7 @@ export default {
 		level: 2,
 		type: 'boss',
 		speed: 1,
-		health: 1000,
+		health: 1200,
 		money: 300,
 	},
 
@@ -19,7 +19,7 @@ export default {
 		level: 2,
 		type: 'boss',
 		speed: 1,
-		health: 1000,
+		health: 1200,
 		money: 300,
 	},
 
@@ -27,7 +27,7 @@ export default {
 		level: 2,
 		type: 'boss',
 		speed: 1,
-		health: 1000,
+		health: 1200,
 		money: 300,
 	},
 };

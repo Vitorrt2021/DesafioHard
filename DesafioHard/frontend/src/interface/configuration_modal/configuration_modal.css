@@ -70,13 +70,14 @@
 	background-position: center;
 	border: none;
 	background-color: transparent;
-	width: 27.5vw;
-	height: 12.5vh;
+	width: 80%;
+	height: 20%;
 }
 
 .configuration_modal_sound_button {
 	background-image: url('../../assets/interface_shared_images/sound_button.svg');
-	width: 12.5vw;
+	width: 40%;
+	height: 12.5vh;
 }
 
 .configuration_modal_sound_button:active {
@@ -86,8 +87,8 @@
 
 .configuration_modal_speed_button {
 	margin-bottom: 3%;
-	width: 13.5vw;
-	height: 13.5vh;
+	width: 44%;
+	height: 12.5vh;
 	background-image: url('images/speed_control.svg');
 }
 

@@ -137,7 +137,6 @@ class AssetManager {
 	}
 
 	async #makeAudioObjectFromFrontEnd(sound_name) {
-		// const frontendSound = new Audio('../assets/audios/' + sound_name + '.mp3');
 		const frontendSound = new Audio(`../../assets/audios/${sound_name}.mp3`);
 
 		this.#sounds[sound_name] = frontendSound;

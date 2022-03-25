@@ -8,18 +8,18 @@ const collision = {
 	// 	}
 	// 	return false;
 	// },
-	// pointRectCollisionDetection: (first, second) => {
-	// 	if (
-	// 		!(
-	// 			first.x > second.x + second.width ||
-	// 			first.x < second.x ||
-	// 			first.y > second.y + second.height ||
-	// 			first.y < second.y
-	// 		)
-	// 	) {
-	// 		return true;
-	// 	}
-	// },
+	pointRectCollisionDetection: (first, second) => {
+		if (
+			!(
+				first.x > second.x + second.width ||
+				first.x < second.x ||
+				first.y > second.y + second.height ||
+				first.y < second.y
+			)
+		) {
+			return true;
+		}
+	},
 	rectRectCollisionDetection: (rect1, rect2) => {
 		if (
 			rect1.collisionX < rect2.collisionX + rect2.collisionWidth &&

@@ -6,7 +6,7 @@ import Enemy from './Enemy.js';
 import towerStatus from './TowerData.js';
 import assetManager from './AssetManager.js';
 import renderSaveScoreModal from '../interface/save_score_modal/save_score.js';
-import EnemiesController from './EnemiesController.js';
+import EnemiesControl from './EnemiesController.js';
 
 class Game {
 	#canvas = document.getElementById('canvas');
@@ -24,16 +24,18 @@ class Game {
 	#enemiesDying = [];
 	#bossLevelMultiple = 3;
 	#isBossSpawned = false;
-	#spawnVelocity = 600;
+	#spawnVelocity = 400;
 	#maxSpawnVelocity = 60;
 	#moneyDrop = 20;
 	#backgroundMusic = '';
+	#removeTower = false;
 
 	constructor() {
 		this.#canvas.width = 1600;
 		this.#canvas.height = 800;
 		this.isAccelerated = false;
 		this.monsterCount = 0;
+		this.enemiesController = new EnemiesControl();
 	}
 
 	restart() {
@@ -52,7 +54,7 @@ class Game {
 		this.#enemiesDying = [];
 		this.#bossLevelMultiple = 3;
 		this.#isBossSpawned = false;
-		this.#spawnVelocity = 600;
+		this.#spawnVelocity = 300;
 		this.#maxSpawnVelocity = 60;
 		this.#moneyDrop = 20;
 		this.#backgroundMusic = '';
@@ -60,6 +62,9 @@ class Game {
 		this.#canvas.height = 800;
 		this.isAccelerated = false;
 		this.monsterCount = 0;
+		this.#removeTower = false;
+		this.enemiesController = new EnemiesControl();
+		$('#level_value').html(this.enemiesController.horda);
 
 		this.start();
 	}
@@ -72,7 +77,27 @@ class Game {
 		this.#createGrid();
 		this.#catchMousePosition();
 	}
+	setRemoveTower() {
+		this.#removeTower = !this.#removeTower;
+	}
+	getRemoveTower() {
+		return this.#removeTower;
+	}
 
+	removeTower() {
+		if (this.#removeTower) {
+			this.#towers.forEach((element, indexOf) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					element.health = 0;
+					this.#player.addMoney(Math.floor(element.price * 0.4));
+					this.#updateMoney();
+					this.#towerWasDestroyed(element, indexOf);
+				}
+			});
+		}
+	}
 	#haveEnemyInLine() {
 		const position = [false, false, false];
 		const towerPosition = [
@@ -84,7 +109,7 @@ class Game {
 			position[enemy.line] = true;
 		});
 
-		if ((EnemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
+		if ((this.enemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
 			position[0] = true;
 			position[1] = true;
 			position[2] = true;
@@ -180,7 +205,7 @@ class Game {
 			enemy.type === 'iceman'
 		) {
 			setTimeout(() => {
-				renderSaveScoreModal(this);
+				renderSaveScoreModal(this, this.#player.getScore());
 			}, 500);
 			$('#live_value').html('0');
 			$('#level_value').html('');
@@ -191,12 +216,20 @@ class Game {
 	}
 
 	#updateScore() {
-		$('#score_value').html(this.#player.getScore());
+		let score = this.#player.getScore();
+		if (score >= 1000) {
+			score = parseFloat(score / 1000).toFixed(1) + 'k';
+		}
+		$('#score_value').html(score);
 	}
 
 	#updateMoney() {
 		this.#canBuyTowers();
-		$('#money_value').html(this.#player.getMoney());
+		let money = this.#player.getMoney();
+		if (money >= 1000) {
+			money = parseFloat(money / 1000).toFixed(1) + 'k';
+		}
+		$('#money_value').html(money);
 	}
 
 	#updateLive() {
@@ -218,19 +251,26 @@ class Game {
 		if (enemy.health <= 0 && !enemy.isDying) {
 			if (enemy.type === 'golem') {
 				assetManager.playSound('golem_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else if (enemy.type === 'goblin') {
 				assetManager.playSound('goblin_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else if (enemy.type === 'gorilla') {
 				assetManager.playSound('gorilla_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else if (enemy.type === 'iceman') {
-				//FIXME add iceman sound
-				// assetManager.playSound('iceman_dying');
-				this.#player.addScore(100 * Math.pow(2, EnemiesController.horda + 1));
+				assetManager.playSound('iceman_dying');
+				this.#player.addScore(
+					100 * Math.pow(2, this.enemiesController.horda + 1)
+				);
 			} else {
-				this.#player.addScore(20 * (EnemiesController.horda + 1));
+				this.#player.addScore(20 * (this.enemiesController.horda + 1));
 			}
 
 			this.#player.addMoney(Math.floor(this.#moneyDrop) + enemy.money);
@@ -255,7 +295,7 @@ class Game {
 	}
 	#collisionTowerEnemy(enemy, enemyIndex, tower, towerIndex) {
 		let towerHealth = tower.health;
-		tower.health -= enemy.health / (1 + EnemiesController.horda * 0.5);
+		tower.health -= enemy.health / (1 + this.enemiesController.horda * 0.5);
 
 		if (tower.health > 0) {
 			enemy.health -= towerHealth;
@@ -324,7 +364,8 @@ class Game {
 	}
 
 	#changeSpawnVelocity() {
-		const spawnV = (this.#spawnVelocity = 600 - 60 * EnemiesController.horda);
+		const spawnV = (this.#spawnVelocity =
+			300 - 30 * this.enemiesController.horda);
 		if (spawnV <= this.#maxSpawnVelocity) {
 			this.#spawnVelocity = this.#maxSpawnVelocity;
 		} else {
@@ -362,6 +403,10 @@ class Game {
 			this.#checkEnemyAttackedBase();
 			this.#frames++;
 			this.#updateLevel();
+
+			this.#evolutionStatistics();
+			this.#darkenTower();
+
 			requestAnimationFrame(() => {
 				this.#animation();
 			});
@@ -395,17 +440,32 @@ class Game {
 		document.getElementById('canvas').addEventListener('drop', (e) => {
 			e.preventDefault();
 			let towerType = e.dataTransfer.getData('text');
-			this.#updateMousePosition(e);
-			const newTower = new Tower(
-				this.#mousePosition.x,
-				this.#mousePosition.y,
-				150,
-				towerType
-			);
-			if (newTower.price > this.#player.getMoney()) {
-				return;
+			if (towerType === 'stone_tower_level_1') {
+				this.#updateMousePosition(e);
+				const newTower = new Tower(
+					this.#mousePosition.x,
+					this.#mousePosition.y,
+					150,
+					towerType,
+					this.enemiesController.horda
+				);
+				if (newTower.price > this.#player.getMoney()) {
+					return;
+				}
+				this.#addTowerInCell(newTower);
+			} else {
+				this.#updateMousePosition(e);
+				const newTower = new Tower(
+					this.#mousePosition.x,
+					this.#mousePosition.y,
+					150,
+					towerType
+				);
+				if (newTower.price > this.#player.getMoney()) {
+					return;
+				}
+				this.#addTowerInCell(newTower);
 			}
-			this.#addTowerInCell(newTower);
 		});
 	}
 	//FIXME SOBREPOSIÇÃO DE TORRES
@@ -490,7 +550,7 @@ class Game {
 			towerClicked.nextLevel
 		);
 		if (evolvedTower.price > this.#player.getMoney()) return;
-		evolvedTower.damage *= 1 + EnemiesController.horda * 0.35;
+		evolvedTower.damage *= 1 + this.enemiesController.horda * 0.35;
 		this.#player.buy(parseInt(evolvedTower.price));
 		this.#updateMoney();
 		assetManager.playSound('evolve');
@@ -510,15 +570,15 @@ class Game {
 	#spawnEnemy() {
 		const yInitialpositions = [68, 325, 580];
 		const yFinalpositions = [235, 493, 743];
-		let sorted = EnemiesController.sortPosition();
+		let sorted = this.enemiesController.sortPosition();
 		let position = yInitialpositions[sorted];
-		let monsterType = EnemiesController.sortMonster();
+		let monsterType = this.enemiesController.sortMonster();
 
-		if ((EnemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
+		if ((this.enemiesController.horda + 1) % this.#bossLevelMultiple === 0) {
 			if (!this.#isBossSpawned) {
 				this.#isBossSpawned = true;
 				this.#createEnemy(
-					EnemiesController.getBoss(),
+					this.enemiesController.getBoss(),
 					yInitialpositions[1],
 					yFinalpositions[0] - yInitialpositions[0],
 					1
@@ -536,7 +596,7 @@ class Game {
 	}
 
 	#createEnemy(monsterType, position, yPositions, sorted) {
-		// this.#playSoundMonster(monsterType);
+		this.#playSoundMonster(monsterType);
 		this.#enemies.push(
 			new Enemy(
 				monsterType,
@@ -545,7 +605,7 @@ class Game {
 				this.#cellSize,
 				yPositions,
 				sorted,
-				EnemiesController.horda
+				this.enemiesController.horda
 			)
 		);
 	}
@@ -571,10 +631,22 @@ class Game {
 			case 'gorilla':
 				assetManager.playSound('gorilla');
 				break;
-			//FIXME add iceman sound
-			// case 'iceman':
-			// 	assetManager.playSound('iceman');
-			// 	break;
+			case 'iceman':
+				assetManager.playSound('iceman');
+				break;
+			case 'snailPink':
+			case 'snailBlue':
+				assetManager.playSound('snail');
+				break;
+			case 'giantbee':
+				assetManager.playSound('giantbee');
+				break;
+			case 'mushroom':
+				assetManager.playSound('mushroom');
+				break;
+			case 'hedgehog':
+				assetManager.playSound('hedgehog');
+				break;
 			default:
 				break;
 		}
@@ -583,14 +655,14 @@ class Game {
 	#updateLevel() {
 		if (
 			this.#player.getScore() >=
-			100 * Math.pow(2, EnemiesController.horda + 1)
+			100 * Math.pow(2, this.enemiesController.horda + 1)
 		) {
-			EnemiesController.update();
-			this.#moneyDrop *= 1 + 1 / EnemiesController.horda;
+			this.enemiesController.update();
+			this.#moneyDrop *= 1 + 1 / this.enemiesController.horda;
 			assetManager.playSound('level_up');
-			$('#level_value').html(EnemiesController.horda);
+			$('#level_value').html(this.enemiesController.horda);
 
-			if (EnemiesController.horda % 2 === 0) {
+			if (this.enemiesController.horda % 2 === 0) {
 				this.#updateBackgroundMusic();
 			}
 		}
@@ -598,8 +670,114 @@ class Game {
 
 	#updateBackgroundMusic() {
 		assetManager.stopSound(this.#backgroundMusic);
-		this.#backgroundMusic = 'bg_music_lvl_' + EnemiesController.horda;
+		this.#backgroundMusic = 'bg_music_lvl_' + this.enemiesController.horda;
 		assetManager.playSound(this.#backgroundMusic, undefined, true);
+	}
+	#evolutionStatistics() {
+		if (!this.#removeTower) {
+			this.#towers.forEach((element) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					if (!element.nextLevel) return 0;
+					const img = assetManager.getImage('upgrade_info');
+					this.#ctx.drawImage(
+						img,
+						element.x + element.width,
+						element.y,
+						element.width * 1.3,
+						element.height * 1.3
+					);
+					const write = (string, x, y) => {
+						this.#ctx.fillText(
+							string.toFixed(),
+							element.x + element.width * x,
+							element.y + element.height / y
+						);
+					};
+					//data
+					this.#ctx.fillStyle = 'black';
+					this.#ctx.font = '20px sans-serif';
+					//Old Data
+
+					write(element.maxHealth, 1.32, 2.8);
+					write(element.damage, 1.32, 1.6);
+					let attackSpeed = element.attackSpeed;
+					if (attackSpeed == 0) {
+						attackSpeed = 0;
+					} else {
+						attackSpeed = Math.floor(10000 / element.attackSpeed);
+					}
+					this.#ctx.fillText(
+						attackSpeed,
+						element.x + element.width * 1.32,
+						element.y + element.height * 0.86
+					);
+
+					//New Data
+
+					write(towerStatus[element.nextLevel].health, 1.8, 2.8);
+					write(towerStatus[element.nextLevel].damage, 1.8, 1.6);
+					let nextAttackSpeed = towerStatus[element.nextLevel].attackSpeed;
+					if (nextAttackSpeed == 0) {
+						nextAttackSpeed = 0;
+					} else {
+						nextAttackSpeed = Math.floor(
+							10000 / towerStatus[element.nextLevel].attackSpeed
+						);
+					}
+
+					this.#ctx.fillText(
+						nextAttackSpeed,
+						element.x + element.width * 1.8,
+						element.y + element.height * 0.86
+					);
+
+					//money
+					let cost = towerStatus[element.nextLevel].price;
+					if (cost >= 1000) {
+						let uni = cost / 1000;
+						cost = uni + 'k';
+					}
+					this.#ctx.fillText(
+						cost,
+						element.x + element.width * 1.95,
+						element.y + element.height * 1.1
+					);
+				}
+			});
+		}
+	}
+	#darkenTower() {
+		if (this.#removeTower) {
+			this.#towers.forEach((element) => {
+				if (
+					collision.pointRectCollisionDetection(this.#mousePosition, element)
+				) {
+					this.#ctx.fillStyle = 'black';
+					const img = assetManager.getImage('delete_tower');
+
+					this.#ctx.drawImage(
+						img,
+						element.x + element.width / 3.5,
+						element.y + element.height / 3.5,
+						element.width / 2,
+						element.height / 2
+					);
+					this.#ctx.font = '37px sans-serif';
+					let cost = Math.floor(element.price * 0.4);
+					if (cost > 1000) {
+						let uni = cost / 1000;
+						cost = uni + 'k';
+					}
+					this.#ctx.fillText(
+						'$' + cost,
+						element.x + element.width / 3,
+						element.y
+					);
+				}
+			});
+		}
 	}
 }
 
