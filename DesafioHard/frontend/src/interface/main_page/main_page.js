@@ -4,7 +4,7 @@ import assetManager from '../../game_components/AssetManager.js';
 
 $(document).ready(() => {
 	$('#welcome_container').hover(() => {
-		assetManager.playSound('bg_music_lvl_14', undefined, true, true);
+		assetManager.playSound('bg_music', undefined, true, true);
 	});
 
 	$('#play_button').click(() => {
