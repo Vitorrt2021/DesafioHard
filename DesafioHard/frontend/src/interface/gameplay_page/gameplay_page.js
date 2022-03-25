@@ -2,8 +2,7 @@ import Game from '../../game_components/Game.js';
 import assetManager from '../../game_components/AssetManager.js';
 import renderConfigurationModal from '../configuration_modal/configuration_modal.js';
 
-// const apiURL = 'https://data.dudeful.com';
-const apiURL = 'http://localhost:5000';
+const apiURL = 'https://datalab.dudeful.com';
 
 $(document).ready(() => {
 	// Prevent user from unloading the page by accident

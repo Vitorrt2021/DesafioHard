@@ -1,5 +1,4 @@
-// const apiURL = 'https://data.dudeful.com';
-const apiURL = 'http://localhost:5000';
+const apiURL = 'https://datalab.dudeful.com';
 
 async function renderRankingModal() {
 	try {
