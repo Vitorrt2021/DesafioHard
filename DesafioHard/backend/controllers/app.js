@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // 	})
 // );
 app.use(cors());
-dbConnection('/alphatower');
+dbConnection('/admin');
 
 app.use('/load-assets', limiter(10, 30), loadAssets);
 app.use('/ranking', limiter(10, 60), ranking);
