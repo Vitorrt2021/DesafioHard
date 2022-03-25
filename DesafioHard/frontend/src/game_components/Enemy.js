@@ -57,7 +57,7 @@ class Enemy {
 		} else {
 			if (enemyData[this.type].level >= level) {
 				this.health = parseInt(health);
-			} else if (enemyData[this.type].level + 5 <= level) {
+			} else if (enemyData[this.type].level + 3 <= level) {
 				this.health =
 					parseInt(health) +
 					parseInt(health) *

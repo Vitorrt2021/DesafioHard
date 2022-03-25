@@ -1,7 +1,7 @@
 // const apiURL = 'https://data.dudeful.com';
 const apiURL = 'http://localhost:5000';
 
-function renderSaveScoreModal(game) {
+function renderSaveScoreModal(game, score) {
 	$('#save_score_modal').css('display', 'flex');
 	$('#save_score_modal_input').focus();
 	$('#save_score_error_display').text('  ');
@@ -13,7 +13,7 @@ function renderSaveScoreModal(game) {
 	$('#save_score_modal_save_button')
 		.unbind('click')
 		.click(() => {
-			saveScore();
+			saveScore(score);
 		});
 
 	$('#save_score_modal_restart_button')
@@ -43,9 +43,8 @@ function restartGame() {
 	window.location = '/';
 }
 
-async function saveScore() {
+async function saveScore(score) {
 	const name = $('#save_score_modal_input').val();
-	const score = $('#score_value').html();
 	const data = { data: { name, score } };
 
 	try {

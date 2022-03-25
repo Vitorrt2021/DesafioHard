@@ -66,9 +66,9 @@ $(document).ready(() => {
 		});
 
 		createTooltip('cat_tower', 500, 50, Math.floor(10000 / 200));
-		createTooltip('pikachu_tower', 750, 100, Math.floor(10000 / 170));
-		createTooltip('stone_tower', 1000, 0, 0);
+		createTooltip('pikachu_tower', 750, 75, Math.floor(10000 / 170));
 		createTooltip('rabbit_tower', 1000, 300, Math.floor(10000 / 120));
+		createTooltip('stone_tower', 1000, 0, 0);
 	});
 });
 
