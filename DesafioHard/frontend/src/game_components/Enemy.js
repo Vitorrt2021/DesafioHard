@@ -38,7 +38,7 @@ class Enemy {
 
 		this.#updateMaxHeight();
 	}
-	//FIX-IT BALANCEAMENTO
+	//FIXME BALANCEAMENTO
 	setHealth(level, health) {
 		if (
 			this.type === 'golem' ||
@@ -66,7 +66,7 @@ class Enemy {
 			} else {
 				this.health =
 					parseInt(health) +
-					parseInt(health) * Math.pow(1.8, level - enemyData[this.type].level);
+					parseInt(health) * Math.pow(1.9, level - enemyData[this.type].level);
 			}
 		}
 	}

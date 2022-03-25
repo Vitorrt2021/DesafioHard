@@ -54,7 +54,7 @@ class Game {
 		this.#enemiesDying = [];
 		this.#bossLevelMultiple = 3;
 		this.#isBossSpawned = false;
-		this.#spawnVelocity = 400;
+		this.#spawnVelocity = 300;
 		this.#maxSpawnVelocity = 60;
 		this.#moneyDrop = 20;
 		this.#backgroundMusic = '';
@@ -365,7 +365,7 @@ class Game {
 
 	#changeSpawnVelocity() {
 		const spawnV = (this.#spawnVelocity =
-			400 - 30 * this.enemiesController.horda);
+			300 - 30 * this.enemiesController.horda);
 		if (spawnV <= this.#maxSpawnVelocity) {
 			this.#spawnVelocity = this.#maxSpawnVelocity;
 		} else {
